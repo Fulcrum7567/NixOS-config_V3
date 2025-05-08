@@ -1,0 +1,3 @@
+{
+	currentHost = "Hyprdrive";
+}

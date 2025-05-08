@@ -1,7 +1,5 @@
 {
 
-
-
 	description = "Fulcrum's NixOS config V3";
 
 
@@ -43,6 +41,18 @@
 	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, ... }:
 	let
 
+		currentHost = (import ./hosts/currentHost.nix ).currentHost;
+
+		hostSettings = ( import ./hosts/${currentHost}/hostSettings.nix );
+
+		hostSecrets = {
+			hostPassword = "";
+		};
+
+		userSettings = ( import ./user/bin/userSettings.nix );
+
+
+
 		pkgs-stable = nixpkgs-stable {
 			system = hostSettings.system;
 			config = {
@@ -63,10 +73,67 @@
 			};
 		};
 
+		pkgs-default = (if (hostSettings.defaultPackageState == "stable")
+						then
+							pkgs-stable
+						else
+							pkgs-unstable
+						);
+
+		pkgs-system = (if (hostSettings.systemState == "stable")
+						then
+							pkgs-stable
+						else
+							pkgs-unstable
+						);
+
+
+
+		lib = (if (hostSettings.systemState == "stable")
+				then
+					nixpkgs-stable.lib
+				else
+					nixpkgs-unstable.lib
+				);
+
+		home-manager = (if (hostSettings.systemState == "stable")
+						then
+							home-manager-stable
+						else
+							home-manager-unstable
+						);
+
+
+
 		
 
 	in
 	{
+		nixosConfigurations = {
+          ${currentHost} = lib.nixosSystem {
+            system = hostSettings.system;
+            modules = [
+              # Home Manager as a NixOS module
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+              }
+
+              # Host
+              ./hosts/${currentHost}/hostConfigs/configuration.nix
+
+              # User
+              ./user/bin/user.nix
+              ./user/bin/var.nix
+
+            ];
+            specialArgs = {
+            	inherit userSettings hostSettings hostSecrets;
+            };
+          };
+        };
+
 
 	};
 	
