@@ -1,5 +1,5 @@
 
-{ userSettings, editorSettings, browserSettings, explorerSettings, terminalSettings, ... }:
+{ ... }:
 {
 	home-manager.users.${userSettings.username} = { userSettings, editorSettings, browserSettings, explorerSettings, terminalSettings, ... }: {
 		home.sessionVariables = {

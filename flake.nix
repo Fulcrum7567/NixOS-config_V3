@@ -35,22 +35,21 @@
 				inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
 
+
+		# Sops-nix
+		sops-nix.url = "github:Mic92/sops-nix";
+
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, ... }:
 	let
 
-		currentHost = (import ./hosts/currentHost.nix ).currentHost;
+		currentHost = (import ./hosts/currentHost.nix).currentHost;
 
-		hostSettings = ( import ./hosts/${currentHost}/hostSettings.nix );
+		hostSettings = (import ./hosts/${currentHost}/hostSettingsRaw.nix);
 
-		hostSecrets = {
-			hostPassword = "";
-		};
-
-		userSettings = ( import ./user/bin/userSettings.nix );
-
+		hostSecretsFile = "./hosts/${currentHost}/hostSecrets.json";
 
 
 		pkgs-stable = nixpkgs-stable {
@@ -102,34 +101,38 @@
 						else
 							home-manager-unstable
 						);
-
-
-
-		
-
 	in
 	{
 		nixosConfigurations = {
           ${currentHost} = lib.nixosSystem {
             system = hostSettings.system;
             modules = [
-              # Home Manager as a NixOS module
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-              }
+				# Home Manager as a NixOS module
+				home-manager.nixosModules.home-manager
+				{
+				home-manager.useGlobalPkgs = true;
+				home-manager.useUserPackages = true;
+				}
 
-              # Host
-              ./hosts/${currentHost}/hostConfigs/configuration.nix
+				# Sops-nix
+				sops-nix.nixosModules.sops
 
-              # User
-              ./user/bin/user.nix
-              ./user/bin/var.nix
+				# Options
+				./system/options/hostOptions.nix
+				./system/options/userOptions.nix
+
+				# Host
+				./hosts/${currentHost}/hostConfigs/configuration.nix
+
+				# User
+				./user/bin/user.nix
+				./user/bin/userSettings.nix
+				#./user/bin/var.nix
 
             ];
             specialArgs = {
-            	inherit userSettings hostSettings hostSecrets;
+            	inherit hostSecretsFile;
+            	hostSettingsRaw = hostSettings;
             };
           };
         };
