@@ -130,17 +130,16 @@
 				./user/bin/home.nix
 
 				# Packages
-				./user/packages/bin/packageImporter.nix
+				./user/packages/bin/importer.nix
 
-            ];
-            specialArgs = {
-            	inherit currentHost;
-            	hostSettingsRaw = hostSettings;
-            };
-          };
+        ];
+        
+        specialArgs = {
+        	inherit currentHost;
+        	hostSettingsRaw = hostSettings;
         };
-
-
+      };
+    };
 	};
 	
 } 
