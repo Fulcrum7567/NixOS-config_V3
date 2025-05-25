@@ -49,8 +49,6 @@
 
 		hostSettings = (import ./hosts/${currentHost}/hostSettingsRaw.nix);
 
-		hostSecretsFile = "./hosts/${currentHost}/hostSecrets.json";
-
 
 		pkgs-stable = nixpkgs-stable {
 			system = hostSettings.system;
@@ -123,15 +121,19 @@
 
 				# Host
 				./hosts/${currentHost}/hostConfigs/configuration.nix
+				./hosts/${currentHost}/hostConfigs/hostSettings.nix
 
 				# User
 				./user/bin/user.nix
 				./user/bin/userSettings.nix
 				#./user/bin/var.nix
 
+				# Packages
+				./user/packages/bin/packageImporter.nix
+
             ];
             specialArgs = {
-            	inherit hostSecretsFile;
+            	inherit currentHost;
             	hostSettingsRaw = hostSettings;
             };
           };

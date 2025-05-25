@@ -63,6 +63,13 @@ in
 			description = "Set what type of graphics card your system has.";
 		};
 
+
+		# Dotfiles dir
+		dotfilesDir = lib.mkOption {
+			type = lib.types.path;
+			description = "Set where the dotfiles are stored on your host.";
+		};
+
 	};
 
 	

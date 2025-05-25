@@ -1,7 +1,7 @@
-{ config, hostSecretsFile, ... }:
+{ config, currentHost, ... }:
 {
 	sops.secrets.hostPassword = {
-		sopsFile = hostSecretsFile;
+		sopsFile = "${config.host.settings.dotfilesDir}/hosts/${currentHost}/hostSecrets.json";
 		mode = "0400";
 		owner = "root";
 	};
@@ -11,6 +11,6 @@
 	    description = config.user.settings.displayName;
 	    extraGroups = [ "networkmanager" "wheel" ];
 	    uid = 1000;
-	    hashedPasswordFile = config.sops.hostPassword.path; # "$6$swTYGVRP4erDVWWO$argE8karkQ6JyNFAEgFMiJpEYCYrIIZChmqrvXUb0VDx7lS./U661Agnv1mwJVrlx1x.ShGaznfrbgdsrdqBW0";
+	    hashedPasswordFile = config.sops.secrets.hostPassword.path; # "$6$swTYGVRP4erDVWWO$argE8karkQ6JyNFAEgFMiJpEYCYrIIZChmqrvXUb0VDx7lS./U661Agnv1mwJVrlx1x.ShGaznfrbgdsrdqBW0";
   	};
 } 
