@@ -121,12 +121,13 @@
 
 				# Host
 				./hosts/${currentHost}/hostConfigs/configuration.nix
-				./hosts/${currentHost}/hostConfigs/hostSettings.nix
+				./hosts/${currentHost}/hostSettings.nix
 
 				# User
 				./user/bin/user.nix
 				./user/bin/userSettings.nix
-				#./user/bin/var.nix
+				./user/bin/var.nix
+				./user/bin/home.nix
 
 				# Packages
 				./user/packages/bin/packageImporter.nix

@@ -66,7 +66,7 @@ in
 
 		# Dotfiles dir
 		dotfilesDir = lib.mkOption {
-			type = lib.types.path;
+			type = lib.types.str;
 			description = "Set where the dotfiles are stored on your host.";
 		};
 

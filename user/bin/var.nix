@@ -1,11 +1,13 @@
 
-{ ... }:
+{ config, ... }:
 {
-	home-manager.users.${userSettings.username} = { userSettings, editorSettings, browserSettings, explorerSettings, terminalSettings, ... }: {
+	home-manager.users.${config.user.settings.username} = { ... }: {
+		#TODO
+		/*
 		home.sessionVariables = {
 			EDITOR = userSettings.editor;
 			TERM = userSettings.terminal;
-			
+		
 		};
 
 		xdg.mimeApps = {
@@ -21,5 +23,6 @@
 
 			};
 		};
+		*/
 	};  
 } 
