@@ -19,12 +19,14 @@
 
 	inputs = {
 
-		# input nixpkgs
+		# SYSTEM
+
+		# Input nixpkgs
 		nixpkgs-stable.url = "nixpkgs/nixos-24.11";
 		nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
 
-		# input home-manager
+		# Input home-manager
 		home-manager-stable = {
 			url = "github:nix-community/home-manager/release-24.11";
 			inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -39,10 +41,16 @@
 		# Sops-nix
 		sops-nix.url = "github:Mic92/sops-nix";
 
+
+		# PACKAGES
+
+		# Nixcord
+		nixcord.url = "github:kaylorben/nixcord";
+
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, ... }:
 	let
 
 		currentHost = (import ./hosts/currentHost.nix).currentHost;
@@ -135,7 +143,7 @@
         ];
         
         specialArgs = {
-        	inherit currentHost;
+        	inherit currentHost inputs pkgs-default;
         	hostSettingsRaw = hostSettings;
         };
       };
