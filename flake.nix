@@ -42,21 +42,72 @@
 		sops-nix.url = "github:Mic92/sops-nix";
 
 
-		# PACKAGES
+		# ╔════════════════════════════════╗
+		# ║                                ║
+		# ║                                ║
+		# ║                                ║
+		# ║    .oOoO' .oOo. .oOo. .oOo     ║
+		# ║    O   o  O   o O   o `Ooo.    ║
+		# ║    o   O  o   O o   O     O    ║
+		# ║    `OoO'o oOoO' oOoO' `OoO'    ║
+		# ║           O     O              ║
+		# ║           o'    o'             ║
+		# ║                                ║
+		# ╚════════════════════════════════╝
 
 		# Nixcord
 		nixcord.url = "github:kaylorben/nixcord";
 
+
+		# Zen-browser
+		zen-browser-stable = {
+			url = "github:0xc000022070/zen-browser-flake";
+			inputs.nixpkgs.follows = "nixpkgs-stable";
+		};
+
+		zen-browser-unstable = {
+			url = "github:0xc000022070/zen-browser-flake";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, ... }:
 	let
+
+		# ╔═══════════════════════════════════════════════════════════╗
+		# ║                                                           ║
+		# ║                                    o     o                ║
+		# ║                         o         O     O                 ║
+		# ║                                   O     o                 ║
+		# ║                                   o     O                 ║
+		# ║    `o   O .oOoO' `OoOo. O  .oOoO' OoOo. o  .oOo. .oOo     ║
+		# ║     O   o O   o   o     o  O   o  O   o O  OooO' `Ooo.    ║
+		# ║     o  O  o   O   O     O  o   O  o   O o  O         O    ║
+		# ║     `o'   `OoO'o  o     o' `OoO'o `OoO' Oo `OoO' `OoO'    ║
+		# ║                                                           ║
+		# ╚═══════════════════════════════════════════════════════════╝
 
 		currentHost = (import ./hosts/currentHost.nix).currentHost;
 
 		hostSettings = (import ./hosts/${currentHost}/hostSettingsRaw.nix);
 
+
+		# ╔═══════════════════════════════╗
+		# ║                               ║
+		# ║          o                    ║
+		# ║          O                    ║
+		# ║          o                    ║
+		# ║          o                    ║
+		# ║    .oOo. O  o  .oOoO .oOo     ║
+		# ║    O   o OoO   o   O `Ooo.    ║
+		# ║    o   O o  O  O   o     O    ║
+		# ║    oOoO' O   o `OoOo `OoO'    ║
+		# ║    O               O          ║
+		# ║    o'           OoO'          ║
+		# ║                               ║
+		# ╚═══════════════════════════════╝
 
 		pkgs-stable = nixpkgs-stable {
 			system = hostSettings.system;
@@ -107,8 +158,42 @@
 						else
 							home-manager-unstable
 						);
+
+
+
+		zen-browser = (if (hostSettings.defaultPackageState == "stable")
+					then
+						zen-browser-unstable
+					else
+						zen-browser-unstable
+			);
+
 	in
 	{
+
+
+		# ╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+		# ║                                                                                                                                ║
+		# ║    .oOOOo.  o       O .oOOOo.  oOoOOoOOo o.OOoOoo Oo      oO                                                                   ║
+		# ║    o     o  O       o o     o      o      O       O O    o o                                                                   ║
+		# ║    O.       `o     O' O.           o      o       o  o  O  O                                                                   ║
+		# ║     `OOoo.    O   o    `OOoo.      O      ooOO    O   Oo   O                                                                   ║
+		# ║          `O    `O'          `O     o      O       O        o ooooooooo                                                         ║
+		# ║           o     o            o     O      o       o        O                                                                   ║
+		# ║    O.    .O     O     O.    .O     O      O       o        O                                                                   ║
+		# ║     `oooO'      O      `oooO'      o'    ooOooOoO O        o                                                                   ║
+		# ║     .oOOOo.   .oOOOo.  o.     O OOooOoO ooOoOOo  .oOOOo.  O       o `OooOOo.     Oo    oOoOOoOOo ooOoOOo  .oOOOo.  o.     O    ║
+		# ║    .O     o  .O     o. Oo     o o          O    .O     o  o       O  o     `o   o  O       o        O    .O     o. Oo     o    ║
+		# ║    o         O       o O O    O O          o    o         O       o  O      O  O    o      o        o    O       o O O    O    ║
+		# ║    o         o       O O  o   o oOooO      O    O         o       o  o     .O oOooOoOo     O        O    o       O O  o   o    ║
+		# ║    o         O       o O   o  O O          o    O   .oOOo o       O  OOooOO'  o      O     o        o    O       o O   o  O    ║
+		# ║    O         o       O o    O O o          O    o.      O O       O  o    o   O      o     O        O    o       O o    O O    ║
+		# ║    `o     .o `o     O' o     Oo o          O     O.    oO `o     Oo  O     O  o      O     O        O    `o     O' o     Oo    ║
+		# ║     `OoooO'   `OoooO'  O     `o O'      ooOOoOo   `OooO'   `OoooO'O  O      o O.     O     o'    ooOOoOo  `OoooO'  O     `o    ║
+		# ║                                                                                                                                ║
+		# ╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+
 		nixosConfigurations = {
 			${currentHost} = lib.nixosSystem {
             	system = hostSettings.system;
@@ -142,11 +227,10 @@
         		];
         
         		specialArgs = {
-        			inherit currentHost inputs pkgs-default;
+        			inherit currentHost inputs pkgs-default zen-browser;
         			hostSettingsRaw = hostSettings;
         		};
       		};
 		};
 	};
-	
 } 

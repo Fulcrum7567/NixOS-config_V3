@@ -6,8 +6,6 @@
 
 		emailAddresses.git = "dragon.fighter@outlook.de";
 
-		
-
 	};
 
 }
