@@ -1,7 +1,7 @@
 { ... }:
 {
 	imports = [
-		./configs.nix
+		./configs/nixcord.nix
 		./options.nix
 		./packages.nix
 	];
