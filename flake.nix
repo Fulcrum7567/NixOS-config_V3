@@ -108,46 +108,46 @@
 							home-manager-unstable
 						);
 	in
-	{
+{
 		nixosConfigurations = {
           ${currentHost} = lib.nixosSystem {
             system = hostSettings.system;
             modules = [
-				# Home Manager as a NixOS module
-				home-manager.nixosModules.home-manager
-				{
-				home-manager.useGlobalPkgs = true;
-				home-manager.useUserPackages = true;
-				}
+							# Home Manager as a NixOS module
+							home-manager.nixosModules.home-manager
+							{
+							home-manager.useGlobalPkgs = true;
+							home-manager.useUserPackages = true;
+							}
 
-				# Sops-nix
-				sops-nix.nixosModules.sops
+							# Sops-nix
+							sops-nix.nixosModules.sops
 
-				# Options
-				./system/options/hostOptions.nix
-				./system/options/userOptions.nix
+							# Options
+							./system/options/hostOptions.nix
+							./system/options/userOptions.nix
 
-				# Host
-				./hosts/${currentHost}/hostConfigs/configuration.nix
-				./hosts/${currentHost}/hostSettings.nix
+							# Host
+							./hosts/${currentHost}/hostConfigs/configuration.nix
+							./hosts/${currentHost}/hostSettings.nix
 
-				# User
-				./user/bin/user.nix
-				./user/bin/userSettings.nix
-				./user/bin/var.nix
-				./user/bin/home.nix
+							# User
+							./user/bin/user.nix
+							./user/bin/userSettings.nix
+							./user/bin/var.nix
+							./user/bin/home.nix
 
-				# Packages
-				./user/packages/bin/importer.nix
+							# Packages
+							./user/packages/bin/importer.nix
 
-        ];
+        		];
         
-        specialArgs = {
-        	inherit currentHost inputs pkgs-default;
-        	hostSettingsRaw = hostSettings;
-        };
-      };
-    };
-	};
+        		specialArgs = {
+        			inherit currentHost inputs pkgs-default;
+        			hostSettingsRaw = hostSettings;
+        		};
+      		};
+    		};
+			};
 	
 } 
