@@ -3,4 +3,5 @@
 {
 	system = "x86_64-linux";
 	systemState = "unstable";
+	defaultPackageState = "unstable";
 }

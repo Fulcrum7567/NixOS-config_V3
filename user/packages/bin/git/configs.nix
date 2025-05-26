@@ -2,7 +2,7 @@
 {
 	config = lib.mkIf config.packages.git.enable {
 		
-		home-manager.users.${config.user.settings.username} = { config, lib, ... }: {
+		home-manager.users.${config.user.settings.username} = { lib, ... }: {
 			programs.git = {
 				enable = true;
 				userName = config.user.settings.git.username;

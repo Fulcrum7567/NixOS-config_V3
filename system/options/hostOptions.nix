@@ -47,7 +47,7 @@ in
 		# Default package state
 		defaultPackageState = lib.mkOption {
 			type = stateType;
-			default = "stable";
+			default = hostSettingsRaw.defaultPackageState;
 			description = "Set the state packages should be in on default.";
 		};
 

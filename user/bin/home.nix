@@ -1,12 +1,7 @@
 { config, ... }:
 {
-		programs.home-manager = {
-		    enable = true;
-		    extraSpecialArgs = {
-		      	inherit config;
-		    };
-		};
 		home-manager.users.${config.user.settings.username} = { ... }: {
+
 			home.username = config.user.settings.username;
   			home.homeDirectory = "/home/${config.user.settings.username}";
 
