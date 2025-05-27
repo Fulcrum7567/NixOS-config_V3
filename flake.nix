@@ -70,10 +70,12 @@
 			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
 
+		mikuboot.url = "gitlab:evysgarden/mikuboot";
+
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗

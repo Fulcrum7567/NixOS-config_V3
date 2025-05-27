@@ -4,8 +4,6 @@ let
 		"stable"
 		"unstable"
 	];
-
-  	themes = lib.attrNames (builtins.readDir "${config.host.settings.dotfilesDir}/user/themes/profiles/");
 in
 {
 
@@ -74,7 +72,7 @@ in
 
 
 		theme = lib.mkOption {
-			type = lib.types.enum themes;
+			type = lib.types.str;
 			description = "Set the theme to apply. Must exist in user/themes/profiles/.";
 		};
 
