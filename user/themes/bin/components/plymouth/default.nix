@@ -2,7 +2,7 @@
 {
 	options.theming.plymouth.enable = lib.mkOption {
 		type = lib.types.bool;
-		default = false;
+		default = true;
 		description = "Whether to enable plymouth.";
 	};
 
