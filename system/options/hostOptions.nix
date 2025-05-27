@@ -1,9 +1,11 @@
-{ lib, hostSettingsRaw, ... }:
+{ lib, config, hostSettingsRaw, ... }:
 let 
 	stateType = lib.types.enum [
 		"stable"
 		"unstable"
 	];
+
+  	themes = lib.attrNames (builtins.readDir "${config.host.settings.dotfilesDir}/user/themes/profiles/");
 in
 {
 
@@ -31,6 +33,13 @@ in
 			example = "stable";
 		};
 
+		# Default package state
+		defaultPackageState = lib.mkOption {
+			type = stateType;
+			default = hostSettingsRaw.defaultPackageState;
+			description = "Set the state packages should be in on default. Should be the same as in hostSettingsRaw!";
+		};
+
 
 		# System type
 		systemType = lib.mkOption {
@@ -43,13 +52,6 @@ in
 			description = "Set the type of the device.";
 		};
 
-
-		# Default package state
-		defaultPackageState = lib.mkOption {
-			type = stateType;
-			default = hostSettingsRaw.defaultPackageState;
-			description = "Set the state packages should be in on default.";
-		};
 
 
 		# GPU manufacturer
@@ -68,6 +70,12 @@ in
 		dotfilesDir = lib.mkOption {
 			type = lib.types.str;
 			description = "Set where the dotfiles are stored on your host.";
+		};
+
+
+		theme = lib.mkOption {
+			type = lib.types.enum themes;
+			description = "Set the theme to apply. Must exist in user/themes/profiles/.";
 		};
 
 	};
