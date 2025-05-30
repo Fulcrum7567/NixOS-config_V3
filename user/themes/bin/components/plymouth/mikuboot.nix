@@ -6,11 +6,11 @@
 		description = "Whether to enable mikuboot plymouth.";
 	};
 
-	config = lib.mkIf config.theming.plymouth.mikuboot.enable {
-
-		imports = [
+	imports = [
 			inputs.mikuboot.nixosModules.default
-		];
+	];
+
+	config = lib.mkIf config.theming.plymouth.mikuboot.enable {
 
 		boot.plymouth = {
 			enable = true;

@@ -213,6 +213,7 @@
 					# Options
 					./system/options/hostOptions.nix
 					./system/options/userOptions.nix
+					./system/options/themeOptions.nix
 
 					# Host
 					./hosts/${currentHost}/hostConfigs/configuration.nix
@@ -226,6 +227,7 @@
 					
 					# Theming
 					./user/themes/bin/components/importer.nix
+					./user/themes/profiles/importer.nix
 
 					# Packages
 					./user/packages/bin/importer.nix

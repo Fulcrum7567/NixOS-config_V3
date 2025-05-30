@@ -5,4 +5,6 @@
 		gpuManufacturer = "nvidia";
 		dotfilesDir = "/home/${config.user.settings.username}/.dotfiles";
 	};
+
+	config.theming.activeTheme = "demoTheme";
 }
