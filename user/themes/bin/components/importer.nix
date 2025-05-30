@@ -1,30 +1,18 @@
+{ lib, ... }:
+
 let
-  # Get the current directory (assuming importer.nix is run from this directory)
-  dir = ./.;
+  # 1) get a list of all names under this directory
+  allNames = builtins.attrNames (builtins.readDir ./.);
 
-  # Helper function to recursively find all .nix files in subdirectories
-  getNixFiles = path:
-    let
-      entries = builtins.readDir path;
-      paths = builtins.attrNames entries;
-    in
-      builtins.concatLists (map (name:
-        let
-          fullPath = "${path}/${name}";
-          entryType = entries.${name};
-        in
-          if entryType == "directory" then
-            getNixFiles fullPath
-          else if entryType == "regular" && builtins.match ".*\\.nix" name != null then
-            [ fullPath ]
-          else
-            []
-      ) paths);
+  # 2) keep only those names which have an imports.nix inside
+  hasImporter = name:
+    builtins.pathExists (./${name}/imports.nix);
 
-  nixFiles = getNixFiles dir;
+  validDirs = lib.filter hasImporter allNames;
 
-  # Import each nix file
-  imports = map import nixFiles;
-
+  # 3) build the final imports list
+  importerPaths = lib.map (name: ./${name}/imports.nix) validDirs;
 in
-imports
+{
+  imports = importerPaths;
+}

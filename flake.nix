@@ -223,6 +223,9 @@
 					./user/bin/userSettings.nix
 					./user/bin/var.nix
 					./user/bin/home.nix
+					
+					# Theming
+					./user/themes/bin/components/importer.nix
 
 					# Packages
 					./user/packages/bin/importer.nix

@@ -68,13 +68,11 @@ in
 		dotfilesDir = lib.mkOption {
 			type = lib.types.str;
 			description = "Set where the dotfiles are stored on your host.";
+			example = "~/.dotfiles";
 		};
 
 
-		theme = lib.mkOption {
-			type = lib.types.str;
-			description = "Set the theme to apply. Must exist in user/themes/profiles/.";
-		};
+		
 
 	};
 
