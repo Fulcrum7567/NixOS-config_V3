@@ -214,6 +214,7 @@
 					./system/options/hostOptions.nix
 					./system/options/userOptions.nix
 					./system/options/themeOptions.nix
+					./system/options/displayManagers.nix
 
 					# Host
 					./hosts/${currentHost}/hostConfigs/configuration.nix
@@ -231,6 +232,7 @@
 
 					# Desktop
 					./user/desktops/displayManagers/importer.nix
+					./user/desktops/environments/gnome/profiles/importer.nix
 
 					# Packages
 					./user/packages/bin/importer.nix
