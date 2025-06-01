@@ -229,6 +229,9 @@
 					./user/themes/bin/components/importer.nix
 					./user/themes/profiles/importer.nix
 
+					# Desktop
+					./user/desktops/displayManagers/importer.nix
+
 					# Packages
 					./user/packages/bin/importer.nix
         		];
