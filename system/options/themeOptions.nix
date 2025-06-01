@@ -1,6 +1,7 @@
 { config, lib, ... }:
 {
 	options.theming = {
+
 		activeTheme = lib.mkOption {
 			type = lib.types.str;
 			description = "Set the theme to apply. Must exist in user/themes/profiles/.";
