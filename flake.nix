@@ -215,6 +215,7 @@
 					./system/options/userOptions.nix
 					./system/options/themeOptions.nix
 					./system/options/displayManagers.nix
+					./system/options/desktopOptions.nix
 
 					# Host
 					./hosts/${currentHost}/hostConfigs/configuration.nix

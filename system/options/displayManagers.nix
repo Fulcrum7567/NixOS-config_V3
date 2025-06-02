@@ -11,7 +11,7 @@
 
 		activeManager = lib.mkOption {
 			type = lib.types.enum (config.displayManagers.availableManagers or []);
-			description = "Set the active display manager. Must exist in user/desktop/displayManagers.";
+			description = "Set the active display manager. Must exist in user/desktops/displayManagers.";
 		};
 	};
 }
