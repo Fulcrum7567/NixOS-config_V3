@@ -7,4 +7,5 @@
 	};
 
 	config.theming.activeTheme = "demoTheme";
+	config.desktops.activeDesktop = "gnomeWithGdm";
 }

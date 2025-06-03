@@ -22,13 +22,13 @@
 		# SYSTEM
 
 		# Input nixpkgs
-		nixpkgs-stable.url = "nixpkgs/nixos-24.11";
+		nixpkgs-stable.url = "nixpkgs/nixos-25.05";
 		nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
 
 		# Input home-manager
 		home-manager-stable = {
-			url = "github:nix-community/home-manager/release-24.11";
+			url = "github:nix-community/home-manager/release-25.05";
 			inputs.nixpkgs.follows = "nixpkgs-stable";
 		};
 		
@@ -233,7 +233,8 @@
 
 					# Desktop
 					./user/desktops/displayManagers/importer.nix
-					./user/desktops/environments/gnome/profiles/importer.nix
+					./user/desktops/environments/importer.nix
+					./user/desktops/profiles/importer.nix
 
 					# Packages
 					./user/packages/bin/importer.nix

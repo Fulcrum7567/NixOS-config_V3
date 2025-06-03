@@ -1,7 +1,7 @@
 { ... }:
 {
 	imports = [
-		./options.nix
 		./config.nix
+		./options.nix
 	];
-} 
+}
