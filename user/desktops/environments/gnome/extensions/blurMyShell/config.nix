@@ -4,7 +4,7 @@
 		environment.systemPackages = with pkgs.gnomeExtensions; [
 			blur-my-shell
 		];
-		home-manager.users.${config.user.settings.username} = { ... }: {
+		home-manager.users.${config.user.settings.username} =  {
 			dconf.settings = {
 
 				# Enable extension

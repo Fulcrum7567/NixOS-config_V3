@@ -8,6 +8,8 @@
 
 			extensions = {
 				blurMyShell.enable = true;
+				alphabeticalAppGrid.enable = true;
+				clipboardIndicator.enable = true;
 			};
 		};
 
