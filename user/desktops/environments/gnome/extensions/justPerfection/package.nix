@@ -1,10 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, settings, ... }:
 {
-	config = lib.mkIf config.desktopEnvironments.gnome.extensions.dashToDock.enable {
+	config = lib.mkIf config.desktopEnvironments.gnome.extensions.${settings.optionName}.enable {
 
 		# Package installation
-		environment.systemPackages = with pkgs.gnomeExtensions; [
-			just-perfection
+		environment.systemPackages = [
+			(pkgs.gnomeExtensions.${settings.officialName})
 		];
 
 		home-manager.users.${config.user.settings.username} = {
@@ -15,7 +15,7 @@
 				"org/gnome/shell" = {
 					disable-user-extensions = false;
 					enabled-extensions = [
-						"just-perfection-desktop@just-perfection"
+						"${settings.officialID}"
 					];
 				};
 			};
