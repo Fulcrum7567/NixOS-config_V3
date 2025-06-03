@@ -12,6 +12,7 @@
 				clipboardIndicator.enable = true;
 				dashToDock.enable = true;
 				justPerfection.enable = false; # BROKEN!
+				middleClickToClose.enable = true;
 			};
 		};
 	};
