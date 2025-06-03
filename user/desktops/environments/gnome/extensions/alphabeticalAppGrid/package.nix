@@ -1,10 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, settings, ... }:
 {
-	config = lib.mkIf config.desktopEnvironments.gnome.extensions.alphabeticalAppGrid.enable {
+	config = lib.mkIf config.desktopEnvironments.gnome.extensions.${settings.optionName}.enable {
 
 		# Package installation
-		environment.systemPackages = with pkgs.gnomeExtensions; [
-			alphabetical-app-grid
+		environment.systemPackages = [
+			(pkgs.gnomeExtensions.${settings.officialName})
 		];
 
 		home-manager.users.${config.user.settings.username} = {
@@ -15,7 +15,7 @@
 				"org/gnome/shell" = {
 					disable-user-extensions = false;
 					enabled-extensions = [
-						"AlphabeticalAppGrid@stuarthayhurst"
+						"${settings.officialID}"
 					];
 				};
 			};

@@ -1,7 +1,7 @@
-{ ... }:
+{ lib, config, settings, ... }:
 {
 	imports = [
-		./config.nix
-		./options.nix
+		(import ./config.nix { inherit lib config settings; })
+		(import ./options.nix { inherit lib config settings; })
 	];
 } 
