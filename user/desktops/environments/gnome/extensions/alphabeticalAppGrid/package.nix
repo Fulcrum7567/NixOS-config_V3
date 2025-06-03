@@ -18,15 +18,6 @@
 						"AlphabeticalAppGrid@stuarthayhurst"
 					];
 				};
-
-
-				# Configure extension
-				"org/gnome/shell/extensions/alphabetical-app-grid" = {
-					folder-order-position = "start";
-					sort-folder-contents = true;
-			    };
-
-				# End of extension configuration
 			};
 		};
 	};
