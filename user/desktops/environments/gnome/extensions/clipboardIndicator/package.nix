@@ -1,10 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, settings, ... }:
 {
-	config = lib.mkIf config.desktopEnvironments.gnome.extensions.clipboardIndicator.enable {
+	config = lib.mkIf config.desktopEnvironments.gnome.extensions.${settings.optionName}.enable {
 
 		# Package installation
-		environment.systemPackages = with pkgs.gnomeExtensions; [
-			clipboard-indicator
+		environment.systemPackages = [
+			(pkgs.gnomeExtensions.${settings.officialName})
 		];
 
 		home-manager.users.${config.user.settings.username} = {
@@ -15,7 +15,7 @@
 				"org/gnome/shell" = {
 					disable-user-extensions = false;
 					enabled-extensions = [
-						"clipboard-indicator@tudmotu.com"
+						"${settings.officialID}"
 					];
 				};
 			};

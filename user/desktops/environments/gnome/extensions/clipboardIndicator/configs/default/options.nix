@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, settings, ... }:
 {
-	config.desktopEnvironments.gnome.extensions.clipboardIndicator.availableConfigs = [ "default" ];
+	config.desktopEnvironments.gnome.extensions.${settings.optionName}.availableConfigs = [ "default" ];
 } 
