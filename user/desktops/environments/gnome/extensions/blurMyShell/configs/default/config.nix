@@ -1,12 +1,12 @@
-{ config, lib, ... }:
+{ config, lib, settings, ... }:
 let
-	extensionConfig = config.desktopEnvironments.gnome.extensions.blurMyShell;
+	extensionConfig = config.desktopEnvironments.gnome.extensions.${settings.optionName};
 in
 {
 	config = lib.mkIf (extensionConfig.enable && (extensionConfig.activeConfig == "default")) {
 		home-manager.users.${config.user.settings.username} = {
 			dconf.settings = {
-				
+
 				"org/gnome/shell/extensions/blur-my-shell/appfolder" = {
 			      	brightness = 0.6;
 			      	sigma = 30;
@@ -39,8 +39,7 @@ in
 			      	brightness = 0.6;
 			      	sigma = 30;
 			    };
-
-
+			    
 			};
 		};
 	};
