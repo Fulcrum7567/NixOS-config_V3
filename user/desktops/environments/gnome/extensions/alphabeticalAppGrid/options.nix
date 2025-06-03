@@ -9,13 +9,13 @@ in
 			type = lib.types.listOf lib.types.str;
 			default = [];
 			apply = x: lib.unique x;
-			description = "List of all available configs for the alphabetical-app-grid extension.";
+			description = "List of all available configs for the alphabetical-app-grid gnome extension.";
 		};
 
 		activeConfig = lib.mkOption {
-			lib.types.enum (extensionOption.availableConfigs or []);
+			type = lib.types.enum (extensionOption.availableConfigs or []);
 			default = "default"; # A default config should always exist, delete if not
-			description = "Set the active configuration for the alphabetical-app-grid extension.";
+			description = "Set the active configuration for the alphabetical-app-grid gnome extension.";
 		};
 
 		enable = lib.mkOption {

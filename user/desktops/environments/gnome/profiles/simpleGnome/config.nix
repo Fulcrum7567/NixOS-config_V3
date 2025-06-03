@@ -10,6 +10,7 @@
 				blurMyShell.enable = true;
 				alphabeticalAppGrid.enable = true;
 				clipboardIndicator.enable = true;
+				dashToDock.enable = true;
 			};
 		};
 

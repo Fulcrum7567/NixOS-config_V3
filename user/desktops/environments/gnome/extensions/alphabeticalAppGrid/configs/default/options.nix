@@ -1,4 +1,4 @@
 { config, lib, ... }:
 {
-	options.desktopEnvironments.gnome.extensions.clipboardIndicator.availableConfigs = [ "default" ];
+	config.desktopEnvironments.gnome.extensions.alphabeticalAppGrid.availableConfigs = [ "default" ];
 } 

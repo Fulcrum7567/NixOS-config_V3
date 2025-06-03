@@ -1,26 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
+let
+	extensionConfig = config.desktopEnvironments.gnome.extensions.dashToDock;
+in
 {
-	config = lib.mkIf config.desktopEnvironments.gnome.extensions.dashToDock.enable {
-
-		# Package installation
-		environment.systemPackages = with pkgs.gnomeExtensions; [
-			dash-to-dock
-		];
-
+	config = lib.mkIf (extensionConfig.enable && (extensionConfig.activeConfig == "default")) {
 		home-manager.users.${config.user.settings.username} = {
 			dconf.settings = {
-
-				# Enable extension
-
-				"org/gnome/shell" = {
-					disable-user-extensions = false;
-					enabled-extensions = [
-						"dash-to-dock@micxgx.gmail.com"
-					];
-				};
-
-
-				# Configure extension
 				
 				"org/gnome/shell/extensions/dash-to-dock" = {
 			      apply-custom-theme = false;
@@ -52,9 +37,8 @@
 			      transparency-mode = "DYNAMIC";
 			      blur = true;
 			    };
-
-				# End of extension configuration
+			    
 			};
 		};
 	};
-}
+} 
