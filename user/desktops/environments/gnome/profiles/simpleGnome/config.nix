@@ -11,9 +11,8 @@
 				alphabeticalAppGrid.enable = true;
 				clipboardIndicator.enable = true;
 				dashToDock.enable = true;
+				justPerfection.enable = false; # BROKEN!
 			};
 		};
-
-
 	};
 }
