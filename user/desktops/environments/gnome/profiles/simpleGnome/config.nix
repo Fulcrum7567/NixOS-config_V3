@@ -7,7 +7,13 @@
 			gnomeBase.enable = true;
 
 			settings = {
+				fileChooser.enable = true;
+				interface.enable = true;
 				keyboardShortcuts.enable = true;
+				mutter.enable = true;
+				shell.enable = true;
+				touchpad.enable = true;
+				wm.enable = true;
 			};
 
 			extensions = {
