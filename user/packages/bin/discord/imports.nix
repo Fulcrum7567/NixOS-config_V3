@@ -1,8 +1,10 @@
-{ ... }:
+{ lib, config,  inputs, ... }:
+let
+	settings = import ./settings.nix;
+in
 {
 	imports = [
-		./configs/nixcord.nix
-		./options.nix
-		./packages.nix
-	];
+	    (import ./configs/importer.nix { inherit lib config inputs settings; })
+	    (import ./options.nix { inherit lib config settings; })
+  	];
 }
