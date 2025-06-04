@@ -6,6 +6,10 @@
 			# Based on gnome base
 			gnomeBase.enable = true;
 
+			settings = {
+				keyboardShortcuts.enable = true;
+			};
+
 			extensions = {
 				alphabeticalAppGrid.enable = true;
 				appIndicator.enable = true;
