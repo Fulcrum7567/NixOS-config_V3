@@ -17,6 +17,10 @@
 				enable = true;
 				active = "nautilus";
 			};
+			editor = {
+				enable = true;
+				active = "sublime";
+			};
 		};
 	};
 
