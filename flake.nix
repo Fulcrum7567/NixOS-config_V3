@@ -111,7 +111,7 @@
 		# ║                               ║
 		# ╚═══════════════════════════════╝
 
-		pkgs-stable = nixpkgs-stable {
+		pkgs-stable = import nixpkgs-stable {
 			system = hostSettings.system;
 			config = {
 			  	allowUnfree = true;
@@ -121,7 +121,7 @@
 			};
 		};
 
-		pkgs-unstable = nixpkgs-unstable {
+		pkgs-unstable = import nixpkgs-unstable {
 			system = hostSettings.system;
 			config = {
 			  	allowUnfree = true;
@@ -238,10 +238,11 @@
 
 					# Packages
 					./user/packages/bin/importer.nix
+					./user/packages/defaults/importer.nix
         		];
         
         		specialArgs = {
-        			inherit currentHost inputs pkgs-default zen-browser;
+        			inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser;
         			hostSettingsRaw = hostSettings;
         		};
       		};

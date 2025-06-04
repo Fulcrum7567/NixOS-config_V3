@@ -8,7 +8,7 @@ in
 			dconf.settings = {
 
 				"org/gnome/shell" = {
-					favorite-apps = [  ];
+					favorite-apps = [ "${config.defaults.browser.appID}" ];
 					welcome-dialog-last-shown-version = "99.2";
 					remember-mount-password = true;
 			    };
