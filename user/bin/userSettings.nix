@@ -21,6 +21,10 @@
 				enable = true;
 				active = "sublime";
 			};
+			terminal = {
+				enable = true;
+				active = "kitty";
+			};
 		};
 	};
 
