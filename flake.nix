@@ -93,7 +93,7 @@
 
 		currentHost = (import ./hosts/currentHost.nix).currentHost;
 
-		hostSettings = (import ./hosts/${currentHost}/hostSettingsRaw.nix);
+		hostSettings = (import ./hosts/hosts/${currentHost}/hostSettingsRaw.nix);
 
 
 		# ╔═══════════════════════════════╗
@@ -218,8 +218,8 @@
 					./system/options/desktopOptions.nix
 
 					# Host
-					./hosts/${currentHost}/hostConfigs/configuration.nix
-					./hosts/${currentHost}/hostSettings.nix
+					./hosts/hosts/${currentHost}/hostConfigs/configuration.nix
+					./hosts/hosts/${currentHost}/hostSettings.nix
 
 					# User
 					./user/bin/user.nix

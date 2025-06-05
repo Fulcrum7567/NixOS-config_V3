@@ -1,7 +1,7 @@
 { config, currentHost, ... }:
 {
 	sops.secrets.hostPassword = {
-		sopsFile = "${config.host.settings.dotfilesDir}/hosts/${currentHost}/hostSecrets.json";
+		sopsFile = "${config.host.settings.dotfilesDir}/hosts/hosts/${currentHost}/hostSecrets.json";
 		mode = "0400";
 		owner = "root";
 	};
