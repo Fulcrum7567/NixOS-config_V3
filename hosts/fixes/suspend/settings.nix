@@ -1,0 +1,4 @@
+{
+	optionName = "suspend";
+	displayName = "suspend";
+}

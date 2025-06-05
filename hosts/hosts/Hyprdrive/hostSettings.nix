@@ -14,6 +14,7 @@
 		};
 		hosts.fixes = {
 			touchpad.enable = true;
+			suspend.enable = true;
 		};
 	};
 
