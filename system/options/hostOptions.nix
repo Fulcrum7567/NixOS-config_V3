@@ -1,4 +1,4 @@
-{ lib, config, hostSettingsRaw, ... }:
+{ lib, config, hostSettingsRaw, currentHost, ... }:
 let 
 	stateType = lib.types.enum [
 		"stable"
@@ -39,6 +39,13 @@ in
 		};
 
 
+		hostName = lib.mkOption {
+			type = lib.types.str;
+			default = currentHost;
+			description = "Set the host name. Should be the same as currentHost!";
+		};
+
+
 		# System type
 		systemType = lib.mkOption {
 			type = lib.types.nullOr (lib.types.enum [
@@ -70,6 +77,8 @@ in
 			description = "Set where the dotfiles are stored on your host.";
 			example = "~/.dotfiles";
 		};
+
+
 
 
 		
