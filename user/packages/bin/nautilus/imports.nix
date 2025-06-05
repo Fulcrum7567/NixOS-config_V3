@@ -1,11 +1,11 @@
-{ lib, config, pkgs-default, ... }:
+{ lib, config, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
 let
 	settings = import ./settings.nix;
 in
 {
 	imports = [
-	    (import ./configs/importer.nix { inherit lib config settings; })
+	    (import ./configs/importer.nix { inherit lib config pkgs-default pkgs-stable pkgs-unstable settings; })
 	    (import ./options.nix { inherit lib config settings; })
-	    (import ./package.nix { inherit lib config pkgs-default settings; })
+	    (import ./package.nix { inherit lib config pkgs-default pkgs-stable pkgs-unstable settings; })
   	];
 }

@@ -9,22 +9,10 @@
 		};
 
 		defaults = {
-			browser = {
-				enable = true;
-				active = "zen";
-			};
-			explorer = {
-				enable = true;
-				active = "nautilus";
-			};
-			editor = {
-				enable = true;
-				active = "sublime";
-			};
-			terminal = {
-				enable = true;
-				active = "kitty";
-			};
+			browser.active = "zen";
+			explorer.active = "nautilus";
+			editor.active = "sublime";
+			terminal.active = "kitty";
 		};
 	};
 

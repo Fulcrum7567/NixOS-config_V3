@@ -1,11 +1,6 @@
 { config, lib, ... }:
 {
 	options.defaults.editor = {
-		enable = lib.mkOption {
-			type = lib.types.bool;
-			default = true;
-			description = "Whether to enable a default editors.";
-		};
 
 		available = lib.mkOption {
 			type = lib.types.listOf lib.types.str;
@@ -28,7 +23,4 @@
 		};
 	};
 
-	config = lib.mkIf (config.defaults.editor.enable && (config.defaults.editor.active == null)) {
-		warnings = [ "A default editor is enabled but no active editor is set. Set an active editor with config.defaults.editor.active." ]; 
-	};
 }

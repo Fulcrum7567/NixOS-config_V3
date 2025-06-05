@@ -1,11 +1,6 @@
 { config, lib, ... }:
 {
 	options.defaults.terminal = {
-		enable = lib.mkOption {
-			type = lib.types.bool;
-			default = true;
-			description = "Whether to enable a default terminal.";
-		};
 
 		available = lib.mkOption {
 			type = lib.types.listOf lib.types.str;
@@ -33,9 +28,5 @@
 			description = "Command to launch the terminal at given path.";
 			example = "kitty -d";
 		};
-	};
-
-	config = lib.mkIf (config.defaults.terminal.enable && (config.defaults.terminal.active == null)) {
-		warnings = [ "A default terminal is enabled but no active terminal is set. Set an active terminal with config.defaults.terminal.active." ]; 
 	};
 }

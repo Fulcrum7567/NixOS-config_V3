@@ -1,11 +1,6 @@
 { config, lib, ... }:
 {
 	options.defaults.browser = {
-		enable = lib.mkOption {
-			type = lib.types.bool;
-			default = true;
-			description = "Whether to enable a default browser.";
-		};
 
 		availableBrowsers = lib.mkOption {
 			type = lib.types.listOf lib.types.str;
@@ -26,9 +21,5 @@
 			description = "Define the app id of the set browser";
 			example = "zen-beta.desktop";
 		};
-	};
-
-	config = lib.mkIf (config.defaults.browser.enable && (config.defaults.browser.active == null)) {
-		warnings = [ "A default browser is enabled but no active browser is set. Set an active browser with config.defaults.browser.active." ]; 
 	};
 }

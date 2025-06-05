@@ -1,4 +1,4 @@
-{ config, lib, settings, ... }:
+{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
 let
 	option = config.packages.${settings.optionName};
 in

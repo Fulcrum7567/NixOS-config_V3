@@ -1,11 +1,6 @@
 { config, lib, ... }:
 {
 	options.defaults.explorer = {
-		enable = lib.mkOption {
-			type = lib.types.bool;
-			default = true;
-			description = "Whether to enable a default explorer.";
-		};
 
 		available = lib.mkOption {
 			type = lib.types.listOf lib.types.str;
@@ -28,7 +23,4 @@
 		};
 	};
 
-	config = lib.mkIf (config.defaults.explorer.enable && (config.defaults.explorer.active == null)) {
-		warnings = [ "A default explorer is enabled but no active explorer is set. Set an active explorer with config.defaults.explorer.active." ]; 
-	};
 }
