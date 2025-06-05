@@ -12,6 +12,9 @@
 			gaming.enable = true;
 			FH.enable = true;
 		};
+		hosts.fixes = {
+			touchpad.enable = true;
+		};
 	};
 
 

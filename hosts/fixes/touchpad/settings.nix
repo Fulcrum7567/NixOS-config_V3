@@ -1,0 +1,4 @@
+{
+	optionName = "touchpad";
+	displayName = "touchpad";
+}

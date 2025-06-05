@@ -220,6 +220,8 @@
 					# Host
 					./hosts/hosts/${currentHost}/hostConfigs/configuration.nix
 					./hosts/hosts/${currentHost}/hostSettings.nix
+					./hosts/components/importer.nix
+					./hosts/fixes/importer.nix
 
 					# User
 					./user/bin/user.nix
