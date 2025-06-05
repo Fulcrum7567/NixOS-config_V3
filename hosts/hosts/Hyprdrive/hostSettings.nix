@@ -1,11 +1,15 @@
 { config, ... }: {
 	
-	config.host.settings = {
-		systemType = "desktop";
-		gpuManufacturer = "nvidia";
-		dotfilesDir = "/home/${config.user.settings.username}/.dotfiles";
+	config = {
+		host.settings = {
+			systemType = "desktop";
+			gpuManufacturer = "nvidia";
+			dotfilesDir = "/home/${config.user.settings.username}/.dotfiles";
+		};
+		theming.activeTheme = "demoTheme";
+		desktops.activeDesktop = "gnomeWithGdm";
+		groups.gaming.enable = true;
 	};
 
-	config.theming.activeTheme = "demoTheme";
-	config.desktops.activeDesktop = "gnomeWithGdm";
+
 }

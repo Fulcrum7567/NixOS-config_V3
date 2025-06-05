@@ -239,6 +239,7 @@
 					# Packages
 					./user/packages/bin/importer.nix
 					./user/packages/defaults/importer.nix
+					./user/packages/groups/importer.nix
         		];
         
         		specialArgs = {
