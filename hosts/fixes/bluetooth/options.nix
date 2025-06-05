@@ -17,8 +17,8 @@
 
 		enable = lib.mkOption {
 			type = lib.types.bool;
-			default = false;
-			description = "Whether to enable the ${settings.displayName} fix. Fixes the suspend on ASUS ROG Flow Z13";
+			default = true;
+			description = "Whether to enable the ${settings.displayName} fix. Fixes Xbox one controller not beeing able to connect.";
 		};
 	};
 }

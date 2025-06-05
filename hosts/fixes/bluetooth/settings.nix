@@ -1,0 +1,4 @@
+{
+	optionName = "bluetooth";
+	displayName = "bluetooth";
+}

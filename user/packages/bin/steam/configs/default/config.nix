@@ -24,6 +24,8 @@ in
 
 		environment.variables = {
 	  		"STEAM_FORCE_WAYLAND" = "1";
+			SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS = 0;
+
 		};
 
 

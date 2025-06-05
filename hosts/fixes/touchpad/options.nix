@@ -18,7 +18,7 @@
 		enable = lib.mkOption {
 			type = lib.types.bool;
 			default = false;
-			description = "Whether to enable the ${settings.displayName} fix.";
+			description = "Whether to enable the ${settings.displayName} fix. Fixes the touchpad not getting initialized correctly on ASUS ROG Flow Z13.";
 		};
 	};
 }
