@@ -1,4 +1,4 @@
 { config, lib, ... }:
 {
-	config.defaults.browser.availableBrowsers = [ "zen" ];
+	config.packages.defaults.browser.availableBrowsers = [ "zen" ];
 }

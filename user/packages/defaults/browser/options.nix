@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-	options.defaults.browser = {
+	options.packages.defaults.browser = {
 
 		availableBrowsers = lib.mkOption {
 			type = lib.types.listOf lib.types.str;
@@ -10,7 +10,7 @@
 		};
 
 		active = lib.mkOption {
-			type = lib.types.nullOr (lib.types.enum (config.defaults.browser.availableBrowsers or []));
+			type = lib.types.nullOr (lib.types.enum (config.packages.defaults.browser.availableBrowsers or []));
 			default = null;
 			description = "Set the active default Browser.";
 		};
