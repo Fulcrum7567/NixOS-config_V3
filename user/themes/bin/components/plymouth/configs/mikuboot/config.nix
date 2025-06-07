@@ -8,9 +8,14 @@ in
 			inputs.mikuboot.nixosModules.default
 	];
 
-	config = lib.mkIf (option.enable && (option.active == "default")) {
+	config = lib.mkIf (option.enable && (option.active == "mikuboot")) {
 
-		boot.plymouth.enable = true;
+		boot.plymouth = {
+			enable = true;
+
+			themePackages = lib.mkForce [ pkgs.mikuboot ];
+			theme = lib.mkForce "mikuboot";
+		};
 		
 	};
 } 
