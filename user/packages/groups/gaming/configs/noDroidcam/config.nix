@@ -1,6 +1,6 @@
 { config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
 let
-	option = config.groups.${settings.optionName};
+	option = config.packages.groups.${settings.optionName};
 in
 {
 	config = lib.mkIf (option.enable && (option.active == "noDroidcam")) {

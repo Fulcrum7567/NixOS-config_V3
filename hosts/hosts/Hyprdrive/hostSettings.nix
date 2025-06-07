@@ -8,7 +8,7 @@
 		};
 		theming.activeTheme = "demoTheme";
 		desktops.activeDesktop = "gnomeWithGdm";
-		groups = {
+		packages.groups = {
 			gaming.enable = true;
 			FH.enable = true;
 		};

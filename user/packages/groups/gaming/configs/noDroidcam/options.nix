@@ -1,4 +1,4 @@
 { config, lib, settings, ... }:
 {
-	config.groups.${settings.optionName}.available = [ "noDroidcam" ];
+	config.packages.groups.${settings.optionName}.available = [ "noDroidcam" ];
 } 
