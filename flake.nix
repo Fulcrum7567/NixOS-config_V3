@@ -33,13 +33,26 @@
 		};
 		
 		home-manager-unstable = {
-				url = "github:nix-community/home-manager/master";
-				inputs.nixpkgs.follows = "nixpkgs-unstable";
+			url = "github:nix-community/home-manager/master";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
 
 
 		# Sops-nix
 		sops-nix.url = "github:Mic92/sops-nix";
+
+
+		# Stylix
+
+		stylix-stable = {
+			url = "github:nix-community/stylix/release-25.05";
+			inputs.nixpkgs.follows = "nixpkgs-stable";
+		};
+
+		stylix-unstable = {
+			url = "github:danth/stylix";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
 
 
 		# ╔════════════════════════════════╗
@@ -75,7 +88,7 @@
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -162,6 +175,14 @@
 						);
 
 
+		stylix = (if (hostSettings.systemState == "stable")
+						then
+							stylix-stable
+						else
+							stylix-unstable
+						);
+
+
 
 		zen-browser = (if (hostSettings.defaultPackageState == "stable")
 					then
@@ -206,6 +227,9 @@
 						home-manager.useGlobalPkgs = true;
 						home-manager.useUserPackages = true;
 					}
+
+					# Stylix
+					stylix.nixosModules.stylix
 
 					# Sops-nix
 					sops-nix.nixosModules.sops

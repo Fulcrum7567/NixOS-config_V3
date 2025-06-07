@@ -15,8 +15,8 @@
 		boot.plymouth = {
 			enable = true;
 
-			themePackages = [ pkgs.mikuboot ];
-			theme = "mikuboot";
+			themePackages = lib.mkForce [ pkgs.mikuboot ];
+			theme = lib.mkForce "mikuboot";
 		};
 	};
 
