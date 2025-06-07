@@ -1,5 +1,5 @@
 { config, ... }:
 {
-	config.theming.availableThemes = [ "demoTheme" ];
+	config.theming.availableThemes = [ "nord" ];
 	
 }

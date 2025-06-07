@@ -6,7 +6,7 @@
 			gpuManufacturer = "nvidia";
 			dotfilesDir = "/home/${config.user.settings.username}/.dotfiles";
 		};
-		theming.activeTheme = "demoTheme";
+		theming.activeTheme = "nord";
 		desktops.activeDesktop = "gnomeWithGdm";
 		packages.groups = {
 			gaming.enable = true;
