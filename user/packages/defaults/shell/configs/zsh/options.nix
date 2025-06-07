@@ -1,4 +1,4 @@
 { config, lib, ... }:
 {
-	config.defaults.shell.available = [ "zsh" ];
+	config.packages.defaults.shell.available = [ "zsh" ];
 }

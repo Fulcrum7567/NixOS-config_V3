@@ -1,8 +1,13 @@
 { config, lib, ... }:
 {
-	config = lib.mkIf (config.defaults.terminal.active == "kitty") {
-		defaults.terminal.appID = "kitty.desktop";
-		defaults.terminal.launchAtPathCommand = "kitty -d";
-		packages.kitty.enable = true;
+	config = lib.mkIf (config.packages.defaults.terminal.active == "kitty") {
+		packages = {
+			defaults = {
+				terminal.appID = "kitty.desktop";
+				terminal.launchAtPathCommand = "kitty -d";
+			};
+			
+			kitty.enable = true;
+		};
 	};
 }

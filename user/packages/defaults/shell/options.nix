@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-	options.defaults.shell = {
+	options.packages.defaults.shell = {
 
 		available = lib.mkOption {
 			type = lib.types.listOf lib.types.str;
@@ -10,7 +10,7 @@
 		};
 
 		active = lib.mkOption {
-			type = lib.types.nullOr (lib.types.enum (config.defaults.shell.available or []));
+			type = lib.types.nullOr (lib.types.enum (config.packages.defaults.shell.available or []));
 			default = null;
 			description = "Set the active default shell.";
 		};

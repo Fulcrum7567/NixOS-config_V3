@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-	options.defaults.explorer = {
+	options.packages.defaults.explorer = {
 
 		available = lib.mkOption {
 			type = lib.types.listOf lib.types.str;
@@ -10,7 +10,7 @@
 		};
 
 		active = lib.mkOption {
-			type = lib.types.nullOr (lib.types.enum (config.defaults.explorer.available or []));
+			type = lib.types.nullOr (lib.types.enum (config.packages.defaults.explorer.available or []));
 			default = null;
 			description = "Set the active default explorer.";
 		};

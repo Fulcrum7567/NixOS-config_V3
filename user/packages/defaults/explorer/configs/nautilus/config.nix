@@ -1,7 +1,9 @@
 { config, lib, ... }:
 {
-	config = lib.mkIf (config.defaults.explorer.active == "nautilus") {
-		defaults.explorer.appID = "org.gnome.Nautilus.desktop";
-		packages.nautilus.enable = true;
+	config = lib.mkIf (config.packages.defaults.explorer.active == "nautilus") {
+		packages = {
+			defaults.explorer.appID = "org.gnome.Nautilus.desktop";
+			nautilus.enable = true;
+		};
 	};
 }

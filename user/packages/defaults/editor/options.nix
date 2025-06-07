@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-	options.defaults.editor = {
+	options.packages.defaults.editor = {
 
 		available = lib.mkOption {
 			type = lib.types.listOf lib.types.str;
@@ -10,7 +10,7 @@
 		};
 
 		active = lib.mkOption {
-			type = lib.types.nullOr (lib.types.enum (config.defaults.editor.available or []));
+			type = lib.types.nullOr (lib.types.enum (config.packages.defaults.editor.available or []));
 			default = null;
 			description = "Set the active default editor.";
 		};

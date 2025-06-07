@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
-	config = lib.mkIf (config.defaults.editor.active == "sublime") {
-		defaults.editor.appID = "sublime_text.desktop";
+	config = lib.mkIf (config.packages.defaults.editor.active == "sublime") {
+		packages.defaults.editor.appID = "sublime_text.desktop";
 		packages.sublime.enable = true;
 	};
 }

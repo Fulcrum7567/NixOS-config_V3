@@ -11,14 +11,11 @@
 		packages = {
 			defaults = {
 				browser.active = "zen";
+				explorer.active = "nautilus";
+				editor.active = "sublime";
+				terminal.active = "kitty";
+				shell.active = "zsh";
 			};
-		};
-		defaults = {
-			
-			explorer.active = "nautilus";
-			editor.active = "sublime";
-			terminal.active = "kitty";
-			shell.active = "zsh";
 		};
 	};
 

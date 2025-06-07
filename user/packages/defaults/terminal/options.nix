@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-	options.defaults.terminal = {
+	options.packages.defaults.terminal = {
 
 		available = lib.mkOption {
 			type = lib.types.listOf lib.types.str;
@@ -10,7 +10,7 @@
 		};
 
 		active = lib.mkOption {
-			type = lib.types.nullOr (lib.types.enum (config.defaults.terminal.available or []));
+			type = lib.types.nullOr (lib.types.enum (config.packages.defaults.terminal.available or []));
 			default = null;
 			description = "Set the active default terminal.";
 		};

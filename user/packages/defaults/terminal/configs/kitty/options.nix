@@ -1,4 +1,4 @@
 { config, lib, ... }:
 {
-	config.defaults.terminal.available = [ "kitty" ];
+	config.packages.defaults.terminal.available = [ "kitty" ];
 }

@@ -1,4 +1,4 @@
 { config, lib, ... }:
 {
-	config.defaults.explorer.available = [ "nautilus" ];
+	config.packages.defaults.explorer.available = [ "nautilus" ];
 }

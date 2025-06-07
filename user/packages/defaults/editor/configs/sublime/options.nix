@@ -1,4 +1,4 @@
 { config, lib, ... }:
 {
-	config.defaults.editor.available = [ "sublime" ];
+	config.packages.defaults.editor.available = [ "sublime" ];
 }

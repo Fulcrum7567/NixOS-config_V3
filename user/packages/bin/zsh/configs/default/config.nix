@@ -15,7 +15,7 @@ in
 			    enableCompletion = true;
 			    autocd = true;
 			    initContent = ''
-			    PROMPT="${config.defaults.shell.initPrompt}";
+			    PROMPT="${config.packages.defaults.shell.initPrompt}";
 			     
 			    if [[ -n "$DIRENV_DIR" ]]; then
 				    PROMPT="%F{green}❄️ nix-shell%f $PROMPT"
