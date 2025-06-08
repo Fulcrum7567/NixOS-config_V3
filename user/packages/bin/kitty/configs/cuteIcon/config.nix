@@ -1,10 +1,11 @@
 { config, lib, settings, pkgs-default, ... }:
 let
 	option = config.packages.${settings.optionName};
+	pathToIcon = ./kitty.png;
 	customKitty = pkgs-default.kitty.overrideAttrs (oldAttrs: {
 	    postInstall = oldAttrs.postInstall or "" + ''
 	      substituteInPlace $out/share/applications/kitty.desktop \
-	        --replace "Icon=kitty" "Icon=./kitty.png"
+	        --replace "Icon=kitty" "Icon=${pathToIcon}"
 	    '';
 	});
 in

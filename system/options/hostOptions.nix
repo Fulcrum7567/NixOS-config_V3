@@ -78,16 +78,11 @@ in
 			example = "~/.dotfiles";
 		};
 
-
-
-
-		
+		# Host password
+		hashedPassword = lib.mkOption {
+			type = lib.types.str;
+			description = "Hash value of the password to use on this host";
+		};	
 
 	};
-
-	
-
-
-	
-
 }

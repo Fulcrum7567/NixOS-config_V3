@@ -4,8 +4,6 @@
 
 	config = lib.mkIf (config.theming.activeTheme == "nord") {
 
-		
-
 		theming = {
 			colorScheme = "nord";
 			polarity = "dark";
@@ -23,6 +21,8 @@
 		stylix = {
 			enable = true;
 			autoEnable = true;
+
+			targets.qt.enable = false;
 			
 		};
 
