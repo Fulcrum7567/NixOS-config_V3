@@ -16,6 +16,7 @@
 					enable = true;
 					active = "nordzy";
 				};
+				fonts.enable = true;
 			};
 		};
 
