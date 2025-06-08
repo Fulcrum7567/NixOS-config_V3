@@ -12,7 +12,7 @@
 
 		nvidiaBusId = lib.mkOption {
 			type = lib.types.str;
-			description "Bus Id of the NVidia graphics card";
+			description = "Bus Id of the NVidia graphics card";
 			example = "PCI:1:0:0";
 		};
 	};
