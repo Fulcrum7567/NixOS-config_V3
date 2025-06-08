@@ -256,6 +256,7 @@
 					# Theming
 					./user/themes/bin/components/importer.nix
 					./user/themes/profiles/importer.nix
+					./user/themes/bin/colorSchemes/importer.nix
 
 					# Desktop
 					./user/desktops/displayManagers/importer.nix
