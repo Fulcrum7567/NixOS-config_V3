@@ -17,6 +17,15 @@ in
 			iagno # go game
 			tali # poker game
 			totem # video player
+			yelp			# help
+			gnome-maps		# maps
+			simple-scan		# scan
+			gnome-logs		# logs
 		]);
+
+		services.xserver.desktopManager.xterm.enable = false;
+		services.xserver.excludePackages = [ pkgs-default.xterm ];
+
+		documentation.nixos.enable = false;
 	};
 } 

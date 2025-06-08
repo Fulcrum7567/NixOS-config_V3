@@ -14,6 +14,7 @@
 				shell.enable = true;
 				touchpad.enable = true;
 				wm.enable = true;
+				disableApps.enable = true;
 			};
 
 			extensions = {

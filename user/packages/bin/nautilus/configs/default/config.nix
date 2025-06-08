@@ -13,5 +13,10 @@ in
 			    
 			};
 		};
+
+		programs.nautilus-open-any-terminal = {
+			enable = true;
+			terminal = config.packages.defaults.terminal.active;
+		};
 	};
 } 

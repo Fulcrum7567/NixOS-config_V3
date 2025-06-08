@@ -1,0 +1,4 @@
+{
+	optionName = "wallpaper";
+	displayName = "wallpaper";
+}

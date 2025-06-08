@@ -15,6 +15,11 @@
 					active = "nordzy";
 				};
 				fonts.enable = true;
+				wallpaper = {
+					enable = true;
+					type = "single";
+					active = "all/cpu_city.png";
+				};
 			};
 		};
 
