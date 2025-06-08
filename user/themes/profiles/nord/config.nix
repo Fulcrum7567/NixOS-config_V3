@@ -12,6 +12,10 @@
 
 			components = {
 				plymouth.enable = true;
+				mouse = {
+					enable = true;
+					active = "nordzy";
+				};
 			};
 		};
 
