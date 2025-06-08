@@ -5,6 +5,14 @@ in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
 
+		home-manager.users.${config.user.settings.username} = {
+			dconf.settings = {
+				"org/blueman/general" = {
+					plugin-list = [ "!ShowConnected" "!StatusIcon" ];
+				};
+			};
+		};
+
 		hardware.bluetooth = {
 		    enable = true;
 		    powerOnBoot = true;

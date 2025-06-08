@@ -10,11 +10,14 @@
 
 			components = {
 				plymouth.enable = true;
+				opacity.enable = true;
+				fonts.enable = true;
+
 				mouse = {
 					enable = true;
 					active = "nordzy";
 				};
-				fonts.enable = true;
+
 				wallpaper = {
 					enable = true;
 					type = "single";

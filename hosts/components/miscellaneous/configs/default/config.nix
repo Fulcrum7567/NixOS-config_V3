@@ -11,6 +11,5 @@ in
 
 		networking.hostName = config.host.settings.hostName;
 		
-
 	};
 } 
