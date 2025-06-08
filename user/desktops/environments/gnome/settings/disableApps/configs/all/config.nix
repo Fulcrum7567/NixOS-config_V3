@@ -24,6 +24,12 @@ in
 			gnome-maps		# maps
 			simple-scan		# scan
 			gnome-logs		# logs
+			decibels		# Audio player
+			gnome-console	# Console
+			gnome-contacts	# contacts
+			gnome-text-editor
+			gnome-weather
+			gnome-font-viewer
 		]);
 
 		services.xserver.desktopManager.xterm.enable = false;

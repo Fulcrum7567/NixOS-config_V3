@@ -10,8 +10,8 @@
 		};
 
 		active = lib.mkOption {
-			type = lib.types.nullOr (lib.types.enum (config.packages.groups.${settings.optionName}.available or []));
-			default = null;
+			type = lib.types.enum (config.packages.groups.${settings.optionName}.available or []);
+			default = "default";
 			description = "Set the active ${settings.optionName} group config.";
 		};
 

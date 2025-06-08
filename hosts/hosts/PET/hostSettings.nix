@@ -9,14 +9,34 @@
 		};
 		theming.activeTheme = "nord";
 		desktops.activeDesktop = "gnomeWithGdm";
-		packages.groups = {
-			gaming.enable = false;
-			FH.enable = true;
+
+		packages = {
+			supergfxd.enable = true;
+			groups = {
+				gaming.enable = false;
+				FH.enable = true;
+			};
 		};
-		hosts.fixes = {
-			bluetooth.enable = true;
-			suspend.enable = true;
-			touchpad.enable = true;
+
+		hosts = {
+			fixes = {
+				bluetooth.enable = true;
+				suspend.enable = true;
+				touchpad.enable = true;
+			};
+
+			components = {
+			
+				nvidiaDrivers = {
+					enable = true;
+					powerManagement = "finegrained";
+
+					activeConfig = "prime";
+					intelBusId = "PCI:0:2:0";
+					nvidiaBusId = "PCI:1:0:0";
+				};
+
+			};
 		};
 	};
 

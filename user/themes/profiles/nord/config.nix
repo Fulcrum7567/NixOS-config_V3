@@ -1,4 +1,4 @@
-{ config, lib, pkgs-default, ... }:
+{ config, lib, pkgs-default, pkgs, ... }:
 {
 
 
@@ -28,8 +28,8 @@
 			autoEnable = true;
 
 			targets.qt.enable = false;
-			
 		};
 
+	
 	};
 }
