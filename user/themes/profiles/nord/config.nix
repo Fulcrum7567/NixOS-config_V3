@@ -22,7 +22,7 @@
 				wallpaper = {
 					enable = true;
 					type = "single";
-					active = "all/cpu_city.png";
+					active = "cpu_city.png";
 				};
 			};
 		};
