@@ -15,6 +15,7 @@
 				touchpad.enable = true;
 				wm.enable = true;
 				disableApps.enable = true;
+				notifications.enable = true;
 			};
 
 			extensions = {
@@ -24,6 +25,7 @@
 				clipboardIndicator.enable = true;
 				dashToDock.enable = true;
 				grandTheftFocus.enable = true;
+				hibernateStatusButton.enable = true;
 				justPerfection.enable = false; # BROKEN!
 				middleClickClose.enable = true;
 				windowTitleIsBack.enable = true;

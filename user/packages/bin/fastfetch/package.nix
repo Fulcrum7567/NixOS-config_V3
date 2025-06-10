@@ -2,9 +2,8 @@
 {
 	config = lib.mkIf config.packages.${settings.optionName}.enable {
 
-		# Package installation
-		environment.systemPackages = [
-			(pkgs-default.${settings.packageName})
-		];
+		home-manager.users.${config.user.settings.username} = {
+			programs.fastfetch.enable = true;
+		};
 	};
 }

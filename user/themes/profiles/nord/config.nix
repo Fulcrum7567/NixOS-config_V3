@@ -12,6 +12,7 @@
 				plymouth.enable = true;
 				opacity.enable = true;
 				fonts.enable = true;
+				disableDesktopIcons.enable = true;
 
 				mouse = {
 					enable = true;
@@ -32,6 +33,9 @@
 
 			targets.qt.enable = false;
 		};
+
+		
+		
 
 	
 	};
