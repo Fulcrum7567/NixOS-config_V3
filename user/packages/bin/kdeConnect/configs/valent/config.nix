@@ -16,12 +16,12 @@ in
 					paired = true;
 				};
 
-				/*
+				
 				"ca/andyholmes/valent/device/5ce48006642c4106b12ce8b4ee2b1c94/plugin/clipboard" = {
 					auto-pull = true;
 					auto-push = true;
 				};
-				*/
+				
 
 			};
 		};
