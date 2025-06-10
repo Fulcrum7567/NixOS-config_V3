@@ -5,7 +5,7 @@ in
 {
 	config = lib.mkIf (option.enable && (option.active == "default")) {
 		packages = {
-			docker.enable = true;
+			docker.enable = false;
 			jetbrainsToolbox.enable = true;
 			obsidian.enable = true;
 		};
