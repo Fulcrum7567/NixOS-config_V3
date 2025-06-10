@@ -3,7 +3,7 @@ let
 	option = config.packages.${settings.optionName};
 in
 {
-	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
+	config = lib.mkIf (option.enable && (option.activeConfig == "valent")) {
 		programs.kdeconnect.package = pkgs-default.valent;
 	};
 } 
