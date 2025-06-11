@@ -3,7 +3,7 @@ let
 	option = config.hosts.components.${settings.optionName};
 in
 {
-	config = lib.mkIf (option.enable && (option.activeConfig == "latest")) {
+	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
 
 		# Enable OpenGL
 		hardware.graphics = {
