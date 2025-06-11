@@ -8,6 +8,7 @@
 	};
 	*/
 
+	users.mutableUsers = false;
 	users.users.${config.user.settings.username} = {
 	    isNormalUser = true;
 	    description = config.user.settings.displayName;
