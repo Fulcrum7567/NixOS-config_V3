@@ -1,5 +1,9 @@
 { config, ... }:
 {
+
+		home-manager.backupFileExtension = "backup";
+
+		
 		home-manager.users.${config.user.settings.username} = {
 
 			home.username = config.user.settings.username;

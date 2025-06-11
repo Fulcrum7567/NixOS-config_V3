@@ -31,6 +31,8 @@
 			enable = true;
 			autoEnable = true;
 
+			polarity = "dark";
+
 			targets.qt.enable = false;
 		};
 

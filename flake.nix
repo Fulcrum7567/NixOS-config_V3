@@ -246,6 +246,7 @@
 					./hosts/hosts/${currentHost}/hostSettings.nix
 					./hosts/components/importer.nix
 					./hosts/fixes/importer.nix
+					./hosts/hosts/${currentHost}/quickFixes.nix
 
 					# User
 					./user/bin/user.nix
