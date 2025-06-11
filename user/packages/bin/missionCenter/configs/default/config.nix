@@ -26,6 +26,18 @@ in
 					window-width = 600;
 				};
 			    
+			    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings" = {
+			      	"custom-keybindings" = [
+			        	"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+			      	];
+			    };
+
+				# Keyboard shortcut
+				"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+					name = "Open mission center";
+					command = "missioncenter";
+					binding = "<Shift><Control>Escape";
+				};
 			};
 		};
 
