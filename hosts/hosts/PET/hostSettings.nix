@@ -11,6 +11,7 @@
 		desktops.activeDesktop = "gnomeWithGdm";
 
 		packages = {
+			signal.enable = true;
 			supergfxd.enable = true;
 			groups = {
 				gaming.enable = false;

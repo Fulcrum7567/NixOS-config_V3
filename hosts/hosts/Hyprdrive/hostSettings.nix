@@ -9,9 +9,12 @@
 		};
 		theming.activeTheme = "nord";
 		desktops.activeDesktop = "gnomeWithGdm";
-		packages.groups = {
-			gaming.enable = true;
-			FH.enable = true;
+		packages = {
+			signal.enable = true;
+			groups = {
+				gaming.enable = true;
+				FH.enable = true;
+			};
 		};
 		hosts.components = {
 			nvidiaDrivers = {
