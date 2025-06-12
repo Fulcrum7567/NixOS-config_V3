@@ -3,6 +3,9 @@
 	config = lib.mkIf config.packages.${settings.optionName}.enable {
 
 		# Package installation
-		programs.droidcam.enable = true;
+		environment.systemPackages = with pkgs-default; [
+	        droidcam
+			v4l-utils
+		];
 	};
 }
