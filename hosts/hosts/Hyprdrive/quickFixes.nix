@@ -1,6 +1,18 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
 	config = {
+
+		# Mouse wheel
+		environment.systemPackages = with pkgs; [
+			piper
+		];
+		#programs.piper.enable = true;
+
+		# The piper module should automatically pull in services.ratbagd.enable = true;
+		# but you can add it explicitly if you encounter issues.
+		# services.ratbagd.enable = true;
+
+
 		home-manager.users.${config.user.settings.username} = {
 
 			#switch audio

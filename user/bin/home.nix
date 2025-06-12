@@ -1,7 +1,16 @@
 { config, ... }:
 {
-
+		
+		# Remove mimeapps list
 		home-manager.backupFileExtension = "backup";
+
+		system.userActivationScripts = {
+		  	removeConflictingFiles = {
+		    	text = ''
+		      		rm -f /home/${config.user.settings.username}/.config/mimeapps.list.backup
+		    	'';
+		  	};
+		};
 
 		
 		home-manager.users.${config.user.settings.username} = {

@@ -11,6 +11,7 @@
 		desktops.activeDesktop = "gnomeWithGdm";
 		packages = {
 			signal.enable = true;
+			ciscoPacketTracer.enable = true;
 			groups = {
 				gaming.enable = true;
 				FH.enable = true;

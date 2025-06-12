@@ -5,5 +5,5 @@
 */
 { ... }:
 {
-	services.gnome.core-developer-tools.enable = true;
+
 }
