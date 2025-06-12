@@ -3,14 +3,10 @@
 	config = {
 
 		# Mouse wheel
-		environment.systemPackages = with pkgs; [
-			piper
-		];
-		#programs.piper.enable = true;
-
-		# The piper module should automatically pull in services.ratbagd.enable = true;
-		# but you can add it explicitly if you encounter issues.
-		# services.ratbagd.enable = true;
+services.udev.extraRules = ''
+  # Hyper-specific rule for Logitech G903 using hardware IDs to disable hi-res scrolling.
+  ACTION=="add|change", KERNEL=="event[0-9]*", ATTRS{id/vendor}=="046d", ATTRS{id/product}=="4087", ENV{LIBINPUT_ATTR_WHEEL_HI_RES_HW}="0"
+'';
 
 
 		home-manager.users.${config.user.settings.username} = {
