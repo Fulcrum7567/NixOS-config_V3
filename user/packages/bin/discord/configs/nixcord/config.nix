@@ -19,8 +19,8 @@ in
 								name = "discord";
 								desktopName = "Discord";
 								exec = "vesktop %U";
-								icon = "discord";
-								startupWMClass = "Discord";
+								icon = ./discord-icon.svg;
+								startupWMClass = "vesktop";
 								genericName = "Internet Messenger";
 								keywords = [
 									"discord"
@@ -103,7 +103,7 @@ in
 						userVoiceShow.enable = true;
 						volumeBooster = {
 							enable = true;
-							multiplier = 5;
+							multiplier = 3;
 						};
 					};
 				};
