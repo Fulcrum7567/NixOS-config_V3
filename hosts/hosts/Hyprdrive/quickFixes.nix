@@ -2,6 +2,17 @@
 {
 	config = {
 
+
+		# Ollama
+		services.ollama = {
+			enable = false;
+			acceleration = "cuda";
+			models = "/mnt/HDD/AI/Ollama/Models";
+			loadModels = [
+				"deepseek-r1:70b"
+			];
+		};
+
 		# Mouse wheel
 services.udev.extraRules = ''
   # Hyper-specific rule for Logitech G903 using hardware IDs to disable hi-res scrolling.

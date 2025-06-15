@@ -5,6 +5,7 @@
 		# Package installation
 		environment.systemPackages = [
 			(pkgs-default.${settings.packageName})
+			pkgs-default.wineWowPackages.stable
 		];
 	};
 }
