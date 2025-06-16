@@ -85,10 +85,12 @@
 
 		mikuboot.url = "gitlab:evysgarden/mikuboot";
 
+		nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions/00e11463876a04a77fb97ba50c015ab9e5bee90d";
+
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -132,6 +134,9 @@
 			  	allowInsecure = true;
 			  	permittedInsecurePackages = [ "openssl-1.1.1w" ];
 			};
+			overlays = [
+				nix-vscode-extensions.overlays.default
+			];
 		};
 
 		pkgs-unstable = import nixpkgs-unstable {
@@ -142,6 +147,9 @@
 			  	allowInsecure = true;
 			  	permittedInsecurePackages = [ "openssl-1.1.1w" ];
 			};
+			overlays = [
+				nix-vscode-extensions.overlays.default
+			];
 		};
 
 		pkgs-default = (if (hostSettings.defaultPackageState == "stable")

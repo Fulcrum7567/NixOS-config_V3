@@ -1,4 +1,4 @@
-{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
+{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, inputs, ... }:
 let
 	option = config.packages.${settings.optionName};
 in
@@ -7,9 +7,9 @@ in
 		home-manager.users.${config.user.settings.username} = {
 			programs.vscode.profiles.default = {
 				enableUpdateCheck = false;
-				extensions = with pkgs-default; [
-					vscode-extensions.github.copilot
-					vscode-extensions.github.copilot-chat
+				extensions = with pkgs-default.nix-vscode-extensions.vscode-marketplace.vscode-extensions; [
+					github.copilot
+					github.copilot-chat
 				];
 
 				userSettings = {
@@ -33,6 +33,7 @@ in
 					  "editor.bracketPairColorization.independentColorPoolPerBracketType" = true;
 					  "explorer.compactFolders" = false;
 					  "scm.compactFolders" = false;
+					  "github.copilot.nextEditSuggestions.enabled" = true;
 				};
 			};
 		};
