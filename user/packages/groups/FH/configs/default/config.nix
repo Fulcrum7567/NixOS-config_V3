@@ -8,6 +8,7 @@ in
 			docker.enable = false;
 			jetbrainsToolbox.enable = true;
 			obsidian.enable = true;
+			anki.enable = true;
 		};
 	};
 } 

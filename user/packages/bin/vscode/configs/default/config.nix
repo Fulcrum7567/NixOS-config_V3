@@ -32,7 +32,7 @@ in
 					  "workbench.colorTheme" = "Stylix";
 					  "editor.bracketPairColorization.independentColorPoolPerBracketType" = true;
 					  "explorer.compactFolders" = false;
-					  "scm.compactFolders": false;
+					  "scm.compactFolders" = false;
 				};
 			};
 		};
