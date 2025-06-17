@@ -4,7 +4,7 @@
 		home-manager.users.${config.user.settings.username} = {
 			programs.vscode = {
 				enable = true;
-				package = (pkgs-default.${settings.packageName});
+				#package = (pkgs-default.${settings.packageName});
 			};
 
 		};

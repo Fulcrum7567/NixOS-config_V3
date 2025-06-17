@@ -7,7 +7,7 @@ in
 		home-manager.users.${config.user.settings.username} = {
 			programs.vscode.profiles.default = {
 				enableUpdateCheck = false;
-				extensions = with pkgs-default.nix-vscode-extensions.vscode-marketplace.vscode-extensions; [
+				extensions = with pkgs-default.vscode-extensions; [
 					github.copilot
 					github.copilot-chat
 				];
