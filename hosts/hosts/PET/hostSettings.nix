@@ -14,7 +14,11 @@
 			signal.enable = true;
 			supergfxd.enable = true;
 			groups = {
-				gaming.enable = false;
+				gaming = {
+					enable = false;
+					active = "noDroidcam";
+				};
+				programming.enable = true;
 				FH.enable = true;
 			};
 		};
