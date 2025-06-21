@@ -8,7 +8,13 @@ in
 		# Enable OpenGL
 		hardware.graphics = {
 			enable = true;
+			enable32Bit = true;
+			extraPackages = [
+			    pkgs.vulkan-loader
+			    pkgs.vulkan-validation-layers
+		  	];
 		};
+
 
 		# Load nvidia driver for Xorg and Wayland
 		services.xserver.videoDrivers = [ "nvidia" ];

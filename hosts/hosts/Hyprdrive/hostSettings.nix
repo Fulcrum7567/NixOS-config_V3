@@ -24,6 +24,12 @@
 			};
 		};
 		hosts.components = {
+
+			kernelVersion = {
+				enable = true;
+				activeConfig = "latest";
+			};
+
 			nvidiaDrivers = {
 				enable = true;
 				powerManagement = "enabled";

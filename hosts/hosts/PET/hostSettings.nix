@@ -31,6 +31,11 @@
 			};
 
 			components = {
+
+				kernelVersion = {
+					enable = true;
+					activeConfig = "6_14";
+				};
 			
 				nvidiaDrivers = {
 					enable = true;

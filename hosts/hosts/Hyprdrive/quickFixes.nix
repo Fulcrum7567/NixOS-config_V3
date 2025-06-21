@@ -2,7 +2,6 @@
 {
 	config = {
 
-
 		# Ollama
 		services.ollama = {
 			enable = false;
@@ -14,6 +13,7 @@
 		};
 
 		# Mouse wheel
+		/*
 services.udev.extraRules = ''
   # Hyper-specific rule for Logitech G903 using hardware IDs to disable hi-res scrolling.
   ACTION=="add|change", KERNEL=="event[0-9]*", ATTRS{id/vendor}=="046d", ATTRS{id/product}=="4087", ENV{LIBINPUT_ATTR_WHEEL_HI_RES_HW}="0"
@@ -24,6 +24,8 @@ services.udev.extraRules = ''
 		];
 		services.libinput.enable = true;
 
+
+		*/
 		home-manager.users.${config.user.settings.username} = {
 
 			#switch audio

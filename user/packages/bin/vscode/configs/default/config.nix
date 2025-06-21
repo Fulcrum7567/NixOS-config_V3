@@ -10,6 +10,10 @@ in
 				extensions = with pkgs-default.vscode-extensions; [
 					github.copilot
 					github.copilot-chat
+					redhat.java
+					vscjava.vscode-java-pack
+					ms-python.python
+					timonwong.shellcheck
 				];
 
 				userSettings = {
@@ -31,9 +35,12 @@ in
 					  "update.mode" = "none";
 					  "workbench.colorTheme" = "Stylix";
 					  "editor.bracketPairColorization.independentColorPoolPerBracketType" = true;
+					  "editor.guides.bracketPairs" = false;
 					  "explorer.compactFolders" = false;
 					  "scm.compactFolders" = false;
 					  "github.copilot.nextEditSuggestions.enabled" = true;
+					  "git.openRepositoryInParentFolders" = "always";
+					  "redhat.telemetry.enabled" = false;
 				};
 			};
 		};
