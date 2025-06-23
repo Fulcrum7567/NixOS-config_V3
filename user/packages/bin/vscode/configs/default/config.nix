@@ -10,10 +10,12 @@ in
 				extensions = with pkgs-default.vscode-extensions; [
 					github.copilot
 					github.copilot-chat
+					github.codespaces
 					redhat.java
 					vscjava.vscode-java-pack
 					ms-python.python
 					timonwong.shellcheck
+					ms-vscode-remote.remote-containers
 				];
 
 				userSettings = {
