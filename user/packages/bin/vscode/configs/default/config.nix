@@ -16,6 +16,7 @@ in
 					ms-python.python
 					timonwong.shellcheck
 					ms-vscode-remote.remote-containers
+					mkhl.direnv
 				];
 
 				userSettings = {

@@ -18,6 +18,9 @@
 			signal.enable = true;
 			ciscoPacketTracer.enable = true;
 			vscode.enable = true;
+
+			mullvad.enable = true;
+
 			groups = {
 				gaming.enable = true;
 				FH.enable = true;

@@ -5,8 +5,11 @@ in
 {
 	config = lib.mkIf (option.enable && (option.active == "default")) {
 		packages = {
+			groups = {
+				programming.enable = true;
+			};	
+
 			docker.enable = false;
-			jetbrainsToolbox.enable = true;
 			obsidian.enable = true;
 			anki.enable = true;
 		};
