@@ -4,5 +4,8 @@
 
 		# Package installation
 		services.mullvad-vpn.enable = true;
+
+		# Needed for now
+		services.resolved.enable = true;
 	};
 }
