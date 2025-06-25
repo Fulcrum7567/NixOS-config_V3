@@ -5,7 +5,16 @@ in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
 		home-manager.users.${config.user.settings.username} = {
-			
+			xdg.desktopEntries = {
+				jetbrains-toolbox = {
+					name = "Jetbrains Toolbox";
+					genericName = "Jetbrains Toolbox";
+					exec = "jetbrains-toolbox";
+					icon = "jetbrains-toolbox";
+					categories = [ ];
+					noDisplay = false;
+				};
+			};
 		};
 	};
 } 
