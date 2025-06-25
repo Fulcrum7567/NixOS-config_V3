@@ -7,7 +7,7 @@ in
 
 		system.autoUpgrade = {
 			enable = true;
-			flake = host.settings.dotfilesDir;
+			flake = config.host.settings.dotfilesDir;
 			operation = "switch";
 			dates = option.interval;
 			randomizedDelaySec = "10min";
