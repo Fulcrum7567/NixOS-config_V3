@@ -226,7 +226,7 @@
 
 
 		nixosConfigurations = {
-			${currentHost} = lib.nixosSystem {
+			Hyprdrive = lib.nixosSystem {
             	system = hostSettings.system;
             	modules = [
 					# Home Manager as a NixOS module

@@ -2,6 +2,9 @@
 {
 	config = {
 
+		# Backlight
+		programs.light.enable = true;
+
 		# Ollama
 		services.ollama = {
 			enable = false;
