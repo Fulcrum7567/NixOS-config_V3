@@ -10,7 +10,7 @@ in
 					name = "Jetbrains Toolbox";
 					genericName = "Jetbrains Toolbox";
 					exec = "jetbrains-toolbox";
-					icon = "jetbrains-toolbox";
+					icon = ./toolbox.png;
 					categories = [ ];
 					noDisplay = false;
 				};
