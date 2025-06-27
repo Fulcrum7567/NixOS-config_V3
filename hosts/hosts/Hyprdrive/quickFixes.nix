@@ -3,7 +3,13 @@
 	config = {
 
 		# Backlight
-		programs.light.enable = true;
+		boot.kernelModules = [ "i2c-dev" ];
+		environment.systemPackages = with pkgs; [
+		  	ddcutil
+		  	ddcui
+		];
+		users.users.${config.user.settings.username}.extraGroups = [ "i2c" ];
+		desktopEnvironments.gnome.extensions.brightnessControl.enable = true;
 
 		# Ollama
 		services.ollama = {
@@ -22,9 +28,6 @@ services.udev.extraRules = ''
   ACTION=="add|change", KERNEL=="event[0-9]*", ATTRS{id/vendor}=="046d", ATTRS{id/product}=="4087", ENV{LIBINPUT_ATTR_WHEEL_HI_RES_HW}="0"
 '';
 		
-		environment.systemPackages = [
-			pkgs.libinput
-		];
 		services.libinput.enable = true;
 
 

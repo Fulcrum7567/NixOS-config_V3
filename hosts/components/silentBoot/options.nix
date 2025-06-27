@@ -1,0 +1,31 @@
+{ config, lib, settings, ... }:
+{
+    options.hosts.components.${settings.optionName} = {
+
+        availableConfigs = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [];
+            apply = x: lib.unique x;
+            description = "List of all available configs for the ${settings.displayName} component.";
+        };
+
+        activeConfig = lib.mkOption {
+            type = lib.types.enum (config.hosts.components.${settings.optionName}.availableConfigs or []);
+            default = "default";
+            description = "Set the active configuration for the ${settings.displayName} component.";
+        };
+
+        hideMenu = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+            description = "Whether the boot menu should be hidden, press any key to show.";
+        };
+
+        enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+            description = "Whether to enable the ${settings.displayName} component.";
+        };
+
+    };
+}
