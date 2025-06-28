@@ -2,15 +2,6 @@
 {
 	config = {
 
-		# Backlight
-		boot.kernelModules = [ "i2c-dev" ];
-		environment.systemPackages = with pkgs; [
-		  	ddcutil
-		  	ddcui
-		];
-		users.users.${config.user.settings.username}.extraGroups = [ "i2c" ];
-		desktopEnvironments.gnome.extensions.brightnessControl.enable = true;
-
 		# Ollama
 		services.ollama = {
 			enable = false;

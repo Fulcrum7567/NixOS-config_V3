@@ -7,6 +7,8 @@
 			dotfilesDir = "/home/${config.user.settings.username}/.dotfiles";
 			hashedPassword = "$6$LndFR/AR7MoTwWAT$Mt8cqxGvTAKlHTJ8zZyOnJOwZ6r0RsSw4bM9i.Wx8eQwidFdyMSEoYOFc29Egbpbzg2lhPULwziIOapSMU/lY0";
 		};
+
+		
 		theming = {
 			activeTheme = "nord";
 			components = {
@@ -26,6 +28,8 @@
 			};
 		};
 		hosts.components = {
+
+			monitorBrightness.enable = true;
 
 			kernelVersion = {
 				enable = true;
