@@ -6,7 +6,7 @@ in
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
 
 		boot.kernelModules = [ "i2c-dev" ];
-		environment.systemPackages = with pkgs; [
+		environment.systemPackages = with pkgs-default; [
 		  	ddcutil
 		  	ddcui
 		];
