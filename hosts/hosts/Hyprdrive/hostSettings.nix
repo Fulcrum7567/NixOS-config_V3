@@ -40,6 +40,11 @@
 				enable = true;
 				powerManagement = "enabled";
 			};
+
+			wakeOnLan = {
+				enable = true;
+				interface = "eno1";
+			};
 		};
 
 		# Drives:
