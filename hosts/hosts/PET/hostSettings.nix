@@ -34,7 +34,7 @@
 
 				kernelVersion = {
 					enable = true;
-					activeConfig = "6_14";
+					activeConfig = "latest";
 				};
 			
 				nvidiaDrivers = {

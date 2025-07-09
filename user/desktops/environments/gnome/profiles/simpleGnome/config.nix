@@ -29,6 +29,7 @@
 				justPerfection.enable = false; # BROKEN!
 				middleClickClose.enable = true;
 				windowTitleIsBack.enable = true;
+				colorPicker.enable = true;
 			};
 		};
 	};
