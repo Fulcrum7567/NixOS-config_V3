@@ -1,4 +1,4 @@
-{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
+{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, currentHost, ... }:
 let
 	option = config.packages.${settings.optionName};
 in
@@ -10,6 +10,10 @@ in
 		# Define connected devices
 		home-manager.users.${config.user.settings.username} = {
 			dconf.settings = {
+
+				"ca/andyholmes/valent" = {
+					name = currentHost;
+				};
 
 				# S23
 				"ca/andyholmes/valent/device/5ce48006642c4106b12ce8b4ee2b1c94" = {
