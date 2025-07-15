@@ -11,7 +11,7 @@ in
         # Add the font package to the system-wide fonts so it's available
         fonts.packages = [ aurebesh-font ];
 
-        home-manager.users.fulcrum.programs.vscode.profiles.default.userSettings."markdown.preview.fontFamily" = lib.mkForce "Aurebesh AF";
+        home-manager.users.${config.user.settings.username}.programs.vscode.profiles.default.userSettings."markdown.preview.fontFamily" = lib.mkForce "Aurebesh AF";
 
         stylix = {
             fonts = {
