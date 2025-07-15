@@ -16,6 +16,7 @@
 				wm.enable = true;
 				disableApps.enable = true;
 				notifications.enable = true;
+				mouse.enable = true;
 			};
 
 			extensions = {
