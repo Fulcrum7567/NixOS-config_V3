@@ -20,7 +20,8 @@ in
 					height-fraction = 0.9;
 					intellihide-mode = "FOCUS_APPLICATION_WINDOWS";
 					isolate-workspaces = true;
-					max-alpha = 0.7;
+					min-alpha = 0.75;
+					max-alpha = 0.9;
 					middle-click-action = "quit";
 					multi-monitor = true;
 					preview-size-scale = 0.0;

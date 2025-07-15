@@ -6,7 +6,7 @@ let
     aurebesh-font = pkgs.callPackage ../../bin/aurebesh/aurebesh-font.nix {};
 in
 {
-    config = lib.mkIf (option.enable && (option.active == "default")) {
+    config = lib.mkIf (option.enable && (option.active == "aurebesh")) {
 
         # Add the font package to the system-wide fonts so it's available
         fonts.packages = [ aurebesh-font ];
