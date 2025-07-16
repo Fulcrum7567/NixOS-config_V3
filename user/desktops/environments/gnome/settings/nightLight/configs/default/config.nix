@@ -7,7 +7,7 @@ in
 		home-manager.users.${config.user.settings.username} = {
 			dconf.settings = {
 
-				"org/gnome/settings-deamon/plugins/color" = {
+				"org/gnome/settings-daemon/plugins/color" = {
 					night-light-enabled = settingsConfig.on;
 					night-light-temperature = 2000;
 					night-light-schedule-automatic = false;
