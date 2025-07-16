@@ -17,6 +17,10 @@
 				disableApps.enable = true;
 				notifications.enable = true;
 				mouse.enable = true;
+				nightLight = {
+					enable =  true;
+					on = false;
+				};
 			};
 
 			extensions = {

@@ -1,3 +1,3 @@
 {
-	currentHost = "Hyprdrive";
+	currentHost = "PET";
 }
