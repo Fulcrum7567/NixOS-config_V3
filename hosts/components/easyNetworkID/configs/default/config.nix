@@ -10,5 +10,7 @@ in
 			nssmdns4 = true;
 		};
 
+		networking.firewall.allowedUDPPorts = [ 5353 ];
+
 	};
 } 

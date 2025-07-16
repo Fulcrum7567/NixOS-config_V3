@@ -15,12 +15,6 @@
             description = "Set the active configuration for the ${settings.displayName} component.";
         };
 
-        hideMenu = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-            description = "Whether the boot menu should be hidden, press any key to show.";
-        };
-
         enable = lib.mkOption {
             type = lib.types.bool;
             default = true;
