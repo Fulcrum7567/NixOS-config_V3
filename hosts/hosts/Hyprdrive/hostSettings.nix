@@ -33,7 +33,7 @@
 
 			kernelVersion = {
 				enable = true;
-				activeConfig = "latest";
+				activeConfig = "cachy";
 			};
 
 			nvidiaDrivers = {

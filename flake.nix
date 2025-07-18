@@ -54,6 +54,9 @@
 			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
 
+		# CachyOS kernel
+		cachyos-kernel.url = "github:drakon64/nixos-cachyos-kernel";
+
 
 		# ╔════════════════════════════════╗
 		# ║                                ║
@@ -90,7 +93,7 @@
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, cachyos-kernel, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
