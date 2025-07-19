@@ -28,6 +28,7 @@
 				bluetooth.enable = true;
 				suspend.enable = true;
 				touchpad.enable = true;
+				sdCardReader.enable = true;
 			};
 
 			components = {

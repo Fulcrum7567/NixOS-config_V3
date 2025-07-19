@@ -3,7 +3,7 @@
 
 
 */
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 {
 	config = {
 		services.desktopManager.gnome.enable = true;
