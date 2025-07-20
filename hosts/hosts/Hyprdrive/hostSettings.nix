@@ -15,18 +15,29 @@
 				plymouth.active = "mikuboot";
 			};
 		};
+
+		
 		desktops.activeDesktop = "gnomeWithGdm";
+
+
 		packages = {
 			signal.enable = true;
 			vscode.enable = true;
+
+			solaar.enable = true;
 
 			mullvad.enable = true;
 
 			groups = {
 				gaming.enable = true;
 				FH.enable = true;
+				printing.enable = true;
 			};
 		};
+
+
+
+
 		hosts.components = {
 
 			monitorBrightness.enable = true;

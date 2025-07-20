@@ -134,6 +134,21 @@
         "type": "github"
       }
     },
+    "cachyos-kernel": {
+      "locked": {
+        "lastModified": 1743535541,
+        "narHash": "sha256-OlBtXY26w9OcAmpqrTvxaG4/rfDdavauQF2eRxb+ySs=",
+        "owner": "drakon64",
+        "repo": "nixos-cachyos-kernel",
+        "rev": "8516d89c4e0c4a25cea1be8431db3963359ee81b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "drakon64",
+        "repo": "nixos-cachyos-kernel",
+        "type": "github"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -255,6 +270,21 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flatpak": {
+      "locked": {
+        "lastModified": 1751276396,
+        "narHash": "sha256-oOYrnKStMsOXST+wKnzuSZ49h8Dr1Q3mIn2f5Kb5GAw=",
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "rev": "59adb9ad1cbd915494fc35cd0e0a9d582ca9de74",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
         "type": "github"
       }
     },
@@ -629,6 +659,8 @@
     },
     "root": {
       "inputs": {
+        "cachyos-kernel": "cachyos-kernel",
+        "flatpak": "flatpak",
         "home-manager-stable": "home-manager-stable",
         "home-manager-unstable": "home-manager-unstable",
         "mikuboot": "mikuboot",

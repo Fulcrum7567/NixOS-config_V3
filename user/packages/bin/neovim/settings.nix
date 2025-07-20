@@ -1,5 +1,5 @@
 {
 	optionName = "neovim";
-	packageName = "neovim";
+	packageName = "neovim-unwrapped";
 	displayName = "neovim";
 }
