@@ -26,6 +26,8 @@
 
 			solaar.enable = true;
 
+			sunshine.enable = true;
+
 			mullvad.enable = true;
 
 			groups = {

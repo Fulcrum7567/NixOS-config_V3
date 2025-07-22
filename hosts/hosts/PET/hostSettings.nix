@@ -13,6 +13,9 @@
 		packages = {
 			signal.enable = true;
 			supergfxd.enable = true;
+
+			moonlight.enable = true;
+
 			groups = {
 				gaming = {
 					enable = true;
