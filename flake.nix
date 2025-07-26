@@ -92,10 +92,20 @@
 
 		flatpak.url = "github:gmodena/nix-flatpak";
 
+		nvf-stable = {
+			url = "github:NotAShelf/nvf";
+			inputs.nixpkgs.follows = "nixpkgs-stable";
+		};
+
+		nvf-unstable = {
+			url = "github:NotAShelf/nvf";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, cachyos-kernel, flatpak, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, cachyos-kernel, flatpak, nvf-stable, nvf-unstable, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -204,6 +214,13 @@
 						zen-browser-unstable
 			);
 
+		nvf = (if (hostSettings.defaultPackageState == "stable")
+					then
+						nvf-stable
+					else
+						nvf-unstable
+			);
+
 	in
 	{
 
@@ -232,8 +249,8 @@
 
 		nixosConfigurations = {
 			${currentHost} = lib.nixosSystem {
-            	system = hostSettings.system;
-            	modules = [
+            	                system = hostSettings.system;
+            	                modules = [
 					# Home Manager as a NixOS module
 					home-manager.nixosModules.home-manager
 					{
@@ -281,13 +298,13 @@
 					./user/packages/bin/importer.nix
 					./user/packages/defaults/importer.nix
 					./user/packages/groups/importer.nix
-        		];
+        		        ];
         
-        		specialArgs = {
-        			inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser;
-        			hostSettingsRaw = hostSettings;
-        		};
-      		};
+        		        specialArgs = {
+        			        inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf;
+        			        hostSettingsRaw = hostSettings;
+        		        };
+      		         };
 		};
 	};
 } 
