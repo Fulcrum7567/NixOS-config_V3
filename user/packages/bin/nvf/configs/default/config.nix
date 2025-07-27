@@ -12,7 +12,7 @@ in
 					exec = "kitty nvim";
 					icon = "nvim";
 					categories = [  ];
-					noDisplay = false;
+					noDisplay = true;
 				};
 			};
 		};
