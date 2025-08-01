@@ -16,6 +16,8 @@
 
 			moonlight.enable = true;
 
+			cubeIDE.enable = true;
+
 			groups = {
 				gaming = {
 					enable = false;
