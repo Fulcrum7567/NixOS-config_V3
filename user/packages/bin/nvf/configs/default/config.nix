@@ -33,6 +33,7 @@ in
 				nix.enable = true;
 				ts.enable = true;
 				python.enable = true;
+				java.enable = true;
 			};
 
 		};
