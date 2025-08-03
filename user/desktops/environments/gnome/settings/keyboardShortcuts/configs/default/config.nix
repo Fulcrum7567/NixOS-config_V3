@@ -1,6 +1,37 @@
 { config, lib, settings, ... }:
 let
 	settingsConfig = config.desktopEnvironments.gnome.settings.${settings.optionName};
+
+	keyMap = {
+		"<sep>" = "";
+
+		"<super>" = "<Super>";
+		"<shift>" = "<Shift>";
+		"<alt>" = "<Alt>";
+		"<ctrl>" = "<Control>";
+
+		"<tab>" = "Tab";
+
+		"<down>" = "Down";
+		"<left>" = "Left";
+		"<right>" = "Right";
+		"<up>" = "Up";
+
+		"<f1>" = "F1";
+		"<f2>" = "F2";
+		"<f3>" = "F3";
+		"<f4>" = "F4";
+		"<f5>" = "F5";
+		"<f6>" = "F6";
+		"<f7>" = "F7";
+		"<f8>" = "F8";
+		"<f9>" = "F9";
+		"<f10>" = "F10";
+		"<f11>" = "F11";
+		"<f12>" = "F12";
+	};
+
+
 in
 {
 	config = lib.mkIf (settingsConfig.enable && (settingsConfig.activeConfig == "default")) {
@@ -9,71 +40,72 @@ in
 
 				"org/gnome/desktop/wm/keybindings" = {
 					activate-window-menu = [];
-					always-on-top = [ "<Shift><Super>t" ];
+					always-on-top = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.alwaysOnTop) ];
 					begin-move = [];
 					begin-resize = [];
-					close = [ "<Super>q" ];
-					cycle-group = [ "<Super>Tab" ];
-					cycle-group-backward = [ "<Shift><Super>Tab" ];
+					close = [ (config.custom.shortcuts.map keyMap config.shortcuts.apps.close) ];
+					cycle-group = [ ];
+					cycle-group-backward = [ ];
 					cycle-panels = [];
 					cycle-panels-backward = [];
 					cycle-windows = [];
 					cycle-windows-backward = [];
 					minimize = [];
-					move-to-monitor-down = [ "<Alt><Super>Down" ];
-					move-to-monitor-left = [ "<Alt><Super>Left" ];
-					move-to-monitor-right = [ "<Alt><Super>Right" ];
-					move-to-monitor-up = [ "<Alt><Super>Up" ];
-					move-to-workspace-1 = [ "<Shift><Super>1" ];
-					move-to-workspace-2 = [ "<Shift><Super>2" ];
-					move-to-workspace-3 = [ "<Shift><Super>3" ];
-					move-to-workspace-4 = [ "<Shift><Super>4" ];
-					move-to-workspace-5 = [ "<Shift><Super>5" ];
-					move-to-workspace-6 = [ "<Shift><Super>6" ];
-					move-to-workspace-7 = [ "<Shift><Super>7" ];
-					move-to-workspace-8 = [ "<Shift><Super>8" ];
-					move-to-workspace-9 = [ "<Shift><Super>9" ];
+					move-to-monitor-down = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToMonitorDown) ];
+					move-to-monitor-left = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToMonitorLeft) ];
+					move-to-monitor-right = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToMonitorRight) ];
+					move-to-monitor-up = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToMonitorUp) ];
+					move-to-workspace-1 = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace1) ];
+					move-to-workspace-2 = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace2) ];
+					move-to-workspace-3 = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace3) ];
+					move-to-workspace-4 = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace4) ];
+					move-to-workspace-5 = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace5) ];
+					move-to-workspace-6 = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace6) ];
+					move-to-workspace-7 = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace7) ];
+					move-to-workspace-8 = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace8) ];
+					move-to-workspace-9 = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace9) ];
 
-					move-to-workspace-left = [ "<Shift><Super>Left" ];
-					move-to-workspace-right = [ "<Shift><Super>Right" ];
-					show-desktop = [ "<Super>d" ];
+					move-to-workspace-left = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspaceLeft) ];
+					move-to-workspace-right = [ (config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspaceRight) ];
+
+					show-desktop = [ (config.custom.shortcuts.map keyMap config.shortcuts.de.showDesktop) ];
 					switch-applications = [];
 					switch-applications-backward = [];
 					switch-input-source = [];
 					switch-input-source-backward = [];
 					switch-panels = [];
 					switch-panels-backward = [];
-					switch-to-workspace-1 = [ "<Control><Super>1" ];
-					switch-to-workspace-2 = [ "<Control><Super>2" ];
-					switch-to-workspace-3 = [ "<Control><Super>3" ];
-					switch-to-workspace-4 = [ "<Control><Super>4" ];
-					switch-to-workspace-5 = [ "<Control><Super>5" ];
-					switch-to-workspace-6 = [ "<Control><Super>6" ];
-					switch-to-workspace-7 = [ "<Control><Super>7" ];
-					switch-to-workspace-8 = [ "<Control><Super>8" ];
-					switch-to-workspace-9 = [ "<Control><Super>9" ];
+					switch-to-workspace-1 = [ ];
+					switch-to-workspace-2 = [ ];
+					switch-to-workspace-3 = [ ];
+					switch-to-workspace-4 = [ ];
+					switch-to-workspace-5 = [ ];
+					switch-to-workspace-6 = [ ];
+					switch-to-workspace-7 = [ ];
+					switch-to-workspace-8 = [ ];
+					switch-to-workspace-9 = [ ];
 
-					switch-to-workspace-left = [ "<Control><Super>Left" ];
-					switch-to-workspace-right = [ "<Control><Super>Right" ];
-					switch-windows = [ "<Alt>Tab" ];
-					switch-windows-backward = [ "<Shift><Alt>Tab" ];
-					toggle-fullscreen = [ "F11" ];
+					switch-to-workspace-left = [ (config.custom.shortcuts.map keyMap config.shortcuts.workspaces.switchToWorkspaceLeft) ];
+					switch-to-workspace-right = [ (config.custom.shortcuts.map keyMap config.shortcuts.workspaces.switchToWorkspaceRight) ];
+					switch-windows = [ (config.custom.shortcuts.map keyMap config.shortcuts.apps.switch) ];
+					switch-windows-backward = [ (config.custom.shortcuts.map keyMap config.shortcuts.apps.switchBackward) ];
+					toggle-fullscreen = [ (config.custom.shortcuts.map keyMap config.shortcuts.apps.fullscreen) ];
 					toggle-maximized = [];
-					toggle-on-all-workspaces = [ "<Control><Super>t" ];
+					toggle-on-all-workspaces = [ (config.custom.shortcuts.map keyMap config.shortcuts.apps.activeOnAllWorkspaces) ];
 				};
 
 				"org/gnome/settings-daemon/plugins/media-keys" = {
-					control-center = [ "<Super>i" ];
-					home = [ "<Super>e" ];
+					control-center = [ (config.custom.shortcuts.map keyMap config.shortcuts.apps.launchSettings) ];
+					home = [ (config.custom.shortcuts.map keyMap config.shortcuts.apps.launchExplorer) ];
 			    };
 
 			    "org/gnome/shell/keybindings" = {
-			    	focus-active-notification = [ "<Shift><Super>n" ];
-					screenshot = [ "<Shift><Control><Super>s" ];
-					screenshot-window = [ "<Shift><Alt><Super>s" ];
+			    	focus-active-notification = [ (config.custom.shortcuts.map keyMap config.shortcuts.de.focusActiveNotification) ];
+					screenshot = [ (config.custom.shortcuts.map keyMap config.shortcuts.de.quickScreenshot) ];
+					screenshot-window = [ (config.custom.shortcuts.map keyMap config.shortcuts.de.quickScreenshotWindow) ];
 					show-screen-recording-ui = [];
-					show-screenshot-ui = [ "<Shift><Super>s" ];
-					toggle-message-tray = [ "<Super>n" ];
+					show-screenshot-ui = [ (config.custom.shortcuts.map keyMap config.shortcuts.de.screenshot) ];
+					toggle-message-tray = [ (config.custom.shortcuts.map keyMap config.shortcuts.de.openNotificationPanel) ];
 			    };
 			    
 			};
