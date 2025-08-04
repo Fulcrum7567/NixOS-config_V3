@@ -3,42 +3,14 @@
 
 
 	config = lib.mkIf (config.theming.activeTheme == "nord") {
-
 		theming = {
-			colorScheme = "nord";
 			polarity = "dark";
 
-			components = {
-				plymouth.enable = true;
-				opacity.enable = true;
-				fonts.enable = true;
-				disableDesktopIcons.enable = true;
-
-				mouse = {
-					enable = true;
-					active = "nordzy";
-				};
-
-				wallpaper = {
-					enable = true;
-					type = "single";
-					active = "cpu_city.png";
-				};
+			fonts = {
+				monospace.config = "jetBrainsMono";
+				sansSerif.config = "dejaVuSans";
+				serif.config = "dejaVuSerif";				
 			};
 		};
-
-		stylix = {
-			enable = true;
-			autoEnable = true;
-
-			polarity = "dark";
-
-			targets.qt.enable = false;
-		};
-
-		
-		
-
-	
 	};
 }

@@ -24,16 +24,22 @@
 			example = "dark";
 		};
 
-		availableColorSchemes = lib.mkOption {
-			type = lib.types.listOf lib.types.str;
-			default = [];
-			apply = x: lib.unique x;
-			description = "List of all available color schemes.";
+		baseGTKTheme = lib.mkOption {
+			type = lib.types.str;
+			default = "Adwaita-dark";
+			description = "Theme the GTK theme is based on.";
 		};
 
-		colorScheme = lib.mkOption {
-			type = lib.types.enum (config.theming.availableColorSchemes or []);
-			description = "Set the color scheme of the theme";
+		baseQtTheme = lib.mkOption {
+			type = lib.types.str;
+			default = "adwaita-qt";
+			description = "Theme the Qt theme is based on.";
+		};
+
+		overrideThemeColors = lib.mkOption {
+			type = lib.types.bool;
+			default = true;
+			description = "Whether to override theme colors.";
 		};
 	};
 
