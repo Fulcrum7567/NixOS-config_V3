@@ -1,6 +1,6 @@
 { lib, config, inputs, pkgs, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
 let
-	settings = import ./settings.nix;
+	settings = (import ./settings.nix {inherit pkgs pkgs-default pkgs-stable pkgs-unstable; });
 in
 {
 	imports = [

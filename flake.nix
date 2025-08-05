@@ -287,6 +287,7 @@
 					
 					# Theming
 					./user/themes/bin/importer.nix
+					./user/themes/bin/apps/importer.nix
 					./user/themes/profiles/importer.nix
 
 					# Desktop
