@@ -12,7 +12,10 @@
 				serif.config = "dejaVuSerif";				
 			};
 
-			cursors.active = "nordzy";
+			cursors = {
+				active = "nordzy";
+				size = 28;
+			};
 		};
 	};
 }

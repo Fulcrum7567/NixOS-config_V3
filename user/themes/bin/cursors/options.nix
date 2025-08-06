@@ -25,6 +25,12 @@
 			description = "Name of the cursor in the package. Is set by the cursor config.";
 		};
 
+		size = lib.mkOption {
+			type = lib.types.int;
+			default = 24;
+			description = "Size of the cursor.";
+		};
+
 		
 	};
 }
