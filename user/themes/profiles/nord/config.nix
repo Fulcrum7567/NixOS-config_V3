@@ -16,6 +16,8 @@
 				active = "nordzy";
 				size = 28;
 			};
+
+			icons.active = "nordzy";
 		};
 	};
 }

@@ -4,5 +4,6 @@
 	    ./fonts.nix
 	    ./general.nix
 	    ./cursor.nix
+	    ./icons.nix
   	];
 }
