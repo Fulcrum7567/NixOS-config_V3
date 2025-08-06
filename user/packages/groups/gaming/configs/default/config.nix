@@ -13,6 +13,7 @@ in
 			minecraft.enable = true;
 			protonup.enable = true;
 			steam.enable = true;
+			moonlight.enable = true;
 		};
 	};
 } 

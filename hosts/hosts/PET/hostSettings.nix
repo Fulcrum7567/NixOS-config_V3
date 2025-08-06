@@ -14,7 +14,6 @@
 			signal.enable = true;
 			supergfxd.enable = true;
 
-			moonlight.enable = true;
 
 			cubeIDE.enable = true;
 

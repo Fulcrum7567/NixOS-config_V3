@@ -27,6 +27,7 @@
 			solaar.enable = true;
 
 			sunshine.enable = true;
+			moonlight.enable = lib.mkForce false;
 
 			mullvad.enable = true;
 
