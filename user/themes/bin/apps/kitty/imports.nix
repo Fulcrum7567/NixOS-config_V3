@@ -2,6 +2,5 @@
 {
 	imports = [
 	    ./fonts.nix
-	    ./general.nix
   	];
 }

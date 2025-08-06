@@ -62,26 +62,26 @@
 
 		sizes = {
 			applications = lib.mkOption {
-				types = lib.types.int;
+				type = lib.types.int;
 				description = "Sets the size of the font in applications.";
 				default = 12;
 			};
 
 			terminal = lib.mkOption {
-				types = lib.types.int;
+				type = lib.types.int;
 				description = "Sets the size of the font in the terminal.";
 				default = 15;
 			};
 			
 
 			desktop = lib.mkOption {
-				types = lib.types.int;
+				type = lib.types.int;
 				description = "Sets the size of the font on the desktop.";
 				default = 10;
 			};
 
 			popups = lib.mkOption {
-				types = lib.types.int;
+				type = lib.types.int;
 				description = "Sets the size of the font in popups.";
 				default = 10;
 			};

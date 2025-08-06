@@ -11,6 +11,8 @@
 				sansSerif.config = "dejaVuSans";
 				serif.config = "dejaVuSerif";				
 			};
+
+			cursors.active = "nordzy";
 		};
 	};
 }

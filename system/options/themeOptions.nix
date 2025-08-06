@@ -32,7 +32,7 @@
 
 		baseQtTheme = lib.mkOption {
 			type = lib.types.str;
-			default = "adwaita-qt";
+			default = (if (config.theming.polarity == "light") then "adwaita" else "adwaita-dark");
 			description = "Theme the Qt theme is based on.";
 		};
 

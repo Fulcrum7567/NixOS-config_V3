@@ -1,7 +1,7 @@
 { lib, config, ... }:
 {
 	imports = [
-	    ./fonts.nix
-	    ./general.nix
+	    ./polarity.nix
+	    ./cursor.nix
   	];
 }
