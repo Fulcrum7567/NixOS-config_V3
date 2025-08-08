@@ -54,6 +54,8 @@
 			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
 
+		nix-colors.url = "github:misterio77/nix-colors";
+
 		# CachyOS kernel
 		cachyos-kernel.url = "github:drakon64/nixos-cachyos-kernel";
 
@@ -249,13 +251,17 @@
 
 		nixosConfigurations = {
 			${currentHost} = lib.nixosSystem {
-            	                system = hostSettings.system;
-            	                modules = [
+                system = hostSettings.system;
+                modules = [
 					# Home Manager as a NixOS module
 					home-manager.nixosModules.home-manager
 					{
 						home-manager.useGlobalPkgs = true;
 						home-manager.useUserPackages = true;
+
+						imports = [
+							inputs.nix-colors.homeManagerModules.default
+						];
 					}
 
 					# Stylix
@@ -263,6 +269,7 @@
 
 					# Sops-nix
 					sops-nix.nixosModules.sops
+
 
 					# Options
 					./system/options/hostOptions.nix

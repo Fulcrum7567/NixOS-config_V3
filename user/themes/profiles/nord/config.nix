@@ -1,8 +1,11 @@
-{ config, lib, pkgs-default, pkgs, ... }:
+{ config, lib, pkgs-default, pkgs, inputs, ... }:
 {
 
 
 	config = lib.mkIf (config.theming.activeTheme == "nord") {
+
+		colorScheme = inputs.nix-colors.colorSchemes.nord;
+
 		theming = {
 			polarity = "dark";
 
@@ -18,6 +21,9 @@
 			};
 
 			icons.active = "nordzy";
+
+			useStylix = true;
+
 		};
 	};
 }

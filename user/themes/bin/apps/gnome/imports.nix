@@ -3,5 +3,6 @@
 	imports = [
 	    ./polarity.nix
 	    ./cursor.nix
+	    ./general.nix
   	];
 }

@@ -41,6 +41,27 @@
 			default = true;
 			description = "Whether to override theme colors.";
 		};
-	};
 
+		gnomeAccentColor = lib.mkOption {
+			type = lib.types.enum [
+				"blue"
+				"teal"
+				"green"
+				"yellow"
+				"orange"
+				"red"
+				"pink"
+				"purple"
+				"slate"
+			];
+			default = "blue";
+			description = "Selects the accent color of gnome.";
+		};
+
+		useStylix = lib.mkOption {
+			type = lib.types.bool;
+			default = false;
+			description = "Whether to use stylix to theme programs. Might break things (like Plasma 6). Should be set by DEs for example.";
+		};
+	};
 } 
