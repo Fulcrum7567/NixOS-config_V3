@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, lib, ... }: {
 	
 	config = {
 		host.settings = {
@@ -11,9 +11,6 @@
 		
 		theming = {
 			activeTheme = "nord";
-			components = {
-				plymouth.active = "mikuboot";
-			};
 		};
 
 		
@@ -47,7 +44,7 @@
 
 			kernelVersion = {
 				enable = true;
-				activeConfig = "cachy";
+				activeConfig = "latest";
 			};
 
 			nvidiaDrivers = {
