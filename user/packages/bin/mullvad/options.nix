@@ -15,6 +15,12 @@
 			description = "Set the active configuration for the ${settings.displayName} package.";
 		};
 
+		autoEnableDelay = lib.mkOption {
+			type 		= lib.types.int;
+			default 	= 180; # Wait 3 minutes
+			description = "Set the time before the vpn gets enabled. Set to -1 to disable auto enable.";
+		};
+
 		enable = lib.mkOption {
 			type = lib.types.bool;
 			default = false;

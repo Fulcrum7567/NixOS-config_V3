@@ -7,5 +7,25 @@ in
 
 		# Graphical package
 		services.mullvad-vpn.package = pkgs-default.mullvad-vpn;
+
+
+		# Auto enable
+
+		systemd.services.mullvad-connect-delayed = lib.mkIf (option.autoEnableDelay != -1) {
+			description = "Connect to Mullvad VPN after a set delay";
+
+			wantedBy = [ "multi-user.target" ];
+
+			after = [ "network-online.target" "mullvad-daemon.service" ];
+			wants = [ "network-online.target" "mullvad-daemon.service" ];
+
+			serviceConfig = {
+				Type = "oneshot";
+
+				ExecStart = ''
+					${pkgs.bash}/bin/bash -c "sleep ${option.autoEnableDelay} && ${pkgs.mullvad-vpn}/bin/mullvad connect"
+				'';
+			};
+		};
 	};
 } 
