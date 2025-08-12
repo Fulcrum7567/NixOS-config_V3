@@ -23,7 +23,7 @@ in
 				Type = "oneshot";
 
 				ExecStart = ''
-					${pkgs.bash}/bin/bash -c "sleep ${option.autoEnableDelay} && ${pkgs.mullvad-vpn}/bin/mullvad connect"
+					${pkgs-default.bash}/bin/bash -c "sleep ${option.autoEnableDelay} && ${pkgs-default.mullvad-vpn}/bin/mullvad connect"
 				'';
 			};
 		};
