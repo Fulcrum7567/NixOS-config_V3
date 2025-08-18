@@ -31,7 +31,7 @@
 			groups = {
 				gaming.enable = true;
 				FH.enable = true;
-				printing.enable = true;
+				printing.enable = false;
 			};
 		};
 
