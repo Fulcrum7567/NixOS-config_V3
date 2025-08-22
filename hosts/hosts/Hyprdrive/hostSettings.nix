@@ -26,7 +26,10 @@
 			sunshine.enable = true;
 			moonlight.enable = lib.mkForce false;
 
-			mullvad.enable = true;
+			mullvad = {
+				enable = true;
+				autoEnableDelay = 1;
+			};
 
 			groups = {
 				gaming.enable = true;

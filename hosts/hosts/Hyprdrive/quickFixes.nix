@@ -2,9 +2,6 @@
 {
 	config = {
 
-		environment.systemPackages = with pkgs-unstable; [
-			libinput
-		];
 
 		# Ollama
 		services.ollama = {
@@ -16,31 +13,6 @@
 			];
 		};
 
-		# Mouse wheel
-
-		services.udev.packages = [
-			(pkgs.writeTextFile {
-				name = "libinput-quirks-g903";
-				destination = "/lib/udev/libinput/quirks/91-logitech-g903.quirks";
-				text = ''
-					[Logitech G903 Lightspeed]
-					MatchName=Logitech G903*
-					AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;
-				'';
-			})
-		];
-		/*
-services.udev.extraRules = ''
-  # Hyper-specific rule for Logitech G903 using hardware IDs to disable hi-res scrolling.
-  ACTION=="add|change", KERNEL=="event[0-9]*", ATTRS{id/vendor}=="046d", ATTRS{id/product}=="4087", ENV{LIBINPUT_ATTR_WHEEL_HI_RES_HW}="0"
-'';
-
-
-		
-		services.libinput.enable = true;
-
-
-		*/
 		home-manager.users.${config.user.settings.username} = {
 
 			#switch audio
