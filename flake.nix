@@ -248,7 +248,7 @@
 
 
 		nixosConfigurations = {
-			${currentHost} = lib.nixosSystem {
+			PET = lib.nixosSystem {
                 system = hostSettings.system;
                 modules = [
 					# Home Manager as a NixOS module

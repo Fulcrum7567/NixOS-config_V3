@@ -5,7 +5,7 @@
 			enable = true;
 			wayland.enable = true;
 		};
-		services.displayManager.gdm.enable = lib.mkForce false;
+		services.xserver.displayManager.gdm.enable = lib.mkForce false;
 
 	};
 }

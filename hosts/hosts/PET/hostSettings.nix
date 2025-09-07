@@ -14,8 +14,13 @@
 			signal.enable = true;
 			supergfxd.enable = true;
 
+			mullvad = {
+				enable = true;
+				autoEnableDelay = -1;
+			};
 
-			cubeIDE.enable = true;
+
+			cubeIDE.enable = false;
 
 			groups = {
 				gaming = {
