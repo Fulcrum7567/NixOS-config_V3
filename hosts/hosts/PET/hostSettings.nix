@@ -22,6 +22,8 @@
 
 			cubeIDE.enable = false;
 
+			bitwarden.enable = true;
+
 			groups = {
 				gaming = {
 					enable = true;
