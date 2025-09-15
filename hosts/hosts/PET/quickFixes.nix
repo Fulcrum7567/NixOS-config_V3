@@ -9,6 +9,8 @@
 		services.desktopManager.gnome.enable = true;
 		services.displayManager.gdm.enable = true;
 
+		services.n8n.enable = true;
+
 
 		# Fingerprint reader
 		services.fwupd.enable = true;
