@@ -44,6 +44,8 @@
 
 			components = {
 
+				fingerprint.enable = true;
+
 				kernelVersion = {
 					enable = true;
 					activeConfig = "latest";
