@@ -17,7 +17,7 @@
 
 			wallpaper = {
 				type = "single";
-				active = ../../bin/wallpapers/bin/cpu_city.png;
+				single.active = "cpu_city.png";
 			};
 
 			cursors = {

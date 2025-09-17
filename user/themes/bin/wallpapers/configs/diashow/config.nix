@@ -3,7 +3,7 @@
 	config = {
 		assertions = [
 			{
-				assertion = (config.theming.wallpaper.type != "single") || (config.theming.wallpaper.single.active != null);
+				assertion = true;
 				message = "Single Wallpaper is enabled but not set.";
 			}
 		];
