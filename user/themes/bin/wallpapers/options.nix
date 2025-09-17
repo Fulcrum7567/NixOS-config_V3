@@ -2,7 +2,7 @@
 {
 	options.theming.wallpaper = {
 		availableTypes = lib.mkOption {
-			type = lib.types.listOf lib.types.str:
+			type = lib.types.listOf lib.types.str;
 			default = [ ];
 			apply = x: lib.unique x;
 			description = "List of all available wallpaper types";
@@ -14,4 +14,4 @@
 		};
 
 	};
-} 
+}

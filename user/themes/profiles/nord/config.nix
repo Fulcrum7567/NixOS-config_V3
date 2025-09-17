@@ -15,6 +15,11 @@
 				serif.config = "dejaVuSerif";				
 			};
 
+			wallpaper = {
+				type = "single";
+				active = ../../bin/wallpapers/bin/cpu_city.png;
+			};
+
 			cursors = {
 				active = "nordzy";
 				size = 28;

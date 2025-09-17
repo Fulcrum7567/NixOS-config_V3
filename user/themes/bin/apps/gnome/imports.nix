@@ -4,5 +4,6 @@
 	    ./polarity.nix
 	    ./cursor.nix
 	    ./general.nix
+	    ./wallpaper.nix
   	];
 }

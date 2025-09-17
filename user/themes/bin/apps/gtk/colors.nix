@@ -97,5 +97,7 @@ in
 			"gtk-3.0/gtk.css".text = gtkCss;
 			"gtk-4.0/gtk.css".text = gtkCss;
 		};
+
+		home.sessionVariables.GTK_THEME = config.theming.baseGTKTheme;
 	};
 } 

@@ -6,5 +6,6 @@
 	    ./cursor.nix
 	    ./icons.nix
 	    ./colors.nix
+	    ./polarity.nix
   	];
 }
