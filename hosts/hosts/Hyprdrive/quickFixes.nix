@@ -2,6 +2,11 @@
 {
 	config = {
 
+		#nix-diff
+		environment.systemPackages = with pkgs; [
+			nix-diff
+		];
+
 
 		# Ollama
 		services.ollama = {

@@ -38,6 +38,8 @@ in
 					"application/json"			= defaultApps.editor.appID;
 					"application/xml"			= defaultApps.editor.appID;
 					"application/javascript"	= defaultApps.editor.appID;
+					"inode/x-empty"				= defaultApps.editor.appID;
+					"text"		 				= defaultApps.editor.appID;
 
 					#"image/png"				=...
 					#"image/jpeg"				=...

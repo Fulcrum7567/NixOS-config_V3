@@ -151,6 +151,7 @@
 			};
 			overlays = [
 				nix-vscode-extensions.overlays.default
+				(import ./system/customTypes/overlay.nix)
 			];
 		};
 
@@ -164,6 +165,7 @@
 			};
 			overlays = [
 				nix-vscode-extensions.overlays.default
+				(import ./system/customTypes/overlay.nix)
 			];
 		};
 
@@ -182,13 +184,14 @@
 						);
 
 
-
+		/*
 		lib = (if (hostSettings.systemState == "stable")
 				then
 					nixpkgs-stable.lib
 				else
 					nixpkgs-unstable.lib
 				);
+		*/
 
 		home-manager = (if (hostSettings.systemState == "stable")
 						then
@@ -248,7 +251,7 @@
 
 
 		nixosConfigurations = {
-			PET = lib.nixosSystem {
+			Hyprdrive = pkgs-system.lib.nixosSystem {
                 system = hostSettings.system;
                 modules = [
 					# Home Manager as a NixOS module
@@ -304,13 +307,13 @@
 					./user/packages/bin/importer.nix
 					./user/packages/defaults/importer.nix
 					./user/packages/groups/importer.nix
-        		        ];
-        
-        		        specialArgs = {
-        			        inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf;
-        			        hostSettingsRaw = hostSettings;
-        		        };
-      		         };
+		        ];
+
+		        specialArgs = {
+					inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf;
+					hostSettingsRaw = hostSettings;
+				};
+			};
 		};
 	};
 } 

@@ -16,7 +16,15 @@
 			};
 
 			wallpaper = {
-				type = "single";
+				type = "diashow";
+				diashow = {
+					active = {
+						name = "test";
+						wallpapers = [ ];
+					};
+					selectCommand = "";
+
+				};
 				single.active = "cpu_city.png";
 			};
 
