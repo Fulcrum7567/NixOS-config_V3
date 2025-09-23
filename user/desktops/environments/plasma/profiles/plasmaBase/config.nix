@@ -27,7 +27,7 @@
 		    kdePackages.kde-gtk-config
 		];
 
-		stylix.targets.qt.enable = false;
+		theming.useStylix = lib.mkForce false;
 
 		packages = {
 			kdeConnect.enable = lib.mkForce false;

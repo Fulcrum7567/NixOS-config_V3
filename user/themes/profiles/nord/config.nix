@@ -33,9 +33,12 @@
 				size = 28;
 			};
 
-			icons.active = "nordzy";
+			plymouth = {
+				enable = true;
+				activeTheme = "default";
+			};
 
-			useStylix = true;
+			icons.active = "nordzy";
 
 		};
 	};
