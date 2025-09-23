@@ -98,6 +98,6 @@ in
 			"gtk-4.0/gtk.css".text = gtkCss;
 		};
 
-		home.sessionVariables.GTK_THEME = config.theming.baseGTKTheme;
+		home.sessionVariables.GTK_THEME = config.theming.baseGTKTheme.name;
 	};
 } 

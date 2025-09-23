@@ -7,6 +7,7 @@
 		colorScheme = inputs.nix-colors.colorSchemes.nord;
 
 		theming = {
+
 			polarity = "dark";
 
 			fonts = {
@@ -23,8 +24,9 @@
 						wallpapers = [ "cpu_city.png" "forest1.jpg" "girlOnBed.png" "japan1.png" "mountainRange1.png" "mountainRange2.jpg" "nixos.png" "seashore1.png" "yourName.png" ];
 					};
 					delay = 301;
-
 				};
+
+				
 				single.active = "cpu_city.png";
 			};
 

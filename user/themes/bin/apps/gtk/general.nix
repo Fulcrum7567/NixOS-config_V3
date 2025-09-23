@@ -5,7 +5,8 @@
 			gtk = lib.mkIf (config.theming.useStylix == false) {
 				enable = true;
 
-				theme.name = config.theming.baseGTKTheme;
+				theme.name = config.theming.baseGTKTheme.name;
+				theme.package = config.theming.baseGTKTheme.package;
 			};
 
 		};

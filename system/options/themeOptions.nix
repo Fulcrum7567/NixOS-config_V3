@@ -24,16 +24,33 @@
 			example = "dark";
 		};
 
-		baseGTKTheme = lib.mkOption {
-			type = lib.types.str;
-			default = "Adwaita-dark";
-			description = "Theme the GTK theme is based on.";
+		baseGTKTheme = {
+
+			package = lib.mkOption {
+				type = lib.types.nullOr lib.types.package;
+				default = null;
+				description = "Package providing the GTK theme the GTK theme is based on.";
+			};
+
+			name = lib.mkOption {
+				type = lib.types.str;
+				default = "Adwaita-dark";
+				description = "Theme the GTK theme is based on.";
+			};
 		};
 
-		baseQtTheme = lib.mkOption {
-			type = lib.types.str;
-			default = (if (config.theming.polarity == "light") then "adwaita" else "adwaita-dark");
-			description = "Theme the Qt theme is based on.";
+		baseQtTheme = {
+			package = lib.mkOption {
+				type = lib.types.nullOr lib.types.package;
+				default = null;
+				description = "Package providing the Qt theme the Qt theme is based on.";
+			};
+			
+			name = lib.mkOption {
+				type = lib.types.str;
+				default = (if (config.theming.polarity == "light") then "adwaita" else "adwaita-dark");
+				description = "Theme the Qt theme is based on.";
+			};
 		};
 
 		overrideThemeColors = lib.mkOption {

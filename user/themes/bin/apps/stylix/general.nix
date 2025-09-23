@@ -7,6 +7,10 @@
 			base16Scheme = config.colorScheme.palette;
 			autoEnable = true;
 
+			targets = {
+				plymouth.enable = false;
+			};
+
 
 			polarity = (if (config.theming.polarity == "mixed") then "either" else config.theming.polarity);
 		

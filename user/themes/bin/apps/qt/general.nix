@@ -8,7 +8,10 @@
 			qt = lib.mkIf (config.theming.useStylix == false) {
 				enable = true;
 				platformTheme.name = "gtk";
-				style.name = config.theming.baseQtTheme;
+				style = {
+					name = config.theming.baseQtTheme.name;
+					package = config.theming.baseQtTheme.package;
+				};
 			};
 		};
 

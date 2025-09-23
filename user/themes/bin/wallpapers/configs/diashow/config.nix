@@ -12,13 +12,11 @@
 			}
 		];
 
-		systemd.user.services.wallpaper-diashow = lib.mkIf (config.theming.wallpaper.type == "diashow") {
+		systemd.user.services.wallpaper-diashow = {
 			description = "Wallpaper Diashow Service";
-			wantedBy = [ "default.target" ];
+			wantedBy = lib.mkIf (config.theming.wallpaper.type == "diashow") [ "default.target" ];
 			after = [ "graphical-session.target" ];
-			
-			# This ensures the service restarts when the configuration changes
-			restartIfChanged = true;
+			enable = config.theming.wallpaper.type == "diashow";
 			
 			path = with pkgs; [ 
 				glib  # for gsettings
@@ -75,44 +73,37 @@
 				'';
 			in wallpaperScript;
 		};
+	
 
-		system.activationScripts.restartWallpaperService = lib.mkIf (config.theming.wallpaper.type == "diashow") {
-			# This specifies the script's content.
-			text = ''
-				USER=${config.user.settings.username}
 
-				# Get the User ID
-				USER_UID=$(${pkgs.coreutils}/bin/id -u $USER)
-
-				# Find the PID of the user's "systemd --user" instance
-				USER_SYSTEMD_PID=$(${pkgs.procps}/bin/pgrep -u $USER_UID -f "systemd --user")
-
-				# Safety check
-				if [ -z "$USER_SYSTEMD_PID" ]; then
-					echo "User $USER session not found, skipping user service restart."
-					exit 0
-				fi
-
-				# Extract the necessary environment variables from the user's running session
-				DBUS_ADDRESS=$(${pkgs.gnugrep}/bin/grep -z DBUS_SESSION_BUS_ADDRESS /proc/$USER_SYSTEMD_PID/environ | ${pkgs.coreutils}/bin/cut -d= -f2-)
-				# --- NEW LINE ADDED HERE ---
-				XDG_DIR=$(${pkgs.gnugrep}/bin/grep -z XDG_RUNTIME_DIR /proc/$USER_SYSTEMD_PID/environ | ${pkgs.coreutils}/bin/cut -d= -f2-)
-
-				echo "Restarting wallpaper-diashow.service for user $USER..."
-
-				# --- SUDO COMMANDS UPDATED HERE ---
-				# Run the commands passing BOTH required variables into the environment
-				${pkgs.sudo}/bin/sudo -u $USER \
-					DBUS_SESSION_BUS_ADDRESS=$DBUS_ADDRESS \
-					XDG_RUNTIME_DIR=$XDG_DIR \
-					${pkgs.systemd}/bin/systemctl --user daemon-reload
-
-				${pkgs.sudo}/bin/sudo -u $USER \
-					DBUS_SESSION_BUS_ADDRESS=$DBUS_ADDRESS \
-					XDG_RUNTIME_DIR=$XDG_DIR \
-					${pkgs.systemd}/bin/systemctl --user restart wallpaper-diashow
-			'';
-		};
-
+		# Create a simple script that users can run manually if needed
+		environment.systemPackages = with pkgs; [
+			(writeShellScriptBin "wallpaper-diashow-control" ''
+				#!/bin/bash
+				
+				case "$1" in
+					start)
+						echo "Starting wallpaper diashow service..."
+						systemctl --user start wallpaper-diashow
+						;;
+					stop)
+						echo "Stopping wallpaper diashow service..."
+						systemctl --user stop wallpaper-diashow
+						;;
+					restart)
+						echo "Restarting wallpaper diashow service..."
+						systemctl --user restart wallpaper-diashow
+						;;
+					status)
+						systemctl --user status wallpaper-diashow
+						;;
+					*)
+						echo "Usage: $0 {start|stop|restart|status}"
+						exit 1
+						;;
+				esac
+			'')
+		];
 	};
+	
 }
