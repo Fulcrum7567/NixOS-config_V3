@@ -184,14 +184,20 @@
 						);
 
 
-		/*
+		
 		lib = (if (hostSettings.systemState == "stable")
 				then
 					nixpkgs-stable.lib
 				else
 					nixpkgs-unstable.lib
 				);
-		*/
+
+		libExtended = (if (hostSettings.systemState == "stable")
+				then
+					pkgs-stable.lib
+				else
+					pkgs-unstable.lib
+				);
 
 		home-manager = (if (hostSettings.systemState == "stable")
 						then
@@ -251,7 +257,7 @@
 
 
 		nixosConfigurations = {
-			Hyprdrive = pkgs-system.lib.nixosSystem {
+			${currentHost} = lib.nixosSystem {
                 system = hostSettings.system;
                 modules = [
 					# Home Manager as a NixOS module
@@ -312,6 +318,7 @@
 		        specialArgs = {
 					inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf;
 					hostSettingsRaw = hostSettings;
+					lib = libExtended;
 				};
 			};
 		};

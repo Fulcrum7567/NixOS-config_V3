@@ -16,5 +16,11 @@
 			description = "Command to set a wallpaper. Should be set by the DE.";
 			example = "gsettings set org.gnome.desktop.background picture-uri-dark '<wallpaperPath>'";
 		};
+
+		delay = lib.mkOption {
+			type = lib.types.int;
+			default = 300;
+			description = "Delay between wallpaper changes in seconds.";
+		};
 	};
 } 

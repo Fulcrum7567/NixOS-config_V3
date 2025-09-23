@@ -19,10 +19,10 @@
 				type = "diashow";
 				diashow = {
 					active = {
-						name = "test";
-						wallpapers = [ ];
+						name = "nord";
+						wallpapers = [ "cpu_city.png" "forest1.jpg" "girlOnBed.png" "japan1.png" "mountainRange1.png" "mountainRange2.jpg" "nixos.png" "seashore1.png" "yourName.png" ];
 					};
-					selectCommand = "";
+					delay = 301;
 
 				};
 				single.active = "cpu_city.png";
