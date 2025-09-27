@@ -1,0 +1,442 @@
+Sep 26 21:47:59 PET sddm[1531]: Initializing...
+Sep 26 21:47:59 PET sddm[1531]: Starting...
+Sep 26 21:47:59 PET sddm[1531]: Logind interface found
+Sep 26 21:47:59 PET sddm[1531]: Adding new display...
+Sep 26 21:47:59 PET sddm[1531]: Loaded empty theme configuration
+Sep 26 21:47:59 PET sddm[1531]: Using VT 1
+Sep 26 21:47:59 PET sddm[1531]: Display server started.
+Sep 26 21:47:59 PET sddm[1531]: Socket server starting...
+Sep 26 21:47:59 PET sddm[1531]: Socket server started.
+Sep 26 21:47:59 PET sddm[1531]: Loading theme configuration from "/run/current-system/sw/share/sddm/themes/breeze/theme.conf"
+Sep 26 21:47:59 PET sddm[1531]: Greeter starting...
+Sep 26 21:47:59 PET sddm-helper[1533]: [PAM] Starting...
+Sep 26 21:47:59 PET sddm-helper[1533]: [PAM] Authenticating...
+Sep 26 21:47:59 PET sddm-helper[1533]: [PAM] returning.
+Sep 26 21:47:59 PET systemd-logind[1203]: New session c1 of user sddm.
+Sep 26 21:47:59 PET (systemd)[1537]: pam_unix(systemd-user:session): session opened for user sddm(uid=175) by (uid=0)
+Sep 26 21:47:59 PET systemd-logind[1203]: New session 1 of user sddm.
+Sep 26 21:47:59 PET systemd[1537]: Cleanup lingering KCrash metadata was skipped because of an unmet condition check (ConditionPathExistsGlob=/var/lib/sddm/.cache/kcrash-metadata/*.ini).
+Sep 26 21:47:59 PET systemd[1537]: Submitting pending crash events was skipped because of an unmet condition check (ConditionPathExistsGlob=/var/lib/sddm/.cache/drkonqi/sentry-envelopes/*).
+Sep 26 21:47:59 PET systemd[1537]: Cleanup lingering KCrash metadata was skipped because of an unmet condition check (ConditionPathExistsGlob=/var/lib/sddm/.cache/kcrash-metadata/*.ini).
+Sep 26 21:47:59 PET systemd[1]: Started Session c1 of User sddm.
+Sep 26 21:47:59 PET sddm-helper[1549]: Jumping to VT 1
+Sep 26 21:47:59 PET sddm-helper[1549]: VT mode fixed
+Sep 26 21:47:59 PET sddm[1531]: Greeter session started successfully
+Sep 26 21:47:59 PET sddm-helper-start-wayland[1549]: Starting Wayland process "/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6.4.5/bin/kwin_wayland --no-global-shortcuts --no-kactivities --no-lockscreen --locale1" "sddm"
+Sep 26 21:47:59 PET sddm-helper-start-wayland[1549]: started succesfully "/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6.4.5/bin/kwin_wayland --no-global-shortcuts --no-kactivities --no-lockscreen --locale1"
+Sep 26 21:47:59 PET sddm-helper-start-wayland[1549]: Directory "/run/user/175" has changed, checking for Wayland socket
+Sep 26 21:48:00 PET sddm-helper-start-wayland[1549]: "Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted\n"
+Sep 26 21:48:00 PET sddm-helper-start-wayland[1549]: "No backend specified, automatically choosing drm\n"
+Sep 26 21:48:00 PET sddm-helper-start-wayland[1549]: Directory "/run/user/175" has changed, checking for Wayland socket
+Sep 26 21:48:00 PET sddm-helper-start-wayland[1549]: Found Wayland socket "/run/user/175/wayland-0"
+Sep 26 21:48:00 PET sddm-helper-start-wayland[1549]: "Accepting client connections on sockets: QList(\"wayland-0\")\n"
+Sep 26 21:48:00 PET sddm-greeter-qt6[1555]: High-DPI autoscaling Enabled
+Sep 26 21:48:00 PET sddm-helper-start-wayland[1549]: "Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted\n"
+Sep 26 21:48:00 PET sddm-helper-start-wayland[1549]: "Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted\n"
+Sep 26 21:48:01 PET dbus-daemon[1152]: [system] Activating via systemd: service name='org.freedesktop.locale1' unit='dbus-org.freedesktop.locale1.service' requested by ':1.18' (uid=175 pid=1551 comm="/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6")
+Sep 26 21:48:01 PET dbus-daemon[1152]: [system] Activating via systemd: service name='org.freedesktop.RealtimeKit1' unit='rtkit-daemon.service' requested by ':1.20' (uid=175 pid=1551 comm="/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6")
+Sep 26 21:48:02 PET sddm-greeter-qt6[1555]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/wayland-sessions/plasma.desktop"
+Sep 26 21:48:02 PET sddm-greeter-qt6[1555]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/wayland-sessions/steam.desktop"
+Sep 26 21:48:02 PET sddm-greeter-qt6[1555]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/xsessions/plasmax11.desktop"
+Sep 26 21:48:02 PET sddm-greeter-qt6[1555]: Loading theme configuration from "/run/current-system/sw/share/sddm/themes/breeze/theme.conf"
+Sep 26 21:48:02 PET sddm-greeter-qt6[1555]: Connected to the daemon.
+Sep 26 21:48:02 PET sddm[1531]: Message received from greeter: Connect
+Sep 26 21:48:02 PET sddm-greeter-qt6[1555]: Loading file:///run/current-system/sw/share/sddm/themes/breeze/Main.qml...
+Sep 26 21:48:02 PET sddm-greeter-qt6[1555]: Adding view for "eDP-1" QRect(0,0 1670x1043)
+Sep 26 21:48:02 PET sddm-greeter-qt6[1555]: Message received from daemon: Capabilities
+Sep 26 21:48:02 PET sddm-greeter-qt6[1555]: Message received from daemon: HostName
+Sep 26 21:48:27 PET sddm[1531]: Message received from greeter: Reboot
+Sep 26 21:48:27 PET sddm-greeter-qt6[1555]: Signal received: SIGTERM
+Sep 26 21:48:27 PET sddm-helper-start-wayland[1549]: Signal received: SIGTERM
+Sep 26 21:48:27 PET sddm-helper-start-wayland[1549]: quitting helper-start-wayland
+Sep 26 21:48:27 PET sddm-helper-start-wayland[1549]: Stopping... "/nix/store/3f9sjzlf6s5safqi2j4s1ssrnn9ysaq2-sddm-wrapped/bin/sddm-greeter-qt6"
+Sep 26 21:48:27 PET systemd[1]: Stopping Session c1 of User sddm...
+Sep 26 21:48:27 PET sddm[1531]: Error from greeter session: "Process crashed"
+Sep 26 21:48:27 PET sddm[1531]: Auth: sddm-helper (--socket /tmp/sddm-auth-fbf168fa-569e-444d-ba37-c3017fe19987 --id 2 --start /nix/store/3f9sjzlf6s5safqi2j4s1ssrnn9ysaq2-sddm-wrapped/bin/sddm-greeter-qt6 --socket /tmp/sddm--wvfmdf --theme /run/current-system/sw/share/sddm/themes/breeze --user sddm --display-server /nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6.4.5/bin/kwin_wayland --no-global-shortcuts --no-kactivities --no-lockscreen --locale1 --greeter) crashed (exit code 1)
+Sep 26 21:48:27 PET sddm[1531]: Error from greeter session: "Process crashed"
+Sep 26 21:48:27 PET sddm[1531]: Auth: sddm-helper exited with 1
+Sep 26 21:48:27 PET sddm[1531]: Greeter stopped. SDDM::Auth::HELPER_AUTH_ERROR
+Sep 26 21:48:27 PET sddm[1531]: Signal received: SIGTERM
+Sep 26 21:48:27 PET sddm[1531]: Socket server stopping...
+Sep 26 21:48:27 PET sddm[1531]: Socket server stopped.
+Sep 26 21:48:27 PET systemd[1]: Stopped Session c1 of User sddm.
+Sep 26 21:48:27 PET (sd-pam)[1539]: pam_unix(systemd-user:session): session closed for user sddm
+Sep 26 21:48:40 PET stage-2-init: removing group ‘sddm’
+Sep 26 21:48:40 PET stage-2-init: removing user ‘sddm’
+Sep 26 21:48:40 PET stage-2-init: removing obsolete symlink ‘/etc/sddm.conf’...
+Sep 26 21:48:40 PET stage-2-init: removing obsolete symlink ‘/etc/pam.d/sddm-greeter’...
+Sep 26 21:48:40 PET stage-2-init: removing obsolete symlink ‘/etc/pam.d/sddm’...
+Sep 26 21:48:40 PET stage-2-init: removing obsolete symlink ‘/etc/pam.d/sddm-autologin’...
+Sep 26 21:48:40 PET stage-2-init: removing obsolete symlink ‘/etc/tmpfiles.d/sddm.conf’...
+Sep 26 21:54:00 PET sddm[1521]: Initializing...
+Sep 26 21:54:00 PET sddm[1521]: Starting...
+Sep 26 21:54:00 PET sddm[1521]: Logind interface found
+Sep 26 21:54:00 PET sddm[1521]: Adding new display...
+Sep 26 21:54:00 PET sddm[1521]: Loaded empty theme configuration
+Sep 26 21:54:00 PET sddm[1521]: Using VT 1
+Sep 26 21:54:00 PET sddm[1521]: Display server started.
+Sep 26 21:54:00 PET sddm[1521]: Socket server starting...
+Sep 26 21:54:00 PET sddm[1521]: Socket server started.
+Sep 26 21:54:00 PET sddm[1521]: Loading theme configuration from "/run/current-system/sw/share/sddm/themes/breeze/theme.conf"
+Sep 26 21:54:00 PET sddm[1521]: Greeter starting...
+Sep 26 21:54:00 PET sddm-helper[1524]: [PAM] Starting...
+Sep 26 21:54:00 PET sddm-helper[1524]: [PAM] Authenticating...
+Sep 26 21:54:00 PET sddm-helper[1524]: [PAM] returning.
+Sep 26 21:54:00 PET systemd-logind[1200]: New session c1 of user sddm.
+Sep 26 21:54:00 PET (systemd)[1529]: pam_unix(systemd-user:session): session opened for user sddm(uid=175) by (uid=0)
+Sep 26 21:54:00 PET systemd-logind[1200]: New session 1 of user sddm.
+Sep 26 21:54:00 PET systemd[1529]: Cleanup lingering KCrash metadata was skipped because of an unmet condition check (ConditionPathExistsGlob=/var/lib/sddm/.cache/kcrash-metadata/*.ini).
+Sep 26 21:54:00 PET systemd[1529]: Submitting pending crash events was skipped because of an unmet condition check (ConditionPathExistsGlob=/var/lib/sddm/.cache/drkonqi/sentry-envelopes/*).
+Sep 26 21:54:00 PET systemd[1529]: Cleanup lingering KCrash metadata was skipped because of an unmet condition check (ConditionPathExistsGlob=/var/lib/sddm/.cache/kcrash-metadata/*.ini).
+Sep 26 21:54:00 PET systemd[1]: Started Session c1 of User sddm.
+Sep 26 21:54:00 PET sddm-helper[1541]: Jumping to VT 1
+Sep 26 21:54:00 PET sddm-helper[1541]: VT mode fixed
+Sep 26 21:54:00 PET sddm[1521]: Greeter session started successfully
+Sep 26 21:54:00 PET sddm-helper-start-wayland[1541]: Starting Wayland process "/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6.4.5/bin/kwin_wayland --no-global-shortcuts --no-kactivities --no-lockscreen --locale1" "sddm"
+Sep 26 21:54:00 PET sddm-helper-start-wayland[1541]: started succesfully "/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6.4.5/bin/kwin_wayland --no-global-shortcuts --no-kactivities --no-lockscreen --locale1"
+Sep 26 21:54:00 PET sddm-helper-start-wayland[1541]: Directory "/run/user/175" has changed, checking for Wayland socket
+Sep 26 21:54:01 PET sddm-helper-start-wayland[1541]: "Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted\n"
+Sep 26 21:54:01 PET sddm-helper-start-wayland[1541]: "No backend specified, automatically choosing drm\n"
+Sep 26 21:54:01 PET sddm-helper-start-wayland[1541]: Directory "/run/user/175" has changed, checking for Wayland socket
+Sep 26 21:54:01 PET sddm-helper-start-wayland[1541]: Found Wayland socket "/run/user/175/wayland-0"
+Sep 26 21:54:01 PET sddm-helper-start-wayland[1541]: "Accepting client connections on sockets: QList(\"wayland-0\")\n"
+Sep 26 21:54:01 PET sddm-greeter-qt6[1547]: High-DPI autoscaling Enabled
+Sep 26 21:54:01 PET sddm-helper-start-wayland[1541]: "Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted\n"
+Sep 26 21:54:01 PET sddm-helper-start-wayland[1541]: "Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted\n"
+Sep 26 21:54:02 PET dbus-daemon[1155]: [system] Activating via systemd: service name='org.freedesktop.locale1' unit='dbus-org.freedesktop.locale1.service' requested by ':1.18' (uid=175 pid=1544 comm="/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6")
+Sep 26 21:54:02 PET dbus-daemon[1155]: [system] Activating via systemd: service name='org.freedesktop.RealtimeKit1' unit='rtkit-daemon.service' requested by ':1.20' (uid=175 pid=1544 comm="/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6")
+Sep 26 21:54:03 PET sddm-greeter-qt6[1547]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/wayland-sessions/plasma.desktop"
+Sep 26 21:54:03 PET sddm-greeter-qt6[1547]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/wayland-sessions/steam.desktop"
+Sep 26 21:54:03 PET sddm-greeter-qt6[1547]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/xsessions/plasmax11.desktop"
+Sep 26 21:54:03 PET sddm-greeter-qt6[1547]: Loading theme configuration from "/run/current-system/sw/share/sddm/themes/breeze/theme.conf"
+Sep 26 21:54:03 PET sddm-greeter-qt6[1547]: Connected to the daemon.
+Sep 26 21:54:03 PET sddm[1521]: Message received from greeter: Connect
+Sep 26 21:54:03 PET sddm-greeter-qt6[1547]: Loading file:///run/current-system/sw/share/sddm/themes/breeze/Main.qml...
+Sep 26 21:54:03 PET sddm-greeter-qt6[1547]: Adding view for "eDP-1" QRect(0,0 1670x1043)
+Sep 26 21:54:03 PET sddm-greeter-qt6[1547]: Message received from daemon: Capabilities
+Sep 26 21:54:03 PET sddm-greeter-qt6[1547]: Message received from daemon: HostName
+Sep 26 21:54:09 PET sddm-greeter-qt6[1547]: file:///run/current-system/sw/share/sddm/themes/breeze/Main.qml:232:17 Parameter "username" is not declared. Injection of parameters into signal handlers is deprecated. Use JavaScript functions with formal parameters instead.
+Sep 26 21:54:09 PET sddm-greeter-qt6[1547]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/wayland-sessions/plasma.desktop"
+Sep 26 21:54:09 PET sddm[1521]: Message received from greeter: Login
+Sep 26 21:54:09 PET sddm[1521]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/wayland-sessions/plasma.desktop"
+Sep 26 21:54:09 PET sddm[1521]: Session "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/wayland-sessions/plasma.desktop" selected, command: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/libexec/plasma-dbus-run-session-if-needed /nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/startplasma-wayland" for VT 2
+Sep 26 21:54:09 PET sddm-helper[1641]: [PAM] Starting...
+Sep 26 21:54:09 PET sddm-helper[1641]: [PAM] Authenticating...
+Sep 26 21:54:09 PET sddm-helper[1641]: [PAM] Preparing to converse...
+Sep 26 21:54:09 PET sddm-helper[1641]: [PAM] Conversation with 1 messages
+Sep 26 21:54:09 PET sddm-helper[1641]: pam_kwallet5(sddm:auth): pam_kwallet5: pam_sm_authenticate
+Sep 26 21:54:09 PET sddm-helper[1641]: [PAM] returning.
+Sep 26 21:54:09 PET sddm[1521]: Authentication for user  "fulcrum"  successful
+Sep 26 21:54:09 PET sddm-helper[1641]: pam_kwallet5(sddm:setcred): pam_kwallet5: pam_sm_setcred
+Sep 26 21:54:09 PET sddm-helper[1641]: pam_unix(sddm:session): session opened for user fulcrum(uid=1000) by (uid=0)
+Sep 26 21:54:09 PET sddm-greeter-qt6[1547]: Message received from daemon: LoginSucceeded
+Sep 26 21:54:09 PET sddm-helper-start-wayland[1541]: wayland greeter finished 0 QProcess::NormalExit
+Sep 26 21:54:09 PET sddm-helper-start-wayland[1541]: quitting helper-start-wayland
+Sep 26 21:54:09 PET sddm-helper-start-wayland[1541]: Stopping... "/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6.4.5/bin/kwin_wayland"
+Sep 26 21:54:09 PET sddm-helper-start-wayland[1541]: "kwin_scene_opengl: Could not delete render time query because no context is current\n"
+Sep 26 21:54:09 PET sddm-helper-start-wayland[1541]: wayland compositor finished 15 QProcess::NormalExit
+Sep 26 21:54:09 PET sddm-helper-start-wayland[1541]: quitting helper-start-wayland
+Sep 26 21:54:09 PET sddm-helper[1524]: [PAM] Closing session
+Sep 26 21:54:09 PET sddm-helper[1524]: [PAM] Ended.
+Sep 26 21:54:09 PET sddm[1521]: Auth: sddm-helper exited successfully
+Sep 26 21:54:09 PET sddm[1521]: Greeter stopped. SDDM::Auth::HELPER_SUCCESS
+Sep 26 21:54:09 PET sddm-helper[1641]: pam_kwallet5(sddm:session): pam_kwallet5: pam_sm_open_session
+Sep 26 21:54:09 PET sddm-helper[1691]: pam_kwallet5: final socket path: /run/user/1000/kwallet5.socket
+Sep 26 21:54:09 PET sddm-helper[1641]: Starting Wayland user session: "/nix/store/1kpq2gb41qwkimldzandrpvip7drdil4-sddm-unwrapped-0.21.0/share/sddm/scripts/wayland-session" "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/libexec/plasma-dbus-run-session-if-needed /nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/startplasma-wayland"
+Sep 26 21:54:09 PET sddm-helper[1693]: Jumping to VT 2
+Sep 26 21:54:09 PET sddm-helper[1693]: VT mode didn't need to be fixed
+Sep 26 21:54:09 PET sddm[1521]: Session started true
+Sep 26 21:54:09 PET systemd[1649]: Reload requested from client PID 1693 ('.startplasma-wa')...
+Sep 26 21:54:09 PET dbus-daemon[1684]: [session uid=1000 pid=1684] Activating service name='org.kde.KSplash' requested by ':1.2' (uid=1000 pid=1693 comm="/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma")
+Sep 26 21:54:10 PET dbus-daemon[1684]: [session uid=1000 pid=1684] Activating via systemd: service name='org.freedesktop.portal.Desktop' unit='xdg-desktop-portal.service' requested by ':1.6' (uid=1000 pid=1710 comm="/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6")
+Sep 26 21:54:10 PET .kwin_wayland-w[1710]: cannot open display: 
+Sep 26 21:54:10 PET .kwin_wayland-w[1731]: cannot open display: 
+Sep 26 21:54:10 PET .kwin_wayland-w[1751]: cannot open display: 
+Sep 26 21:54:10 PET .kwin_wayland-w[1759]: cannot open display: 
+Sep 26 21:54:10 PET .kwin_wayland-w[1761]: cannot open display: 
+Sep 26 21:54:10 PET .kwin_wayland-w[1763]: cannot open display: 
+Sep 26 21:54:10 PET .kwin_wayland-w[1765]: cannot open display: 
+Sep 26 21:54:10 PET .kwin_wayland-w[1767]: cannot open display: 
+Sep 26 21:54:10 PET .kwin_wayland-w[1769]: cannot open display: 
+Sep 26 21:54:10 PET .kwin_wayland-w[1771]: cannot open display: 
+Sep 26 21:54:10 PET .kwin_wayland-w[1773]: cannot open display: 
+Sep 26 21:54:10 PET systemd[1649]: Requested transaction contradicts existing jobs: Transaction for plasma-workspace.target/stop is destructive (plasma-workspace-wayland.target has 'start' job queued, but 'stop' is included in transaction).
+Sep 26 21:54:10 PET sddm-helper[1641]: [PAM] Closing session
+Sep 26 21:54:10 PET sddm-helper[1641]: pam_unix(sddm:session): session closed for user fulcrum
+Sep 26 21:54:10 PET sddm-helper[1641]: pam_kwallet5(sddm:session): pam_kwallet5: pam_sm_close_session
+Sep 26 21:54:10 PET sddm-helper[1641]: pam_kwallet5(sddm:setcred): pam_kwallet5: pam_sm_setcred
+Sep 26 21:54:10 PET sddm-helper[1641]: [PAM] Ended.
+Sep 26 21:54:10 PET sddm[1521]: Auth: sddm-helper exited successfully
+Sep 26 21:54:10 PET sddm[1521]: Socket server stopping...
+Sep 26 21:54:10 PET sddm[1521]: Socket server stopped.
+Sep 26 21:54:10 PET sddm[1521]: Removing display SDDM::Display(0x25a5f150) ...
+Sep 26 21:54:10 PET sddm[1521]: Adding new display...
+Sep 26 21:54:10 PET sddm[1521]: Loaded empty theme configuration
+Sep 26 21:54:10 PET sddm[1521]: Using VT 1
+Sep 26 21:54:10 PET sddm[1521]: Display server started.
+Sep 26 21:54:10 PET sddm[1521]: Socket server starting...
+Sep 26 21:54:10 PET sddm[1521]: Socket server started.
+Sep 26 21:54:10 PET sddm[1521]: Loading theme configuration from "/run/current-system/sw/share/sddm/themes/breeze/theme.conf"
+Sep 26 21:54:10 PET sddm[1521]: Greeter starting...
+Sep 26 21:54:10 PET sddm-helper[1778]: [PAM] Starting...
+Sep 26 21:54:10 PET sddm-helper[1778]: [PAM] Authenticating...
+Sep 26 21:54:10 PET sddm-helper[1778]: [PAM] returning.
+Sep 26 21:54:10 PET systemd-logind[1200]: New session c2 of user sddm.
+Sep 26 21:54:10 PET systemd[1]: Started Session c2 of User sddm.
+Sep 26 21:54:10 PET sddm-helper[1785]: Jumping to VT 1
+Sep 26 21:54:10 PET sddm-helper[1785]: VT mode didn't need to be fixed
+Sep 26 21:54:10 PET sddm[1521]: Greeter session started successfully
+Sep 26 21:54:10 PET sddm-helper-start-wayland[1785]: Starting Wayland process "/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6.4.5/bin/kwin_wayland --no-global-shortcuts --no-kactivities --no-lockscreen --locale1" "sddm"
+Sep 26 21:54:10 PET sddm-helper-start-wayland[1785]: started succesfully "/nix/store/j0kjapz7gx3zjwj0q4pagiq6g7frcxpr-kwin-6.4.5/bin/kwin_wayland --no-global-shortcuts --no-kactivities --no-lockscreen --locale1"
+Sep 26 21:54:10 PET sddm-helper-start-wayland[1785]: "Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted\n"
+Sep 26 21:54:10 PET sddm-helper-start-wayland[1785]: "No backend specified, automatically choosing drm\n"
+Sep 26 21:54:10 PET sddm-helper-start-wayland[1785]: Directory "/run/user/175" has changed, checking for Wayland socket
+Sep 26 21:54:10 PET sddm-helper-start-wayland[1785]: Found Wayland socket "/run/user/175/wayland-0"
+Sep 26 21:54:10 PET sddm-helper-start-wayland[1785]: "Accepting client connections on sockets: QList(\"wayland-0\")\n"
+Sep 26 21:54:10 PET sddm-greeter-qt6[1796]: High-DPI autoscaling Enabled
+Sep 26 21:54:10 PET sddm-helper-start-wayland[1785]: "Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted\n"
+                                            #12 0x0000000000406c60 _ZN9SplashAppC2ERiPPc (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksplashqml-wrapped + 0x6c60)
+                                            #13 0x0000000000405ce0 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksplashqml-wrapped + 0x5ce0)
+                                            #16 0x0000000000405d65 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksplashqml-wrapped + 0x5d65)
+                                            #12 0x00000000004036f1 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.kcminit-wrapped + 0x36f1)
+                                            #15 0x0000000000403bc5 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.kcminit-wrapped + 0x3bc5)
+Sep 26 21:54:10 PET systemd[1649]: plasma-ksplash.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:10 PET systemd[1649]: plasma-ksplash.service: Failed with result 'core-dump'.
+Sep 26 21:54:10 PET drkonqi-coredump-processor[1790]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksplashqml-wrapped" 1714 "/var/lib/systemd/coredump/core.\\x2eksplashqml-wra.1000.b98fc8bc13dc4d5490dd415db2e53640.1714.1758916450000000.zst"
+Sep 26 21:54:10 PET systemd[1649]: plasma-kded6.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:10 PET systemd[1649]: plasma-kded6.service: Failed with result 'core-dump'.
+Sep 26 21:54:10 PET systemd[1649]: plasma-kcminit-phase1.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+Sep 26 21:54:10 PET systemd[1649]: plasma-kcminit-phase1.service: Failed with result 'exit-code'.
+Sep 26 21:54:10 PET sddm-helper-start-wayland[1785]: "Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted\n"
+                                            #12 0x000000000040cbbe main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksmserver-wrapped + 0xcbbe)
+                                            #15 0x000000000040d585 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksmserver-wrapped + 0xd585)
+Sep 26 21:54:10 PET systemd[1649]: plasma-ksmserver.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:10 PET systemd[1649]: plasma-ksmserver.service: Failed with result 'core-dump'.
+Sep 26 21:54:10 PET systemd[1649]: Dependency failed for plasma-workspace-wayland.target.
+Sep 26 21:54:10 PET systemd[1649]: plasma-workspace-wayland.target: Job plasma-workspace-wayland.target/start failed with result 'dependency'.
+Sep 26 21:54:10 PET systemd[1649]: plasma-workspace.target: Job plasma-workspace.target/start failed with result 'dependency'.
+Sep 26 21:54:10 PET systemd[1649]: plasma-core.target: Job plasma-core.target/start failed with result 'dependency'.
+Sep 26 21:54:10 PET systemd[1649]: Requested transaction contradicts existing jobs: Transaction for graphical-session.target/stop is destructive (plasma-powerdevil.service has 'start' job queued, but 'stop' is included in transaction).
+Sep 26 21:54:10 PET systemd[1649]: graphical-session.target: Failed to enqueue stop job, ignoring: Transaction for graphical-session.target/stop is destructive (plasma-powerdevil.service has 'start' job queued, but 'stop' is included in transaction).
+Sep 26 21:54:10 PET systemd[1649]: app-org.kde.plasma\x2dfallback\x2dsession\x2drestore@autostart.service: Skipped due to 'exec-condition'.
+Sep 26 21:54:10 PET systemd[1649]: plasma-polkit-agent.service: Main process exited, code=killed, status=6/ABRT
+Sep 26 21:54:10 PET systemd[1649]: plasma-polkit-agent.service: Failed with result 'signal'.
+Sep 26 21:54:10 PET systemd[1649]: plasma-kded6.service: Scheduled restart job, restart counter is at 1.
+Sep 26 21:54:10 PET plasmashell[1887]: qt.qpa.xcb: could not connect to display
+Sep 26 21:54:10 PET plasmashell[1887]: qt.qpa.plugin: From 6.5.0, xcb-cursor0 or libxcb-cursor0 is needed to load the Qt xcb platform plugin.
+Sep 26 21:54:10 PET plasmashell[1887]: qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+Sep 26 21:54:10 PET plasmashell[1887]: This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+Sep 26 21:54:10 PET systemd-coredump[1924]: Process 1887 (.plasmashell-wr) of user 1000 terminated abnormally with signal 6/ABRT, processing...
+Sep 26 21:54:11 PET drkonqi-coredump-processor[1831]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksmserver-wrapped" 1816 "/var/lib/systemd/coredump/core.\\x2eksmserver-wrap.1000.b98fc8bc13dc4d5490dd415db2e53640.1816.1758916450000000.zst"
+                                            #12 0x0000000000408027 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped + 0x8027)
+                                            #15 0x0000000000408455 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped + 0x8455)
+                                            #12 0x000000000040bb27 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped + 0xbb27)
+                                            #15 0x000000000040c0b5 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped + 0xc0b5)
+Sep 26 21:54:11 PET systemd[1649]: plasma-xembedsniproxy.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-xembedsniproxy.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Scheduled restart job, restart counter is at 1.
+Sep 26 21:54:11 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET sddm-greeter-qt6[1796]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/wayland-sessions/plasma.desktop"
+Sep 26 21:54:11 PET sddm-greeter-qt6[1796]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/wayland-sessions/steam.desktop"
+Sep 26 21:54:11 PET sddm-greeter-qt6[1796]: Reading from "/nix/store/qh85a31z65a24dh5a7g3ianmqqiiiybx-desktops/share/xsessions/plasmax11.desktop"
+Sep 26 21:54:11 PET sddm-greeter-qt6[1796]: Loading theme configuration from "/run/current-system/sw/share/sddm/themes/breeze/theme.conf"
+Sep 26 21:54:11 PET systemd[1649]: plasma-kded6.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-kded6.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET sddm-greeter-qt6[1796]: Connected to the daemon.
+Sep 26 21:54:11 PET sddm[1521]: Message received from greeter: Connect
+                                            #12 0x0000000000408d4a main (/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped + 0x8d4a)
+                                            #15 0x0000000000409145 _start (/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped + 0x9145)
+Sep 26 21:54:11 PET systemd[1649]: plasma-kaccess.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-kaccess.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Main process exited, code=killed, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Failed with result 'signal'.
+Sep 26 21:54:11 PET sddm-greeter-qt6[1796]: Loading file:///run/current-system/sw/share/sddm/themes/breeze/Main.qml...
+Sep 26 21:54:11 PET systemd-coredump[1931]: Process 1887 (.plasmashell-wr) of user 1000 dumped core.
+                                            #12 0x000000000042d3fb main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.plasmashell-wrapped + 0x2d3fb)
+                                            #15 0x000000000042dfb5 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.plasmashell-wrapped + 0x2dfb5)
+Sep 26 21:54:11 PET systemd[1649]: plasma-plasmashell.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-plasmashell.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET systemd[1649]: plasma-powerdevil.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-powerdevil.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET systemd[1649]: plasma-xembedsniproxy.service: Scheduled restart job, restart counter is at 1.
+Sep 26 21:54:11 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Scheduled restart job, restart counter is at 1.
+Sep 26 21:54:11 PET systemd[1649]: plasma-kded6.service: Scheduled restart job, restart counter is at 2.
+Sep 26 21:54:11 PET systemd[1649]: plasma-kaccess.service: Scheduled restart job, restart counter is at 1.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Scheduled restart job, restart counter is at 2.
+Sep 26 21:54:11 PET systemd[1649]: plasma-plasmashell.service: Scheduled restart job, restart counter is at 1.
+Sep 26 21:54:11 PET systemd[1649]: plasma-powerdevil.service: Scheduled restart job, restart counter is at 1.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Main process exited, code=killed, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Failed with result 'signal'.
+Sep 26 21:54:11 PET plasmashell[2019]: qt.qpa.xcb: could not connect to display
+Sep 26 21:54:11 PET plasmashell[2019]: qt.qpa.plugin: From 6.5.0, xcb-cursor0 or libxcb-cursor0 is needed to load the Qt xcb platform plugin.
+Sep 26 21:54:11 PET plasmashell[2019]: qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+Sep 26 21:54:11 PET plasmashell[2019]: This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+Sep 26 21:54:11 PET systemd-coredump[2052]: Process 2019 (.plasmashell-wr) of user 1000 terminated abnormally with signal 6/ABRT, processing...
+Sep 26 21:54:11 PET systemd[1649]: plasma-kded6.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-kded6.service: Failed with result 'core-dump'.
+                                            #12 0x000000000040bb27 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped + 0xbb27)
+                                            #15 0x000000000040c0b5 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped + 0xc0b5)
+Sep 26 21:54:11 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET sddm-greeter-qt6[1796]: Adding view for "eDP-1" QRect(0,0 1670x1043)
+Sep 26 21:54:11 PET sddm-greeter-qt6[1796]: Message received from daemon: Capabilities
+Sep 26 21:54:11 PET sddm-greeter-qt6[1796]: Message received from daemon: HostName
+                                            #12 0x0000000000408027 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped + 0x8027)
+                                            #15 0x0000000000408455 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped + 0x8455)
+Sep 26 21:54:11 PET systemd[1649]: plasma-xembedsniproxy.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-xembedsniproxy.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Scheduled restart job, restart counter is at 3.
+                                            #12 0x0000000000408d4a main (/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped + 0x8d4a)
+                                            #15 0x0000000000409145 _start (/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped + 0x9145)
+Sep 26 21:54:11 PET systemd[1649]: plasma-kaccess.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-kaccess.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET systemd-coredump[2053]: Process 2019 (.plasmashell-wr) of user 1000 dumped core.
+                                            #12 0x000000000042d3fb main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.plasmashell-wrapped + 0x2d3fb)
+                                            #15 0x000000000042dfb5 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.plasmashell-wrapped + 0x2dfb5)
+Sep 26 21:54:11 PET systemd[1649]: plasma-plasmashell.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-plasmashell.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Main process exited, code=killed, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Failed with result 'signal'.
+Sep 26 21:54:11 PET systemd[1649]: plasma-powerdevil.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-powerdevil.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET systemd[1649]: plasma-kded6.service: Scheduled restart job, restart counter is at 3.
+Sep 26 21:54:11 PET systemd[1649]: plasma-xembedsniproxy.service: Scheduled restart job, restart counter is at 2.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Scheduled restart job, restart counter is at 4.
+Sep 26 21:54:11 PET systemd[1649]: plasma-kaccess.service: Scheduled restart job, restart counter is at 2.
+Sep 26 21:54:11 PET systemd[1649]: plasma-plasmashell.service: Scheduled restart job, restart counter is at 2.
+Sep 26 21:54:11 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Scheduled restart job, restart counter is at 2.
+Sep 26 21:54:11 PET systemd[1649]: plasma-powerdevil.service: Scheduled restart job, restart counter is at 2.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Main process exited, code=killed, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Failed with result 'signal'.
+Sep 26 21:54:11 PET plasmashell[2131]: qt.qpa.xcb: could not connect to display
+Sep 26 21:54:11 PET plasmashell[2131]: qt.qpa.plugin: From 6.5.0, xcb-cursor0 or libxcb-cursor0 is needed to load the Qt xcb platform plugin.
+Sep 26 21:54:11 PET plasmashell[2131]: qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+Sep 26 21:54:11 PET plasmashell[2131]: This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+Sep 26 21:54:11 PET systemd-coredump[2159]: Process 2131 (.plasmashell-wr) of user 1000 terminated abnormally with signal 6/ABRT, processing...
+Sep 26 21:54:11 PET systemd[1649]: plasma-kded6.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-kded6.service: Failed with result 'core-dump'.
+                                            #12 0x0000000000408027 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped + 0x8027)
+                                            #15 0x0000000000408455 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped + 0x8455)
+Sep 26 21:54:11 PET systemd[1649]: plasma-xembedsniproxy.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-xembedsniproxy.service: Failed with result 'core-dump'.
+                                            #12 0x000000000040bb27 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped + 0xbb27)
+                                            #15 0x000000000040c0b5 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped + 0xc0b5)
+Sep 26 21:54:11 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Failed with result 'core-dump'.
+                                            #12 0x0000000000408d4a main (/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped + 0x8d4a)
+                                            #15 0x0000000000409145 _start (/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped + 0x9145)
+Sep 26 21:54:11 PET systemd[1649]: plasma-kaccess.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-kaccess.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Scheduled restart job, restart counter is at 5.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Start request repeated too quickly.
+Sep 26 21:54:11 PET systemd[1649]: plasma-polkit-agent.service: Failed with result 'signal'.
+Sep 26 21:54:11 PET systemd[1649]: plasma-powerdevil.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-powerdevil.service: Failed with result 'core-dump'.
+Sep 26 21:54:11 PET systemd-coredump[2163]: Process 2131 (.plasmashell-wr) of user 1000 dumped core.
+                                            #12 0x000000000042d3fb main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.plasmashell-wrapped + 0x2d3fb)
+                                            #15 0x000000000042dfb5 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.plasmashell-wrapped + 0x2dfb5)
+Sep 26 21:54:11 PET systemd[1649]: plasma-plasmashell.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:11 PET systemd[1649]: plasma-plasmashell.service: Failed with result 'core-dump'.
+Sep 26 21:54:12 PET systemd[1649]: plasma-kded6.service: Scheduled restart job, restart counter is at 4.
+Sep 26 21:54:12 PET systemd[1649]: plasma-plasmashell.service: Scheduled restart job, restart counter is at 3.
+Sep 26 21:54:12 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Scheduled restart job, restart counter is at 3.
+Sep 26 21:54:12 PET systemd[1649]: plasma-kaccess.service: Scheduled restart job, restart counter is at 3.
+Sep 26 21:54:12 PET systemd[1649]: plasma-powerdevil.service: Scheduled restart job, restart counter is at 3.
+Sep 26 21:54:12 PET systemd[1649]: plasma-xembedsniproxy.service: Scheduled restart job, restart counter is at 3.
+Sep 26 21:54:12 PET systemd[1649]: plasma-plasmashell.service: Start request repeated too quickly.
+Sep 26 21:54:12 PET systemd[1649]: plasma-plasmashell.service: Failed with result 'core-dump'.
+                                            #12 0x000000000040bb27 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped + 0xbb27)
+                                            #15 0x000000000040c0b5 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped + 0xc0b5)
+Sep 26 21:54:12 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:12 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Failed with result 'core-dump'.
+                                            #12 0x0000000000408027 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped + 0x8027)
+                                            #15 0x0000000000408455 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped + 0x8455)
+Sep 26 21:54:12 PET systemd[1649]: plasma-kded6.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:12 PET systemd[1649]: plasma-kded6.service: Failed with result 'core-dump'.
+Sep 26 21:54:12 PET systemd[1649]: plasma-xembedsniproxy.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:12 PET systemd[1649]: plasma-xembedsniproxy.service: Failed with result 'core-dump'.
+                                            #12 0x0000000000408d4a main (/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped + 0x8d4a)
+                                            #15 0x0000000000409145 _start (/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped + 0x9145)
+Sep 26 21:54:12 PET systemd[1649]: plasma-kaccess.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:12 PET systemd[1649]: plasma-kaccess.service: Failed with result 'core-dump'.
+Sep 26 21:54:12 PET systemd[1649]: plasma-powerdevil.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:12 PET systemd[1649]: plasma-powerdevil.service: Failed with result 'core-dump'.
+Sep 26 21:54:12 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Scheduled restart job, restart counter is at 4.
+Sep 26 21:54:12 PET systemd[1649]: plasma-xembedsniproxy.service: Scheduled restart job, restart counter is at 4.
+Sep 26 21:54:12 PET systemd[1649]: plasma-kaccess.service: Scheduled restart job, restart counter is at 4.
+Sep 26 21:54:12 PET systemd[1649]: plasma-powerdevil.service: Scheduled restart job, restart counter is at 4.
+Sep 26 21:54:12 PET systemd[1649]: plasma-kded6.service: Scheduled restart job, restart counter is at 5.
+Sep 26 21:54:12 PET drkonqi-coredump-processor[2230]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped" 2210 "/var/lib/systemd/coredump/core.\\x2egmenudbusmenup.1000.b98fc8bc13dc4d5490dd415db2e53640.2210.1758916452000000.zst"
+Sep 26 21:54:12 PET systemd[1649]: plasma-kded6.service: Start request repeated too quickly.
+Sep 26 21:54:12 PET systemd[1649]: plasma-kded6.service: Failed with result 'core-dump'.
+                                            #12 0x000000000040bb27 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped + 0xbb27)
+                                            #15 0x000000000040c0b5 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped + 0xc0b5)
+Sep 26 21:54:12 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:12 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Failed with result 'core-dump'.
+                                            #12 0x0000000000408d4a main (/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped + 0x8d4a)
+                                            #15 0x0000000000409145 _start (/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped + 0x9145)
+                                            #12 0x0000000000408027 main (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped + 0x8027)
+                                            #15 0x0000000000408455 _start (/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped + 0x8455)
+Sep 26 21:54:12 PET systemd[1649]: plasma-xembedsniproxy.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:12 PET systemd[1649]: plasma-xembedsniproxy.service: Failed with result 'core-dump'.
+Sep 26 21:54:12 PET systemd[1649]: plasma-kaccess.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:12 PET systemd[1649]: plasma-kaccess.service: Failed with result 'core-dump'.
+Sep 26 21:54:12 PET systemd[1649]: plasma-powerdevil.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:12 PET systemd[1649]: plasma-powerdevil.service: Failed with result 'core-dump'.
+Sep 26 21:54:13 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Scheduled restart job, restart counter is at 5.
+Sep 26 21:54:13 PET systemd[1649]: plasma-kaccess.service: Scheduled restart job, restart counter is at 5.
+Sep 26 21:54:13 PET systemd[1649]: plasma-powerdevil.service: Scheduled restart job, restart counter is at 5.
+Sep 26 21:54:13 PET systemd[1649]: plasma-xembedsniproxy.service: Scheduled restart job, restart counter is at 5.
+Sep 26 21:54:13 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Start request repeated too quickly.
+Sep 26 21:54:13 PET systemd[1649]: plasma-gmenudbusmenuproxy.service: Failed with result 'core-dump'.
+Sep 26 21:54:13 PET systemd[1649]: plasma-kaccess.service: Start request repeated too quickly.
+Sep 26 21:54:13 PET systemd[1649]: plasma-kaccess.service: Failed with result 'core-dump'.
+Sep 26 21:54:13 PET systemd[1649]: plasma-powerdevil.service: Start request repeated too quickly.
+Sep 26 21:54:13 PET systemd[1649]: plasma-powerdevil.service: Failed with result 'core-dump'.
+Sep 26 21:54:13 PET systemd[1649]: plasma-xembedsniproxy.service: Start request repeated too quickly.
+Sep 26 21:54:13 PET systemd[1649]: plasma-xembedsniproxy.service: Failed with result 'core-dump'.
+Sep 26 21:54:13 PET drkonqi-coredump-processor[2298]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped" 2272 "/var/lib/systemd/coredump/core.\\x2egmenudbusmenup.1000.b98fc8bc13dc4d5490dd415db2e53640.2272.1758916452000000.zst"
+Sep 26 21:54:35 PET dbus-daemon[1684]: [session uid=1000 pid=1684] Activating via systemd: service name='org.freedesktop.impl.portal.desktop.kde' unit='plasma-xdg-desktop-portal-kde.service' requested by ':1.9' (uid=1000 pid=1719 comm="/nix/store/fs7qnhj61x282g4hm6mlp7hk5rcl26ja-xdg-de")
+Sep 26 21:54:35 PET systemd[1649]: plasma-xdg-desktop-portal-kde.service: Main process exited, code=dumped, status=6/ABRT
+Sep 26 21:54:35 PET systemd[1649]: plasma-xdg-desktop-portal-kde.service: Failed with result 'core-dump'.
+Sep 26 21:55:09 PET plasma_waitforname[1700]: org.kde.plasma.waitforname: WaitForName: Service was not registered within timeout
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 1941 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.c71231c337aa44b48e86b0bd7dd9c7b9.1941.1750185450000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 1958 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.c31d9aa3a0084f478891192013a25fc6.1958.1750185616000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 3646 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.08b829c226c8437987043cb85fbd6b0d.3646.1750185947000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 3973 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.08b829c226c8437987043cb85fbd6b0d.3973.1750185990000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 1925 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.63458d3856f94a88b47f0a5e293e7b75.1925.1750186429000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 1929 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.613dfa8fa3cf4eb7b0526a43671905c4.1929.1750186547000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 1928 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.2dadc5495716440899efc22c2a342505.1928.1750186961000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 1930 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.cf7d9a135f00494b9764b70405c9e27d.1930.1750187482000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 5493 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.c4aa5bfec2bc4e56802eeb4b2a4f9602.5493.1750234894000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 2006 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.f825b266793f4872a9107ab6d51b5f29.2006.1750236201000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/9hxwyhs27l4krqz3ikbk92qhwpn6rr91-plasma-workspace-6.3.5/bin/.plasmashell-wrapped" 3174 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.4cc2e1044d2b4403afb38d8ead45ff67.3174.1750253872000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/2gqw3wp905k3w4c1s3j4mwdy00yxys3p-plasma-workspace-6.4.0/bin/.plasmashell-wrapped" 2112 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.c3b7447a32194140a4db74d0d1777b5d.2112.1750662616000000.zst"
+Sep 26 21:55:10 PET drkonqi-coredump-processor[1882]: "/nix/store/2gqw3wp905k3w4c1s3j4mwdy00yxys3p-plasma-workspace-6.4.0/bin/.plasmashell-wrapped" 2109 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.8dd84e65dee747ba9e2c987cf539ae71.2109.1750922819000000.zst"
+Sep 26 21:55:11 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksplashqml-wrapped" 1918 "/var/lib/systemd/coredump/core.\\x2eksplashqml-wra.1000.643f0099f57847a59a689d52ff2dc6f7.1918.1758639476000000.zst"
+Sep 26 21:55:11 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksmserver-wrapped" 2016 "/var/lib/systemd/coredump/core.\\x2eksmserver-wrap.1000.643f0099f57847a59a689d52ff2dc6f7.2016.1758639476000000.zst"
+Sep 26 21:55:14 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/libexec/.plasma-fallback-session-restore-wrapped" 8456 "/var/lib/systemd/coredump/core.\\x2eplasma-fallbac.1000.643f0099f57847a59a689d52ff2dc6f7.8456.1758639515000000.zst"
+Sep 26 21:55:14 PET drkonqi-coredump-launcher[14286]: Unable to find file for pid 8456 expected at "kcrash-metadata/.plasma-fallback-session-restore-wrapped.643f0099f57847a59a689d52ff2dc6f7.8456.ini"
+Sep 26 21:55:14 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksmserver-wrapped" 8620 "/var/lib/systemd/coredump/core.\\x2eksmserver-wrap.1000.643f0099f57847a59a689d52ff2dc6f7.8620.1758639515000000.zst"
+Sep 26 21:55:14 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped" 8709 "/var/lib/systemd/coredump/core.\\x2egmenudbusmenup.1000.643f0099f57847a59a689d52ff2dc6f7.8709.1758639515000000.zst"
+Sep 26 21:55:14 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.plasmashell-wrapped" 8712 "/var/lib/systemd/coredump/core.\\x2eplasmashell-wr.1000.643f0099f57847a59a689d52ff2dc6f7.8712.1758639515000000.zst"
+Sep 26 21:55:14 PET drkonqi-coredump-launcher[14316]: Unable to find file for pid 8712 expected at "kcrash-metadata/.plasmashell-wrapped.643f0099f57847a59a689d52ff2dc6f7.8712.ini"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped" 8921 "/var/lib/systemd/coredump/core.\\x2ekaccess-wrappe.1000.643f0099f57847a59a689d52ff2dc6f7.8921.1758639516000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped" 8928 "/var/lib/systemd/coredump/core.\\x2exembedsniproxy.1000.643f0099f57847a59a689d52ff2dc6f7.8928.1758639516000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.kcminit-wrapped" 1843 "/var/lib/systemd/coredump/core.\\x2ekcminit-wrappe.1000.d23bc69d6cf84e67a6dd0021d8be4ab7.1843.1758639549000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksplashqml-wrapped" 1836 "/var/lib/systemd/coredump/core.\\x2eksplashqml-wra.1000.dbee27fbcf0543b1acd1d93d8e34d043.1836.1758639729000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksmserver-wrapped" 1940 "/var/lib/systemd/coredump/core.\\x2eksmserver-wrap.1000.dbee27fbcf0543b1acd1d93d8e34d043.1940.1758639730000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped" 2019 "/var/lib/systemd/coredump/core.\\x2ekaccess-wrappe.1000.dbee27fbcf0543b1acd1d93d8e34d043.2019.1758639730000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped" 2166 "/var/lib/systemd/coredump/core.\\x2ekaccess-wrappe.1000.dbee27fbcf0543b1acd1d93d8e34d043.2166.1758639730000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped" 2229 "/var/lib/systemd/coredump/core.\\x2exembedsniproxy.1000.dbee27fbcf0543b1acd1d93d8e34d043.2229.1758639730000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped" 2228 "/var/lib/systemd/coredump/core.\\x2egmenudbusmenup.1000.dbee27fbcf0543b1acd1d93d8e34d043.2228.1758639730000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped" 2279 "/var/lib/systemd/coredump/core.\\x2ekaccess-wrappe.1000.dbee27fbcf0543b1acd1d93d8e34d043.2279.1758639730000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped" 2336 "/var/lib/systemd/coredump/core.\\x2exembedsniproxy.1000.dbee27fbcf0543b1acd1d93d8e34d043.2336.1758639730000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped" 2334 "/var/lib/systemd/coredump/core.\\x2egmenudbusmenup.1000.dbee27fbcf0543b1acd1d93d8e34d043.2334.1758639730000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped" 2400 "/var/lib/systemd/coredump/core.\\x2ekaccess-wrappe.1000.dbee27fbcf0543b1acd1d93d8e34d043.2400.1758639731000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.gmenudbusmenuproxy-wrapped" 2443 "/var/lib/systemd/coredump/core.\\x2egmenudbusmenup.1000.dbee27fbcf0543b1acd1d93d8e34d043.2443.1758639731000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.xembedsniproxy-wrapped" 2448 "/var/lib/systemd/coredump/core.\\x2exembedsniproxy.1000.dbee27fbcf0543b1acd1d93d8e34d043.2448.1758639731000000.zst"
+Sep 26 21:55:15 PET drkonqi-coredump-processor[1882]: "/nix/store/0462nx295i0ic3m65jnkfmqyvmzl2b4c-plasma-desktop-6.4.5/bin/.kaccess-wrapped" 2502 "/var/lib/systemd/coredump/core.\\x2ekaccess-wrappe.1000.dbee27fbcf0543b1acd1d93d8e34d043.2502.1758639731000000.zst"
+Sep 26 21:55:16 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.kcminit-wrapped" 1828 "/var/lib/systemd/coredump/core.\\x2ekcminit-wrappe.1000.66eee3d61a174d3e955bec899b8cb313.1828.1758640140000000.zst"
+Sep 26 21:55:16 PET drkonqi-coredump-processor[1882]: "/nix/store/yda48y469v1c8s8wkpjlwygnfgxvaqbk-plasma-workspace-6.4.5/bin/.ksplashqml-wrapped" 1824 "/var/lib/systemd/coredump/core.\\x2eksplashqml-wra.1000.66eee3d61a174d3e955bec899b8cb313.1824.1758640140000000.zst"

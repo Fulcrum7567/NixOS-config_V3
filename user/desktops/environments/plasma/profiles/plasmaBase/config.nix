@@ -3,6 +3,9 @@
 	config = lib.mkIf config.desktopEnvironments.plasma.plasmaBase.enable {
 		services.desktopManager.plasma6.enable = true;
 
+		services.displayManager.sddm.package = lib.mkForce pkgs.kdePackages.sddm;
+
+		boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 
 		xdg.portal = {
 	      	enable = true;
@@ -27,7 +30,24 @@
 		    kdePackages.kde-gtk-config
 		];
 
+		
+
 		theming.useStylix = lib.mkForce false;
+
+		theming.wallpaper.diashow.selectCommand = ''
+			qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript '
+				var allDesktops = desktops();
+				print (allDesktops);
+				for (i=0;i<allDesktops.length;i++) {{
+						d = allDesktops[i];
+						d.wallpaperPlugin = "org.kde.image";
+						d.currentConfigGroup = Array("Wallpaper",
+																				"org.kde.image",
+																				"General");
+						d.writeConfig("Image", "file:///<wallpaperPath>");
+				}}
+		'
+		'';
 
 		packages = {
 			kdeConnect.enable = lib.mkForce false;

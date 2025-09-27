@@ -17,13 +17,13 @@
 			};
 
 			wallpaper = {
-				type = "diashow";
+				type = "single";
 				diashow = {
 					active = {
 						name = "nord";
 						wallpapers = [ "cpu_city.png" "forest1.jpg" "girlOnBed.png" "japan1.png" "mountainRange1.png" "mountainRange2.jpg" "nixos.png" "seashore1.png" "yourName.png" ];
 					};
-					delay = 301;
+					delay = 180;
 				};
 
 				
@@ -37,7 +37,7 @@
 
 			plymouth = {
 				enable = true;
-				activeTheme = "default";
+				activeTheme = "mikuboot";
 			};
 
 			icons.active = "nordzy";
