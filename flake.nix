@@ -148,6 +148,7 @@
 			  	allowUnfreePredicate = (_: true);
 			  	allowInsecure = true;
 			  	permittedInsecurePackages = [ "openssl-1.1.1w" ];
+				nvidia.acceptLicense = true;
 			};
 			overlays = [
 				nix-vscode-extensions.overlays.default
@@ -162,6 +163,7 @@
 			  	allowUnfreePredicate = (_: true);
 			  	allowInsecure = true;
 			  	permittedInsecurePackages = [ "openssl-1.1.1w" ];
+				nvidia.acceptLicense = true;
 			};
 			overlays = [
 				nix-vscode-extensions.overlays.default

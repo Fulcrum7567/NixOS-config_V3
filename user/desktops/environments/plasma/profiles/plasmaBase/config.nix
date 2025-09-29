@@ -2,6 +2,7 @@
 {
 	config = lib.mkIf config.desktopEnvironments.plasma.plasmaBase.enable {
 		services.desktopManager.plasma6.enable = true;
+		services.desktopManager.gnome.enable = lib.mkForce false;
 
 		services.displayManager.sddm.package = lib.mkForce pkgs.kdePackages.sddm;
 
@@ -28,11 +29,18 @@
 		    wayland-utils # Wayland utilities
 		    wl-clipboard # Command-line copy/paste utilities for Wayland
 		    kdePackages.kde-gtk-config
+			kdePackages.plasma-desktop
+			kdePackages.plasma-wayland-protocols
+			kdePackages.plasma-workspace
 		];
 
-		
+		systemd.services."xdg-desktop-portal-gnome" = {
+			wantedBy = lib.mkForce [];
+		};
 
-		theming.useStylix = lib.mkForce false;
+		
+		
+		#theming.useStylix = lib.mkForce false;
 
 		theming.wallpaper.diashow.selectCommand = ''
 			qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript '
@@ -49,9 +57,14 @@
 		'
 		'';
 
+
+
+		
 		packages = {
 			kdeConnect.enable = lib.mkForce false;
 		};
+		
 		programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.kdePackages.ksshaskpass.out}/bin/ksshaskpass";
+		
 	};
 }
