@@ -6,6 +6,18 @@
 		environment.systemPackages = with pkgs; [
 			nix-diff
 		];
+		
+		# AMD drivers
+		hardware.graphics = {
+		  enable = true;
+		  enable32Bit = true;
+		};
+
+		# Fix network
+		networking.firewall.allowPing = true;
+
+
+
 
 
 		# Ollama

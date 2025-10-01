@@ -11,7 +11,7 @@
 
         activeConfig = lib.mkOption {
             type = lib.types.enum (config.hosts.components.${settings.optionName}.availableConfigs or []);
-            default = "default";
+            default = "RX5000Series";
             description = "Set the active configuration for the ${settings.displayName} component.";
         };
 
