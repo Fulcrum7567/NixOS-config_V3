@@ -17,6 +17,8 @@ in
 					timonwong.shellcheck
 					ms-vscode-remote.remote-containers
 					mkhl.direnv
+					arrterian.nix-env-selector
+					jnoortheen.nix-ide
 				];
 
 				userSettings = {
