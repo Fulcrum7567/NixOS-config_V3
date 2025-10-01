@@ -51,8 +51,13 @@
 			};
 
 			nvidiaDrivers = {
-				enable = true;
+				enable = false;
 				powerManagement = "enabled";
+			};
+
+			amdDrivers = {
+				enable = true;
+				activeConfig = "RX5000Series";
 			};
 
 			wakeOnLan = {
