@@ -1,4 +1,4 @@
-{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
+{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, pkgs, ... }:
 let
 	option = config.hosts.components.${settings.optionName};
 in
