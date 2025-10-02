@@ -56,6 +56,17 @@
 
 		nix-colors.url = "github:misterio77/nix-colors";
 
+		# Hyprland
+		hyprland-unstable = {
+			url = "github:hyprwm/hyprland";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+
+		hyprland-stable = {
+			url = "github:hyprwm/hyprland";
+			inputs.nixpkgs.follows = "nixpkgs-stable";
+		};
+
 		
 
 		# ╔════════════════════════════════╗
@@ -105,7 +116,7 @@
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -231,6 +242,13 @@
 					else
 						nvf-unstable
 			);
+		
+		hyprland = (if (hostSettings.defaultPackageState == "stable")
+					then
+						hyprland-stable
+					else
+						hyprland-unstable
+			);
 
 	in
 	{
@@ -318,7 +336,7 @@
 		        ];
 
 		        specialArgs = {
-					inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf;
+					inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland;
 					hostSettingsRaw = hostSettings;
 					lib = libExtended;
 				};

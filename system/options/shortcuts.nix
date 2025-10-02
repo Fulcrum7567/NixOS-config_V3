@@ -178,13 +178,13 @@ in
 
 				switch = lib.mkOption {
 					type = lib.types.str;
-					default = "<alt><tab><sep>";
+					default = "<alt><sep><tab>";
 					description = "Shortcut to switch to the next app.";
 				};
 
 				switchBackward = lib.mkOption {
 					type = lib.types.str;
-					default = "<alt><shift><tab><sep>";
+					default = "<alt><shift><sep><tab>";
 					description = "Shortcut to switch to the previous app.";
 				};
 
@@ -210,6 +210,18 @@ in
 					type = lib.types.str;
 					default = "<super><sep>e";
 					description = "Shortcut to launch the file explorer.";
+				};
+
+				launchTerminal = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>c";
+					description = "Shortcut to launch the terminal.";
+				};
+
+				launchBrowser = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>b";
+					description = "Shortcut to launch the web browser.";
 				};
 
 

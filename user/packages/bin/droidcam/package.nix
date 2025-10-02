@@ -4,7 +4,7 @@
 
 		# Package installation
 		environment.systemPackages = with pkgs-default; [
-	        droidcam
+			droidcam
 			v4l-utils
 		];
 	};

@@ -28,7 +28,7 @@
 
 			mullvad = {
 				enable = true;
-				autoEnableDelay = 1;
+				autoEnableDelay = 300;
 			};
 
 			groups = {
@@ -63,13 +63,14 @@
 		  	fsType = "ext4";
 		  	options = [ "defaults" ];
 		};
-		/*
+		
+		
 		fileSystems."/mnt/HDD" = {
 		  	device = "/dev/disk/by-uuid/DC0673760673508E";
 		  	fsType = "ntfs-3g";
 		  	options = [ "uid=1000" "gid=1000" "umask=0022" "windows_names" "big_writes" ];
 		};
-		*/
+		
 	};
 
 
