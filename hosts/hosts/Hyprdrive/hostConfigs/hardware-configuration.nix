@@ -23,12 +23,7 @@
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
-
-  fileSystems."/mnt/SSD-Games" =
-    { device = "/dev/disk/by-uuid/01d21518-b3cd-4ffe-92f0-53776892600e";
-      fsType = "ext4";
-    };
-
+    
   swapDevices =
     [ { device = "/dev/disk/by-uuid/99201cd1-f24b-455f-8409-586a37784347"; }
     ];
