@@ -21,9 +21,10 @@ in
 
 			serviceConfig = {
 				Type = "oneshot";
+				RemainAfterExit = true;
 
 				ExecStart = ''
-					${pkgs-default.bash}/bin/bash -c "sleep ${toString option.autoEnableDelay} && ${pkgs-default.mullvad-vpn}/bin/mullvad connect"
+					${pkgs-default.bash}/bin/bash -c "(sleep ${toString option.autoEnableDelay} && ${pkgs-default.mullvad-vpn}/bin/mullvad connect) &"
 				'';
 			};
 		};

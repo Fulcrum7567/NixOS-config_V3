@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  home-manager.users.${config.user.settings.username} = {
+  home-manager.users.${config.user.settings.username} = lib.mkIf (config.theming.apps.hyprland.bin.general.enable && (config.theming.apps.hyprland.bin.general.activeConfig == "default")) {
     wayland.windowManager.hyprland.settings = {
       # Refer to https://wiki.hyprland.org/Configuring/Variables/
 
