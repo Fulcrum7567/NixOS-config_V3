@@ -40,6 +40,10 @@ in
 				enable = true;
 				activeConfig = "slyHarvey";
 			};
+			tray = {
+				enable = true;
+				activeConfig = "slyHarvey";
+			};
 		};
 
 		home-manager.users.${config.user.settings.username} = {
@@ -62,7 +66,7 @@ in
 
 					modules-left = [ "hyprland/workspaces" "cava" ];
 					modules-center = [ "clock" "mpris" ];
-					modules-right = [ "pulseaudio" "bluetooth" "network" ];
+					modules-right = [ "tray" "pulseaudio" "bluetooth" "network" ];
 				};
 			};
 		};
