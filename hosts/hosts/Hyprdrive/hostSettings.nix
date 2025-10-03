@@ -14,7 +14,7 @@
 		};
 
 		
-		desktops.activeDesktop = "gnomeWithGdm";
+		desktops.activeDesktop = "sddmWithHyprland";
 
 
 		packages = {

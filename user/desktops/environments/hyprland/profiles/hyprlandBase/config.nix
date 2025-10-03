@@ -34,6 +34,11 @@
 			gestures.enable = true;
 			input.enable = true;
 			bindings.enable = true;
+
+			apps = {
+				waybar.enable = true;
+				rofi.enable = true;
+			};
 		};
 
 		theming = {
@@ -41,8 +46,6 @@
 			wallpaper.diashow.selectCommand = "";
 		};
 
-		packages = {
-			defaults.appLauncher.active = "rofi";
-		};
+		
 	};
 }
