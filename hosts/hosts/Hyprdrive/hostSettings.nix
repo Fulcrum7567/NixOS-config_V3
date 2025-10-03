@@ -14,7 +14,7 @@
 		};
 
 		
-		desktops.activeDesktop = "gnomeWithGdm";
+		desktops.activeDesktop = "sddmWithHyprland";
 
 
 		packages = {
@@ -28,7 +28,7 @@
 
 			mullvad = {
 				enable = true;
-				autoEnableDelay = 300;
+				autoEnableDelay = 1;
 			};
 
 			groups = {

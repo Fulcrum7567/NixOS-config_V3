@@ -28,5 +28,11 @@
 			description = "Command to launch the terminal at given path.";
 			example = "kitty -d";
 		};
+
+		launchCommand = lib.mkOption {
+			type = lib.types.str;
+			default = config.packages.defaults.terminal.active or "";
+			description = "Define a custom launch command for the terminal.";
+		};
 	};
 }

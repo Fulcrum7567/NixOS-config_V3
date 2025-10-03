@@ -40,5 +40,9 @@
 			useStylix = true;
 			wallpaper.diashow.selectCommand = "";
 		};
+
+		packages = {
+			defaults.appLauncher.active = "rofi";
+		};
 	};
 }

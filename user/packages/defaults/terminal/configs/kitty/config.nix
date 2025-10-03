@@ -5,6 +5,7 @@
 			defaults = {
 				terminal.appID = "kitty.desktop";
 				terminal.launchAtPathCommand = "kitty -d";
+				terminal.launchCommand = "kitty";
 			};
 			
 			kitty.enable = true;

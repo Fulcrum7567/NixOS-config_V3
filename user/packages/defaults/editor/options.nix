@@ -21,6 +21,12 @@
 			description = "Define the app id of the set editor";
 			example = "zen-beta.desktop";
 		};
+
+		launchCommand = lib.mkOption {
+			type = lib.types.str;
+			default = config.packages.defaults.editor.active or "";
+			description = "Define a custom launch command for the editor.";
+		};
 	};
 
 }

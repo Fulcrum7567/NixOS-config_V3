@@ -21,6 +21,12 @@
 			description = "Define the app id of the set explorer";
 			example = "zen-beta.desktop";
 		};
+
+		launchCommand = lib.mkOption {
+			type = lib.types.str;
+			default = config.packages.defaults.explorer.active or "";
+			description = "Define a custom launch command for the explorer.";
+		};
 	};
 
 }

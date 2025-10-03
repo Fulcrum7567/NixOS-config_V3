@@ -42,6 +42,15 @@
 
 			icons.active = "nordzy";
 
+			apps = {
+				hyprland.bin = {
+					animations.enable = true;
+					decorations.enable = true;
+					general.enable = true;
+					misc.enable = true;
+				};
+			};
+
 		};
 	};
 }

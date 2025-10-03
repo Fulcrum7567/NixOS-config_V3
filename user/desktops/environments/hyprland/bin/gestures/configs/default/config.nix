@@ -4,7 +4,7 @@
     home-manager.users.${config.user.settings.username} = {
       wayland.windowManager.hyprland.settings = {
         gestures = {
-          workspace_swipe = true;
+          workspace = true;
           workspace_swipe_touch = true;
         };
       };

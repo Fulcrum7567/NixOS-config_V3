@@ -5,7 +5,7 @@
       wayland.windowManager.hyprland.settings = {
         general = {
           resize_on_border = true;
-          snap.enable = true;
+          snap.enabled = true;
         };
       };
     };

@@ -67,6 +67,24 @@ in
 					description = "Shortcut to minimize window.";
 				};
 
+				toggleFloating = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>v";
+					description = "Shortcut to toggle floating mode for window.";
+				};
+
+				pseudoTile = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>p";
+					description = "Shortcut to toggle pseudo tiling mode for window.";
+				};
+
+				toggleSplit = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>j";
+					description = "Shortcut to toggle split mode for window.";
+				};
+
 
 				# Move to monitor
 
@@ -188,6 +206,30 @@ in
 					description = "Shortcut to switch to the previous app.";
 				};
 
+				switchToAppLeft = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep><left>";
+					description = "Shortcut to switch to the app on the left.";
+				};
+
+				switchToAppRight = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep><right>";
+					description = "Shortcut to switch to the app on the right.";
+				};
+
+				switchToAppUp = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep><up>";
+					description = "Shortcut to switch to the app above.";
+				};
+
+				switchToAppDown = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep><down>";
+					description = "Shortcut to switch to the app below.";
+				};
+
 				fullscreen = lib.mkOption {
 					type = lib.types.str;
 					default = "<sep><f11>";
@@ -224,12 +266,72 @@ in
 					description = "Shortcut to launch the web browser.";
 				};
 
+				launchAppLauncher = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep><space>";
+					description = "Shortcut to launch the application launcher.";
+				};
+
 
 			};
 
 			# Workspaces
 
 			workspaces = {
+
+				switchToWorkspace1 = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>1";
+					description = "Shortcut to switch to workspace 1.";
+				};
+
+				switchToWorkspace2 = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>2";
+					description = "Shortcut to switch to workspace 2.";
+				};
+
+				switchToWorkspace3 = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>3";
+					description = "Shortcut to switch to workspace 3.";
+				};
+
+				switchToWorkspace4 = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>4";
+					description = "Shortcut to switch to workspace 4.";
+				};
+
+				switchToWorkspace5 = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>5";
+					description = "Shortcut to switch to workspace 5.";
+				};
+
+				switchToWorkspace6 = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>6";
+					description = "Shortcut to switch to workspace 6.";
+				};
+
+				switchToWorkspace7 = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>7";
+					description = "Shortcut to switch to workspace 7.";
+				};
+
+				switchToWorkspace8 = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>8";
+					description = "Shortcut to switch to workspace 8.";
+				};
+
+				switchToWorkspace9 = lib.mkOption {
+					type = lib.types.str;
+					default = "<super><sep>9";
+					description = "Shortcut to switch to workspace 9.";
+				};
 
 				switchToWorkspaceLeft = lib.mkOption {
 					type = lib.types.str;
