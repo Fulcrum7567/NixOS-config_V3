@@ -1,0 +1,6 @@
+{ ... }:
+{
+  imports = [
+    ./workspaces/imports.nix
+  ];
+}

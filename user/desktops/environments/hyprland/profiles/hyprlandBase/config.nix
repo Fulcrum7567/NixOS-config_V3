@@ -36,7 +36,10 @@
 			bindings.enable = true;
 
 			apps = {
-				waybar.enable = true;
+				waybar = {
+					enable = true;
+					activeConfig = "slyHarvey";
+				};
 				rofi.enable = true;
 			};
 		};
