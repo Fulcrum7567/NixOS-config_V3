@@ -58,7 +58,7 @@
 		'';
 
 
-
+		desktops.sessionType = "wayland";
 		
 		packages = {
 			kdeConnect.enable = lib.mkForce false;

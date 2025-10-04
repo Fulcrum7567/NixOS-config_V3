@@ -41,13 +41,15 @@
 					activeConfig = "slyHarvey";
 				};
 				rofi.enable = true;
+				hyprpaper.enable = true;
 			};
 		};
 
 		theming = {
 			useStylix = true;
-			wallpaper.diashow.selectCommand = "";
 		};
+
+		desktops.sessionType = "wayland";
 
 		
 	};
