@@ -3,7 +3,7 @@
   options.theming.apps.waybar.modules.bluetooth = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = config.packages.waybar.modules.bluetooth.enable;
       description = "Enable bluetooth module for waybar.";
     };
 
@@ -15,7 +15,7 @@
 
     activeConfig = lib.mkOption {
       type = lib.types.enum (config.theming.apps.waybar.modules.bluetooth.availableConfigs or []);
-      default = packages.waybar.modules.bluetooth.activeConfig or "default";
+      default = config.packages.waybar.modules.bluetooth.activeConfig or "default";
       description = "Active bluetooth module configuration for waybar.";
     };
   };
