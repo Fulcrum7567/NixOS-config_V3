@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  config = lib.mkIf (config.packages.waybar.modules.cava.enable && (config.packages.waybar.modules.cava.activeConfig == "slyHarvey")) {
+  config = lib.mkIf (config.packages.waybar.modules.hyprland.workspaces.enable && (config.packages.waybar.modules.hyprland.workspaces.activeConfig == "slyHarvey")) {
     home-manager.users.${config.user.settings.username}.programs.waybar.settings.mainBar = {
       "hyprland/workspaces" = {
         disable-scroll = true;

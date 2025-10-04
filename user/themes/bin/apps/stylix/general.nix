@@ -17,6 +17,11 @@
 		};
 
 		home-manager.users.${config.user.settings.username} = {
+			
+			stylix.targets = {
+				waybar.enable = false;
+			};
+
 			xdg.desktopEntries = {
 				kvantummanager = {
 					name = "Kvantum Manager";

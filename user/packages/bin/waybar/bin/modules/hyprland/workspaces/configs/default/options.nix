@@ -1,4 +1,4 @@
 { config, lib, ... }:
 {
-  config.packages.waybar.modules.cava.availableConfigs = [ "default" ];
+  config.packages.waybar.modules.hyprland.workspaces.availableConfigs = [ "default" ];
 }

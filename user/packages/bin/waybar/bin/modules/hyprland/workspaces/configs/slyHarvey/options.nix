@@ -1,4 +1,4 @@
 { config, lib, ... }:
 {
-  config.packages.waybar.modules.cava.availableConfigs = [ "slyHarvey" ];
+  config.packages.waybar.modules.hyprland.workspaces.availableConfigs = [ "slyHarvey" ];
 }
