@@ -61,6 +61,8 @@
 
 			monitorBrightness.enable = true;
 
+			amdDrivers.enable = true;
+
 			kernelVersion = {
 				enable = true;
 				activeConfig = "lqx";
