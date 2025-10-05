@@ -16,6 +16,22 @@
 		
 		desktops.activeDesktop = "sddmWithHyprland";
 
+		hardware.displays = {
+			LG-UltraGear = {
+				primary = true;
+				resolution = "2560x1440";
+				position = "0x0";
+				refreshRate = 144;
+				name = "DP-2";
+			};
+			ACER = {
+				resolution = "1920x1080";
+				position = "2560x80";
+				refreshRate = 60;
+				name = "HDMI-A-2";
+			};
+		};
+
 
 		packages = {
 			signal.enable = true;

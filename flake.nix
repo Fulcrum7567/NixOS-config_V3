@@ -305,6 +305,7 @@
 					./system/options/displayManagers.nix
 					./system/options/desktopOptions.nix
 					./system/options/shortcuts.nix
+					./system/options/hardware.nix
 
 					# Host
 					./hosts/hosts/${currentHost}/hostConfigs/configuration.nix
