@@ -7,7 +7,7 @@
 				message = "Diashow Wallpaper is enabled but not set.";
 			}
 			{
-				assertion = (config.theming.wallpaper.type != "diashow") || (config.theming.wallpaper.diashow.selectCommand != null);
+				assertion = (config.theming.wallpaper.type != "diashow") || (config.theming.wallpaper.diashow.selectCommand != null) || (config.theming.wallpaper.diashow.serviceNeeded == false);
 				message = "Diashow Wallpaper is enabled but no command to select one is set.";
 			}
 		];
@@ -16,7 +16,7 @@
 			description = "Wallpaper Diashow Service";
 			wantedBy = lib.mkIf (config.theming.wallpaper.type == "diashow") [ "default.target" ];
 			after = [ "graphical-session.target" ];
-			enable = config.theming.wallpaper.type == "diashow";
+			enable = config.theming.wallpaper.type == "diashow" && config.theming.wallpaper.diashow.serviceNeeded;
 			
 			path = with pkgs; [ 
 				glib  # for gsettings
@@ -25,7 +25,7 @@
 				findutils
 				gnugrep
 				gnused
-			];
+			] ++ config.theming.wallpaper.diashow.additionalPackages;
 			
 			environment = {
 				DISPLAY = ":0";

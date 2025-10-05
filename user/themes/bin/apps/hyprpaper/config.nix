@@ -12,7 +12,10 @@
                   else [];
     };
 
-    theming.wallpaper.diashow.selectCommand = "hyprctl hyprpaper reload ,'<wallpaperPath>'";
+    theming.wallpaper.diashow = {
+      selectCommand = "hyprctl hyprpaper reload ,'<wallpaperPath>'";
+      additionalPackages = [ config.programs.hyprland.package ];
+    };
 
   };
 }

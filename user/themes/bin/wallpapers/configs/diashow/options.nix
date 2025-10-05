@@ -10,6 +10,18 @@
 			description = "Set the active wallpaper group";
 		};
 
+		serviceNeeded = lib.mkOption {
+			type = lib.types.bool;
+			default = true;
+			description = "Whether the diashow wallpaper type needs a service to run.";
+		};
+
+		additionalPackages = lib.mkOption {
+			type = lib.types.listOf lib.types.package;
+			default = [  ];
+			description = "Additional packages needed for the diashow wallpaper type.";
+		};
+
 		selectCommand = lib.mkOption {
 			type = lib.types.nullOr lib.types.str;
 			default = null;
