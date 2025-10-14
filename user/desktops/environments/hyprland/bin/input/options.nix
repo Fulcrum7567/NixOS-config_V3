@@ -19,5 +19,11 @@
       default = "default";
       description = "Set the active input method for Hyprland.";
     };
+
+    synchronizedWorkspaces = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Synchronize workspaces across monitors in Hyprland.";
+    };
   };
 }

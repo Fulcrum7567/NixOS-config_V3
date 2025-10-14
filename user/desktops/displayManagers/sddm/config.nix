@@ -4,17 +4,9 @@
 		services.displayManager.sddm = {
 			enable = true;
 			wayland.enable = true; 
-
-			setupScript = ''
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
-'';
-			theme = "";
-			wayland.compositor = "kwin";
+			autoNumlock = true;
 		};
 		
-		hosts.components.fingerprint.enable = lib.mkForce false;
-
 		services.displayManager.gdm.enable = lib.mkForce false;
 		
 

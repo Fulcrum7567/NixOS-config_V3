@@ -17,7 +17,7 @@
 			};
 
 			wallpaper = {
-				type = "diashow";
+				type = "single";
 				diashow = {
 					active = {
 						name = "nord";

@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-unstable, lib, ... }:
 {
 	config = {
 
@@ -7,16 +7,22 @@
 			nix-diff
 		];
 		
-		# AMD drivers
+		# Max performance mode
+		powerManagement.cpuFreqGovernor = "performance";
+
 		hardware.graphics = {
-		  enable = true;
-		  enable32Bit = true;
+			enable = true;
+			enable32Bit = true;
 		};
 
-		# Fix network
-		networking.firewall.allowPing = true;
+		boot.kernelParams = [
+			"video=DP-3:2560x1440@144"
+			"video=HDMI-A-1:1920x1080@60"
+		];
 
 
+		# Update failed
+		packages.lutris.enable = lib.mkForce false;
 
 
 

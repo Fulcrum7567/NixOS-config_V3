@@ -20,6 +20,26 @@ in
 		# Your custom shortcuts options
 		shortcuts = {
 
+			customs = lib.mkOption {
+				type = lib.types.listOf (lib.types.submodule {
+					options = {
+						name = lib.mkOption {
+							type = lib.types.str;
+							description = "Name of the custom shortcut.";
+						};
+						bind = lib.mkOption {
+							type = lib.types.str;
+							description = "Shortcut binding in abstract syntax.";
+						};
+						command = lib.mkOption {
+							type = lib.types.str;
+							description = "Command to execute for the custom shortcut.";
+						};
+					};
+				});
+				default = [ ];
+			};
+
 			/*
 				Possible tokens for keyboard shortcuts:
 				<sep>			: Separator between modifiers and keys (", " for hyprland)

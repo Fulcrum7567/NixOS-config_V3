@@ -14,7 +14,7 @@
 		};
 
 		
-		desktops.activeDesktop = "sddmWithHyprland";
+		desktops.activeDesktop = "gnomeWithGdm";
 
 		hardware.displays = {
 			LG-UltraGear = {
@@ -22,15 +22,17 @@
 				resolution = "2560x1440";
 				position = "0x0";
 				refreshRate = 144;
-				name = "DP-2";
+				name = "DP-3";
 			};
 			ACER = {
 				resolution = "1920x1080";
 				position = "2560x80";
 				refreshRate = 60;
-				name = "HDMI-A-2";
+				name = "HDMI-A-1";
 			};
 		};
+
+		desktopEnvironments.hyprland.bin.input.synchronizedWorkspaces = true;
 
 
 		packages = {
@@ -42,9 +44,10 @@
 			sunshine.enable = true;
 			moonlight.enable = lib.mkForce false;
 
+
 			mullvad = {
 				enable = true;
-				autoEnableDelay = 300;
+				autoEnableDelay = 30;
 			};
 
 			groups = {
