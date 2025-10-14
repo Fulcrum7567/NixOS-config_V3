@@ -7,9 +7,13 @@ in
 		home-manager.users.${config.user.settings.username} = {
 			dconf.settings = {
 				"org/gnome/desktop/interface" = {
-			    	color-scheme = gnomePolarity;
-			    };
-		    };
+					color-scheme = gnomePolarity;
+				};
+
+				"org/gnome/desktop/interface/accent-color" = {
+					color = "slate";
+				};
+			};
 		};
 	};
 } 
