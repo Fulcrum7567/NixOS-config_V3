@@ -13,7 +13,7 @@
 				browser.active = "zen";
 				explorer.active = "nautilus";
 				editor.active = "sublime";
-				terminal.active = "kitty";
+				terminal.active = "ghostty";
 				shell.active = "zsh";
 			};
 		};
