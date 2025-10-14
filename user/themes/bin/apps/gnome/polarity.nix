@@ -10,8 +10,8 @@ in
 					color-scheme = gnomePolarity;
 				};
 
-				"org/gnome/desktop/interface/accent-color" = {
-					color = "slate";
+				"org/gnome/desktop/interface" = {
+					accent-color = "slate";
 				};
 			};
 		};
