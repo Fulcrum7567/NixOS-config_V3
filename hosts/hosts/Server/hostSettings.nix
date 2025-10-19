@@ -12,6 +12,8 @@
 
 		packages = {
 			nvf.enable = true;
+
+			docker.enable = true;
 		};
 
 		hosts = {
