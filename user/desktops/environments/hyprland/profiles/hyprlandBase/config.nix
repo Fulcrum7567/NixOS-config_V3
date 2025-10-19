@@ -40,6 +40,7 @@ let
 in
 {
 	config = lib.mkIf config.desktopEnvironments.hyprland.hyprlandBase.enable {
+		system.inputUpdates = [ "hyprland-unstable" "hyprland-stable" ];
 		programs.hyprland = {
 			enable = true;
 			package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;

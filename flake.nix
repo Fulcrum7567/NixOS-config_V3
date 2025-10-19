@@ -306,6 +306,10 @@
 					./system/options/desktopOptions.nix
 					./system/options/shortcuts.nix
 					./system/options/hardware.nix
+					./system/options/systemOptions.nix
+
+					# Scripts
+					./system/scripts/updateInputs.nix
 
 					# Host
 					./hosts/hosts/${currentHost}/hostConfigs/configuration.nix

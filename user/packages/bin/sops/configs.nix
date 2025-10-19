@@ -2,6 +2,8 @@
 {
 	config = lib.mkIf config.packages.sops.enable {
 
+		system.inputUpdates = [ "sops-nix" ];
+
 		environment.systemPackages = with pkgs-default; [
 			sops
 		];

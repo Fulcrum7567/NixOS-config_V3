@@ -10,6 +10,17 @@
 		theming.activeTheme = "nord";
 		desktops.activeDesktop = "gnomeWithGdm";
 
+
+		hardware.displays = {
+			Builtin = {
+				primary = true;
+				resolution = "1920x1200";
+				position = "0x0";
+				refreshRate = 60;
+				name = "eDP-1";
+			};
+		};
+
 		packages = {
 			signal.enable = true;
 			supergfxd.enable = true;
@@ -18,6 +29,8 @@
 				enable = true;
 				autoEnableDelay = -1;
 			};
+
+			docker.enable = lib.mkForce true;
 
 
 			cubeIDE.enable = false;

@@ -4,6 +4,9 @@ let
 in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "nixcord")) {
+
+		system.inputUpdates = [ "nixcord" ];
+
 		home-manager.users.${config.user.settings.username} = {
 			imports = [
 				inputs.nixcord.homeModules.nixcord

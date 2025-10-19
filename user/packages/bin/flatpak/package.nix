@@ -7,6 +7,8 @@
 
 	config = lib.mkIf config.packages.${settings.optionName}.enable {
 
+		system.inputUpdates = [ "flatpak" ];
+		
 		services.flatpak.enable = true;
 		
 	};

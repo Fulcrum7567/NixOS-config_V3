@@ -4,6 +4,8 @@
 
 	config = lib.mkIf (config.theming.activeTheme == "nord") {
 
+		system.inputUpdates = [ "nix-colors" ];
+
 		colorScheme = inputs.nix-colors.colorSchemes.nord;
 
 		theming = {

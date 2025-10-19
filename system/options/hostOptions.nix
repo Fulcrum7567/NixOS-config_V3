@@ -52,6 +52,7 @@ in
 				"desktop"
 				"laptop"
 				"convertible"
+				"server"
 			]);
 			default = "desktop";
 			description = "Set the type of the device.";

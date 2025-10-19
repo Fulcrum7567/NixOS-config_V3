@@ -12,8 +12,8 @@ in
 
 		# 2. Specify the driver for the ELAN fingerprint sensor
 		# This enables the Touch OEM Driver (TOD) support required by the ELAN sensor
-		# services.fprintd.tod.enable = true;
-		# services.fprintd.tod.driver = pkgs.libfprint-2-tod1-elan;
+		services.fprintd.tod.enable = true;
+		services.fprintd.tod.driver = pkgs-default.libfprint-2-tod1-elan;
 
 		# 3. Configure PAM for GDM to allow both fingerprint and password login
 		security.pam.services.gdm.fprintAuth = true;

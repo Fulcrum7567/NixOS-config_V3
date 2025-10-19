@@ -2,6 +2,8 @@
 {
 	config = lib.mkIf config.theming.useStylix {
 
+		system.inputUpdates = [ "stylix-stable" "stylix-unstable" ];
+
 		stylix = {
 			enable = config.theming.useStylix;
 			base16Scheme = config.colorScheme.palette;
