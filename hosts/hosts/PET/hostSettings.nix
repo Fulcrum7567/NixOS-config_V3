@@ -32,7 +32,7 @@
 
 			docker.enable = lib.mkForce true;
 
-
+			
 			cubeIDE.enable = false;
 
 			bitwarden.enable = true;

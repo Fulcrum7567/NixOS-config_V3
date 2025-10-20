@@ -44,6 +44,11 @@
 			sunshine.enable = true;
 			moonlight.enable = lib.mkForce false;
 
+			neovim = {
+				enable = true;
+				activeConfig = "nvf";
+			};
+
 
 			mullvad = {
 				enable = true;
