@@ -5,10 +5,15 @@
 		home-manager.users.${config.user.settings.username} = { lib, ... }: {
 			programs.git = {
 				enable = true;
-				userName = config.user.settings.git.username;
-				userEmail = config.user.settings.git.userEmail;
-				extraConfig = lib.mkIf config.packages.git.storeCredentials {
-					credential.helper = "store";
+				settings = {
+					user = {
+						name = config.user.settings.git.username;
+						email = config.user.settings.git.userEmail;
+					};
+
+					credential = lib.mkIf config.packages.git.storeCredentials {
+						helper = "store";
+					};
 				};
 			};	
 
