@@ -1,4 +1,4 @@
-{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
+{ config, lib, nvf, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
 let
 	option = config.packages.${settings.optionName};
 in
@@ -7,14 +7,12 @@ in
 	imports = [
 		nvf.nixosModules.default
 	];
-	
+
 	config = lib.mkIf (option.enable && (option.activeConfig == "nvf")) {
 
 		system.inputUpdates = [ "nvf-unstable" "nvf-stable" ];
 
-		home-manager.users.${config.user.settings.username} = {
-
-			programs.nvf = {
+		programs.nvf = {
 				enable = true;
 				settings.vim = {
 					viAlias = false;
@@ -37,6 +35,8 @@ in
 
 				};
 			};
+
+		home-manager.users.${config.user.settings.username} = {
 		};
 	};
 } 

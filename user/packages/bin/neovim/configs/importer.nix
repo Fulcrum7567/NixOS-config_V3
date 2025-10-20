@@ -1,4 +1,4 @@
-{ lib, config, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
+{ lib, config, nvf, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
 
 let
   # 1) Get all directory names
@@ -12,7 +12,7 @@ let
 
   # 3) Map valid directories to function imports, passing config/lib/settings
   importerPaths = lib.map
-    (name: import ./${name}/imports.nix { inherit lib config pkgs-default pkgs-stable pkgs-unstable settings; })
+    (name: import ./${name}/imports.nix { inherit lib nvf config pkgs-default pkgs-stable pkgs-unstable settings; })
     validDirs;
 in
 {
