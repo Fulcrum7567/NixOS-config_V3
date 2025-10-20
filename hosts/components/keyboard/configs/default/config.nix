@@ -12,13 +12,13 @@ in
 			home.keyboard = {
 				layout = "de";
 			};
-  		};
+  	};
 
 		services.xserver = {
-			enable = true;
-	  		xkb.layout = "de";
-	    	xkb.variant = "";
-	  	};
+			enable = lib.mkDefault true;
+			xkb.layout = "de";
+			xkb.variant = "";
+	  };
 		console.keyMap = "de";
 
 	};
