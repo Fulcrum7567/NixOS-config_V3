@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
 	config = {
-		home-manager.users.${config.user.settings.username} = {
+		home-manager.users.${config.user.settings.username} = lib.mkIf (config.theming.activeTheme != null) {
 			home.packages = with pkgs; [
 				adwaita-qt
 			];

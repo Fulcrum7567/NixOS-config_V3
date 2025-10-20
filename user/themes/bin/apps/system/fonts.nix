@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-	config = {
+	config = lib.mkIf ((config.theming.activeTheme != null) && (config.theming.useStylix == false)) {
 		fonts.fontconfig.defaultFonts = {
 			monospace = [ config.theming.fonts.monospace.name ];
 			sansSerif = [ config.theming.fonts.sansSerif.name ];
