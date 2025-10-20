@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-	config.home-manager.users.${config.user.settings.username} = lib.mkIf (config.theming.useStylix == false) {
+	config.home-manager.users.${config.user.settings.username} = lib.mkIf ((config.theming.activeTheme != null) && (config.theming.useStylix == false)) {
 		gtk = {
 			font = {
 				name = config.theming.fonts.sansSerif.name;

@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-	config.home-manager.users.${config.user.settings.username} = {
+	config.home-manager.users.${config.user.settings.username} = lib.mkIf (config.theming.activeTheme != null) {
 		gtk = {
 			cursorTheme = {
 				name = config.theming.cursors.name;

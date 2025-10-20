@@ -92,7 +92,7 @@ let
 	'';
 in
 {
-	config.home-manager.users.${config.user.settings.username} = lib.mkIf (config.theming.overrideThemeColors && (config.theming.useStylix == false)) {
+	config.home-manager.users.${config.user.settings.username} = lib.mkIf ((config.theming.activeTheme != null) && (config.theming.overrideThemeColors && (config.theming.useStylix == false))) {
 		xdg.configFile = {
 			"gtk-3.0/gtk.css".text = gtkCss;
 			"gtk-4.0/gtk.css".text = gtkCss;
