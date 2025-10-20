@@ -318,6 +318,9 @@
 					./hosts/fixes/importer.nix
 					./hosts/hosts/${currentHost}/quickFixes.nix
 
+					# Server
+					./server/system/filesystem/imports.nix
+
 					# User
 					./user/bin/user.nix
 					./user/bin/userSettings.nix
