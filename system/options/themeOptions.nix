@@ -10,7 +10,7 @@
 		};
 
 		activeTheme = lib.mkOption {
-			type = lib.types.enum (config.theming.availableThemes or []);
+			type = lib.types.nullOr (lib.types.enum (config.theming.availableThemes or []));
 			description = "Set the theme to apply. Must exist in user/themes/profiles/.";
 		};
 

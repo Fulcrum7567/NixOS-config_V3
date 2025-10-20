@@ -23,6 +23,7 @@
 		displayManagers.activeManager = null;
 		desktops.activeDesktop = null;
 		desktops.sessionType = null;
+		theming.activeTheme = null;
 
 		hosts = {
 			fixes = {
