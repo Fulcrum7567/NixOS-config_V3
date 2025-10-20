@@ -44,10 +44,9 @@
             };
 
             displayName = lib.mkOption {
-              type = lib.types.str;
               description = "The network-visible name for the Samba share (e.g., 'Media').";
-              # We can be clever and default to the capitalized 'name'
-              default = lib.toTitle config.server.filesystem.settings.shares.${name}.name;
+              type = lib.types.nullOr lib.types.str;
+              default = null;
             };
 
             datapool = lib.mkOption {
