@@ -25,6 +25,8 @@
 		desktops.sessionType = null;
 		theming = {
 			activeTheme = null;
+			useStylix = false;
+
 			cursors = {
 				active = null;
 				package = null;
