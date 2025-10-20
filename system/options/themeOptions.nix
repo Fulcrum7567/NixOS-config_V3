@@ -20,6 +20,7 @@
 				"light"
 				"mixed"
 			]);
+			default = "dark";
 			description = "Set the polarity of the theme";
 			example = "dark";
 		};
