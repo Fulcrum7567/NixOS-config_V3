@@ -13,7 +13,7 @@
 		packages = {
 			neovim = {
 				enable = true;
-				active = "nvf";
+				activeConfig = "nvf";
 			};
 
 			docker.enable = true;
