@@ -11,17 +11,17 @@
 
 		
 		active = lib.mkOption {
-			type = lib.types.enum (config.theming.icons.available or []);
+			type = lib.types.nullOr (lib.types.enum (config.theming.icons.available or []));
 			description = "Selects the icons of the theme";
 		};
 
 		package = lib.mkOption {
-			type = lib.types.package;
+			type = lib.types.nullOr lib.types.package;
 			description = "package of the icons. Is set by the icon config.";
 		};
 
 		name = lib.mkOption {
-			type = lib.types.str;
+			type = lib.types.nullOr lib.types.str;
 			description = "Name of the icons in the package. Is set by the icon config.";
 		};
 

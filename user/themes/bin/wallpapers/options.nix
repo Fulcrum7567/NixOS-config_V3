@@ -17,7 +17,7 @@
 		};
 
 		type = lib.mkOption {
-			type = lib.types.enum (config.theming.wallpaper.availableTypes or []);
+			type = lib.types.nullOr (lib.types.enum (config.theming.wallpaper.availableTypes or []));
 			description = "What type of wallpaper";
 		};
 

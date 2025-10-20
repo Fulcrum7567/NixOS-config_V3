@@ -15,11 +15,11 @@
 		};
 
 		polarity = lib.mkOption {
-			type = lib.types.enum [
+			type = lib.types.nullOr (lib.types.enum [
 				"dark"
 				"light"
 				"mixed"
-			];
+			]);
 			description = "Set the polarity of the theme";
 			example = "dark";
 		};

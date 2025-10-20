@@ -11,17 +11,17 @@
 
 		
 		active = lib.mkOption {
-			type = lib.types.enum (config.theming.cursors.available or []);
+			type = lib.types.nullOr (lib.types.enum (config.theming.cursors.available or []));
 			description = "Selects the cursor of the theme";
 		};
 
 		package = lib.mkOption {
-			type = lib.types.package;
+			type = lib.types.nullOr lib.types.package;
 			description = "package of the cursor. Is set by the cursor config.";
 		};
 
 		name = lib.mkOption {
-			type = lib.types.str;
+			type = lib.types.nullOr lib.types.str;
 			description = "Name of the cursor in the package. Is set by the cursor config.";
 		};
 

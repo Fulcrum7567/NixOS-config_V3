@@ -23,7 +23,40 @@
 		displayManagers.activeManager = null;
 		desktops.activeDesktop = null;
 		desktops.sessionType = null;
-		theming.activeTheme = null;
+		theming = {
+			activeTheme = null;
+			cursors = {
+				active = null;
+				package = null;
+				name = null;
+			};
+
+			fonts = {
+				monospace = {
+					config = null;
+					package = null;
+					name = null;
+				};
+				sansSerif = {
+					config = null;
+					package = null;
+					name = null;
+				};
+				serif = {
+					config = null;
+					package = null;
+					name = null;
+				};
+			};
+
+			icons = {
+				active = null;
+				package = null;
+				name = null;
+			};
+
+			wallpaper.type = null;
+		};
 
 		hosts = {
 			fixes = {
