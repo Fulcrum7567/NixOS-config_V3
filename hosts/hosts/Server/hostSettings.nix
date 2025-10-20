@@ -14,8 +14,12 @@
 			nvf.enable = true;
 
 			docker.enable = true;
-			
+
 		};
+
+		displayManagers.activeManager = null;
+		desktops.activeDesktop = null;
+		desktops.sessionType = null;
 
 		hosts = {
 			fixes = {

@@ -9,12 +9,12 @@
 		};
 
 		activeDesktop = lib.mkOption {
-			type = lib.types.enum (config.desktops.availableDesktops or []);
+			type = lib.types.nullOr (lib.types.enum (config.desktops.availableDesktops or []));
 			description = "Set the active desktop. Must exist in user/desktops/profiles.";
 		};
 
 		sessionType = lib.mkOption {
-			type = lib.types.enum [ "x11" "wayland" ];
+			type = lib.types.nullOr (lib.types.enum [ "x11" "wayland" ]);
 			description = "Set the session type to use.";
 		};
 	};
