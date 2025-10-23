@@ -15,7 +15,7 @@
 
     activeConfig = lib.mkOption {
       type = lib.types.enum (config.server.filesystem.availableConfigs or [ ]);
-      default = "default";
+      default = "zfs";
       description = "The active filesystem configuration set.";    
     };
 
@@ -38,8 +38,6 @@
             # It will be used as the ZFS dataset name and mount point path component.
             name = lib.mkOption {
               type = lib.types.str;
-              readOnly = true;
-              internal = true; # This isn't user-facing
               description = "The internal ID of the share (from the attrset key).";
             };
 
@@ -81,10 +79,6 @@
         });
         default = { };
         description = "The set of declarative NAS shares to configure.";
-
-        # This magic line sets the `name` option in the submodule
-        # to be the key of the attribute set (e.g., "media").
-        apply = lib.mapAttrs (name: def: def // { name = name; });
       };
     };
 
