@@ -30,7 +30,7 @@
 				autoEnableDelay = -1;
 			};
 
-			docker.enable = lib.mkForce true;
+			docker.enable = lib.mkForce false;
 
 			
 			cubeIDE.enable = false;
@@ -61,12 +61,12 @@
 
 				kernelVersion = {
 					enable = true;
-					activeConfig = "latest";
+					activeConfig = "zen";
 				};
 			
 				nvidiaDrivers = {
 					enable = true;
-					package = config.boot.kernelPackages.nvidiaPackages.beta;
+					package = config.boot.kernelPackages.nvidiaPackages.stable;
 					powerManagement = "finegrained";
 
 					activeConfig = "prime";
