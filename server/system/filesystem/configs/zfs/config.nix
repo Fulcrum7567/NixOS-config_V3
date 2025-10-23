@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
     zfsCompatibleKernelPackages = lib.filterAttrs (
     name: kernelPackages:
@@ -13,7 +13,7 @@ let
   );
 in
 {
-  config = lib.mkIf config.server.filesystem.activeConfig == "zfs" {
+  config = lib.mkIf (config.server.filesystem.enable && (config.server.filesystem.activeConfig == "zfs")) {
     boot.kernelPackages = lib.mkForce latestKernelPackage;
 
     systemd.services.zfs-mount.enable = false; # Disable auto mount by systemd
