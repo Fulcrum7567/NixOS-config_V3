@@ -6,7 +6,7 @@ in
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
 		home-manager.users.${config.user.settings.username} = {
 			dconf.settings = {
-				"net/nokyan/resources" = {
+				"net/nokyan/Resources" = {
 					apps-show-gpu-memory = true;
 					graph-data-points = 60;
 					is-maximized = true;
