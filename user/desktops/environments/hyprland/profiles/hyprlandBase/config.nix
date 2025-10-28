@@ -94,6 +94,7 @@ in
 
 		packages = {
 			hypridle.enable = true;
+			mako.enable = true;
 		};
 
 		desktops.sessionType = "wayland";

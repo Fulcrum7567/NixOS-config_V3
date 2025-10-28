@@ -7,8 +7,10 @@
 			nix-diff
 		];
 		
-		# Max performance mode
-		powerManagement.cpuFreqGovernor = "performance";
+		programs.alvr = {
+			enable = true;
+			openFirewall = true;
+		};
 
 		hardware.graphics = {
 			enable = true;
