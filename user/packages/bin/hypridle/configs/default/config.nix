@@ -1,6 +1,8 @@
 { config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
 let
 	option = config.packages.${settings.optionName};
+
+	restartWaybar = if config.packages.waybar.enable then "waybar &" else "";
 in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
@@ -25,7 +27,7 @@ in
 					{
 						timeout = config.packages.${settings.optionName}.sleepTimeout;
 						on-timeout = "hyprctl dispatch dpms off";
-						on-resume = "hyprctl dispatch dpms on";
+						on-resume = "hyprctl dispatch dpms on; ${restartWaybar}";
 					}
 				];
 			};
