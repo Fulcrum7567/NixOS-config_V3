@@ -30,7 +30,7 @@
 				autoEnableDelay = -1;
 			};
 
-			docker.enable = lib.mkForce false;
+			docker.enable = lib.mkForce true;
 
 			
 			cubeIDE.enable = false;
