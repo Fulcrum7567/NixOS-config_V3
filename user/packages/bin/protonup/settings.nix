@@ -1,5 +1,5 @@
 {
 	optionName = "protonup";
-	packageName = "protonup";
+	packageName = "protonup-ng";
 	displayName = "protonup";
 }

@@ -22,10 +22,10 @@ with lib.hm.gvariant;
 
 				"${extensionPath}/applications" = {
 					blacklist = [ "Plank" "com.desktop.ding" "Conky" "kitty" ];
-					blur = true;
+					blur = false;
 					blur-on-overview = false;
 					dynamic-opacity = false;
-					enable-all = true;
+					enable-all = false;
 				};
 
 				"${extensionPath}/coverflow-alt-tab" = {

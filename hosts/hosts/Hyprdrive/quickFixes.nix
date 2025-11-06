@@ -24,7 +24,7 @@
 
 
 		# Update failed
-		packages.lutris.enable = lib.mkForce false;
+		# packages.lutris.enable = lib.mkForce false;
 
 
 
