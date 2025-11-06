@@ -8,6 +8,7 @@ in
 			dconf.settings = {
 
 				"org/gnome/shell/extensions/just-perfection" = {
+					/*
 					accent-color-icon = false;
 					activities-button = true;
 					animation = 4;
@@ -24,6 +25,7 @@ in
 					show-apps-button = false;
 					support-notifier-showed-version = 34;
 					world-clock = false;
+					*/
 			    };
 			    
 			};

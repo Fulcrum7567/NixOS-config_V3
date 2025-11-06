@@ -14,7 +14,7 @@
 		};
 
 		
-		desktops.activeDesktop = "gnomeWithGdm";
+		desktops.activeDesktop = "gdmWithGnome";
 
 		hardware.displays = {
 			LG-UltraGear = {
