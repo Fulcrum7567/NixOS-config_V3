@@ -19,6 +19,7 @@ in
 					mkhl.direnv
 					arrterian.nix-env-selector
 					jnoortheen.nix-ide
+					ms-vscode.cpptools-extension-pack
 				];
 
 				userSettings = {

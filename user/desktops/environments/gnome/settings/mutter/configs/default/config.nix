@@ -11,7 +11,7 @@ in
 					edge-tiling = true;
 					dynamic-workspaces = true;
 					workspaces-only-on-primary = false;
-					experimental-features = [ "scale-monitor-framebuffer" "xwayland-native-scaling" ];
+					experimental-features = [ "scale-monitor-framebuffer" "xwayland-native-scaling" "variable-refresh-rate" ];
 				};
 			    
 			};

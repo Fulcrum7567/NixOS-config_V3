@@ -9,7 +9,7 @@ in
 				programming.enable = true;
 			};	
 
-			docker.enable = false;
+			docker.enable = true;
 			obsidian.enable = true;
 			anki.enable = true;
 		};
