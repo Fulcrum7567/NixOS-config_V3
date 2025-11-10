@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 {
-	config = {
+	config = lib.mkIf (config.theming.wallpaper.type == "diashow") {
 		assertions = [
 			{
 				assertion = (config.theming.wallpaper.type != "diashow") || (config.theming.wallpaper.diashow.active != null);

@@ -6,5 +6,13 @@
 { lib, config, pkgs, ... }:
 {
 	config = {
+
+		# Swap-file
+		swapDevices = [
+			{
+				device = "/swapfile";
+				size = 16 * 1024;
+			}
+		];
 	};
 }
