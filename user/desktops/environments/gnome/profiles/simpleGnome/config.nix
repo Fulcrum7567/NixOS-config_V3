@@ -35,6 +35,7 @@
 				middleClickClose.enable = true;
 				windowTitleIsBack.enable = true;
 				colorPicker.enable = true;
+				fuzzySearch.enable = true;
 			};
 		};
 	};
