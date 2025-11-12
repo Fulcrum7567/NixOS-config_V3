@@ -7,12 +7,7 @@ in
 		home-manager.users.${config.user.settings.username} = {
 			dconf.settings = {
 
-				"org/gnome/shell/extensions/alphabetical-app-grid" = {
-
-			      	folder-order-position = "start";
-			      	sort-folder-contents = true;
-			      	
-			    };
+				
 			    
 			};
 		};
