@@ -14,8 +14,8 @@ in
 					steam-proton-support = true;
 					temp = true;
 					update-date = false;
-				}
-			}
+				};
+			};
 		};
 	};
 } 
