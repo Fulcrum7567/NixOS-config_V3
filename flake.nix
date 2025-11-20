@@ -67,6 +67,10 @@
 			inputs.nixpkgs.follows = "nixpkgs-stable";
 		};
 
+		# Chaotic's Nyx
+		chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
+
 		
 
 		# ╔════════════════════════════════╗
@@ -116,7 +120,7 @@
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -250,6 +254,14 @@
 						hyprland-unstable
 			);
 
+		nyx-modules = if (hostSettings.systemState == "unstable") then [
+			chaotic.nixosModules.default
+		] else [
+			chaotic.nixosModules.nyx-cache
+			chaotic.nixosModules.nyx-overlay
+			chaotic.nixosModules.nyx-registry
+		];
+
 	in
 	{
 
@@ -341,7 +353,7 @@
 					./user/packages/bin/importer.nix
 					./user/packages/defaults/importer.nix
 					./user/packages/groups/importer.nix
-		        ];
+		      ] ++ nyx-modules;
 
 		        specialArgs = {
 					inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland;
