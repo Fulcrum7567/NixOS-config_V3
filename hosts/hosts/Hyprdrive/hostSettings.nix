@@ -75,7 +75,7 @@
 
 			kernelVersion = {
 				enable = true;
-				activeConfig = "lqx";
+				activeConfig = "cachy";
 			};
 
 			wakeOnLan = {
