@@ -4,7 +4,9 @@
 
 		# Package installation
 		environment.systemPackages = [
-			(pkgs-default.${settings.packageName})
+			(pkgs-default.${settings.packageName}.override {
+				removeWarningPopup = true;
+			})
 		];
 	};
 }
