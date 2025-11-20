@@ -41,8 +41,10 @@
 
 			solaar.enable = true;
 
-			sunshine.enable = true;
+			sunshine.enable = false;
 			moonlight.enable = lib.mkForce false;
+
+			bottles.enable = true;
 
 			neovim = {
 				enable = true;
