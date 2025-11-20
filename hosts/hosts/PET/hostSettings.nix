@@ -57,6 +57,11 @@
 
 			components = {
 
+				scheduler = {
+					enable = true;
+					activeConfig = "scx";
+				};
+
 				fingerprint.enable = true;
 
 				kernelVersion = {
