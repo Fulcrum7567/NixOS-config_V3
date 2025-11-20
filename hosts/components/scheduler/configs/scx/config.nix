@@ -8,8 +8,8 @@ in
 		services.scx = {
 			enable = (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.12");
 			package = pkgs-default.scx.rustscheds;
-			scheduler = "scx_lavd"
-		}
+			scheduler = "scx_lavd";
+		};
 
 		assertions = [
 			{
