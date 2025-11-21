@@ -17,5 +17,5 @@
 		hashedPassword = config.host.settings.hashedPassword; # "$6$swTYGVRP4erDVWWO$argE8karkQ6JyNFAEgFMiJpEYCYrIIZChmqrvXUb0VDx7lS./U661Agnv1mwJVrlx1x.ShGaznfrbgdsrdqBW0";
 	};
 	# wheel group gets trusted access to nix daemon
-  nix.settings.trusted-users = [ config.user.settings.username "@wheel" ];
+  	nix.settings.trusted-users = [ config.user.settings.username "@wheel" ];
 } 

@@ -11,7 +11,7 @@ in
 			};
 		};
 
-		users.users.${config.user.settings.username}.groups = [ "steam" ];
+		users.users.${config.user.settings.username}.extraGroups = [ "steam" ];
 
 		programs = {
 		
