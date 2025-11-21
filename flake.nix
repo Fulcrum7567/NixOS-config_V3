@@ -182,6 +182,7 @@
 			};
 			overlays = [
 				nix-vscode-extensions.overlays.default
+				chaotic.overlays.default
 				(import ./system/customTypes/overlay.nix)
 			];
 		};
