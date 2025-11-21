@@ -21,6 +21,7 @@
 					enable =  true;
 					on = false;
 				};
+				misc.enable = true;
 			};
 
 			extensions = {
