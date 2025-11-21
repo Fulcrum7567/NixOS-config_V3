@@ -30,7 +30,8 @@
 				clipboardIndicator.enable = true;
 				dashToDock.enable = true;
 				grandTheftFocus.enable = true;
-				hibernateStatusButton.enable = true;
+				hibernateStatusButton.enable = false;
+				powerOffOptions.enable = true;
 				justPerfection.enable = false; # BROKEN!
 				middleClickClose.enable = true;
 				windowTitleIsBack.enable = true;
