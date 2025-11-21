@@ -13,7 +13,7 @@ in
 
 		assertions = [
 			{
-				assertion = !(lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.12");
+				assertion = (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.12");
 				message = "Trying to use scx scheduler on unsupported kernel version. Minimum required version is 6.12.\nSet config.hosts.components.${settings.optionName}.activeConfig to another value or disable the component.";
 			}
 		];
