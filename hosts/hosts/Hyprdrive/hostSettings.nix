@@ -78,6 +78,11 @@
 				activeConfig = "cachy";
 			};
 
+			scheduler = {
+				enable = true;
+				activeConfig = "scx";
+			};
+
 			wakeOnLan = {
 				enable = true;
 				interface = "eno1";
