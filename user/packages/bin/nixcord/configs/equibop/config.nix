@@ -489,7 +489,7 @@ in
 							enable = false;
 						};
 
-						saveFavoriteGifs.enable = false;
+						saveFavoriteGiFs.enable = false;
 						screenRecorder.enable = false;
 						searchFix.enable = false;
 
