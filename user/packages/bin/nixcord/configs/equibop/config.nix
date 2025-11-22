@@ -102,7 +102,7 @@ in
 						betterInvites.enable = false;
 						betterPlusReacts.enable = false;
 
-						betterQuickReacts = {
+						betterQuickReact = {
 							enable = true;
 							columns = 4.0;
 							rows = 2.0;
