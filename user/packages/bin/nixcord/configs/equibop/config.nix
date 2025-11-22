@@ -11,6 +11,7 @@ in
 				discord = {
 					enable = false;
 					equicord.enable = true;
+					vencord.enable = false;
 				};
 
 				equibop = {
