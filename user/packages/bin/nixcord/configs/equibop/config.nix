@@ -731,7 +731,7 @@ in
 							enable = false;
 						};
 
-						alwaysTrus = {
+						alwaysTrust = {
 							enable = false;
 						};
 
