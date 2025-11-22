@@ -85,7 +85,7 @@ in
 						noPendingCount = {
 							enable = true;
 							hideFriendRequestsCount = false;
-							hideMessageRequestCount = false;
+							hideMessageRequestsCount = false;
 							hidePremiumOffersCount = true;
 						};
 						noProfileThemes.enable = true;
