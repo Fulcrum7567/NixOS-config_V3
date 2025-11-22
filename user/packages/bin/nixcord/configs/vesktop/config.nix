@@ -55,7 +55,7 @@ in
 						betterSessions.enable = false;
 						betterSettings.enable = true;
 						callTimer.enable = true;
-						clearURLs.enable = true;
+						clearUrLs.enable = true;
 						copyFileContents.enable = true;
 						customIdle = {
 							enable = true;
@@ -97,7 +97,7 @@ in
 						noProfileThemes.enable = true;
 						oneko.enable = true;
 						platformIndicators.enable = true;
-						reviewDB.enable = true;
+						reviewDb.enable = true;
 						secretRingToneEnabler.enable = false;
 						summaries.enable = true;
 						serverListIndicators = {
