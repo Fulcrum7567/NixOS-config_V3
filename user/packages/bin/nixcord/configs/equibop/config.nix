@@ -443,7 +443,7 @@ in
 						questFocused.enable = false;
 						questify.enable = false;
 
-						questinMarkReplacement = {
+						questingMarkReplacement = {
 							enable = false;
 						};
 
