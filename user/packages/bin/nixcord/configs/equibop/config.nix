@@ -664,7 +664,7 @@ in
 							ignoreBlockedUsers = true;
 							mode = 1;
 							voiceChannelChatSelf = true;
-							voicChannelChatSilent = true;
+							voiceChannelChatSilent = true;
 							voiceChannelChatSilentSelf = false;
 						};
 
