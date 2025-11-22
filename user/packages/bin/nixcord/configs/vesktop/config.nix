@@ -107,7 +107,7 @@ in
 						userVoiceShow.enable = true;
 						volumeBooster = {
 							enable = true;
-							multiplier = 3;
+							multiplier = 3.0;
 						};
 					};
 				};
