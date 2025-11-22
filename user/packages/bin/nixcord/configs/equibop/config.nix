@@ -406,7 +406,7 @@ in
 						neverPausePreviews.enable = false;
 						newPluginsManager.enable = true;
 						noBulletPoints.enable = false;
-						noModalsAnimation.enable = true;
+						noModalAnimation.enable = true;
 						noNitroUpsell.enable = true;
 						noOnboarding.enable = true;
 						noRoleHeaders.enable = false;
