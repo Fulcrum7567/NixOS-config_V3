@@ -176,7 +176,7 @@ in
 
 						decodeBase64 = {
 							enable = false;
-							clickMethod = "left"; # "left" | "right"
+							clickMethod = "Left"; # "Left" | "Right"
 						};
 
 						disableCameras.enable = false;
