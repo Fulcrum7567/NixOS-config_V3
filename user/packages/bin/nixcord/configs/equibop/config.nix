@@ -16,7 +16,6 @@ in
 
 				equibop = {
 					enable = true;
-					/*
 					package = pkgs-default.equibop.overrideAttrs (prev: {
 						desktopItems = [
 							(pkgs-default.makeDesktopItem {
@@ -35,7 +34,6 @@ in
 							})
 						];
 					});
-					*/
 
 					settings = {
 

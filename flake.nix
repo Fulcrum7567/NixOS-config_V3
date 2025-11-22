@@ -87,7 +87,7 @@
 		# ╚════════════════════════════════╝
 
 		# Nixcord
-		nixcord.url = "github:kaylorben/nixcord";
+		nixcord.url = "github:Fulcrum7567/nixcord";
 
 
 		# Zen-browser
