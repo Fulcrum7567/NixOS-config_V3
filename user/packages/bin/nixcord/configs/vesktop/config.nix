@@ -102,7 +102,7 @@ in
 						summaries.enable = true;
 						serverListIndicators = {
 							enable = true;
-							mode = "both";
+							mode = 3;
 						};
 						userVoiceShow.enable = true;
 						volumeBooster = {
