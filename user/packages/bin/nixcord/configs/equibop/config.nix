@@ -404,7 +404,7 @@ in
 
 						musicControls.enable = false;
 						neverPausePreviews.enable = false;
-						newPluginsSystem.enable = true;
+						newPluginsManager.enable = true;
 						noBulletPoints.enable = false;
 						noModalsAnimation.enable = true;
 						noNitroUpsell.enable = true;
