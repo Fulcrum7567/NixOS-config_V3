@@ -161,7 +161,7 @@ in
 
 						customTimestamps = {
 							enable = false;
-							overrides = {};
+							formats = {};
 						};
 
 						customUserColors = {
