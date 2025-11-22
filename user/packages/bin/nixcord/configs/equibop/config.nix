@@ -8,7 +8,10 @@ in
 
 		home-manager.users.${config.user.settings.username} = {
 			programs.nixcord = {
-				discord.enable = false;
+				discord = {
+					enable = false;
+					equicord.enable = true;
+				};
 
 				equibop = {
 					enable = true;
