@@ -124,7 +124,7 @@ in
 						};
 
 						cleanChannelName.enable = false;
-						cleanUserAreas.enable = true;
+						cleanUserArea.enable = true;
 						
 						clientSideBlock = {
 							enable = true;
