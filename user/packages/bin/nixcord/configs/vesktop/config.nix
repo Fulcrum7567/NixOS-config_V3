@@ -3,17 +3,11 @@ let
 	option = config.packages.${settings.optionName};
 in
 {
-	config = lib.mkIf (option.enable && (option.activeConfig == "nixcord")) {
+	config = lib.mkIf (option.enable && (option.activeConfig == "vesktop")) {
 
-		system.inputUpdates = [ "nixcord" ];
 
 		home-manager.users.${config.user.settings.username} = {
-			imports = [
-				inputs.nixcord.homeModules.nixcord
-			];
-
 			programs.nixcord = {
-				enable = true;
 				vesktop = {
 					enable = true;
 					package = pkgs-default.vesktop.overrideAttrs (prev: {
@@ -22,13 +16,14 @@ in
 								name = "discord";
 								desktopName = "Discord";
 								exec = "vesktop %U";
-								icon = ./discord-icon.svg;
+								icon = ../../shared/discord-icon.svg;
 								startupWMClass = "vesktop";
 								genericName = "Internet Messenger";
 								keywords = [
 									"discord"
 									"vencord"
 									"vesktop"
+									"nixcord"
 								];
 							})
 						];

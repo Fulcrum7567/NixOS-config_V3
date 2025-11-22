@@ -5,7 +5,7 @@ in
 {
 	config = lib.mkIf (option.enable && (option.active == "noDroidcam")) {
 		packages = {
-			discord.enable = true;
+			nixcord.enable = true;
 			heroic.enable = true;
 			lutris.enable = true;
 			mangohud.enable = true;

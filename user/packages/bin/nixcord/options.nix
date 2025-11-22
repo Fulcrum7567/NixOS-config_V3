@@ -11,7 +11,7 @@
 
 		activeConfig = lib.mkOption {
 			type = lib.types.enum (config.packages.${settings.optionName}.availableConfigs or []);
-			default = "nixcord"; # A default config should always exist, delete if not
+			default = "equibop"; # A default config should always exist, delete if not
 			description = "Set the active configuration for the ${settings.displayName} package.";
 		};
 
