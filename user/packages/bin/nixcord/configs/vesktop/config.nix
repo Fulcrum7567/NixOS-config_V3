@@ -74,7 +74,6 @@ in
 						friendsSince.enable = true;
 						gameActivityToggle.enable = true;
 						implicitRelationships.enable = true;
-						moreKaomoji.enable = true;
 						mutualGroupDMs.enable = true;
 						newGuildSettings = {
 							enable = true;
