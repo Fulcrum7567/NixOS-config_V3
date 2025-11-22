@@ -78,7 +78,14 @@ in
 						newGuildSettings = {
 							enable = true;
 							guild = true;
-							messages = "nothing";
+							events = true;
+							everyone = true;
+							highlights = true;
+							messages = 2;
+							mobilePush = true;
+							role = true;
+							showAllChannels = true;
+							voiceChannels = true;
 						};
 						noOnboardingDelay.enable = true;
 						noPendingCount = {
