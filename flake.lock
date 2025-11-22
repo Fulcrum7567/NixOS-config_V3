@@ -1439,15 +1439,15 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1763740867,
-        "narHash": "sha256-93safrqdU7Vo7LKoxVPbZ+ksUVTYzDcIFG0EaEWb3eU=",
-        "owner": "kaylorben",
+        "lastModified": 1763811193,
+        "narHash": "sha256-oi+Nd8O+lWCj0Jh+8Px3UAo82HMTB2AaPiJsy5iUPt8=",
+        "owner": "Fulcrum7567",
         "repo": "nixcord",
-        "rev": "ce6a071ea0439fbef6588e77e7d4e7e594c41f8c",
+        "rev": "67270045c238347404f657ce09714df591f05385",
         "type": "github"
       },
       "original": {
-        "owner": "kaylorben",
+        "owner": "Fulcrum7567",
         "repo": "nixcord",
         "type": "github"
       }
