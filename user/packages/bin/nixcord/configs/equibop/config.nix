@@ -360,7 +360,7 @@ in
 							enable = false;
 						};
 
-						loginWithQR = {
+						loginWithQr = {
 							enable = false;
 						};
 
