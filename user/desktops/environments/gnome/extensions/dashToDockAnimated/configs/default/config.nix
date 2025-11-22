@@ -2,8 +2,6 @@
 let
 	extensionConfig = config.desktopEnvironments.gnome.extensions.${settings.optionName};
 in
-
-with lib.hm.gvariant;
 {
 	config = lib.mkIf (extensionConfig.enable && (extensionConfig.activeConfig == "default")) {
 		home-manager.users.${config.user.settings.username} = {
@@ -45,7 +43,6 @@ with lib.hm.gvariant;
 					running-indicator-size = 2;
 					running-indicator-style = 1;
 					scroll-sensitivity = 0.11;
-					separator-color = mkTuple [ 0.125490203499794 0.1411764770746231 0.1725490242242813 1.0 ];
 					separator-thickness = 1;
 					shrink-icons = true;
 					topbar-border-thickness = 3;
