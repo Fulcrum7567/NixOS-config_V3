@@ -2,6 +2,8 @@
 let
 	extensionConfig = config.desktopEnvironments.gnome.extensions.${settings.optionName};
 in
+
+with lib.hm.gvariant;
 {
 	config = lib.mkIf (extensionConfig.enable && (extensionConfig.activeConfig == "default")) {
 		home-manager.users.${config.user.settings.username} = {
