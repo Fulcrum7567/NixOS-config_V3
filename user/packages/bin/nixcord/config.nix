@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, inputs, ... }:
 {
   config = lib.mkIf config.packages.nixcord.enable {
 		system.inputUpdates = [ "nixcord" ];
