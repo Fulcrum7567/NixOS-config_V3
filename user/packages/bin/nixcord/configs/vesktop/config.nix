@@ -1,4 +1,4 @@
-{ config, lib, settings, inputs, pkgs-default, ... }:
+{ config, lib, settings, inputs, pkgs-default, pkgs-stable, ... }:
 let
 	option = config.packages.${settings.optionName};
 in
@@ -10,9 +10,9 @@ in
 			programs.nixcord = {
 				vesktop = {
 					enable = true;
-					package = pkgs-default.vesktop.overrideAttrs (prev: {
+					package = pkgs-stable.vesktop.overrideAttrs (prev: {
 						desktopItems = [
-							(pkgs-default.makeDesktopItem {
+							(pkgs-stable.makeDesktopItem {
 								name = "discord";
 								desktopName = "Discord";
 								exec = "vesktop %U";
