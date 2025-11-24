@@ -197,6 +197,95 @@
 					};
 					pinsForce = true;
 					pins = {
+
+						# Private Workspace
+
+						"YouTube" = {
+							url = null;
+							id = "2152852a-d575-4b8f-925f-ca6d63dc35b8";
+							container = 1;
+							workspace = "2d19d9e4-c7c3-4260-a46d-b3b8dab8db24";
+							position = 1;
+							isEssential = false;
+							isGroup = true;
+							editedTitle = true;
+							isFolderCollapsed = true;
+							folderIcon = "https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png";
+							folderParentId = null;
+						};
+
+						"Subscriptions - YouTube" = {
+							url = "https://www.youtube.com/feed/subscriptions";
+							id = "d2ce3076-1192-4b73-9651-8de2375062af";
+							container = 1;
+							workspace = "2d19d9e4-c7c3-4260-a46d-b3b8dab8db24";
+							position = 2;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = true;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = "2152852a-d575-4b8f-925f-ca6d63dc35b8";
+						};
+
+						"Watch Later - YouTube" = {
+							url = "https://www.youtube.com/playlist?list=WL";
+							id = "c837024b-3350-42cf-bf26-09d6ea06b0fd";
+							container = 1;
+							workspace = "2d19d9e4-c7c3-4260-a46d-b3b8dab8db24";
+							position = 3;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = true;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = "2152852a-d575-4b8f-925f-ca6d63dc35b8";
+						};
+
+						"Mit Jasmin - Youtube" = {
+							url = "https://www.youtube.com/playlist?list=PLCG25QW23viB4NajkNTjQjfRaojO0Z83f";
+							id = "6de41e06-ac37-49c2-9508-21e06eee1b0a";
+							container = 1;
+							workspace = "2d19d9e4-c7c3-4260-a46d-b3b8dab8db24";
+							position = 4;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = true;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = "2152852a-d575-4b8f-925f-ca6d63dc35b8";
+						};
+
+						"Watch2Gether" = {
+							url = "https://w2g.tv/en/room/?access_key=b3zw0q715qpmfzxo0j10ob";
+							id = "8f3f3f3e-5b6d-4c2a-9f4e-8e2b8f3c3d4e";
+							container = 1;
+							workspace = "2d19d9e4-c7c3-4260-a46d-b3b8dab8db24";
+							position = 5;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = true;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = "2152852a-d575-4b8f-925f-ca6d63dc35b8";
+						};
+
+						"GitHub" = {
+							url = "https://github.com/fulcrum7567";
+							id = "e086904a-184c-4f61-9895-433ad8416e60";
+							container = 1;
+							workspace = "2d19d9e4-c7c3-4260-a46d-b3b8dab8db24";
+							position = 6;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = true;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = null;
+						};
+
+						# FH Workspace
+
 						"Moodle" = {
 							url = "https://lms.fh-wedel.de/my/courses.php";
 							id = "8499796c-d322-4713-af65-b13da909e538";
@@ -239,9 +328,9 @@
 							folderParentId = null;
 						};
 
-						"SP Testserver" = {
-							url = "https://sp.fh-wedel.de:4434/fhw";
-							id = "d0608699-9467-4c56-a5f9-c4a2dcf3e566";
+						"Outlook" = {
+							url = "https://outlook.office.com/mail/0/?deeplink=mail%2F0%2F%3Fnlp%3D0";
+							id = "1fcbc314-55ac-4021-97a1-72bcda0d4a33";
 							container = 2;
 							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
 							position = 4;
@@ -252,7 +341,64 @@
 							folderIcon = null;
 							folderParentId = null;
 						};
-					};
+
+						"Dualer Kalender" = {
+							url = "https://www.fh-wedel.de/fileadmin/FHW-Files/Dokumente_FHW/Dual/Dualer_Kalender_FH_Wedel_6-1__SomS25-SomS26__v2.03_25-10-16.pdf";
+							id = "a46f7594-0c26-45fa-b41f-bd19277dc28d";
+							container = 2;
+							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
+							position = 5;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = true;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = null;
+						};
+
+						"Zeiterfassung SP Abnahme" = {
+							url = "https://rzfhwedel-my.sharepoint.com/:x:/r/personal/avh_rz_fh-wedel_de/_layouts/15/Doc.aspx?sourcedoc={6D5FA4B1-D905-4A6E-A2D8-09AD8F23631A}&file=Zeiterfassung_WS2526_SP_Mario.xlsx&fromShare=true&action=default&mobileredirect=true";
+							id = "f66afbd5-d320-4476-a9fd-7504566469cd";
+							container = 2;
+							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
+							position = 6;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = true;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = null;
+						};
+
+						"SP Testserver" = {
+							url = "https://sp.fh-wedel.de:4434/fhw";
+							id = "d0608699-9467-4c56-a5f9-c4a2dcf3e566";
+							container = 2;
+							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
+							position = 7;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = true;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = null;
+						};
+
+						# NixOS Workspace
+
+						".dotfiles - GitHub" = {
+							url = "https://github.com/Fulcrum7567/NixOS-config_V3";
+							id ="ce010016-b97b-452d-a4a9-7850b92f0948";
+							container = 3;
+							workspace = "d99d79ca-e944-4d4f-9bd3-5965af61fb16";
+							position = 1;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = true;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = null;
+						};
 
 
 					settings = {

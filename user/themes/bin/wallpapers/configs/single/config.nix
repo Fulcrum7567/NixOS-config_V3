@@ -7,5 +7,9 @@
 				message = "Single Wallpaper is enabled but not set.";
 			}
 		];
+
+		stylix = lib.mkIf ((config.theming.wallpaper.type == "single") && config.theming.useStylix) {
+			wallpaper = config.theming.wallpaper.single.active;
+		};
 	};
 }
