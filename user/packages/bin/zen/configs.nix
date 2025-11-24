@@ -195,6 +195,65 @@
 							position = 3000;
 						};
 					};
+					pinsForce = true;
+					pins = {
+						"Moodle" = {
+							url = "https://lms.fh-wedel.de/my/courses.php";
+							id = "8499796c-d322-4713-af65-b13da909e538";
+							container = 2;
+							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
+							position = 1;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = false;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = null;
+						};
+
+						"myCampus" = {
+							url = "https://mycampus.fh-wedel.de/campus/#!app/smartdesign.campus.studyplanco";
+							id = "0a22945c-291d-47f1-8030-a14f608f6e5a";
+							container = 2;
+							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
+							position = 2;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = false;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = null;
+						};
+
+						"Teams" = {
+							url = "https://teams.microsoft.com/v2/";
+							id = "ad777a60-36c5-4eed-9d19-ec3a0b08f7c8";
+							container = 2;
+							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
+							position = 3;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = false;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = null;
+						};
+
+						"SP Testserver" = {
+							url = "https://sp.fh-wedel.de:4434/fhw";
+							id = "d0608699-9467-4c56-a5f9-c4a2dcf3e566";
+							container = 2;
+							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
+							position = 4;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = false;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = null;
+						};
+					};
+
 
 					settings = {
 						"browser.tabs.warnOnClose" = false;
