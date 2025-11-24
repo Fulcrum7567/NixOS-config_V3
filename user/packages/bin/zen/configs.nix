@@ -399,6 +399,7 @@
 							folderIcon = null;
 							folderParentId = null;
 						};
+					};
 
 
 					settings = {
