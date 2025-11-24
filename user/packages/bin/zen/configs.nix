@@ -205,7 +205,7 @@
 							position = 1;
 							isEssential = false;
 							isGroup = false;
-							editedTitle = false;
+							editedTitle = true;
 							isFolderCollapsed = false;
 							folderIcon = null;
 							folderParentId = null;
@@ -219,7 +219,7 @@
 							position = 2;
 							isEssential = false;
 							isGroup = false;
-							editedTitle = false;
+							editedTitle = true;
 							isFolderCollapsed = false;
 							folderIcon = null;
 							folderParentId = null;
@@ -233,7 +233,7 @@
 							position = 3;
 							isEssential = false;
 							isGroup = false;
-							editedTitle = false;
+							editedTitle = true;
 							isFolderCollapsed = false;
 							folderIcon = null;
 							folderParentId = null;
@@ -247,7 +247,7 @@
 							position = 4;
 							isEssential = false;
 							isGroup = false;
-							editedTitle = false;
+							editedTitle = true;
 							isFolderCollapsed = false;
 							folderIcon = null;
 							folderParentId = null;
