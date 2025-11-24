@@ -9,7 +9,7 @@
 		];
 
 		stylix = lib.mkIf ((config.theming.wallpaper.type == "single") && config.theming.useStylix) {
-			wallpaper = config.theming.wallpaper.single.active;
+			image = config.theming.wallpaper.single.active;
 		};
 	};
 }
