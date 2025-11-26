@@ -25,21 +25,6 @@
 			example = "dark";
 		};
 
-		baseGTKTheme = {
-
-			package = lib.mkOption {
-				type = lib.types.nullOr lib.types.package;
-				default = null;
-				description = "Package providing the GTK theme the GTK theme is based on.";
-			};
-
-			name = lib.mkOption {
-				type = lib.types.str;
-				default = "Adwaita-dark";
-				description = "Theme the GTK theme is based on.";
-			};
-		};
-
 		baseQtTheme = {
 			package = lib.mkOption {
 				type = lib.types.nullOr lib.types.package;

@@ -1,11 +1,13 @@
 { lib, config, ... }:
 {
 	imports = [
-	    ./fonts.nix
-	    ./general.nix
-	    ./cursor.nix
-	    ./icons.nix
 	    ./colors.nix
-	    ./polarity.nix
+			./cursor.nix
+			./fonts.nix
+			./icons.nix
+			./options.nix
+			./polarity.nix
+			./stylix.nix
+			./theme.nix
   	];
 }

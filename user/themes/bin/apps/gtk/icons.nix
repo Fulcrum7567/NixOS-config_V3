@@ -1,10 +1,10 @@
 { config, lib, ... }:
 {
-	config.home-manager.users.${config.user.settings.username} = lib.mkIf (config.theming.activeTheme != null) {
+	config.home-manager.users.${config.user.settings.username} = lib.mkIf (config.theming.gtk.icons.override) {
 		gtk = {
 			iconTheme = {
-				name = config.theming.icons.name;
-				package = config.theming.icons.package;
+				name = config.theming.gtk.icons.value.name;
+				package = config.theming.gtk.icons.value.package;
 			};
 		};
 	};

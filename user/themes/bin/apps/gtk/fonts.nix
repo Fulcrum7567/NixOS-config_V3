@@ -1,18 +1,18 @@
 { config, lib, ... }:
 {
-	config.home-manager.users.${config.user.settings.username} = lib.mkIf ((config.theming.activeTheme != null) && (config.theming.useStylix == false)) {
+	config.home-manager.users.${config.user.settings.username} = lib.mkIf (config.theming.gtk.fonts.override) {
 		gtk = {
 			font = {
-				name = config.theming.fonts.sansSerif.name;
-				size = config.theming.fonts.sizes.applications;
+				name = config.theming.gtk.fonts.value.sansSerif.name;
+				size = config.theming.gtk.fonts.value.sizes.applications;
 			};
 		};
 
 		dconf.settings = {
 			"org/gnome/desktop/interface" = {
-				document-font-name = "${config.theming.fonts.sansSerif.name} ${toString config.theming.fonts.sizes.applications}";
+				document-font-name = "${config.theming.gtk.fonts.value.sansSerif.name} ${toString config.theming.gtk.fonts.value.sizes.applications}";
 
-				monospace-font-name = "${config.theming.fonts.monospace.name} ${toString config.theming.fonts.sizes.applications}";
+				monospace-font-name = "${config.theming.gtk.fonts.value.monospace.name} ${toString config.theming.gtk.fonts.value.sizes.applications}";
 			};
 		};
 	};
