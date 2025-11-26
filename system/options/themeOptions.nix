@@ -79,7 +79,7 @@
 		useStylix = lib.mkOption {
 			type = lib.types.bool;
 			default = false;
-			description = "Whether to use stylix to theme programs. Might break things (like Plasma 6). Should be set by DEs for example.";
+			description = "Whether to use stylix to theme programs. Might break things. Should be set by DEs for example.";
 		};
 	};
 } 

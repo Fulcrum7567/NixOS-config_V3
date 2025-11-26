@@ -10,6 +10,10 @@
 
 		theming = {
 
+			gnome = {
+				accentColor = "slate";
+			};
+
 			
 			polarity = "dark";
 

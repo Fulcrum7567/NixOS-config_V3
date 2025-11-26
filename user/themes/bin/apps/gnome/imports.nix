@@ -3,7 +3,9 @@
 	imports = [
 	    ./polarity.nix
 	    ./cursor.nix
-	    ./general.nix
+	    ./stylix.nix
 	    ./wallpaper.nix
+			./options.nix
+			./accentColor.nix
   	];
 }

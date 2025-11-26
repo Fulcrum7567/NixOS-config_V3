@@ -1,10 +1,10 @@
 { config, lib, ... }:
 {
-	config = {
-		home-manager.users.${config.user.settings.username} = lib.mkIf (config.theming.activeTheme != null) {
-			dconf.settings = lib.mkIf (config.theming.useStylix == false) {
+	config = lib.mkIf (config.theming.gnome.cursor.override) {
+		home-manager.users.${config.user.settings.username} = {
+			dconf.settings = {
 				"org/gnome/desktop/interface" = {
-			    	cursor-theme = config.theming.cursors.name;
+			    	cursor-theme = config.theming.gnome.cursor.cursor-theme;
 			    };
 		    };
 		};
