@@ -13,6 +13,13 @@
 				plymouth.enable = false;
 			};
 
+			icons = {
+				enable = config.theming.useStylix;
+				dark = config.theming.icons.name;
+				light = config.theming.icons.name;
+				package = config.theming.icons.package;
+			};
+
 
 			polarity = (if (config.theming.polarity == "mixed") then "either" else config.theming.polarity);
 		
