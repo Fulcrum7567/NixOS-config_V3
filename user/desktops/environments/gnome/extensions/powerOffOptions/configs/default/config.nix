@@ -7,7 +7,10 @@ in
 		home-manager.users.${config.user.settings.username} = {
 			
 			dconf.settings = {
-				
+				"org/gnome/shell/extensions/power-off-options" = {
+					show-hibernate = true;
+					show-reboot-to-bios = true;
+				};
 
 			};
 			
