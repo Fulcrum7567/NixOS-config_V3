@@ -10,6 +10,7 @@
 
 		theming = {
 
+			
 			polarity = "dark";
 
 			fonts = {
