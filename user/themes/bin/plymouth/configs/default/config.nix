@@ -2,7 +2,7 @@
 {
 	config = lib.mkIf (config.theming.plymouth.activeTheme == "default") {
 
-		boot.plymouth = {
+		boot.plymouth = lib.mkIf (config.theming.useStylix == false) {
 			theme = "breeze";
 		};
 	};

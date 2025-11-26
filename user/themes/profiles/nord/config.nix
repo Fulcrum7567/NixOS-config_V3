@@ -44,7 +44,7 @@
 
 			plymouth = {
 				enable = true;
-				activeTheme = "mikuboot";
+				activeTheme = "default";
 			};
 
 			icons.active = "nordzy";
