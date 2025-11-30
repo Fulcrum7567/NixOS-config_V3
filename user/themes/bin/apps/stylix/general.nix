@@ -10,6 +10,7 @@
 			autoEnable = true;
 
 			targets = {
+				
 				plymouth.enable = config.theming.plymouth.enable && (config.theming.plymouth.activeTheme == "default");
 			};
 
