@@ -22,13 +22,13 @@
 		# SYSTEM
 
 		# Input nixpkgs
-		nixpkgs-stable.url = "nixpkgs/nixos-25.05";
+		nixpkgs-stable.url = "nixpkgs/nixos-25.11";
 		nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
 
 		# Input home-manager
 		home-manager-stable = {
-			url = "github:nix-community/home-manager/release-25.05";
+			url = "github:nix-community/home-manager/release-25.11";
 			inputs.nixpkgs.follows = "nixpkgs-stable";
 		};
 		
@@ -45,7 +45,7 @@
 		# Stylix
 
 		stylix-stable = {
-			url = "github:nix-community/stylix/release-25.05";
+			url = "github:nix-community/stylix/release-25.11";
 			inputs.nixpkgs.follows = "nixpkgs-stable";
 		};
 

@@ -6,6 +6,6 @@
 			"gtk-4.0/gtk.css".text = config.theming.gtk.colors.value;
 		};
 
-		home.sessionVariables.GTK_THEME = config.theming.baseGTKTheme.name;
+		home.sessionVariables.GTK_THEME = config.theming.gtk.theme.value.name;
 	};
 } 

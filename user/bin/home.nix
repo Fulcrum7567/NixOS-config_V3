@@ -12,8 +12,13 @@
 		  	};
 		};
 
+
 		
 		home-manager.users.${config.user.settings.username} = {
+
+			
+			xdg.configFile."mimeapps.list".force = true;
+			xdg.configFile."gtk-4.0/settings.ini".force = true;
 
 			home.username = config.user.settings.username;
   			home.homeDirectory = "/home/${config.user.settings.username}";
