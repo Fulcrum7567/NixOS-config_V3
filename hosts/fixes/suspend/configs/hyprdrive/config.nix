@@ -3,7 +3,7 @@ let
 	option = config.hosts.fixes.${settings.optionName};
 in
 {
-	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
+	config = lib.mkIf (option.enable && (option.activeConfig == "hyprdrive")) {
 
 		# Fix immediate suspend wake caused by GPP0 (Chipset/LAN Bridge)
 		systemd.services.fix-suspend-gpp0 = {
