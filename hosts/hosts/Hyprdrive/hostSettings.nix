@@ -67,25 +67,35 @@
 
 
 
-		hosts.components = {
+		hosts = {
 
-			monitorBrightness.enable = true;
-
-			amdDrivers.enable = true;
-
-			kernelVersion = {
-				enable = true;
-				activeConfig = "cachy";
+			fixes = {
+				suspend = {
+					enable = true;
+					activeConfig = "hyprdrive";
+				};
 			};
+			
+			components = {
 
-			scheduler = {
-				enable = true;
-				activeConfig = "scx";
-			};
+				monitorBrightness.enable = true;
 
-			wakeOnLan = {
-				enable = true;
-				interface = "eno1";
+				amdDrivers.enable = true;
+
+				kernelVersion = {
+					enable = true;
+					activeConfig = "cachy";
+				};
+
+				scheduler = {
+					enable = true;
+					activeConfig = "scx";
+				};
+
+				wakeOnLan = {
+					enable = true;
+					interface = "eno1";
+				};
 			};
 		};
 		
