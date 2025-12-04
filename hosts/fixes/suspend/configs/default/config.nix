@@ -9,6 +9,5 @@ in
 		    "mmc_core.disable_uhs2=1"
 		    "mem_sleep_default=deep"
 		];  
-
 	};
 } 

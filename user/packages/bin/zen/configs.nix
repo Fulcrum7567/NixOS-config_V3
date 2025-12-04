@@ -293,7 +293,7 @@
 							id = "8499796c-d322-4713-af65-b13da909e538";
 							container = 2;
 							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
-							position = 1;
+							position = 10;
 							isEssential = false;
 							isGroup = false;
 							editedTitle = true;
@@ -307,7 +307,7 @@
 							id = "0a22945c-291d-47f1-8030-a14f608f6e5a";
 							container = 2;
 							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
-							position = 2;
+							position = 20;
 							isEssential = false;
 							isGroup = false;
 							editedTitle = true;
@@ -321,7 +321,7 @@
 							id = "ad777a60-36c5-4eed-9d19-ec3a0b08f7c8";
 							container = 2;
 							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
-							position = 3;
+							position = 30;
 							isEssential = false;
 							isGroup = false;
 							editedTitle = true;
@@ -335,7 +335,7 @@
 							id = "1fcbc314-55ac-4021-97a1-72bcda0d4a33";
 							container = 2;
 							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
-							position = 4;
+							position = 40;
 							isEssential = false;
 							isGroup = false;
 							editedTitle = true;
@@ -349,7 +349,21 @@
 							id = "a46f7594-0c26-45fa-b41f-bd19277dc28d";
 							container = 2;
 							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
-							position = 5;
+							position = 50;
+							isEssential = false;
+							isGroup = false;
+							editedTitle = true;
+							isFolderCollapsed = false;
+							folderIcon = null;
+							folderParentId = null;
+						};
+
+						"Handout-Server" = {
+							url = "https://stud.fh-wedel.de/handout/";
+							if = "b01b88f8-d8cf-480b-b61a-3b5af22c4cd6";
+							container = 2;
+							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
+							position = 60;
 							isEssential = false;
 							isGroup = false;
 							editedTitle = true;
@@ -363,7 +377,7 @@
 							id = "f66afbd5-d320-4476-a9fd-7504566469cd";
 							container = 2;
 							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
-							position = 6;
+							position = 70;
 							isEssential = false;
 							isGroup = false;
 							editedTitle = true;
@@ -377,7 +391,7 @@
 							id = "d0608699-9467-4c56-a5f9-c4a2dcf3e566";
 							container = 2;
 							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
-							position = 7;
+							position = 80;
 							isEssential = false;
 							isGroup = false;
 							editedTitle = true;

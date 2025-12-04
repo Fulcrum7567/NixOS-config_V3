@@ -16,6 +16,11 @@
 		
 		home-manager.users.${config.user.settings.username} = {
 
+			xdg.userDirs = {
+				enable = true;
+				createDirectories = true;
+			};
+
 			
 			xdg.configFile."mimeapps.list".force = true;
 			xdg.configFile."gtk-4.0/settings.ini".force = true;
