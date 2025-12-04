@@ -39,6 +39,7 @@ in
 					"application/xml"			= defaultApps.editor.appID;
 					"application/javascript"	= defaultApps.editor.appID;
 					"inode/x-empty"				= defaultApps.editor.appID;
+					"application/x-zerosize" = defaultApps.editor.appID;
 					"text"		 				= defaultApps.editor.appID;
 
 					#"image/png"				=...
