@@ -360,7 +360,7 @@
 
 						"Handout-Server" = {
 							url = "https://stud.fh-wedel.de/handout/";
-							if = "b01b88f8-d8cf-480b-b61a-3b5af22c4cd6";
+							id = "b01b88f8-d8cf-480b-b61a-3b5af22c4cd6";
 							container = 2;
 							workspace = "a7f9811e-2bb5-4e4f-ad7b-f32a1eee19c4";
 							position = 60;
