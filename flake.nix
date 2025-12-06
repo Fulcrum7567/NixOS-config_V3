@@ -136,132 +136,219 @@
 		# ║                                                           ║
 		# ╚═══════════════════════════════════════════════════════════╝
 
-		currentHost = (import ./hosts/currentHost.nix).currentHost;
-
-		hostSettings = (import ./hosts/hosts/${currentHost}/hostSettingsRaw.nix);
-
-
-		# ╔═══════════════════════════════╗
-		# ║                               ║
-		# ║          o                    ║
-		# ║          O                    ║
-		# ║          o                    ║
-		# ║          o                    ║
-		# ║    .oOo. O  o  .oOoO .oOo     ║
-		# ║    O   o OoO   o   O `Ooo.    ║
-		# ║    o   O o  O  O   o     O    ║
-		# ║    oOoO' O   o `OoOo `OoO'    ║
-		# ║    O               O          ║
-		# ║    o'           OoO'          ║
-		# ║                               ║
-		# ╚═══════════════════════════════╝
-
-		pkgs-stable = import nixpkgs-stable {
-			system = hostSettings.system;
-			config = {
-			  	allowUnfree = true;
-			  	allowUnfreePredicate = (_: true);
-			  	allowInsecure = true;
-			  	permittedInsecurePackages = [ "openssl-1.1.1w" ];
-				nvidia.acceptLicense = true;
-			};
-			overlays = [
-				nix-vscode-extensions.overlays.default
-				(import ./system/customTypes/overlay.nix)
-			];
-		};
-
-		pkgs-unstable = import nixpkgs-unstable {
-			system = hostSettings.system;
-			config = {
-			  	allowUnfree = true;
-			  	allowUnfreePredicate = (_: true);
-			  	allowInsecure = true;
-			  	permittedInsecurePackages = [ "openssl-1.1.1w" ];
-				nvidia.acceptLicense = true;
-			};
-			overlays = [
-				nix-vscode-extensions.overlays.default
-				chaotic.overlays.default
-				(import ./system/customTypes/overlay.nix)
-			];
-		};
-
-		pkgs-default = (if (hostSettings.defaultPackageState == "stable")
-						then
-							pkgs-stable
-						else
-							pkgs-unstable
-						);
-
-		pkgs-system = (if (hostSettings.systemState == "stable")
-						then
-							pkgs-stable
-						else
-							pkgs-unstable
-						);
-
-
 		
-		lib = (if (hostSettings.systemState == "stable")
-				then
-					nixpkgs-stable.lib
-				else
-					nixpkgs-unstable.lib
-				);
 
-		libExtended = (if (hostSettings.systemState == "stable")
-				then
-					pkgs-stable.lib
-				else
-					pkgs-unstable.lib
-				);
+		# Create a list of all directories inside of ./hosts/hosts
+		# Every directory represents a host configuration
+		hosts = builtins.filter (x: x != null) (
+			nixpkgs-stable.lib.mapAttrsToList (name: value: if (value == "directory") then name else null) (
+				builtins.readDir ./hosts/hosts
+			)
+		);
 
-		home-manager = (if (hostSettings.systemState == "stable")
+		# Function to generate configuration for a single host
+		mkHost = host:
+			let
+				hostSettings = (import ./hosts/hosts/${host}/hostSettingsRaw.nix);
+				currentHost = host;
+
+
+				# ╔═══════════════════════════════╗
+				# ║                               ║
+				# ║          o                    ║
+				# ║          O                    ║
+				# ║          o                    ║
+				# ║          o                    ║
+				# ║    .oOo. O  o  .oOoO .oOo     ║
+				# ║    O   o OoO   o   O `Ooo.    ║
+				# ║    o   O o  O  O   o     O    ║
+				# ║    oOoO' O   o `OoOo `OoO'    ║
+				# ║    O               O          ║
+				# ║    o'           OoO'          ║
+				# ║                               ║
+				# ╚═══════════════════════════════╝
+
+				pkgs-stable = import nixpkgs-stable {
+					system = hostSettings.system;
+					config = {
+						allowUnfree = true;
+						allowUnfreePredicate = (_: true);
+						allowInsecure = true;
+						permittedInsecurePackages = [ "openssl-1.1.1w" ];
+						nvidia.acceptLicense = true;
+					};
+					overlays = [
+						nix-vscode-extensions.overlays.default
+						(import ./system/customTypes/overlay.nix)
+					];
+				};
+
+				pkgs-unstable = import nixpkgs-unstable {
+					system = hostSettings.system;
+					config = {
+						allowUnfree = true;
+						allowUnfreePredicate = (_: true);
+						allowInsecure = true;
+						permittedInsecurePackages = [ "openssl-1.1.1w" ];
+						nvidia.acceptLicense = true;
+					};
+					overlays = [
+						nix-vscode-extensions.overlays.default
+						chaotic.overlays.default
+						(import ./system/customTypes/overlay.nix)
+					];
+				};
+
+				pkgs-default = (if (hostSettings.defaultPackageState == "stable")
+								then
+									pkgs-stable
+								else
+									pkgs-unstable
+								);
+
+				pkgs-system = (if (hostSettings.systemState == "stable")
+								then
+									pkgs-stable
+								else
+									pkgs-unstable
+								);
+
+				
+				lib = (if (hostSettings.systemState == "stable")
 						then
-							home-manager-stable
+							nixpkgs-stable.lib
 						else
-							home-manager-unstable
+							nixpkgs-unstable.lib
 						);
 
-
-		stylix = (if (hostSettings.systemState == "stable")
+				libExtended = (if (hostSettings.systemState == "stable")
 						then
-							stylix-stable
+							pkgs-stable.lib
 						else
-							stylix-unstable
+							pkgs-unstable.lib
 						);
 
+				home-manager = (if (hostSettings.systemState == "stable")
+								then
+									home-manager-stable
+								else
+									home-manager-unstable
+								);
 
 
-		zen-browser = (if (hostSettings.defaultPackageState == "stable")
-					then
-						zen-browser-unstable
-					else
-						zen-browser-unstable
-			);
+				stylix = (if (hostSettings.systemState == "stable")
+								then
+									stylix-stable
+								else
+									stylix-unstable
+								);
 
-		nvf = (if (hostSettings.defaultPackageState == "stable")
-					then
-						nvf-stable
-					else
-						nvf-unstable
-			);
-		
-		hyprland = (if (hostSettings.defaultPackageState == "stable")
-					then
-						hyprland-stable
-					else
-						hyprland-unstable
-			);
 
-		nyx-modules = if (hostSettings.systemState == "unstable") then [
-			chaotic.nixosModules.default
-		] else [
-			chaotic.nixosModules.nyx-cache
-			chaotic.nixosModules.nyx-overlay
-			chaotic.nixosModules.nyx-registry
-		];
+
+				zen-browser = (if (hostSettings.defaultPackageState == "stable")
+							then
+								zen-browser-unstable
+							else
+								zen-browser-unstable
+					);
+
+				nvf = (if (hostSettings.defaultPackageState == "stable")
+							then
+								nvf-stable
+							else
+								nvf-unstable
+					);
+				
+				hyprland = (if (hostSettings.defaultPackageState == "stable")
+							then
+								hyprland-stable
+							else
+								hyprland-unstable
+					);
+
+				nyx-modules = if (hostSettings.systemState == "unstable") then [
+					chaotic.nixosModules.default
+				] else [
+					chaotic.nixosModules.nyx-cache
+					chaotic.nixosModules.nyx-overlay
+					chaotic.nixosModules.nyx-registry
+				];
+			in
+			{
+				name = host;
+				value = lib.nixosSystem {
+					system = hostSettings.system;
+					modules = [
+						# Home Manager as a NixOS module
+						home-manager.nixosModules.home-manager
+						{
+							home-manager.useGlobalPkgs = true;
+							home-manager.useUserPackages = true;
+
+							imports = [
+								inputs.nix-colors.homeManagerModules.default
+							];
+						}
+
+						# Stylix
+						stylix.nixosModules.stylix
+
+						# Sops-nix
+						sops-nix.nixosModules.sops
+
+
+						# Options
+						./system/options/hostOptions.nix
+						./system/options/userOptions.nix
+						./system/options/themeOptions.nix
+						./system/options/displayManagers.nix
+						./system/options/desktopOptions.nix
+						./system/options/shortcuts.nix
+						./system/options/hardware.nix
+						./system/options/systemOptions.nix
+
+						# Scripts
+						./system/scripts/updateInputs.nix
+
+						# Host
+						./hosts/hosts/${host}/hostConfigs/configuration.nix
+						./hosts/hosts/${host}/hostSettings.nix
+						./hosts/components/importer.nix
+						./hosts/fixes/importer.nix
+						./hosts/hosts/${host}/quickFixes.nix
+
+						# Server
+						./server/system/filesystem/imports.nix
+
+						# User
+						./user/bin/user.nix
+						./user/bin/userSettings.nix
+						./user/bin/var.nix
+						./user/bin/home.nix
+						
+						# Theming
+						./user/themes/bin/importer.nix
+						./user/themes/bin/apps/importer.nix
+						./user/themes/profiles/importer.nix
+
+						# Desktop
+						./user/desktops/displayManagers/importer.nix
+						./user/desktops/environments/importer.nix
+						./user/desktops/profiles/importer.nix
+
+						# Packages
+						./user/packages/bin/importer.nix
+						./user/packages/defaults/importer.nix
+						./user/packages/groups/importer.nix
+					] ++ nyx-modules;
+
+					specialArgs = {
+						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland;
+						hostSettingsRaw = hostSettings;
+						lib = libExtended;
+					};
+				};
+			};
 
 	in
 	{
@@ -289,79 +376,9 @@
 		# ╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
 
 
-		nixosConfigurations = {
-			${currentHost} = lib.nixosSystem {
-                system = hostSettings.system;
-                modules = [
-					# Home Manager as a NixOS module
-					home-manager.nixosModules.home-manager
-					{
-						home-manager.useGlobalPkgs = true;
-						home-manager.useUserPackages = true;
-
-						imports = [
-							inputs.nix-colors.homeManagerModules.default
-						];
-					}
-
-					# Stylix
-					stylix.nixosModules.stylix
-
-					# Sops-nix
-					sops-nix.nixosModules.sops
-
-
-					# Options
-					./system/options/hostOptions.nix
-					./system/options/userOptions.nix
-					./system/options/themeOptions.nix
-					./system/options/displayManagers.nix
-					./system/options/desktopOptions.nix
-					./system/options/shortcuts.nix
-					./system/options/hardware.nix
-					./system/options/systemOptions.nix
-
-					# Scripts
-					./system/scripts/updateInputs.nix
-
-					# Host
-					./hosts/hosts/${currentHost}/hostConfigs/configuration.nix
-					./hosts/hosts/${currentHost}/hostSettings.nix
-					./hosts/components/importer.nix
-					./hosts/fixes/importer.nix
-					./hosts/hosts/${currentHost}/quickFixes.nix
-
-					# Server
-					./server/system/filesystem/imports.nix
-
-					# User
-					./user/bin/user.nix
-					./user/bin/userSettings.nix
-					./user/bin/var.nix
-					./user/bin/home.nix
-					
-					# Theming
-					./user/themes/bin/importer.nix
-					./user/themes/bin/apps/importer.nix
-					./user/themes/profiles/importer.nix
-
-					# Desktop
-					./user/desktops/displayManagers/importer.nix
-					./user/desktops/environments/importer.nix
-					./user/desktops/profiles/importer.nix
-
-					# Packages
-					./user/packages/bin/importer.nix
-					./user/packages/defaults/importer.nix
-					./user/packages/groups/importer.nix
-		      ] ++ nyx-modules;
-
-		        specialArgs = {
-					inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland;
-					hostSettingsRaw = hostSettings;
-					lib = libExtended;
-				};
-			};
-		};
+		# Generate a nixosConfiguration for every host in ./hosts/hosts
+		nixosConfigurations = builtins.listToAttrs (
+			map mkHost hosts
+		);
 	};
 } 
