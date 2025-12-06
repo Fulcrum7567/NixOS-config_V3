@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, lib, pkgs, ... }: {
 	
 	config = {
 		host.settings = {
@@ -85,6 +85,7 @@
 				kernelVersion = {
 					enable = true;
 					activeConfig = "cachy";
+					cachy.version = pkgs.linuxPackages_cachyos-lts;
 				};
 
 				scheduler = {

@@ -5,7 +5,7 @@ in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "cachy")) {
 
-		boot.kernelPackages = (if (config.host.settings.systemType == "server") then pkgs.linuxPackages_cachyos-server else pkgs.linuxPackages_cachyos);
+		boot.kernelPackages = option.cachy.version;
 		
 	};
 } 

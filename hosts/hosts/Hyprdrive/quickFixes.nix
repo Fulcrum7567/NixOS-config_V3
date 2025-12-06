@@ -2,6 +2,23 @@
 {
 	config = {
 
+		nixpkgs.overlays = [
+			(final: prev: {
+				# CHANGE THIS to match your kernel: 
+				# linuxPackages | linuxPackages_latest | linuxPackages_6_12
+				linuxPackages_cachyos = prev.linuxPackages_cachyos.extend (kfinal: kprev: {
+					xpadneo = kprev.xpadneo.overrideAttrs (old: {
+						patches = (old.patches or []) ++ [
+							(prev.fetchpatch {
+								url = "https://github.com/orderedstereographic/xpadneo/commit/233e1768fff838b70b9e942c4a5eee60e57c54d4.patch";
+								hash = "sha256-HL+SdL9kv3gBOdtsSyh49fwYgMCTyNkrFrT+Ig0ns7E=";
+								stripLen = 2; # This removes the first 2 paths from the patch file
+							})
+						];
+					});
+				});
+			})
+		];
 
 
 		home-manager.users.${config.user.settings.username} = {
