@@ -39,6 +39,8 @@
 			signal.enable = true;
 			vscode.enable = true;
 
+			alvr.enable = true;
+
 			solaar.enable = true;
 
 			sunshine.enable = false;
