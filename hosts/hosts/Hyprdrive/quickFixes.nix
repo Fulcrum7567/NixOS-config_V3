@@ -2,40 +2,7 @@
 {
 	config = {
 
-		#nix-diff
-		environment.systemPackages = with pkgs; [
-			nix-diff
-		];
-		
-		programs.alvr = {
-			enable = true;
-			openFirewall = true;
-		};
 
-		hardware.graphics = {
-			enable = true;
-			enable32Bit = true;
-		};
-
-		boot.kernelParams = [
-			"video=DP-3:2560x1440@144"
-			"video=HDMI-A-1:1920x1080@60"
-		];
-
-
-
-
-
-
-		# Ollama
-		services.ollama = {
-			enable = false;
-			acceleration = "cuda";
-			models = "/mnt/HDD/AI/Ollama/Models";
-			loadModels = [
-				"deepseek-r1:70b"
-			];
-		};
 
 		home-manager.users.${config.user.settings.username} = {
 
