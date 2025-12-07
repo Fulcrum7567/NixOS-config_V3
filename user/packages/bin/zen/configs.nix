@@ -172,6 +172,12 @@
 							icon = "circle";
 							id = 3;
 						};
+
+						Jasmin = {
+							color = "pink";
+							icon = "food";
+							id = 4;
+						};
 					};
 
 					spacesForce = true;
@@ -193,6 +199,12 @@
 							icon = "❄️";
 							container = 3;
 							position = 3000;
+						};
+						"Jasmin" = {
+							id = "5c3fd124-d39d-420a-8989-f98fb0a7a47a";
+							icon = "🌸";
+							container = 4;
+							position = 4000;
 						};
 					};
 					pinsForce = true;

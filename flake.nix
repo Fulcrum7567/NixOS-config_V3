@@ -70,6 +70,17 @@
 		# Chaotic's Nyx
 		chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
+		disko-unstable = {
+			url = "github:nix-community/disko";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+
+		disko-stable = {
+			url = "github:nix-community/disko";
+			inputs.nixpkgs.follows = "nixpkgs-stable";
+		};
+
+
 
 		
 
@@ -120,7 +131,7 @@
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -273,6 +284,13 @@
 					chaotic.nixosModules.nyx-overlay
 					chaotic.nixosModules.nyx-registry
 				];
+
+				disko = (if (hostSettings.systemState == "stable")
+							then
+								disko-stable
+							else
+								disko-unstable
+					);
 			in
 			{
 				name = host;
@@ -343,7 +361,7 @@
 					] ++ nyx-modules;
 
 					specialArgs = {
-						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland;
+						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland disko;
 						hostSettingsRaw = hostSettings;
 						lib = libExtended;
 					};
