@@ -36,7 +36,8 @@
 				powerOffOptions.enable = true;
 				justPerfection.enable = false; # BROKEN!
 				middleClickClose.enable = true;
-				windowTitleIsBack.enable = true;
+				windowTitleIsBack.enable = false;
+				appIconsTaskbar.enable = true;
 				colorPicker.enable = true;
 				fuzzySearch.enable = true;
 			};
