@@ -10,8 +10,8 @@ in
 				"org/gnome/shell/extensions/aztaskbar" = {
 			    favourites = false;
 					intellihide = false;
-					middle-click-action = 'QUIT';
-					position-in-panel = 'LEFT';	
+					middle-click-action = "QUIT";
+					position-in-panel = "LEFT";	
 			  };  
 			};
 		};
