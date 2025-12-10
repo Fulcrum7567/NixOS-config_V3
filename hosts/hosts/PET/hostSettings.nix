@@ -68,7 +68,7 @@
 			
 				nvidiaDrivers = {
 					enable = true;
-					package = config.boot.kernelPackages.nvidiaPackages.stable;
+					package = config.boot.kernelPackages.nvidiaPackages.beta;
 					powerManagement = "finegrained";
 
 					activeConfig = "prime";
