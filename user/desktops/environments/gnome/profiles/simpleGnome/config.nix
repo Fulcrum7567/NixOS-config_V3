@@ -29,8 +29,8 @@
 				appIndicator.enable = true;
 				blurMyShell.enable = true;
 				clipboardIndicator.enable = true;
-				dashToDock.enable = false;
-				dashToDockAnimated.enable = true;
+				dashToDock.enable = true;
+				dashToDockAnimated.enable = false; # Buggy
 				grandTheftFocus.enable = true;
 				hibernateStatusButton.enable = false;
 				powerOffOptions.enable = true;
