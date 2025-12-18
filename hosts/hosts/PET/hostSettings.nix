@@ -25,6 +25,11 @@
 			signal.enable = true;
 			supergfxd.enable = true;
 
+			neovim = {
+				enable = true;
+				activeConfig = "nvf";
+			};
+
 			mullvad = {
 				enable = true;
 				autoEnableDelay = -1;

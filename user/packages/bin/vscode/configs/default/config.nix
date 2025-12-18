@@ -20,6 +20,8 @@ in
 					arrterian.nix-env-selector
 					jnoortheen.nix-ide
 					ms-vscode.cpptools-extension-pack
+					ms-azuretools.vscode-containers
+					ms-python.vscode-pylance
 				];
 
 				userSettings = {
