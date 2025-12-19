@@ -6,7 +6,6 @@ in
 	config = lib.mkIf (option.enable && (option.active == "default")) {
 		packages = {
 			git.enable = true;
-			jetbrainsToolbox.enable = true;
 			vscode.enable = true;
 		};
 	};
