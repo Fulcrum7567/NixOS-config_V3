@@ -25,6 +25,8 @@
 			signal.enable = true;
 			supergfxd.enable = true;
 
+			bottles.enable = true;
+
 			neovim = {
 				enable = true;
 				activeConfig = "nvf";

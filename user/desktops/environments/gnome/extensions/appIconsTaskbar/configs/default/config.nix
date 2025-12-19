@@ -8,11 +8,12 @@ in
 			dconf.settings = {
 
 				"org/gnome/shell/extensions/aztaskbar" = {
-			    favorites = false;
+			    	favorites = false;
 					intellihide = false;
 					middle-click-action = "QUIT";
 					position-in-panel = "LEFT";
 					panel-on-all-monitors = false;
+					hide-dash = false;
 			  };  
 			};
 		};
