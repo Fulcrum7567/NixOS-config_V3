@@ -46,7 +46,7 @@
 
 			groups = {
 				gaming = {
-					enable = false;
+					enable = true;
 					active = "noDroidcam";
 				};
 				programming.enable = true;

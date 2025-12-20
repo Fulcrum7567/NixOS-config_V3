@@ -27,7 +27,7 @@ in
 					{
 						timeout = config.packages.${settings.optionName}.sleepTimeout;
 						on-timeout = "hyprctl dispatch dpms off";
-						on-resume = "hyprctl dispatch dpms on; ${restartWaybar}";
+						on-resume = "hyprctl dispatch dpms on";#; ${restartWaybar}"; Fixed?
 					}
 				];
 			};
