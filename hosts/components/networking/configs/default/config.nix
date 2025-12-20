@@ -9,23 +9,23 @@ in
 
 			networks = {
 				"Obi Wlan Kenobi 5GHz" = {
-					psk = "dc17a708c048642dfce8e96376d476b9001c11956567990af0cd522b58d1754c";
+					pskRaw = "dc17a708c048642dfce8e96376d476b9001c11956567990af0cd522b58d1754c";
 				};
 
 				"FRITZ!Box 7490" = {
-					psk = "54fa802e4e2cce3ba8cd0e3b0f1ce42a83797dc92c8f7a980c476ee6883c2bdd";
+					pskRaw = "54fa802e4e2cce3ba8cd0e3b0f1ce42a83797dc92c8f7a980c476ee6883c2bdd";
 				};
 
 				"FRITZ!Box 7510 JB" = {
-					psk = "30b94206fc3c13e62221a0c99eda0ce7528636acbcffff255ed2d89c02d1cc43";
+					pskRaw = "30b94206fc3c13e62221a0c99eda0ce7528636acbcffff255ed2d89c02d1cc43";
 				};
 
 				"Mario's S23" = {
-					psk = "1cbafa8a27a779a8875cc9cec0cecc24ddb7528680dd0f5237093e7bb64188ac";
+					pskRaw = "1cbafa8a27a779a8875cc9cec0cecc24ddb7528680dd0f5237093e7bb64188ac";
 				};
 
 				"Apfelsaft" = {
-					psk = "1bc394df3c25a7d6034b35ed2e3fc4cdeacbf79343e8e986c9260d20467fa7b8";
+					pskRaw = "1bc394df3c25a7d6034b35ed2e3fc4cdeacbf79343e8e986c9260d20467fa7b8";
 				};
 
 				"FH-AD-Student" = {
