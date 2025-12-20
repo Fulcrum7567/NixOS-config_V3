@@ -83,7 +83,10 @@ in
 					enable = true;
 					activeConfig = "slyHarvey";
 				};
-				rofi.enable = true;
+				rofi = {
+					enable = true;
+					activeConfig = "slyHarvey";
+				};
 				hyprpaper.enable = true;
 			};
 		};
