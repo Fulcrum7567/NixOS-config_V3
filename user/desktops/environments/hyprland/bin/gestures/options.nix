@@ -3,7 +3,7 @@
   options.desktopEnvironments.hyprland.bin.gestures = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = false;
+      default = config.desktopEnvironments.hyprland.hyprlandBase.enable;
       description = "Enable gestures for Hyprland.";
     };
 

@@ -6,9 +6,9 @@ in
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
 		
 		networking = {
-			networkmanager.enable = false;
+			networkmanager.enable = config.desktopEnvironments.gnome.gnomeBase.enable;
 			wireless = {
-				enable = true;
+				enable = !config.desktopEnvironments.gnome.gnomeBase.enable;
 
 				networks = {
 					"Obi Wlan Kenobi 5GHz" = {
