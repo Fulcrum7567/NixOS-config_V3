@@ -49,6 +49,11 @@ in
 				enable = true;
 				activeConfig = "slyHarvey";
 			};
+
+			battery = {
+				enable = true;
+				activeConfig = "default";
+			};
 		};
 
 		home-manager.users.${config.user.settings.username} = {
@@ -71,7 +76,7 @@ in
 
 					modules-left = [ "hyprland/workspaces" "cava" "hyprland/window" ];
 					modules-center = [ "clock" "mpris" ];
-					modules-right = [ "tray" "pulseaudio" "bluetooth" "network" ];
+					modules-right = [ "tray" "pulseaudio" "bluetooth" ] ++ (if (config.host.settings.systemType == "laptop") then [ "battery" ] else []) ++ [ "network" ];
 				};
       };
 		};
