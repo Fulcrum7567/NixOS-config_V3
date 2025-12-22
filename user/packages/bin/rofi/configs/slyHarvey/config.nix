@@ -5,21 +5,12 @@ in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "slyHarvey")) {
 		home-manager.users.${config.user.settings.username} = {
-
-			xdg.configFile."rofi/launchers" = {
-				source = ./launchers;
-				recursive = true;
-			};
-			xdg.configFile."rofi/colors" = {
-				source = ./colors;
-				recursive = true;
-			};
 			
 			programs.rofi = {
 				terminal = config.packages.defaults.terminal.launchCommand;
 				plugins = with pkgs-default; [
 					rofi-emoji # https://github.com/Mange/rofi-emoji 🤯
-          			rofi-games # https://github.com/Rolv-Apneseth/rofi-games 🎮
+          rofi-games # https://github.com/Rolv-Apneseth/rofi-games 🎮
 				];
 
 

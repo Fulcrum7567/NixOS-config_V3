@@ -31,6 +31,10 @@ in
 						pskRaw = "1bc394df3c25a7d6034b35ed2e3fc4cdeacbf79343e8e986c9260d20467fa7b8";
 					};
 
+					"Stoetzels FRITZ!Box 7490" = {
+						pskRaw = "e436390a5a2b19e0e92d6663b9af576eff2d843a0248c951a4afa3368973ca82";
+					};
+
 					"FH-AD-Student" = {
 						auth = ''
 							key_mgmt=WPA-EAP
