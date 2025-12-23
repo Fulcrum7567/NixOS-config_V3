@@ -3,7 +3,7 @@ let
 	option = config.packages.${settings.optionName};
 in
 {
-	config = lib.mkIf (option.enable && (option.activeConfig == "slyHarvey")) {
+	config = lib.mkIf (option.enable && (option.activeConfig == "custom1")) {
 
 		packages.waybar.modules = {
 			cava = {
@@ -33,7 +33,7 @@ in
 
 			network = {
 				enable = true;
-				activeConfig = "slyHarvey";
+				activeConfig = "custom1";
 			};
 
 			bluetooth = {
@@ -48,6 +48,11 @@ in
 			tray = {
 				enable = true;
 				activeConfig = "slyHarvey";
+			};
+
+			battery = {
+				enable = true;
+				activeConfig = "custom1";
 			};
 		};
 
@@ -71,7 +76,7 @@ in
 
 					modules-left = [ "hyprland/workspaces" "cava" "hyprland/window" ];
 					modules-center = [ "clock" "mpris" ];
-					modules-right = [ "tray" "pulseaudio" "bluetooth" "network" ];
+					modules-right = [ "tray" "pulseaudio" "bluetooth" ] ++ (if (config.host.settings.systemType == "laptop") then [ "battery" ] else []) ++ [ "network" ];
 				};
       };
 		};

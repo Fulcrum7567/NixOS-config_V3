@@ -81,7 +81,7 @@ in
 			apps = {
 				waybar = {
 					enable = true;
-					activeConfig = "slyHarvey";
+					activeConfig = "custom1";
 				};
 				rofi = {
 					enable = true;

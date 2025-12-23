@@ -50,6 +50,32 @@
 			icons.active = "nordzy";
 
 			apps = {
+				waybar = {
+					window = {
+						enable = true;
+						activeConfig = "slyHarvey";
+					};
+
+					tooltips = {
+						enable = true;
+						activeConfig = "slyHarvey";
+					};
+
+					general = {
+						enable = true;
+						activeConfig = "slyHarvey";
+					};
+
+					colors = {
+						enable = true;
+						activeConfig = "slyHarvey";
+					};
+
+					modules = {
+						enable = true;
+						activeConfig = "slyHarvey";
+					};
+				};
 				hyprland.bin = {
 					animations.enable = true;
 					decorations.enable = true;
