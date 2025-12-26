@@ -63,7 +63,7 @@ in
 					layer = "top";
 					position = "top";
 					mode = "dock";
-					height = 32; # 35
+					height = 35; # 35
 					exclusive = true;
 					passthrough = false;
 					gtk-layer-shell = true;

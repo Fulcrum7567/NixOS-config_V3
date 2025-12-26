@@ -6,7 +6,14 @@
         content = ''
           #network {
             color: @blue;
-            font-size: 28px;
+            /* 1. Reset padding so it doesn't add to the height */
+            padding-top: 0;
+            padding-bottom: 0;
+
+            /* 2. Aggressive negative margins. 
+              Start with -10px. If the bar is still too tall, try -15px or -20px. */
+            margin-top: -20px;
+            margin-bottom: -20px;
           }
           #network.disconnected,
           #network.disabled {
