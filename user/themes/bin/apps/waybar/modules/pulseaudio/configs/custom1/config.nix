@@ -5,7 +5,7 @@
       {
         content = ''
           #pulseaudio {
-            color: @base0A;
+            color: @module_icon_color;
             /* 1. Reset padding so it doesn't add to the height */
             padding-top: 0;
             padding-bottom: 0;

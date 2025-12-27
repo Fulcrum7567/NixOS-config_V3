@@ -5,7 +5,7 @@
       {
         content = ''
           #clock {
-            color: @base0D;
+            color: @base0C;
           }
         '';
       }

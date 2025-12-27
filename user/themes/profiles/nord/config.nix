@@ -53,7 +53,7 @@
 				waybar = {
 					window = {
 						enable = true;
-						activeConfig = "custom1";
+						activeConfig = "slyHarvey";
 					};
 
 					tooltips = {
@@ -68,13 +68,31 @@
 
 					colors = {
 						enable = true;
-						activeConfig = "custom1";
+						activeConfig = "dynamic";
 					};
 
 					modules = {
 						enable = true;
-						activeConfig = "slyHarvey";
+						activeConfig = "custom1";
+
+						clock = {
+							enable = true;
+							activeConfig = "custom1";
+						};
+
+						hyprland = {
+							workspaces = {
+								enable = true;
+								activeConfig = "custom1";
+							};
+							window = {
+								enable = true;
+								activeConfig = "custom1";
+							};
+						};
 					};
+
+					
 				};
 				hyprland.bin = {
 					animations.enable = true;

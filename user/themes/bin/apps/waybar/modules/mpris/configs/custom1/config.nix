@@ -5,7 +5,7 @@
       {
         content = ''
           #mpris {
-          	color: @base0F;
+          	color: @base0E;
           }
         '';
       }

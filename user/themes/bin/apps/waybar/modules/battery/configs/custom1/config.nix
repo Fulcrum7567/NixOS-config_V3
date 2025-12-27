@@ -5,7 +5,7 @@
       {
         content = ''
           #battery {
-            color: @base0A;
+            color: @module_icon_color;
             /* 1. Reset padding so it doesn't add to the height */
             padding-top: 0;
             padding-bottom: 0;
@@ -19,10 +19,10 @@
             background-color: transparent;
           }
           #battery.critical {
-            color: @base0B;
+            color: @base08;
           }
           #battery.charging {
-            color: @base0E;
+            color: @base0B;
           }
         '';
       }

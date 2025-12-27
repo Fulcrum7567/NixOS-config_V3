@@ -5,7 +5,7 @@
       {
         content = ''
           #window {
-            color: @base0F;
+            color: @base0E;
           }
         '';
       }

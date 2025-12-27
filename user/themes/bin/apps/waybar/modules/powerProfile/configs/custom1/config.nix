@@ -5,7 +5,7 @@
       {
         content = ''
           #power-profiles-daemon {
-            color: @base0A;
+            color: @module_icon_color;
           }
         '';
       }

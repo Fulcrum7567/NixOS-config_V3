@@ -6,22 +6,22 @@
         order = 200;
         content = ''
           .modules-left {
-          	background: @theme_base_color;
-           	border: 1px solid @blue;
+          	background: @base01;
+           	border: 1px solid @module_border_color;
           	padding-right: 15px;
           	padding-left: 2px;
           	border-radius: 10px;
           }
           .modules-center {
-          	background: @theme_base_color;
-            border: 0.5px solid @overlay0;
+          	background: @base01;
+            border: 0.5px solid @base00;
           	padding-right: 5px;
           	padding-left: 5px;
           	border-radius: 10px;
           }
           .modules-right {
-          	background: @theme_base_color;
-           	border: 1px solid @blue;
+          	background: @base01;
+           	border: 1px solid @module_border_color;
           	padding-right: 15px;
           	padding-left: 15px;
           	border-radius: 10px;

@@ -5,7 +5,7 @@
       {
         content = ''
           #cava {
-          	color: @base0A;
+          	color: @module_icon_color;
           }
         '';
       }

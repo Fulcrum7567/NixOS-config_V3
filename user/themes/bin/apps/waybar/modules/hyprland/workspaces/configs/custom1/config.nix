@@ -20,27 +20,27 @@
           	color: @base03;
           	background-color: @base00;
            	padding-left: 2px;
-              padding-right: 2px;
-              animation: gradient_f 20s ease-in infinite;
-              transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+            padding-right: 2px;
+            animation: gradient_f 20s ease-in infinite;
+            transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
           }
 
           #workspaces button.persistent {
-          	color: @base01;
+          	color: @base00;
           	border-radius: 10px;
           }
 
           #workspaces button.active {
-          	color: @base0C;
-            	border-radius: 10px;
-              padding-left: 8px;
-              padding-right: 8px;
-              animation: gradient_f 20s ease-in infinite;
-              transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+          	color: @base0E;
+            border-radius: 10px;
+            padding-left: 8px;
+            padding-right: 8px;
+            animation: gradient_f 20s ease-in infinite;
+            transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
           }
 
           #workspaces button.urgent {
-          	color: @base0B;
+          	color: @base08;
            	border-radius: 0px;
           }
         '';
