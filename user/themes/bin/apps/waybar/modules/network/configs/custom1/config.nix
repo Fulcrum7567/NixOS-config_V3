@@ -14,6 +14,9 @@
               Start with -10px. If the bar is still too tall, try -15px or -20px. */
             margin-top: -20px;
             margin-bottom: -20px;
+
+            /* 3. Optional: Ensure the background doesn't look weird if you use one */
+            background-color: transparent;
           }
           #network.disconnected,
           #network.disabled {

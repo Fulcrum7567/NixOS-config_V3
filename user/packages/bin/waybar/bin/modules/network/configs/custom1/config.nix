@@ -5,6 +5,7 @@
       "network" = {
         # on-click = "nm-connection-editor";
         # "interface" = "wlp2*"; # (Optional) To force the use of this interface
+        interval = 10;
         format = "<span size='250%'></span>";
         format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
         format-wifi = "<span size='250%'>{icon}</span>";

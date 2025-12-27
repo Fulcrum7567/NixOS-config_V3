@@ -38,12 +38,12 @@ in
 
 			bluetooth = {
 				enable = true;
-				activeConfig = "slyHarvey";
+				activeConfig = "custom1";
 			};
 
 			pulseaudio = {
 				enable = true;
-				activeConfig = "slyHarvey";
+				activeConfig = "custom1";
 			};
 			tray = {
 				enable = true;
