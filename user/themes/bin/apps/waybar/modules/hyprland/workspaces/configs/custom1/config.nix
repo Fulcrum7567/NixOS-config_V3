@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  config.theming.apps.waybar = lib.mkIf (config.theming.apps.waybar.enable && (config.theming.apps.waybar.modules.hyprland.workspaces.enable && (config.theming.apps.waybar.modules.hyprland.workspaces.activeConfig == "slyHarvey"))) {
+  config.theming.apps.waybar = lib.mkIf (config.theming.apps.waybar.enable && (config.theming.apps.waybar.modules.hyprland.workspaces.enable && (config.theming.apps.waybar.modules.hyprland.workspaces.activeConfig == "custom1"))) {
     style = [
       {
         content = ''
@@ -17,8 +17,8 @@
 
           #workspaces button:hover {
           	border-radius: 10px;
-          	color: @overlay0;
-          	background-color: @surface0;
+          	color: @base03;
+          	background-color: @base00;
            	padding-left: 2px;
               padding-right: 2px;
               animation: gradient_f 20s ease-in infinite;
@@ -26,12 +26,12 @@
           }
 
           #workspaces button.persistent {
-          	color: @surface1;
+          	color: @base01;
           	border-radius: 10px;
           }
 
           #workspaces button.active {
-          	color: @peach;
+          	color: @base0C;
             	border-radius: 10px;
               padding-left: 8px;
               padding-right: 8px;
@@ -40,7 +40,7 @@
           }
 
           #workspaces button.urgent {
-          	color: @red;
+          	color: @base0B;
            	border-radius: 0px;
           }
         '';

@@ -5,7 +5,7 @@
       {
         content = ''
           #bluetooth {
-            color: @blue;
+            color: @base0A;
           }
         '';
       }

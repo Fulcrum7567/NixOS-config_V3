@@ -53,22 +53,22 @@
 				waybar = {
 					window = {
 						enable = true;
-						activeConfig = "slyHarvey";
+						activeConfig = "custom1";
 					};
 
 					tooltips = {
 						enable = true;
-						activeConfig = "slyHarvey";
+						activeConfig = "custom1";
 					};
 
 					general = {
 						enable = true;
-						activeConfig = "slyHarvey";
+						activeConfig = "custom1";
 					};
 
 					colors = {
 						enable = true;
-						activeConfig = "slyHarvey";
+						activeConfig = "custom1";
 					};
 
 					modules = {

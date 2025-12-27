@@ -5,7 +5,7 @@
       {
         content = ''
           #network {
-            color: @blue;
+            color: @base08;
             /* 1. Reset padding so it doesn't add to the height */
             padding-top: 0;
             padding-bottom: 0;
@@ -20,8 +20,8 @@
           }
           #network.disconnected,
           #network.disabled {
-            background-color: @surface0;
-            color: @text;
+            background-color: @base00;
+            color: @base04;
           }
         '';
       }
