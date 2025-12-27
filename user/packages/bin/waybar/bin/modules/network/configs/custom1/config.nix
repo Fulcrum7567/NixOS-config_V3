@@ -13,7 +13,7 @@
         format-disconnected = "<span size='250%'>󰤮</span>";
         format-disabled = "<span size='250%'>󰤮</span> <span rise='7800'>Off</span>";
         tooltip-format = "󰈁 {essid}\n 󰩠 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
-        tooltip-format-wifi = "{icon} {essid} - {signalStrength}%\n󰩠 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
+        tooltip-format-wifi = "{icon} {essid} ({frequency} GHz) - {signalStrength}%\n󰩠 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
         tooltip-format-disconnected = "󰤮 Disconnected";
         tooltip-format-disabled = "󰤮 Network Disabled";
         
