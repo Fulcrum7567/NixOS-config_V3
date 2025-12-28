@@ -20,7 +20,6 @@
           }
           #network.disconnected,
           #network.disabled {
-            background-color: @base00;
             color: @base04;
           }
         '';
