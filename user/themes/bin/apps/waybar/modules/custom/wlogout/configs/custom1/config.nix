@@ -5,6 +5,7 @@
       {
         content = ''
           #custom-wlogout {
+            padding-left: 6px;
             color: @module_icon_color;
           }
         '';
