@@ -55,7 +55,6 @@ in
 						betterSessions.enable = false;
 						betterSettings.enable = true;
 						callTimer.enable = true;
-						clearUrLs.enable = true;
 						copyFileContents.enable = true;
 						customIdle = {
 							enable = true;
@@ -74,7 +73,6 @@ in
 						friendsSince.enable = true;
 						gameActivityToggle.enable = true;
 						implicitRelationships.enable = true;
-						mutualGroupDMs.enable = true;
 						newGuildSettings = {
 							enable = true;
 							guild = true;
@@ -97,7 +95,6 @@ in
 						noProfileThemes.enable = true;
 						oneko.enable = true;
 						platformIndicators.enable = true;
-						reviewDb.enable = true;
 						secretRingToneEnabler.enable = false;
 						summaries.enable = true;
 						serverListIndicators = {
