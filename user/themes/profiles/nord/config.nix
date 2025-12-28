@@ -90,6 +90,13 @@
 								activeConfig = "custom1";
 							};
 						};
+
+						custom = {
+							wlogout = {
+								enable = true;
+								activeConfig = "custom1";
+							};
+						};
 					};
 
 					

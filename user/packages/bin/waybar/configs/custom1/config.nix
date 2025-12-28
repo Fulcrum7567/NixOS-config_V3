@@ -59,6 +59,13 @@ in
 				enable = true;
 				activeConfig = "custom1";
 			};
+
+			custom = {
+				wlogout = {
+					enable = true;
+					activeConfig = "custom1";
+				};
+			};
 		};
 
 		home-manager.users.${config.user.settings.username} = {
@@ -81,7 +88,7 @@ in
 
 					modules-left = [ "hyprland/workspaces" "cava" "hyprland/window" ];
 					modules-center = [ "clock" "mpris" ];
-					modules-right = [ "tray" "pulseaudio" "bluetooth" "power-profiles-daemon" ] ++ (if (config.host.settings.systemType == "laptop") then [ "battery" ] else []) ++ [ "network" ];
+					modules-right = [ "tray" "pulseaudio" "bluetooth" "power-profiles-daemon" ] ++ (if (config.host.settings.systemType == "laptop") then [ "battery" ] else []) ++ [ "network" "custom/wlogout" ];
 				};
       };
 		};

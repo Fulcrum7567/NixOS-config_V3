@@ -4,13 +4,8 @@ let
 in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
-		security.pam.services.hyprlock.fprintAuth = false;
 		home-manager.users.${config.user.settings.username} = {
-			programs.hyprlock.settings = {
-				auth = {
-    			fingerprint.enabled = config.hosts.components.fingerprint.enable;
-				};
-			};
+			
 		};
 	};
-}
+} 
