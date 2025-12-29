@@ -98,6 +98,7 @@ in
 		packages = {
 			hypridle.enable = true;
 			mako.enable = true;
+			hyprgrass.enable = true;
 		};
 
 		desktops.sessionType = "wayland";

@@ -16,6 +16,9 @@ in
 			    autocd = true;
 			    initContent = ''
 			    PROMPT="${config.packages.defaults.shell.initPrompt}";
+					if [[ -n ${if config.packages.fastfetch.enable then "enabled" else ""} ]]; then
+						fastfetch
+					fi
 			     
 			    if [[ -n "$DIRENV_DIR" ]]; then
 				    PROMPT="%F{green}❄️ nix-shell%f $PROMPT"

@@ -67,6 +67,15 @@
 			inputs.nixpkgs.follows = "nixpkgs-stable";
 		};
 
+		hyprgrass-stable = {
+			url = "github:horriblename/hyprgrass";
+			inputs.hyprland.follows = "hyprland-stable";
+		};
+
+		hyprgrass-unstable = {
+			url = "github:horriblename/hyprgrass";
+			inputs.hyprland.follows = "hyprland-unstable";
+		};
 		# Chaotic's Nyx
 		chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
@@ -131,7 +140,7 @@
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -277,6 +286,13 @@
 								hyprland-unstable
 					);
 
+				hyprgrass = (if (hostSettings.defaultPackageState == "stable")
+							then
+								hyprgrass-stable
+							else
+								hyprgrass-unstable
+					);
+
 				nyx-modules = if (hostSettings.systemState == "unstable") then [
 					chaotic.nixosModules.default
 				] else [
@@ -361,7 +377,7 @@
 					] ++ nyx-modules;
 
 					specialArgs = {
-						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland disko;
+						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland hyprgrass disko;
 						hostSettingsRaw = hostSettings;
 						lib = libExtended;
 					};
