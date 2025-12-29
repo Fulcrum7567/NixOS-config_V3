@@ -3,7 +3,7 @@
   config = lib.mkIf (config.packages.waybar.modules.custom.wlogout.enable && (config.packages.waybar.modules.custom.wlogout.activeConfig == "custom1")) {
     packages.wlogout = {
       enable = true;
-      activeConfig = "HyDE1";
+      activeConfig = "sheng";
     };
     home-manager.users.${config.user.settings.username}.programs.waybar.settings.mainBar = {
       "custom/wlogout" = {

@@ -91,37 +91,37 @@ in
           }
 
           #lock {
-              background-image: image(url("${../../bin/icons/lock_${BtnCol}.png}"));
+              background-image: image(url("${./bin/icons/lock_${BtnCol}.png}"));
               border-radius: ${button_rad}px 0px 0px ${button_rad}px;
               margin : ${mgn}px 0px ${mgn}px ${mgn}px;
           }
 
           #logout {
-              background-image: image(url("${../../bin/icons/logout_${BtnCol}.png}"));
+              background-image: image(url("${./bin/icons/logout_${BtnCol}.png}"));
               border-radius: 0px 0px 0px 0px;
               margin : ${mgn}px 0px ${mgn}px 0px;
           }
 
           #suspend {
-              background-image: image(url("${../../bin/icons/suspend_${BtnCol}.png}"));
+              background-image: image(url("${./bin/icons/suspend_${BtnCol}.png}"));
               border-radius: 0px 0px 0px 0px;
               margin : ${mgn}px 0px ${mgn}px 0px;
           }
 
           #shutdown {
-              background-image: image(url("${../../bin/icons/shutdown_${BtnCol}.png}"));
+              background-image: image(url("${./bin/icons/shutdown_${BtnCol}.png}"));
               border-radius: 0px 0px 0px 0px;
               margin : ${mgn}px 0px ${mgn}px 0px;
           }
 
           #hibernate {
-              background-image: image(url("${../../bin/icons/hibernate_${BtnCol}.png}"));
+              background-image: image(url("${./bin/icons/hibernate_${BtnCol}.png}"));
               border-radius: 0px 0px 0px 0px;
               margin : ${mgn}px 0px ${mgn}px 0px;
           }
 
           #reboot {
-              background-image: image(url("${../../bin/icons/reboot_${BtnCol}.png}"));
+              background-image: image(url("${./bin/icons/reboot_${BtnCol}.png}"));
               border-radius: 0px ${button_rad}px ${button_rad}px 0px;
               margin : ${mgn}px ${mgn}px ${mgn}px 0px;
           }
