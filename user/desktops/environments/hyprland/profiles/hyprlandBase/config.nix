@@ -99,6 +99,7 @@ in
 			hypridle.enable = true;
 			mako.enable = true;
 			hyprgrass.enable = true;
+			brightnessctl.enable = true;
 		};
 
 		desktops.sessionType = "wayland";
