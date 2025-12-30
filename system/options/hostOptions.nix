@@ -83,7 +83,19 @@ in
 		hashedPassword = lib.mkOption {
 			type = lib.types.str;
 			description = "Hash value of the password to use on this host";
-		};	
+		};
+
+		suspendWorking = lib.mkOption {
+			type = lib.types.bool;
+			default = false;
+			description = "Whether suspend is working on this host or not.";
+		};
+
+		hibernateWorking = lib.mkOption {
+			type = lib.types.bool;
+			default = false;
+			description = "Whether hibernate is working on this host or not.";
+		};
 
 	};
 }

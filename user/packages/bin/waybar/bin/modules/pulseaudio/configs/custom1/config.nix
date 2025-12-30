@@ -5,10 +5,10 @@
       "pulseaudio" = {
         format = "<span size='250%'>{icon}</span> <span rise='7800'>{volume}%</span>";
         format-muted = "<span size='250%'></span>";
-        format-bluetooth = "<span size='250%'>󰥰</span>";
+        format-bluetooth = "<span size='250%'>󰥰</span> <span rise='7800'>{volume}%</span>";
         on-click = "pavucontrol -t 3";
         on-click-middle = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-        tooltip-format = "{icon} {desc} {volume}%";
+        tooltip-format = "{icon} {volume}% ({desc})";
         scroll-step = 2;
         format-icons = {
           headphone = "";
@@ -20,6 +20,10 @@
           default = [
             ""
             ""
+            ""
+            ""
+            ""
+            ""
             ""
           ];
         };

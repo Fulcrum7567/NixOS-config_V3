@@ -17,5 +17,10 @@
 			type = lib.types.nullOr (lib.types.enum [ "x11" "wayland" ]);
 			description = "Set the session type to use.";
 		};
+
+		logoutCommand = lib.mkOption {
+			type = lib.types.str;
+			description = "Define logout command for the desktop environment.";
+		};
 	};
 }

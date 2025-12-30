@@ -50,6 +50,7 @@
 			icons.active = "nordzy";
 
 			apps = {
+				wlogout.activeConfig = "sheng";
 				waybar = {
 					window = {
 						enable = true;

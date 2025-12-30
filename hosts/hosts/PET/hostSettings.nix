@@ -6,6 +6,8 @@
 			gpuManufacturer = "nvidia";
 			dotfilesDir = "/home/${config.user.settings.username}/.dotfiles";
 			hashedPassword = "$6$swTYGVRP4erDVWWO$argE8karkQ6JyNFAEgFMiJpEYCYrIIZChmqrvXUb0VDx7lS./U661Agnv1mwJVrlx1x.ShGaznfrbgdsrdqBW0";
+			hibernateWorking = false;
+			suspendWorking = true;
 		};
 		theming.activeTheme = "nord";
 		desktops.activeDesktop = "sddmWithHyprland";

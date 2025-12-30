@@ -100,9 +100,16 @@ in
 			mako.enable = true;
 			hyprgrass.enable = true;
 			brightnessctl.enable = true;
+
+			defaults = {
+				lockscreen.active = "hyprlock";
+			};
 		};
 
-		desktops.sessionType = "wayland";
+		desktops = {
+			sessionType = "wayland";
+			logoutCommand = "hyprctl dispatch exit";
+		};
 
 		
 	};
