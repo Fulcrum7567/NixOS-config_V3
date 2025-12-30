@@ -4,43 +4,43 @@ let
 in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "sheng")) {
-		packages.toybox.enable = true; # make sure killall is available
+		packages.hyprlock.enable = true; # lockscreen
 		home-manager.users.${config.user.settings.username} = {
 			programs.wlogout = {
 				layout = [
 					{
 							"label" = "lock";
-							"action" = "killall wlogout && sleep 0.15 && sh $HOME/Scripts/lockscreen";
+							"action" = "pkill wlogout && sleep 0.15 && hyprlock";
 							"text" = "Lock";
 							"keybind" = "l";
 					}
 					{
 							"label" = "hibernate";
-							"action" = "killall wlogout && sleep 0.25 && loginctl hibernate";
+							"action" = "pkill wlogout && sleep 0.25 && systemctl hibernate";
 							"text" = "Hibernate";
 							"keybind" = "h";
 					}
 					{
 							"label" = "logout";
-							"action" = "killall wlogout && sleep 0.25 && hyprctl dispatch exit";
+							"action" = "pkill wlogout && sleep 0.25 && hyprctl dispatch exit";
 							"text" = "Logout";
 							"keybind" = "e";
 					}
 					{
 							"label" = "shutdown";
-							"action" = "killall wlogout && sleep 0.25 && loginctl poweroff";
+							"action" = "pkill wlogout && sleep 0.25 && systemctl poweroff";
 							"text" = "Shutdown";
 							"keybind" = "s";
 					}
 					{
 							"label" = "suspend";
-							"action" = "killall wlogout && sleep 0.25 && loginctl suspend";
+							"action" = "pkill wlogout && sleep 0.25 && systemctl suspend";
 							"text" = "Suspend";
 							"keybind" = "u";
 					}
 					{
 							"label" = "reboot";
-							"action" = "killall wlogout && sleep 0.25 && loginctl reboot";
+							"action" = "pkill wlogout && sleep 0.25 && systemctl reboot";
 							"text" = "Reboot";
 							"keybind" = "r";
 					}
