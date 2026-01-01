@@ -1,6 +1,8 @@
 { config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
 let
 	option = config.packages.${settings.optionName};
+
+	activateTlpProfileSwitch = (config.host.settings.systemType == "laptop") && config.hosts.components.powerManagement.enable && (config.hosts.components.powerManagement.activeConfig == "tlp");
 in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "custom1")) {
@@ -65,6 +67,10 @@ in
 					enable = true;
 					activeConfig = "custom1";
 				};
+				tlpProfileSwitch = {
+					enable = activateTlpProfileSwitch;
+					activeConfig = "custom1";
+				};
 			};
 		};
 
@@ -88,7 +94,7 @@ in
 
 					modules-left = [ "hyprland/workspaces" "cava" "hyprland/window" ];
 					modules-center = [ "clock" "mpris" ];
-					modules-right = [ "tray" "pulseaudio" "bluetooth" "power-profiles-daemon" ] ++ (if (config.host.settings.systemType == "laptop") then [ "battery" ] else []) ++ [ "network" "custom/wlogout" ];
+					modules-right = [ "tray" "pulseaudio" "bluetooth" ] ++ (if activateTlpProfileSwitch then [ "custom/tlpProfileSwitch" ] else []) ++ (if (config.host.settings.systemType == "laptop") then [ "battery" ] else []) ++ [ "network" "custom/wlogout" ];
 				};
       };
 		};

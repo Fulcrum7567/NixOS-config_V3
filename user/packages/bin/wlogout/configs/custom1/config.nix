@@ -14,7 +14,14 @@ in
 							"text" = "Lock";
 							"keybind" = "l";
 					}
-				]++ (if (config.host.settings.suspendWorking) then [
+				] ++ [
+					{
+							"label" = "shutdown";
+							"action" = "systemctl poweroff";
+							"text" = "Shutdown";
+							"keybind" = "s";
+					}
+				] ++ (if (config.host.settings.suspendWorking) then [
 					{
 							"label" = "suspend";
 							"action" = "systemctl suspend";
@@ -23,10 +30,10 @@ in
 					} 
 				] else []) ++ [
 					{
-							"label" = "shutdown";
-							"action" = "systemctl poweroff";
-							"text" = "Shutdown";
-							"keybind" = "s";
+							"label" = "reboot";
+							"action" = "systemctl reboot";
+							"text" = "Reboot";
+							"keybind" = "r";
 					}
 				] ++ (if (config.host.settings.hibernateWorking) then [
 					{
@@ -44,12 +51,6 @@ in
 					}
 					
 				]  ++ [
-					{
-							"label" = "reboot";
-							"action" = "systemctl reboot";
-							"text" = "Reboot";
-							"keybind" = "r";
-					}
 					{
 						"label" = "rebootToFirmware";
 						"action" = "systemctl reboot --firmware-setup";

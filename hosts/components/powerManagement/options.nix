@@ -11,13 +11,13 @@
 
         activeConfig = lib.mkOption {
             type = lib.types.enum (config.hosts.components.${settings.optionName}.availableConfigs or []);
-            default = "tlp";
+            default = if (config.host.settings.systemType == "laptop") then "tlp" else "";
             description = "Set the active configuration for the ${settings.displayName} component.";
         };
 
         enable = lib.mkOption {
             type = lib.types.bool;
-            default = false;
+            default = true;
             description = "Whether to enable the ${settings.displayName} component.";
         };
 

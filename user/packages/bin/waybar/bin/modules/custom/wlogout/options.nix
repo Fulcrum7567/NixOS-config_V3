@@ -16,7 +16,7 @@
 
     activeConfig = lib.mkOption {
       type = lib.types.enum (config.packages.waybar.modules.custom.wlogout.availableConfigs or []);
-      default = "default"; # A default config should always exist, delete if not
+      default = "custom1"; # A default config should always exist, delete if not
       description = "Set the active configuration for the wlogout module.";
     };
   };
