@@ -15,6 +15,9 @@
           ",XF86MonBrightnessUp, exec, brightnessctl set 10%+"
           ",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
           ",XF86KbdLightOnOff, exec, brightnessctl --device='asus::kbd_backlight' set $(if [[ $(brightnessctl --device='asus::kbd_backlight' g) -lt 3 ]]; then echo \"+1\"; else echo \"0\"; fi)"
+          ",XF86AudioPlay, exec, playerctl play-pause"
+          ",XF86AudioNext, exec, playerctl next"
+          ",XF86AudioPrev, exec, playerctl previous"
         ];
       };
     };

@@ -4,7 +4,7 @@
 		packages = {
 			defaults = {
 				terminal.appID = "com.mitchellh.ghostty.desktop";
-				terminal.launchAtPathCommand = "ghostty -d";
+				terminal.launchAtPathCommand = "ghostty --working-directory=\"<path>\"";
 				terminal.launchCommand = "ghostty";
 			};
 
