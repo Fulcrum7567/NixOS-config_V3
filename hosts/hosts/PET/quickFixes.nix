@@ -15,6 +15,10 @@
 			}
 		];
 
+		security.sudo.extraConfig = ''
+			Defaults pwfeedback
+		'';
+
 		# Set the power button behavior to suspend
 		services.logind.settings.Login = {
 			HandlePowerKey = "suspend";
