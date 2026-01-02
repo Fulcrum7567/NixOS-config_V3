@@ -66,6 +66,13 @@
 
 			components = {
 
+				powerManagement = {
+					enable = true;
+					activeConfig = "ppd";
+					limitWattageOnBattery = true;
+					chargeLimit = 85;
+				};
+
 				
 
 				fingerprint.enable = true;

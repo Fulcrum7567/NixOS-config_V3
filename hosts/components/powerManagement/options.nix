@@ -11,7 +11,7 @@
 
         activeConfig = lib.mkOption {
             type = lib.types.enum (config.hosts.components.${settings.optionName}.availableConfigs or []);
-            default = if (config.host.settings.systemType == "laptop") then "tlp" else "";
+            default = "ppd";
             description = "Set the active configuration for the ${settings.displayName} component.";
         };
 
@@ -20,6 +20,19 @@
             default = true;
             description = "Whether to enable the ${settings.displayName} component.";
         };
+
+        chargeLimit = lib.mkOption {
+            type = lib.types.nullOr lib.types.int;
+            default = if (config.host.settings.systemType == "laptop") then 85 else null;
+            description = "Set the battery charge limit percentage for power management.";
+        };
+
+        limitWattageOnBattery = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Limit power consumption when running on battery. To prevent crashes";
+        };
+
 
     };
 }

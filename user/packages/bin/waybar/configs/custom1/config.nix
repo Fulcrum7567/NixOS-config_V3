@@ -2,6 +2,11 @@
 let
 	option = config.packages.${settings.optionName};
 
+	powerProfileSet = {
+		enable = (config.host.settings.systemType == "laptop") && config.hosts.components.powerManagement.enable;
+		activeConfig = config.hosts.components.powerManagement.activeConfig;
+	};
+
 	activateTlpProfileSwitch = (config.host.settings.systemType == "laptop") && config.hosts.components.powerManagement.enable && (config.hosts.components.powerManagement.activeConfig == "tlp");
 in
 {
@@ -58,7 +63,7 @@ in
 			};
 
 			powerProfile = {
-				enable = true;
+				enable = powerProfileSet.enable && powerProfileSet.activeConfig == "ppd";
 				activeConfig = "custom1";
 			};
 
@@ -68,7 +73,7 @@ in
 					activeConfig = "custom1";
 				};
 				tlpProfileSwitch = {
-					enable = activateTlpProfileSwitch;
+					enable = powerProfileSet.enable && powerProfileSet.activeConfig == "tlp";
 					activeConfig = "custom1";
 				};
 			};
@@ -94,7 +99,7 @@ in
 
 					modules-left = [ "hyprland/workspaces" "cava" "hyprland/window" ];
 					modules-center = [ "clock" "mpris" ];
-					modules-right = [ "tray" "pulseaudio" "bluetooth" ] ++ (if activateTlpProfileSwitch then [ "custom/tlpProfileSwitch" ] else []) ++ (if (config.host.settings.systemType == "laptop") then [ "battery" ] else []) ++ [ "network" "custom/wlogout" ];
+					modules-right = [ "tray" "pulseaudio" "bluetooth" ] ++ (if powerProfileSet.enable && powerProfileSet.activeConfig == "tlp" then [ "custom/tlpProfileSwitch" ] else (if (powerProfileSet.enable && powerProfileSet.activeConfig == "ppd") then ["power-profiles-daemon"] else [])) ++ (if (config.host.settings.systemType == "laptop") then [ "battery" ] else []) ++ [ "network" "custom/wlogout" ];
 				};
       };
 		};
