@@ -11,7 +11,7 @@
 		packages = {
 			defaults = {
 				browser.active = "zen";
-				explorer.active = "nemo";
+				explorer.active = "nautilus";
 				editor.active = "sublime";
 				terminal.active = "ghostty";
 				shell.active = "zsh";
