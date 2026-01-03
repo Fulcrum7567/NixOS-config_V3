@@ -61,8 +61,8 @@ in
         "${config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace8}, movetoworkspace, 8"
         "${config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspace9}, movetoworkspace, 9"
 
-				"${config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspaceLeft}, movetoworkspace, -1"
-				"${config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspaceRight}, movetoworkspace, +1"
+				#"${config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspaceLeft}, movetoworkspace, -1"
+				#"${config.custom.shortcuts.map keyMap config.shortcuts.windows.moveToWorkspaceRight}, movetoworkspace, +1"
 
 				
 				# Applications
@@ -92,8 +92,8 @@ in
 				"${config.custom.shortcuts.map keyMap config.shortcuts.workspaces.switchToWorkspace9}, workspace, 9"
 
 				
-        "${config.custom.shortcuts.map keyMap config.shortcuts.workspaces.switchToWorkspaceLeft}, workspace, e-1"
-				"${config.custom.shortcuts.map keyMap config.shortcuts.workspaces.switchToWorkspaceRight}, workspace, e+1"
+        #"${config.custom.shortcuts.map keyMap config.shortcuts.workspaces.switchToWorkspaceLeft}, workspace, e-1"
+				#"${config.custom.shortcuts.map keyMap config.shortcuts.workspaces.switchToWorkspaceRight}, workspace, e+1"
 				
 				# DE
 				# No show desktop, lock screen, screenshot, quick screenshot, quick screenshot window, focus active notification, open Notification panel
