@@ -6,6 +6,8 @@
 			gpuManufacturer = "amd";
 			dotfilesDir = "/home/${config.user.settings.username}/.dotfiles";
 			hashedPassword = "$6$LndFR/AR7MoTwWAT$Mt8cqxGvTAKlHTJ8zZyOnJOwZ6r0RsSw4bM9i.Wx8eQwidFdyMSEoYOFc29Egbpbzg2lhPULwziIOapSMU/lY0";
+			hibernateWorking = false;
+			suspendWorking = true;
 		};
 
 		

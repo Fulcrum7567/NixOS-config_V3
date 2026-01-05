@@ -1786,7 +1786,6 @@
         "type": "github"
       }
     },
-<<<<<<< HEAD
     "nixpkgs_5": {
       "locked": {
         "lastModified": 1766840161,
@@ -1819,8 +1818,6 @@
         "type": "github"
       }
     },
-=======
->>>>>>> b932d8c922843fd209929f949b5459c0ae6ef997
     "nur": {
       "inputs": {
         "flake-parts": [

@@ -17,6 +17,15 @@ in
 				environmentFiles = [ config.sops.secrets."networkSecrets.env".path ];
 
 				profiles = {
+
+					"Wired" = {
+						connection = {
+							id = "Wired";
+							type = "ethernet";
+						};
+					};
+
+
 					"HUB" = {
 						connection = {
 							id = "HUB";
