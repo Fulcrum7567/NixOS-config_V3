@@ -10,7 +10,7 @@
 			suspendWorking = true;
 		};
 		theming.activeTheme = "nord";
-		desktops.activeDesktop = "sddmWithHyprland";
+		desktops.activeDesktop = "gdmWithGnome";
 
 
 		hardware.displays = {

@@ -1,0 +1,3 @@
+setting up /etc...
+sops-install-secrets: Imported /etc/ssh/ssh_host_rsa_key as GPG key with fingerprint 405cd5bd1c808049b1e8b962b72917fe9f321324
+/nix/store/1vk34yzgw595ky1l3rcrf3s04l9sjmlc-nixos-system-PET-26.05pre-git

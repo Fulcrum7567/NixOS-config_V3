@@ -1,7 +1,7 @@
 keys:
- - &primary age16thwwkp9ey8jhtkry2s0kvyyvl7wqdzatlr8x6nk6pzu008zdahsfp279r
+ - &masterKey age1cnkpqa4lqwav6c4hptj7f2x0ct5ms9qts2mpcqs756nrjqdxt5nsg5v6ng
 creation_rules: 
- - path_regex: '(?i).*\/[^\/]*secrets?\.json$|.*\/[^\/]*\.secrets\.yaml$'
+ - path_regex: '(?i).*\/[^\/]*secrets?\.json$|.*\/[^\/]*\.secrets\.yaml$|.*\.env$'
    key_groups:
    - age:
-     - *primary
+     - *masterKey
