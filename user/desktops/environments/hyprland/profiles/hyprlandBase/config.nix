@@ -101,6 +101,8 @@ in
 			hyprgrass.enable = true;
 			brightnessctl.enable = true;
 
+			hyprnome.enable = true;
+
 			defaults = {
 				lockscreen.active = "hyprlock";
 			};
