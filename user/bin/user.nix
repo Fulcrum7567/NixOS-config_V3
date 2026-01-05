@@ -12,7 +12,7 @@
 	users.users.${config.user.settings.username} = {
 		isNormalUser = true;
 		description = config.user.settings.displayName;
-		extraGroups = [ "networkmanager" "wheel" ];
+		extraGroups = [ "networkmanager" "wheel" "network" ];
 		uid = 1000;
 		hashedPassword = config.host.settings.hashedPassword; # "$6$swTYGVRP4erDVWWO$argE8karkQ6JyNFAEgFMiJpEYCYrIIZChmqrvXUb0VDx7lS./U661Agnv1mwJVrlx1x.ShGaznfrbgdsrdqBW0";
 	};

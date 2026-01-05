@@ -1,18 +1,158 @@
-{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
+{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, sops-nix, ... }:
 let
 	option = config.hosts.components.${settings.optionName};
 in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
+
+		sops.secrets."networkSecrets.env" = {
+			sopsFile = ../../../../../user/secrets/networkSecrets.env;
+			format = "dotenv";
+		};
+
+		networking.networkmanager = {
+			enable = true;
+
+			ensureProfiles = {
+				environmentFiles = [ config.sops.secrets."networkSecrets.env".path ];
+
+				profiles = {
+					"HUB" = {
+						connection = {
+							id = "HUB";
+							type = "wifi";
+						};
+						wifi = {
+							mode = "infrastructure";
+							ssid = "$HUB_ssid";
+						};
+						wifi-security = {
+							key-mgmt = "wpa-psk";
+							psk = "$HUB_psk";
+						};
+					};
+
+					"math" = {
+						connection = {
+							id = "math";
+							type = "wifi";
+						};
+						wifi = {
+							mode = "infrastructure";
+							ssid = "$math_ssid";
+						};
+						wifi-security = {
+							key-mgmt = "wpa-psk";
+							psk = "$math_psk";
+						};
+					};
+
+					"the view" = {
+						connection = {
+							id = "the view";
+							type = "wifi";
+						};
+						wifi = {
+							mode = "infrastructure";
+							ssid = "$theView_ssid";
+						};
+						wifi-security = {
+							key-mgmt = "wpa-psk";
+							psk = "$theView_psk";
+						};
+					};
+
+					"appletree" = {
+						connection = {
+							id = "appletree";
+							type = "wifi";
+						};
+						wifi = {
+							mode = "infrastructure";
+							ssid = "$appletree_ssid";
+						};
+						wifi-security = {
+							key-mgmt = "wpa-psk";
+							psk = "$appletree_psk";
+						};
+					};
+
+					"ocean" = {
+						connection = {
+							id = "ocean";
+							type = "wifi";
+						};
+						wifi = {
+							mode = "infrastructure";
+							ssid = "$ocean_ssid";
+						};
+						wifi-security = {
+							key-mgmt = "wpa-psk";
+							psk = "$ocean_psk";
+						};
+					};
+
+					"std" = {
+						connection = {
+							id = "std";
+							type = "wifi";
+						};
+						wifi = {
+							mode = "infrastructure";
+							ssid = "$std_ssid";
+						};
+						wifi-security = {
+							key-mgmt = "wpa-eap";
+							eap = "ttls";
+							identity = "$std_identity";
+							password = "$std_password";
+							phase2 = "auth=MSCHAPV2";
+						};
+					};
+
+					"nova" = {
+						connection = {
+							id = "nova";
+							type = "wifi";
+						};
+						wifi = {
+							mode = "infrastructure";
+							ssid = "$nova_ssid";
+						};
+						wifi-security = {
+							key-mgmt = "wpa-psk";
+							psk = "$nova_psk";
+						};
+					};
+
+					"thick" = {
+						connection = {
+							id = "thick";
+							type = "wifi";
+						};
+						wifi = {
+							mode = "infrastructure";
+							ssid = "$thick_ssid";
+						};
+						wifi-security = {
+							key-mgmt = "wpa-psk";
+							psk = "$thick_psk";
+						};
+					};
+				};
+			};
+		};
 		
+		/*
 		networking = {
 			networkmanager.enable = config.desktopEnvironments.gnome.gnomeBase.enable;
-			wireless = {
-				enable = !config.desktopEnvironments.gnome.gnomeBase.enable;
+			wireless = lib.mkIf (!config.desktopEnvironments.gnome.gnomeBase.enable) {
+				enable = true;
+				userControlled = true;
 
 				networks = {
-					"Obi Wlan Kenobi 5GHz" = {
-						pskRaw = "dc17a708c048642dfce8e96376d476b9001c11956567990af0cd522b58d1754c";
+					"Obi Wlan Kenobi 5 GHz" = {
+						pskRaw = "215f719017acab610345cdf770e8708ce16880f14121746e9e980d0d495e4717";
 					};
 
 					"FRITZ!Box 7490" = {
@@ -49,6 +189,7 @@ in
 			};
 
 		};
+		*/
 		
 
 	};

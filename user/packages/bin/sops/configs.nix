@@ -1,4 +1,4 @@
-{ config, lib, pkgs-default, ... }:
+{ config, lib, pkgs-default, sops-nix, ... }:
 {
 	config = lib.mkIf config.packages.sops.enable {
 
@@ -8,7 +8,16 @@
 			sops
 		];
 
-		sops.age.keyFile = "/home/${config.user.settings.username}/.config/sops/age/keys.txt";
-		sops.validateSopsFiles = false;
+		sops ={
+			defaultSopsFile = ../../../secrets/secrets.json;
+			defaultSopsFormat = "json";
+
+			validateSopsFiles = true;
+
+			age = {
+				sshKeyPaths = [];
+				keyFile = "/var/lib/sops-nix/key.txt";
+			};
+		};
 	};
 } 

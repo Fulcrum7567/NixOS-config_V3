@@ -39,7 +39,15 @@
 
 
 		# Sops-nix
-		sops-nix.url = "github:Mic92/sops-nix";
+		sops-nix-unstable = {
+			url = "github:Mic92/sops-nix";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+
+		sops-nix-stable = {
+			url = "github:Mic92/sops-nix";
+			inputs.nixpkgs.follows = "nixpkgs-stable";
+		};	
 
 
 		# Stylix
@@ -142,7 +150,7 @@
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix-stable, sops-nix-unstable, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -265,6 +273,13 @@
 									stylix-unstable
 								);
 
+				sops-nix = (if (hostSettings.systemState == "stable")
+								then
+									sops-nix-stable
+								else
+									sops-nix-unstable
+								);
+
 
 
 				zen-browser = (if (hostSettings.defaultPackageState == "stable")
@@ -328,7 +343,6 @@
 
 						# Stylix
 						stylix.nixosModules.stylix
-
 						# Sops-nix
 						sops-nix.nixosModules.sops
 
@@ -379,7 +393,7 @@
 					] ++ nyx-modules;
 
 					specialArgs = {
-						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland hyprgrass disko waybar;
+						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland hyprgrass disko sops-nix waybar;
 						hostSettingsRaw = hostSettings;
 						lib = libExtended;
 					};
