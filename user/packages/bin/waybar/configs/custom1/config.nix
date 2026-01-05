@@ -3,7 +3,7 @@ let
 	option = config.packages.${settings.optionName};
 
 	powerProfileSet = {
-		enable = (config.host.settings.systemType == "laptop") && config.hosts.components.powerManagement.enable;
+		enable = config.hosts.components.powerManagement.enable;
 		activeConfig = config.hosts.components.powerManagement.activeConfig;
 	};
 

@@ -89,6 +89,8 @@
 			inputs.nixpkgs.follows = "nixpkgs-stable";
 		};
 
+		waybar.url = "github:Alexays/Waybar";
+
 
 
 		
@@ -140,7 +142,7 @@
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -377,7 +379,7 @@
 					] ++ nyx-modules;
 
 					specialArgs = {
-						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland hyprgrass disko;
+						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland hyprgrass disko waybar;
 						hostSettingsRaw = hostSettings;
 						lib = libExtended;
 					};

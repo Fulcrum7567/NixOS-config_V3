@@ -14,6 +14,8 @@
 
           sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
+          accel_profile = "flat"; # "flat", "adaptive", "custom"
+
           touchpad = {
             natural_scroll = true;
             disable_while_typing = true;
