@@ -29,7 +29,12 @@ in
 						on-timeout = "hyprctl dispatch dpms off";
 						on-resume = "hyprctl dispatch dpms on";#; ${restartWaybar}"; Fixed?
 					}
-				];
+				] ++ (if config.host.settings.suspendWorking then [
+					{
+						timeout = config.packages.${settings.optionName}.suspendTimeout;
+						on-timeout = "systemctl suspend";
+					}
+				] else []);
 			};
 		};
 	};

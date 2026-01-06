@@ -56,6 +56,21 @@ in
 						};
 					};
 
+					"local" = {
+						connection = {
+							id = "local";
+							type = "wifi";
+						};
+						wifi = {
+							mode = "infrastructure";
+							ssid = "$local_ssid";
+						};
+						wifi-security = {
+							key-mgmt = "wpa-psk";
+							psk = "$local_psk";
+						};
+					};
+
 					"the view" = {
 						connection = {
 							id = "the view";

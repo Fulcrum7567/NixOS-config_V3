@@ -33,6 +33,12 @@
 			description = "Time in seconds before the screen goes to sleep.";
 		};
 
+		suspendTimeout = lib.mkOption {
+			type = lib.types.int;
+			default = 600; 
+			description = "Time in seconds before the system suspends. Set to 0 to disable.";
+		};
+
 		lockCommand = lib.mkOption {
 			type = lib.types.str;
 			default = "hyprlock";
