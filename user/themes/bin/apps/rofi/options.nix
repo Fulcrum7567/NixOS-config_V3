@@ -24,9 +24,5 @@
       default = [];
       description = "A list of Rofi theme fragments to be recursively merged.";
     };
-    
-
-    
-
   };
 }

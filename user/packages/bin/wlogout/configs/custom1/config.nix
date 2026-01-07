@@ -10,7 +10,7 @@ in
 				layout = [
 					{
 							"label" = "lock";
-							"action" = config.packages.defaults.lockscreen.launchCommand;
+							"action" = "sleep 1 && ${config.packages.defaults.lockscreen.launchCommand}";
 							"text" = "Lock";
 							"keybind" = "l";
 					}

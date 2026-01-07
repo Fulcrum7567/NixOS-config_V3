@@ -1,4 +1,0 @@
-{
-	optionName = "opacity";
-	displayName = "opacity";
-}

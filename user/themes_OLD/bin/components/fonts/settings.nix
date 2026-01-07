@@ -1,4 +1,0 @@
-{
-	optionName = "fonts";
-	displayName = "fonts";
-}
