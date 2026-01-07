@@ -1,4 +1,4 @@
-{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, pkgs, ... }:
+{ config, lib, settings, pkgs-default, pkgs-stable, pkgs-unstable, ... }:
 let
 	option = config.hosts.components.${settings.optionName};
 in
@@ -12,14 +12,29 @@ in
 		services.system76-scheduler.settings.cfsProfiles.enable = true; # Better scheduling for CPU cycles - thanks System76!!!
     services.thermald.enable = true; # Enable thermald, the temperature management daemon. (only necessary if on Intel CPUs)
 
-		# 2. The "Safety Net" - Udev Rules for Anti-Crash
+		# 2. The "Safety Net" - Udev Rules for Anti-Crash & Power Profile Switching
 		# These rules trigger immediately when power creates an event.
-		services.udev.extraRules = lib.mkIf option.limitWattageOnBattery ''
+		services.udev.extraRules = let
+			setPowerSaver = pkgs-default.writeShellScript "set-power-saver" ''
+				${pkgs-default.power-profiles-daemon}/bin/powerprofilesctl set power-saver
+			'';
+			setBalanced = pkgs-default.writeShellScript "set-balanced" ''
+				CURRENT=$(${pkgs-default.power-profiles-daemon}/bin/powerprofilesctl get)
+				if [ "$CURRENT" != "performance" ]; then
+					${pkgs-default.power-profiles-daemon}/bin/powerprofilesctl set balanced
+				fi
+			'';
+		in '''' + lib.optionalString option.autoSwitchProfiles ''
+			# Set Power Profile on Plug/Unplug
+			SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${setPowerSaver}"
+			SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="${setBalanced}"
+		'' + lib.optionalString option.limitWattageOnBattery ''
+
 			# When Unplugged (Battery Mode): Disable Turbo Boost to prevent crashing
-			SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${pkgs.bash}/bin/bash -c 'echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo'"
+			SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${pkgs-default.bash}/bin/bash -c 'echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo'"
 			
 			# When Plugged In (AC Mode): Enable Turbo Boost for max performance
-			SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="${pkgs.bash}/bin/bash -c 'echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo'"
+			SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="${pkgs-default.bash}/bin/bash -c 'echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo'"
 		'';
 
 		# Note: If you have an AMD CPU, change "intel_pstate" above to "cpufreq" 
@@ -34,7 +49,7 @@ in
 			serviceConfig = {
 				Type = "oneshot";
 				Restart = "on-failure";
-				ExecStart = pkgs.writeShellScript "set-charge-limit" ''
+				ExecStart = pkgs-default.writeShellScript "set-charge-limit" ''
 					# Try standard paths (works for most modern kernels/laptops)
 					for bat in /sys/class/power_supply/BAT?; do
 						# Try charge_control_end_threshold (ASUS, modern Linux std)

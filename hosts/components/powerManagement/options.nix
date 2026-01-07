@@ -21,6 +21,12 @@
             description = "Whether to enable the ${settings.displayName} component.";
         };
 
+        autoSwitchProfiles = lib.mkOption {
+            type = lib.types.bool;
+            default = (config.host.settings.systemType == "laptop");
+            description = "Automatically switch power profiles based on power source (AC/Battery).";
+        };
+
         chargeLimit = lib.mkOption {
             type = lib.types.nullOr lib.types.int;
             default = if (config.host.settings.systemType == "laptop") then 85 else null;
@@ -30,7 +36,7 @@
         limitWattageOnBattery = lib.mkOption {
             type = lib.types.bool;
             default = false;
-            description = "Limit power consumption when running on battery. To prevent crashes";
+            description = "Limit power consumption when running on battery to prevent crashes on faulty batteries.";
         };
 
 
