@@ -375,6 +375,7 @@
 
 						# Scripts
 						./system/scripts/updateInputs.nix
+						./system/scripts/setup-sops.nix
 
 						# Host
 						./hosts/hosts/${host}/hostConfigs/configuration.nix

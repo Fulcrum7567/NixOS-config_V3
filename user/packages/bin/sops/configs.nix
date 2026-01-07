@@ -16,7 +16,7 @@
 
 			age = {
 				sshKeyPaths = [];
-				keyFile = "/var/lib/sops-nix/key.txt";
+				keyFile = "/home/${config.user.settings.username}/.config/sops/age/keys.txt";
 			};
 		};
 	};

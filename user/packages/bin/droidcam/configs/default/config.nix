@@ -5,7 +5,9 @@ in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
 
-		programs.adb.enable = true;
+		environment.systemPackages = with pkgs-default; [
+			android-tools
+		];
 
 		boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
 
