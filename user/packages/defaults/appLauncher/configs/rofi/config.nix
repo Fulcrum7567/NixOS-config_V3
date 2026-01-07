@@ -8,7 +8,7 @@ in
 		packages = {
 			defaults = {
 				appLauncher.appID = "";
-				appLauncher.launchCommand = "rofi -show drun ${ts} ${tf}";
+				appLauncher.launchCommand = "if pgrep -x rofi; then pkill rofi; else rofi -show drun ${ts} ${tf}; fi";
 			};
 			
 			rofi.enable = true;
