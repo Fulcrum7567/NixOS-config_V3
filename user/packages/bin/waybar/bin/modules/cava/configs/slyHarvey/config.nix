@@ -17,7 +17,10 @@
           "█"
         ];
         input_delay = 1;
-        # "noise_reduction" = 0.77;
+        sensitivity = 1;
+        data_format = "ascii";
+        ascii_max_range = 9;
+        noise_reduction = 0.77;
         sleep_timer = 5;
         bar_delimiter = 0;
         on-click = "playerctl play-pause";
