@@ -1,0 +1,4 @@
+{
+	optionName = "bootEntryLabels";
+	displayName = "bootEntryLabels";
+}

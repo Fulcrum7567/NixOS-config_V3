@@ -410,7 +410,7 @@
 					] ++ nyx-modules;
 
 					specialArgs = {
-						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland hyprgrass disko sops-nix waybar noctalia;
+						inherit currentHost self inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland hyprgrass disko sops-nix waybar noctalia;
 						hostSettingsRaw = hostSettings;
 						lib = libExtended;
 					};
