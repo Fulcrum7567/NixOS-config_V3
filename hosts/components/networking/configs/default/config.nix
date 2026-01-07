@@ -22,6 +22,7 @@ in
 						connection = {
 							id = "Wired";
 							type = "ethernet";
+							autoconnect = true;
 						};
 					};
 
@@ -30,6 +31,8 @@ in
 						connection = {
 							id = "HUB";
 							type = "wifi";
+							uuid = "a8c0ec80-9200-304d-915f-c08c14cf698f";
+							autoconnect = true;
 						};
 						wifi = {
 							mode = "infrastructure";

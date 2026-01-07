@@ -99,6 +99,15 @@
 
 		waybar.url = "github:Alexays/Waybar";
 
+		noctalia-stable = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+		noctalia-unstable = {
+			url = "github:noctalia-dev/noctalia-shell";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
 
 
 		
@@ -150,7 +159,7 @@
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix-stable, sops-nix-unstable, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix-stable, sops-nix-unstable, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, noctalia-stable, noctalia-unstable, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -295,6 +304,13 @@
 							else
 								nvf-unstable
 					);
+
+				noctalia = (if (hostSettings.defaultPackageState == "stable")
+							then
+								noctalia-stable
+							else
+								noctalia-unstable
+					);
 				
 				hyprland = (if (hostSettings.defaultPackageState == "stable")
 							then
@@ -393,7 +409,7 @@
 					] ++ nyx-modules;
 
 					specialArgs = {
-						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland hyprgrass disko sops-nix waybar;
+						inherit currentHost inputs pkgs-default pkgs-stable pkgs-unstable zen-browser nvf hyprland hyprgrass disko sops-nix waybar noctalia;
 						hostSettingsRaw = hostSettings;
 						lib = libExtended;
 					};
