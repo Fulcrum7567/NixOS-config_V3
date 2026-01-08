@@ -6,5 +6,7 @@
 		environment.systemPackages = [
 			(pkgs-default.${settings.packageName})
 		];
+
+		services.udisks2.enable = true;
 	};
 }

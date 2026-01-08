@@ -114,9 +114,9 @@
 		
 		
 		fileSystems."/mnt/HDD" = {
-		  	device = "/dev/disk/by-uuid/DC0673760673508E";
-		  	fsType = "ntfs-3g";
-		  	options = [ "uid=1000" "gid=1000" "umask=0022" "windows_names" "big_writes" ];
+		  	device = "/dev/disk/by-uuid/f5d38b42-7564-4996-931a-89758fa4ee0d";
+		  	fsType = "ext4";
+		  	options = [ "defaults" ];
 		};
 		
 	};

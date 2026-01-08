@@ -8,7 +8,15 @@ in
 			services.hyprpaper.settings = {
 				ipc = "on";
 				splash = false;
-				splash_offset = 2.0;
+				splash_offset = 2;
+
+				wallpaper = [
+					{
+						monitor = "";
+						path = "${config.theming.wallpaper.wallpaperPath}/${config.theming.wallpaper.single.active}";
+						fit_mode = "cover";
+					}
+				];
 			};
 		};
 	};
