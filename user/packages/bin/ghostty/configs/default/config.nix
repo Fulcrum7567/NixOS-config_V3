@@ -10,6 +10,12 @@ in
 				installBatSyntax = true;
 				enableZshIntegration = config.packages.zsh.enable;
 				enableFishIntegration = config.packages.fish.enable or false;
+				
+				settings = {
+					background-opacity = lib.mkForce 0;
+					background-blur = lib.mkForce false;
+				};
+				
 			};
 		};
 

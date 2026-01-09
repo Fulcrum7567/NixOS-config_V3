@@ -21,6 +21,14 @@
 				package = config.theming.icons.package;
 			};
 
+			/*
+			opacity = {
+				applications = 1.0;
+				desktop = 1.0;
+				popups = 0.8;
+				terminal = 1.0;
+			};
+			*/
 
 			polarity = (if (config.theming.polarity == "mixed") then "either" else config.theming.polarity);
 		

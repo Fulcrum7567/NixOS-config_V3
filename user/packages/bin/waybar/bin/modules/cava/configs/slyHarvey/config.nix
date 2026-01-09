@@ -6,6 +6,8 @@
         hide_on_silence = true;
         framerate = 60;
         bars = 10;
+        #method = "raw";
+        autosense = 1;
         format-icons = [
           "▁"
           "▂"
@@ -17,10 +19,11 @@
           "█"
         ];
         input_delay = 1;
-        sensitivity = 1;
+        sensitivity = 3;
+        stereo = false;
         data_format = "ascii";
-        ascii_max_range = 9;
-        noise_reduction = 0.77;
+        ascii_max_range = 8;
+        noise_reduction = 0.4;
         sleep_timer = 5;
         bar_delimiter = 0;
         on-click = "playerctl play-pause";
