@@ -88,6 +88,11 @@ in
 					activeConfig = "slyHarvey";
 				};
 				hyprpaper.enable = true;
+
+				noctaliaShell = {
+					enable = false;
+					activeConfig = "default";
+				};
 			};
 		};
 
@@ -100,6 +105,8 @@ in
 			mako.enable = true;
 			hyprgrass.enable = true;
 			brightnessctl.enable = true;
+
+			
 
 			hyprnome.enable = true;
 

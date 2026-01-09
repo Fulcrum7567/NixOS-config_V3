@@ -5,85 +5,185 @@ in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
 		home-manager.users.${config.user.settings.username} = {
-			/* No longer necessary with dconf cinnamon settings
-			home.file.".local/share/nemo/actions/open-in-${config.packages.defaults.terminal.active}.nemo_action".text = ''
-				[Nemo Action]
-
-				Name=Open in ${config.packages.defaults.terminal.active}
-				Comment=Open the '${config.packages.defaults.terminal.active}' terminal in the selected folder
-				Exec=${builtins.replaceStrings [ "<path>" ] [ "%F" ] config.packages.defaults.terminal.launchAtPathCommand} 
-				Icon-Name=${config.packages.defaults.terminal.active}
-				Selection=any
-				Extensions=dir;
-				EscapeSpaces=true
-			'';
-			*/
-
-			dconf.settings = {
-				"org/cinnamon/desktop/applications/terminal" = {
-					exec = "${lib.replaceStrings [ "<path>" ] [ "$PWD" ] config.packages.defaults.terminal.launchAtPathCommand}";      # Replace with your terminal command (e.g., kitty, wezterm, foot)
-					exec-arg = "-e";         # Argument to execute a command (common defaults: -e, -x, or leave empty)
-				};
-
-					"org/nemo/preferences" = {
-						default-terminal = config.packages.defaults.terminal.launchCommand;
+			programs.noctalia-shell.settings = {
+				settings = {
+					settingsVersion = 0;
+					bar = {
+						position = "top";
+						monitors = [ ];
+						density = "default";
+						showOutline = false;
+						showCapsule = true;
+						capsuleOpacity = 1;
+						backgroundOpacity = 0.93;
+						useSeparateOpacity = false;
+						floating = false;
+						marginVertical = 0.25;
+						marginHorizontal = 0.25;
+						outerCorners = true;
+						exclusive = true;
+						widgets = {
+							left = [
+								{
+									id = "Launcher";
+								}
+								{
+									id = "Clock";
+								}
+								{
+									id = "SystemMonitor";
+								}
+								{
+									id = "ActiveWindow";
+								}
+								{
+									id = "MediaMini";
+								}
+							];
+							center = [
+								{
+									id = "Workspace";
+								}
+							];
+							right = [
+								{
+									id = "ScreenRecorder";
+								}
+								{
+									id = "Tray";
+								}
+								{
+									id = "NotificationHistory";
+								}
+								{
+									id = "Battery";
+								}
+								{
+									id = "Volume";
+								}
+								{
+									id = "Brightness";
+								}
+								{
+									id = "ControlCenter";
+								}
+							];
+						};
+					};
+					general = {
+						avatarImage = "";
+						dimmerOpacity = 0.2;
+						showScreenCorners = false;
+						forceBlackScreenCorners = false;
+						scaleRatio = 1;
+						radiusRatio = 1;
+						iRadiusRatio = 1;
+						boxRadiusRatio = 1;
+						screenRadiusRatio = 1;
+						animationSpeed = 1;
+						animationDisabled = false;
+						compactLockScreen = false;
+						lockOnSuspend = true;
+						showSessionButtonsOnLockScreen = true;
+						showHibernateOnLockScreen = false;
+						enableShadows = true;
+						shadowDirection = "bottom_right";
+						shadowOffsetX = 2;
+						shadowOffsetY = 3;
+						language = "";
+						allowPanelsOnScreenWithoutBar = true;
+						showChangelogOnStartup = true;
+					};
+					ui = {
+						fontDefault = "";
+						fontFixed = "";
+						fontDefaultScale = 1;
+						fontFixedScale = 1;
+						tooltipsEnabled = true;
+						panelBackgroundOpacity = 0.93;
+						panelsAttachedToBar = true;
+						settingsPanelMode = "attached";
+						wifiDetailsViewMode = "grid";
+						bluetoothDetailsViewMode = "grid";
+						networkPanelView = "wifi";
+						bluetoothHideUnnamedDevices = false;
+						boxBorderEnabled = false;
+					};
+					location = {
+						name = "Berlin";
+						weatherEnabled = true;
+						weatherShowEffects = true;
+						useFahrenheit = false;
+						use12hourFormat = false;
+						showWeekNumberInCalendar = false;
+						showCalendarEvents = true;
+						showCalendarWeather = true;
+						analogClockInCalendar = false;
+						firstDayOfWeek = -1;
+						hideWeatherTimezone = false;
+						hideWeatherCityName = false;
 					};
 
-					"org/nemo/preferences" = {
-					show-hidden-files = true;
-					click-double-parent-folder = true;
-					close-device-view-on-device-eject = true;
-					executable-text-activation = "display"; # Options: "ask", "run", "display"
-					"inherit-show-thumbnails" = true;
-					quick-rename-with-pause-in-between = true;
-					show-advanced-permissions = true;
-					show-compact-view-icon-toolbar = false;
-					show-full-path-titles = false;
-					show-home-icon-toolbar = true;
-					show-icon-view-icon-toolbar = false;
-					show-list-view-icon-toolbar = false;
-					show-open-in-terminal-toolbar = true;
-					show-show-thumbnails-toolbar = false;
-					show-toggle-extra-pane-toolbar = false;
-					sort-directories-first = true;
-					thumbnail-limit = 10485760; # 10 MB
-					tooltips-in-list-view = true;
-					tooltips-show-access-date = true;
-					tooltips-show-birth-date = true;
-					tooltips-show-file-type = true;
-					tooltips-show-mod-date = true;
-					tooltips-show-path = true;
-
-					default-folder-viewer = "list-view";  # Options: "icon-view", "list-view", "compact-view"
-					show-home-icon-on-desktop = true;
-					show-trash-icon-on-desktop = true;
-					confirm-trash = true;
-				};
-
-				"org/nemo/preferences/menu-config" = {
-					background-menu-open-in-terminal = true;
-					desktop-menu-customize = false;
-					selection-menu-open-in-terminal = true;
-				};
-
-				"org/nemo/compact-view" = {
-					zoom-level = "default";
-					all-columns-have-same-width = false;
-				};
-
-				"org/nemo/list-view" = {
-					default-column-order = [ "name" "size" "type" "date_modified" "date_created_with_time" "date_accessed" "date_created" "detailed_type" "group" "where" "mime_type" "date_modified_with_time" "octal_permissions" "owner" "permissions"];
-					default-visible-columns = [ "name" "size" "type" "date_modified" "permissions" ];
-					zoom-level = "default";
-					enable-folder-expansion = false;
-				};
-
-				"org/nemo/window-state" = {
-					start-with-toolbar = true;
-					start-with-status-bar = true;
-					start-with-sidebar = true;
-					sidebar-width = 200;
-					maximized = true;
+					colorSchemes = {
+						useWallpaperColors = false;
+						predefinedScheme = "Noctalia (default)";
+						darkMode = true;
+						schedulingMode = "off";
+						manualSunrise = "06:30";
+						manualSunset = "18:30";
+						matugenSchemeType = "scheme-fruit-salad";
+					};
+					templates = {
+						gtk = false;
+						qt = false;
+						kcolorscheme = false;
+						alacritty = false;
+						kitty = false;
+						ghostty = false;
+						foot = false;
+						wezterm = false;
+						fuzzel = false;
+						discord = false;
+						pywalfox = false;
+						vicinae = false;
+						walker = false;
+						code = false;
+						spicetify = false;
+						telegram = false;
+						cava = false;
+						yazi = false;
+						emacs = false;
+						niri = false;
+						hyprland = false;
+						mango = false;
+						zed = false;
+						helix = false;
+						zenBrowser = false;
+						enableUserTemplates = false;
+					};
+					nightLight = {
+						enabled = false;
+						forced = false;
+						autoSchedule = true;
+						nightTemp = "4000";
+						dayTemp = "6500";
+						manualSunrise = "06:30";
+						manualSunset = "18:30";
+					};
+					hooks = {
+						enabled = false;
+						wallpaperChange = "";
+						darkModeChange = "";
+						screenLock = "";
+						screenUnlock = "";
+						performanceModeEnabled = "";
+						performanceModeDisabled = "";
+					};
+					desktopWidgets = {
+						enabled = false;
+						gridSnap = false;
+						monitorWidgets = [ ];
+					};
 				};
 			};
 		};
