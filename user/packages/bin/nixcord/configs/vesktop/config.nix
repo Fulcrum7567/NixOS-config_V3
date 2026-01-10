@@ -42,6 +42,7 @@ in
 					];
 
 					frameless = true;
+					transparent = true;
 
 					plugins = {
 						alwaysAnimate.enable = true;
