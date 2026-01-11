@@ -1,4 +1,6 @@
 { config, lib, ... }: {
+
+	imports = [] ++ lib.optional (builtins.pathExists ./autoSetups/disko.nix) ./autoSetups/disko.nix;
 	
 	config = {
 		host.settings = {
@@ -65,6 +67,8 @@
 			};
 
 			components = {
+
+				bootEntryLabels.enable = false;
 
 				kernelVersion = {
 					enable = false;

@@ -12,6 +12,7 @@
 
             partitions = {
               ESP = {
+                priority = 1;
                 size = "2G";
                 type = "EF00";
                 content = {
@@ -47,7 +48,7 @@
           type = "zpool";
           mode = "";
           options = {
-            ashift = 12;
+            ashift = "12";
             autotrim = "on";
           };
 

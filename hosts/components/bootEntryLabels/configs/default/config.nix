@@ -7,7 +7,7 @@ in
 
 		system.nixos.tags = [
 
-			"${config.desktops.activeDesktop}"
+			"${config.desktops.activeDesktop or "no-desktop"}"
 			"Git-commit:_${(self.rev or (self.dirtyRev or "dirty"))}_"
 		];
 

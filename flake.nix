@@ -97,6 +97,12 @@
 			inputs.nixpkgs.follows = "nixpkgs-stable";
 		};
 
+		nixos-anywhere = {
+			url = "github:nix-community/nixos-anywhere";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+			inputs.disko.follows = "disko-unstable";
+		};
+
 		waybar.url = "github:Alexays/Waybar";
 
 		noctalia-stable = {
@@ -159,7 +165,7 @@
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix-stable, sops-nix-unstable, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, noctalia-stable, noctalia-unstable, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix-stable, sops-nix-unstable, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, noctalia-stable, noctalia-unstable, nixos-anywhere, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗
@@ -447,5 +453,162 @@
 		nixosConfigurations = builtins.listToAttrs (
 			map mkHost hosts
 		);
+
+		apps."x86_64-linux".install-server = {
+			type = "app";
+			program = toString (nixpkgs-unstable.legacyPackages."x86_64-linux".writeShellScript "install-server" ''
+				PATH=${nixpkgs-unstable.legacyPackages."x86_64-linux".coreutils}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".util-linux}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".openssh}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".nix}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".gnused}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".gnugrep}/bin:$PATH
+				
+				if [ ! -f "flake.nix" ]; then
+					echo "Error: Please run this command from the root of your dotfiles repository."
+					exit 1
+				fi
+
+				echo "╔════════════════════════════════╗"
+				echo "║   Fulcrum Server Installer     ║"
+				echo "╚════════════════════════════════╝"
+				echo ""
+
+				# 0. Host Selection
+				HOST_NAME=""
+				while [ -z "$HOST_NAME" ]; do
+					read -p "[?] Enter Host Configuration Name (e.g. Server): " INPUT_HOST
+					if [ -n "$INPUT_HOST" ]; then
+						if [ ! -d "./hosts/hosts/$INPUT_HOST" ]; then
+							echo "[!] Warning: Directory ./hosts/hosts/$INPUT_HOST does not exist."
+							read -p "    Continue anyway? [y/N] " CONFIRM
+							if [ "$CONFIRM" = "y" ] || [ "$CONFIRM" = "Y" ]; then
+								HOST_NAME="$INPUT_HOST"
+							fi
+						else
+							HOST_NAME="$INPUT_HOST"
+						fi
+					fi
+				done
+
+				# 1. SSH Keys
+				SSH_KEY="$HOME/.ssh/id_ed25519"
+				if [ ! -f "$SSH_KEY" ]; then
+					echo "[?] No SSH key found at $SSH_KEY"
+					read -p "    Generate one? [Y/n] " GEN_KEY
+					if [ "$GEN_KEY" != "n" ]; then
+						ssh-keygen -t ed25519 -C "server-setup" -f "$SSH_KEY"
+					fi
+				fi
+				
+				if [ -f "$SSH_KEY.pub" ]; then
+					PUB_KEY=$(cat "$SSH_KEY.pub")
+				else
+					echo "[!] Authenticated keys not found. Aborting."
+					exit 1
+				fi
+
+				# 2. ISO Creation
+				echo ""
+				read -p "[?] Do you need to build a headless installer ISO? [y/N] " BUILD_ISO
+				if [ "$BUILD_ISO" = "y" ] || [ "$BUILD_ISO" = "Y" ]; then
+					echo "[*] Creating iso.nix..."
+					cat > iso.nix <<EOF
+{ pkgs, modulesPath, ... }: {
+  imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
+  users.users.root.openssh.authorizedKeys.keys = [ "$PUB_KEY" ];
+}
+EOF
+					echo "[*] Building ISO..."
+					nix-build '<nixpkgs/nixos>' -A config.system.build.isoImage -I nixos-config=iso.nix
+					
+					ISO_PATH=$(readlink -f result/iso/*.iso)
+					echo ""
+					echo "[✓] ISO Ready: $ISO_PATH"
+					
+					read -p "[?] Flash ISO to USB now? [y/N] " FLASH_ISO
+					if [ "$FLASH_ISO" = "y" ] || [ "$FLASH_ISO" = "Y" ]; then
+						echo "[*] Listing block devices:"
+						lsblk -d -o NAME,MODEL,SIZE,TYPE,TRAN | grep "usb\\|disk"
+						echo ""
+						read -p "[?] Enter target USB device ID (e.g. sdb): " USB_ID
+						if [ -n "$USB_ID" ]; then
+							TARGET_DEV="/dev/$USB_ID"
+							echo "[!] WARNING: ALL DATA ON $TARGET_DEV WILL BE DESTROYED."
+							read -p "    Type 'yes' to confirm: " CONFIRM_DD
+							if [ "$CONFIRM_DD" = "yes" ]; then
+								echo "[*] Flashing (sudo privileges required)..."
+								sudo dd if="$ISO_PATH" of="$TARGET_DEV" bs=4M status=progress && sync
+								echo "[✓] Flashing complete."
+								echo "    Please boot the server with this USB stick and connect ethernet."
+								read -p "    Press Enter when ready to connect..."
+							else
+								echo "    Aborted flashing."
+							fi
+						fi
+					else
+						echo "    1. Flash manually: sudo dd if=$ISO_PATH of=/dev/sdX bs=4M status=progress"
+						echo "    2. Boot server, connect ethernet."
+						read -p "    Press Enter when ready..."
+					fi
+					rm iso.nix
+				fi
+
+				# 3. Connection
+				TARGET_IP=""
+				while [ -z "$TARGET_IP" ]; do
+					echo ""
+					read -p "[?] Target Server IP: " INPUT_IP
+					if [ -n "$INPUT_IP" ]; then
+						TARGET_IP="$INPUT_IP"
+					fi
+				done
+
+				echo "[*] Verifying SSH connection..."
+				if ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no "root@$TARGET_IP" "echo connected" > /dev/null 2>&1; then
+					echo "[✓] Connection established."
+				else
+					echo "[!] Failed to connect to root@$TARGET_IP"
+					exit 1
+				fi
+
+				# 4. Disk Configuration
+				echo ""
+				read -p "[?] Configure Disk ID? [y/N] " SET_DISK
+				if [ "$SET_DISK" = "y" ] || [ "$SET_DISK" = "Y" ]; then
+					echo "[*] Available disks:"
+					ssh -o StrictHostKeyChecking=no "root@$TARGET_IP" "ls -l /dev/disk/by-id/"
+					
+					echo ""
+					read -p "[?] Enter Disk ID (name only, e.g. nvme-Samsung...): " DISK_ID
+					
+					if [ -n "$DISK_ID" ]; then
+						AUTO_SETUP_DIR="./hosts/hosts/$HOST_NAME/autoSetups"
+						mkdir -p "$AUTO_SETUP_DIR"
+						DISKO_FILE="$AUTO_SETUP_DIR/disko.nix"
+						
+						echo "[*] Writing configuration to $DISKO_FILE..."
+						cat > "$DISKO_FILE" <<EOF
+{ config, lib, ... }:
+{
+    config = lib.mkIf config.server.system.filesystem.disko.enable {
+        server.system.filesystem.disko.diskId = "$DISK_ID";
+    };
+}
+EOF
+						echo "[✓] Created $DISKO_FILE"
+					fi
+				fi
+
+				# 5. Harware Configuration
+				echo ""
+				read -p "[?] Generate hardware-configuration.nix? [y/N] " GEN_HW
+				if [ "$GEN_HW" = "y" ] || [ "$GEN_HW" = "Y" ]; then
+					echo "[*] Generating hardware-configuration.nix..."
+					ssh -o StrictHostKeyChecking=no "root@$TARGET_IP" "nixos-generate-config --no-filesystems --show-hardware-config" > "./hosts/hosts/$HOST_NAME/hostConfigs/hardware-configuration.nix"
+					echo "[✓] Saved to ./hosts/hosts/$HOST_NAME/hostConfigs/hardware-configuration.nix"
+				fi
+
+				# 6. Deployment
+				echo ""
+				echo "[*] deploying .#$HOST_NAME to $TARGET_IP..."
+				${nixos-anywhere.packages."x86_64-linux".nixos-anywhere}/bin/nixos-anywhere --flake .#$HOST_NAME "root@$TARGET_IP"
+			'');
+		};
 	};
 } 
