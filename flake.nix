@@ -614,9 +614,9 @@ EOF
 				read -p "[?] Clone configuration repo on server? [y/N] " CLONE_REPO
 				if [ "$CLONE_REPO" = "y" ] || [ "$CLONE_REPO" = "Y" ]; then
 					echo "[*] Configuration for post-install:"
-					read -p "    Git Repository URL: " GIT_REPO
-					read -p "    Target Directory (e.g. ~/.dotfiles): " TARGET_DIR
 					read -p "    SSH User (e.g. fulcrum): " SSH_USER
+					read -p "    Git Repository URL: " GIT_REPO
+					read -p "    Target Directory (e.g. /home/$SSH_USER/.dotfiles): " TARGET_DIR
 					
 					if [ -n "$GIT_REPO" ] && [ -n "$TARGET_DIR" ] && [ -n "$SSH_USER" ]; then
 						# Clean up known_hosts again as the server key likely changed after reinstall
@@ -637,6 +637,16 @@ EOF
 						echo "[!] Missing information. Skipping clone."
 					fi
 				fi
+
+				# Step 8. Secrets Setup
+				echo ""
+				read -p "[?] Setup SOPS secrets on server? [y/N] " SETUP_SOPS
+				if [ "$SETUP_SOPS" = "y" ] || [ "$SETUP_SOPS" = "Y" ]; then
+					echo "[*] Setting up SOPS..."
+					ssh -t -o StrictHostKeyChecking=no "$USERNAME@$TARGET_IP" "sudo setup-sops"
+					echo "[✓] SOPS setup complete."
+				fi
+
 			'');
 		};
 	};

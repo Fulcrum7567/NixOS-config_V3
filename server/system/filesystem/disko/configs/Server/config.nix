@@ -91,6 +91,15 @@
                 "com.sun:auto-snapshot" = "true";
               };
             };
+
+            "root/data" = {
+              type = "zfs_fs";
+              mountpoint = "/data";
+              options = {
+                mountpoint = "legacy";
+                "com.sun:auto-snapshot" = "true"; 
+              };
+            };
           };
         };
       };
