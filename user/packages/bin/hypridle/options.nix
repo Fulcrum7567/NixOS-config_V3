@@ -22,27 +22,30 @@
 		};
 
 		lockTimeout = lib.mkOption {
-			type = lib.types.int;
-			default = 300; 
-			description = "Time in seconds before the screen is locked.";
+			type = lib.types.nullOr lib.types.int;
+			default = 10*60; 
+			description = "Time in seconds before the screen is locked. Set to null to disable.";
+		};
+
+		dimScreenTimeout = lib.mkOption {
+			type = lib.types.nullOr lib.types.int;
+			default = 8*60; 
+			description = "Time in seconds before the screen is dimmed. Set to null to disable.";
 		};
 
 		sleepTimeout = lib.mkOption {
-			type = lib.types.int;
-			default = 360; 
-			description = "Time in seconds before the screen goes to sleep.";
+			type = lib.types.nullOr lib.types.int;
+			default = 12*60; 
+			description = "Time in seconds before the screen goes to sleep. Set to null to disable.";
 		};
 
 		suspendTimeout = lib.mkOption {
-			type = lib.types.int;
-			default = 600; 
-			description = "Time in seconds before the system suspends. Set to 0 to disable.";
+			type = lib.types.nullOr lib.types.int;
+			default = 15*60; 
+			description = "Time in seconds before the system suspends. Set to null to disable.";
 		};
 
-		lockCommand = lib.mkOption {
-			type = lib.types.str;
-			default = "hyprlock";
-			description = "Command to execute to lock the screen.";
-		};
+
+
 	};
 }
