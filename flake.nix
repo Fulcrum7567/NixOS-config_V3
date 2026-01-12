@@ -457,7 +457,7 @@
 		apps."x86_64-linux".install-server = {
 			type = "app";
 			program = toString (nixpkgs-unstable.legacyPackages."x86_64-linux".writeShellScript "install-server" ''
-				PATH=${nixpkgs-unstable.legacyPackages."x86_64-linux".coreutils}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".util-linux}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".openssh}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".nix}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".gnused}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".gnugrep}/bin:$PATH
+				PATH=${nixpkgs-unstable.legacyPackages."x86_64-linux".coreutils}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".util-linux}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".openssh}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".nix}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".git}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".gnused}/bin:${nixpkgs-unstable.legacyPackages."x86_64-linux".gnugrep}/bin:$PATH
 				
 				if [ ! -f "flake.nix" ]; then
 					echo "Error: Please run this command from the root of your dotfiles repository."
@@ -486,32 +486,16 @@
 					fi
 				done
 
-				# 1. SSH Keys
-				SSH_KEY="$HOME/.ssh/id_ed25519"
-				if [ ! -f "$SSH_KEY" ]; then
-					echo "[?] No SSH key found at $SSH_KEY"
-					read -p "    Generate one? [Y/n] " GEN_KEY
-					if [ "$GEN_KEY" != "n" ]; then
-						ssh-keygen -t ed25519 -C "server-setup" -f "$SSH_KEY"
-					fi
-				fi
-				
-				if [ -f "$SSH_KEY.pub" ]; then
-					PUB_KEY=$(cat "$SSH_KEY.pub")
-				else
-					echo "[!] Authenticated keys not found. Aborting."
-					exit 1
-				fi
-
-				# 2. ISO Creation
+				# 1. ISO Creation
 				echo ""
 				read -p "[?] Do you need to build a headless installer ISO? [y/N] " BUILD_ISO
 				if [ "$BUILD_ISO" = "y" ] || [ "$BUILD_ISO" = "Y" ]; then
 					echo "[*] Creating iso.nix..."
 					cat > iso.nix <<EOF
-{ pkgs, modulesPath, ... }: {
+{ pkgs, modulesPath, lib, ... }: {
   imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
-  users.users.root.openssh.authorizedKeys.keys = [ "$PUB_KEY" ];
+  users.users.root.password = "nixos";
+  services.openssh.settings.PermitRootLogin = lib.mkForce "yes";
 }
 EOF
 					echo "[*] Building ISO..."
@@ -549,7 +533,7 @@ EOF
 					rm iso.nix
 				fi
 
-				# 3. Connection
+				# 2. Connection
 				TARGET_IP=""
 				while [ -z "$TARGET_IP" ]; do
 					echo ""
@@ -559,11 +543,23 @@ EOF
 					fi
 				done
 
+				# Clean up old keys
+				ssh-keygen -R "$TARGET_IP" 2>/dev/null
+
+				USERNAME=""
+				while [ -z "$USERNAME" ]; do
+					read -p "[?] SSH Username (default: root): " INPUT_USER
+					if [ -z "$INPUT_USER" ]; then
+						USERNAME="root"
+					else
+						USERNAME="$INPUT_USER"
+					fi
+				done
 				echo "[*] Verifying SSH connection..."
-				if ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no "root@$TARGET_IP" "echo connected" > /dev/null 2>&1; then
+				if ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no "$USERNAME@$TARGET_IP" "echo connected" > /dev/null 2>&1; then
 					echo "[✓] Connection established."
 				else
-					echo "[!] Failed to connect to root@$TARGET_IP"
+					echo "[!] Failed to connect to $USERNAME@$TARGET_IP"
 					exit 1
 				fi
 
@@ -572,7 +568,7 @@ EOF
 				read -p "[?] Configure Disk ID? [y/N] " SET_DISK
 				if [ "$SET_DISK" = "y" ] || [ "$SET_DISK" = "Y" ]; then
 					echo "[*] Available disks:"
-					ssh -o StrictHostKeyChecking=no "root@$TARGET_IP" "ls -l /dev/disk/by-id/"
+					ssh -o StrictHostKeyChecking=no "$USERNAME@$TARGET_IP" "ls -l /dev/disk/by-id/"
 					
 					echo ""
 					read -p "[?] Enter Disk ID (name only, e.g. nvme-Samsung...): " DISK_ID
@@ -592,6 +588,8 @@ EOF
 }
 EOF
 						echo "[✓] Created $DISKO_FILE"
+						git add "$DISKO_FILE"
+						echo "[✓] Added $DISKO_FILE to git staging"
 					fi
 				fi
 
@@ -602,13 +600,44 @@ EOF
 					echo "[*] Generating hardware-configuration.nix..."
 					ssh -o StrictHostKeyChecking=no "root@$TARGET_IP" "nixos-generate-config --no-filesystems --show-hardware-config" > "./hosts/hosts/$HOST_NAME/hostConfigs/hardware-configuration.nix"
 					echo "[✓] Saved to ./hosts/hosts/$HOST_NAME/hostConfigs/hardware-configuration.nix"
+					git add "./hosts/hosts/$HOST_NAME/hostConfigs/hardware-configuration.nix"
+					echo "[✓] Added hardware-configuration.nix to git staging"
 				fi
 
 				# 6. Deployment
 				echo ""
 				echo "[*] deploying .#$HOST_NAME to $TARGET_IP..."
-				${nixos-anywhere.packages."x86_64-linux".nixos-anywhere}/bin/nixos-anywhere --flake .#$HOST_NAME "root@$TARGET_IP"
+				SSH_AUTH_SOCK="" ${nixos-anywhere.packages."x86_64-linux".nixos-anywhere}/bin/nixos-anywhere --ssh-option "IdentitiesOnly=yes" --flake .#$HOST_NAME "root@$TARGET_IP"
+
+				# 7. Post-Installation
+				echo ""
+				read -p "[?] Clone configuration repo on server? [y/N] " CLONE_REPO
+				if [ "$CLONE_REPO" = "y" ] || [ "$CLONE_REPO" = "Y" ]; then
+					echo "[*] Configuration for post-install:"
+					read -p "    Git Repository URL: " GIT_REPO
+					read -p "    Target Directory (e.g. ~/.dotfiles): " TARGET_DIR
+					read -p "    SSH User (e.g. fulcrum): " SSH_USER
+					
+					if [ -n "$GIT_REPO" ] && [ -n "$TARGET_DIR" ] && [ -n "$SSH_USER" ]; then
+						# Clean up known_hosts again as the server key likely changed after reinstall
+						ssh-keygen -R "$TARGET_IP" 2>/dev/null
+						
+						echo "[*] Waiting for server to reboot and come online..."
+						while ! ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no "$SSH_USER@$TARGET_IP" "echo ready" > /dev/null 2>&1; do
+							sleep 5
+							echo -n "."
+						done
+						echo ""
+						echo "[✓] Server is back online."
+						
+						echo "[*] Cloning repository..."
+						ssh -t -o StrictHostKeyChecking=no "$SSH_USER@$TARGET_IP" "git clone \"$GIT_REPO\" \"$TARGET_DIR\""
+						echo "[✓] Repository cloned to $TARGET_DIR"
+					else
+						echo "[!] Missing information. Skipping clone."
+					fi
+				fi
 			'');
 		};
 	};
-} 
+}
