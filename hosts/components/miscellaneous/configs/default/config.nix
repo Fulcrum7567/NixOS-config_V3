@@ -10,6 +10,8 @@ in
 		nixpkgs.config.allowUnfree = true;
 
 		networking.hostName = config.host.settings.hostName;
+
+		services.xserver.excludePackages = [ pkgs-default.xterm ];
 		
 	};
 } 
