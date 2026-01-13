@@ -29,7 +29,7 @@
 
 		dimScreenTimeout = lib.mkOption {
 			type = lib.types.nullOr lib.types.int;
-			default = 1*60; 
+			default = 8*60; 
 			description = "Time in seconds before the screen is dimmed. Set to null to disable.";
 		};
 
