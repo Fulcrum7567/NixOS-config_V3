@@ -24,8 +24,8 @@ in
 				] else []) ++ (if config.packages.${settings.optionName}.dimScreenTimeout != null then [
 					{
 						timeout = config.packages.${settings.optionName}.dimScreenTimeout;
-						on-timeout = "brightnessctl -s set 5%";
-						on-resume = "brightnessctl -r";
+						on-timeout = "brightnessctl get > /tmp/previous_brightness && echo 0 > /tmp/reset_brightness && while [ $(brightnessctl get) -gt 0 -a $(cat /tmp/reset_brightness) -ne 1 ]; do brightnessctl -q set 1%-; sleep 0.02; done && echo 0 > /tmp/reset_brightness";
+						on-resume = "echo 1 > /tmp/reset_brightness && brightnessctl set $(cat /tmp/previous_brightness)";
 					}
 				] else []) ++ (if config.packages.${settings.optionName}.sleepTimeout != null then [
 					{
