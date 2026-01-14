@@ -7,16 +7,16 @@
       "syncthing/server/key" = { 
         owner = "syncthing"; 
         group = "syncthing";
-        sopsFile = ./syncthingSecrets.json;
-        format = "json";
+        sopsFile = ./syncthingSecrets.yaml;
+        format = "yaml";
         # Restart syncthing if these change
         restartUnits = [ "syncthing.service" ]; 
       };
       "syncthing/server/cert" = { 
         owner = "syncthing"; 
         group = "syncthing";
-        sopsFile = ./syncthingSecrets.json;
-        format = "json";
+        sopsFile = ./syncthingSecrets.yaml;
+        format = "yaml";
         restartUnits = [ "syncthing.service" ];
       };
     };
