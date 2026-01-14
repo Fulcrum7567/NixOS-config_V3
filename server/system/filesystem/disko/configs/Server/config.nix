@@ -92,9 +92,9 @@
               };
             };
 
-            "root/data" = {
+            "root${config.server.system.filesystem.defaultDataDir}" = {
               type = "zfs_fs";
-              mountpoint = "/data";
+              mountpoint = config.server.system.filesystem.defaultDataDir;
               options = {
                 mountpoint = "legacy";
                 "com.sun:auto-snapshot" = "true"; 

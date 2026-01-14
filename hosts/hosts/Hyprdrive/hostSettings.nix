@@ -38,6 +38,12 @@
 
 
 		packages = {
+
+			syncthing = {
+				enable = true;
+				activeConfig = "Hyprdrive";
+			};
+
 			signal.enable = true;
 			vscode.enable = true;
 

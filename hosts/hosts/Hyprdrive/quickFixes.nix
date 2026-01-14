@@ -2,6 +2,15 @@
 {
 	config = {
 
+		hardware.i2c.enable = true;
+
+		# 2. Add the ddcci-driver to the kernel
+		boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
+
+		# 3. Load the module at boot
+		boot.kernelModules = [ "i2c-dev" "ddcci_backlight" ];
+
+
 		nixpkgs.overlays = [
 			(final: prev: {
 				# CHANGE THIS to match your kernel: 
