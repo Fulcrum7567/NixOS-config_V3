@@ -24,6 +24,12 @@
 		};
 
 		packages = {
+
+			syncthing = {
+				enable = true;
+				activeConfig = "PET";
+			};
+
 			signal.enable = true;
 			supergfxd.enable = true;
 
