@@ -37,6 +37,15 @@ in
 			};
 
 		home-manager.users.${config.user.settings.username} = {
+			xdg.desktopEntries = {
+				nvim = {
+					name = "Neovim";
+					genericName = "Neovim";
+					exec = "${lib.replaceStrings [ "<command>" ] [ "nvim" ] config.packages.defaults.terminal.launchWithCommand}";
+					icon = "nvim";
+					noDisplay = false;
+				};
+			};
 		};
 	};
 } 

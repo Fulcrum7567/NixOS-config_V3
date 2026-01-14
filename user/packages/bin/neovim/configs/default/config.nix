@@ -9,7 +9,7 @@ in
 				nvim = {
 					name = "Neovim";
 					genericName = "Neovim";
-					exec = "kitty nvim";
+					exec = "${lib.replaceStrings [ "<command>" ] [ "nvim" ] config.packages.defaults.terminal.launchWithCommand}";
 					icon = "nvim";
 					categories = [  ];
 					noDisplay = false;

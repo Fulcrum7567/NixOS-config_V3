@@ -34,5 +34,11 @@
 			default = config.packages.defaults.terminal.active or "";
 			description = "Define a custom launch command for the terminal.";
 		};
+
+		launchWithCommand = lib.mkOption {
+			type = lib.types.str;
+			description = "Define a custom command to launch the terminal with a specific command.";
+			example = "ghostty -e <command>";
+		};
 	};
 }
