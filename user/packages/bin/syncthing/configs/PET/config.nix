@@ -7,8 +7,8 @@ in
 
 		sops.secrets = {
 			"syncthing/devices/PET/key" = { 
-				owner = "syncthing";
-				group = "syncthing";
+				owner = config.services.syncthing.user;
+				group = config.services.syncthing.group;
 				# Point to the specific file
 				sopsFile = ../../bin/syncthingSecrets.yaml;
 				format = "yaml";
@@ -17,8 +17,8 @@ in
 			};
 
 			"syncthing/devices/PET/cert" = { 
-				owner = "syncthing";
-				group = "syncthing";
+				owner = config.services.syncthing.user;
+				group = config.services.syncthing.group;
 				format = "yaml";
 				sopsFile = ../../bin/syncthingSecrets.yaml;
 				restartUnits = [ "syncthing.service" ];

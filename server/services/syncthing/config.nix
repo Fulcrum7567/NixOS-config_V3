@@ -5,16 +5,16 @@
     sops.secrets = {
       # The server's own identity (private key and cert)
       "syncthing/server/key" = { 
-        owner = "syncthing"; 
-        group = "syncthing";
+        owner = config.services.syncthing.user; 
+        group = config.services.syncthing.group;
         sopsFile = ./syncthingSecrets.yaml;
         format = "yaml";
         key = "syncthing/key";
         restartUnits = [ "syncthing.service" ]; 
       };
       "syncthing/server/cert" = { 
-        owner = "syncthing"; 
-        group = "syncthing";
+        owner = config.services.syncthing.user; 
+        group = config.services.syncthing.group;
         sopsFile = ./syncthingSecrets.yaml;
         format = "yaml";
         key = "syncthing/cert";
@@ -26,10 +26,10 @@
       enable = true;
       openDefaultPorts = true;
 
-      user = "syncthing";
-      group = "syncthing";
+      user = config.user.settings.username;
+      group = config.user.settings.username;
       dataDir = config.server.services.syncthing.defaultDataDir;
-      #configDir = "${config.server.system.filesystem.defaultConfigDir}/syncthing";
+      configDir = "${config.server.system.filesystem.defaultConfigDir}/syncthing";
 
       guiAddress = "0.0.0.0:8384";
 
