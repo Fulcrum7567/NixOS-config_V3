@@ -35,6 +35,15 @@ in
 			key = config.sops.secrets."syncthing/devices/Hyprdrive/key".path;
 			cert = config.sops.secrets."syncthing/devices/Hyprdrive/cert".path;
 
+			settings = {
+				folders = {
+					"FH" = {
+						path = "/home/${config.user.settings.username}/Documents/FH";
+						devices = [ "Server" ];
+					};
+				};
+			};
+
 		};
 	};
 } 
