@@ -45,20 +45,22 @@
         proxy_headers_hash_bucket_size 128;
       '';
 
-      virtualHosts."syncthing.${config.server.webaddress}" = {
-        forceSSL = true;
-        useACMEHost = config.server.webaddress; 
+      virtualHosts = lib.listToAttrs (lib.mapAttrsToList (_: redirect: {
+        name = redirect.from;
+        value = {
+          forceSSL = redirect.forceSSL;
+          useACMEHost = if redirect.useACMEHost then config.server.webaddress else null;
 
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8384";
-
-          proxyWebsockets = true;
-          extraConfig = ''
-            proxy_read_timeout 600s;
-            proxy_send_timeout 600s;
-          '';
+          locations = lib.listToAttrs (lib.mapAttrsToList (_: location: {
+            name = location.path;
+            value = {
+              proxyPass = location.to;
+              proxyWebsockets = location.proxyWebsockets;
+              extraConfig = location.extraConfig;
+            };
+          }) redirect.locations);
         };
-      };
+      }) config.server.services.reverseProxy.activeRedirects);
     };
     
   };

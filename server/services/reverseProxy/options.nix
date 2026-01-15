@@ -51,6 +51,16 @@
                   description = "The backend address to proxy to (e.g. IP:port).";
                   example = "127.0.0.1:8096";
                 };
+                proxyWebsockets = lib.mkOption {
+                  type = lib.types.bool;
+                  default = false;
+                  description = "Whether to enable WebSocket proxying for this location.";
+                };
+                extraConfig = lib.mkOption {
+                  type = lib.types.str;
+                  default = "";
+                  description = "Additional configuration directives for this location.";
+                };
               };
             });
             default = { };

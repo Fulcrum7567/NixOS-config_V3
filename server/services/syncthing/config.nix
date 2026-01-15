@@ -73,6 +73,22 @@
       };
     };
 
+    server.services.reverseProxy.activeRedirects."syncthing" = {
+      from = "syncthing.${config.server.webaddress}";
+      useACMEHost = true;
+      forceSSL = true;
+
+      locations."/" = {
+        path = "/";
+        to = "http://127.0.0.1:8384";
+        proxyWebsockets = true;
+        extraConfig = ''
+          proxy_read_timeout 600s;
+          proxy_send_timeout 600s;
+        '';
+      };
+    };
+
     networking.firewall = {
       allowedTCPPorts = [ /*8384*/ 22000 ];
       allowedUDPPorts = [ 22000 21027 ];
