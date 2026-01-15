@@ -23,6 +23,11 @@
 					activeConfig = "nginx";
 				};
 
+				autoBackup = {
+					enable = true;
+					activeConfig = "default";
+				};
+
 				syncthing = {
 					enable = true;
 					exposeGUI = true;
