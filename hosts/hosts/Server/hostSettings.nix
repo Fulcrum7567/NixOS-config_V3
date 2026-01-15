@@ -74,6 +74,12 @@
 
 			components = {
 
+				shutdownTimes = {
+					enable = true;
+					shutdownAt = "22:00";
+					wakeUpAt = "06:00";
+				};
+
 				bootEntryLabels.enable = false;
 
 				kernelVersion = {
