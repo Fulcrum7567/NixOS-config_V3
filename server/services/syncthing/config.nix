@@ -27,7 +27,7 @@
       user = "syncthing";
       group = "syncthing";
       dataDir = config.server.services.syncthing.defaultDataDir;
-      configDir = "${config.server.filesystem.defaultConfigDir}/syncthing";
+      configDir = "${config.server.system.filesystem.defaultConfigDir}/syncthing";
 
       key = config.sops.secrets."syncthing/server/key".path;
       cert = config.sops.secrets."syncthing/server/cert".path;
