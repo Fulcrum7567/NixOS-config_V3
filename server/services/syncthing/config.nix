@@ -9,6 +9,7 @@
         group = "syncthing";
         sopsFile = ./syncthingSecrets.yaml;
         format = "yaml";
+        key = "syncthing/key";
         restartUnits = [ "syncthing.service" ]; 
       };
       "syncthing/server/cert" = { 
@@ -16,6 +17,7 @@
         group = "syncthing";
         sopsFile = ./syncthingSecrets.yaml;
         format = "yaml";
+        key = "syncthing/cert";
         restartUnits = [ "syncthing.service" ];
       };
     };
