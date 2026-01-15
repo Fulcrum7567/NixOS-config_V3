@@ -7,6 +7,7 @@
     sops.secrets.inwx_credentials = {
       owner = "acme";
       sopsFile = ./inwxSecrets.yaml;
+      format = "yaml";
     };
 
     security.acme = {
