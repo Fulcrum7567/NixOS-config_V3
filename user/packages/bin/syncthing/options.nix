@@ -40,6 +40,16 @@
         ".svn"
         ".hg"
 
+        # --- Nix / Direnv ---
+        ".direnv"               # Direnv environment
+        "result"                # Nix build symlinks
+
+        # --- Logs ---
+        "*.log"
+        "npm-debug.log*"
+        "yarn-debug.log*"
+        "yarn-error.log*"
+
         # --- Python ---
         "__pycache__"           # Compiled Python bytecode
         "*.pyc"
@@ -70,10 +80,16 @@
         "*.so"                  # Shared libraries
         "*.dll"
         "*.exe"                 # Executables
+        "*.class"               # Java Bytecode
         "*.dylib"
         "target"                # Rust build folder (Very heavy)
         "bin"                   # Go/General bin folder
         "obj"                   # C# / General obj folder
+
+        # --- Infrastructure ---
+        ".terraform"            # Terraform
+        ".vagrant"              # Vagrant
+        ".kube"                 # Local Kubernetes Config (Careful!)
 
         # --- IDEs / Editors ---
         ".idea"                 # JetBrains (IntelliJ, PyCharm, etc.)
