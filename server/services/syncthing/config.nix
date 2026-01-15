@@ -9,7 +9,6 @@
         group = "syncthing";
         sopsFile = ./syncthingSecrets.yaml;
         format = "yaml";
-        # Restart syncthing if these change
         restartUnits = [ "syncthing.service" ]; 
       };
       "syncthing/server/cert" = { 
@@ -27,7 +26,7 @@
 
       user = "syncthing";
       group = "syncthing";
-      dataDir = "${config.server.services.syncthing.defaultSaveDir}";
+      dataDir = config.server.services.syncthing.defaultSaveDir;
       configDir = "${config.server.filesystem.defaultConfigDir}/syncthing";
 
       key = config.sops.secrets."syncthing/server/key".path;
