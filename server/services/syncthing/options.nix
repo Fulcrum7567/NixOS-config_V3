@@ -25,5 +25,11 @@
       description = "Default directory to save Syncthing configurations.";
     };
 
+    exposeGUI = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Expose Syncthing web GUI via reverse proxy.";
+    };
+
   };
 }

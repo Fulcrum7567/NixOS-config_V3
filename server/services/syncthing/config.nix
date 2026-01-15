@@ -71,6 +71,12 @@
       };
     };
 
+    # Expose Syncthing GUI via reverse proxy if enabled
+    server.services.reverseProxy.activeRedirects."syncthing" = lib.mkIf config.server.services.syncthing.exposeGUI {
+      from = "syncthing.${config.server.webaddress}";
+      to = "127.0.0.1:8384";
+    };
+
     networking.firewall = {
       allowedTCPPorts = [ 8384 22000 ];
       allowedUDPPorts = [ 22000 21027 ];

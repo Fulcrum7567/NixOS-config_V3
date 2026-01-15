@@ -3,7 +3,7 @@
   options.server.system.filesystem.disko = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = (if config.host.settings.systemType == "server" then true else false);
+      default = (config.host.settings.systemType == "server");
       description = "Enable disko for managing filesystems.";
     };
 

@@ -13,8 +13,20 @@
 		};
 
 		server = {
+
+			webaddress = "aurek.eu";
+
 			services = {
-				syncthing.enable = true;
+
+				reverseProxy = {
+					enable = true;
+					activeConfig = "caddy";
+				};
+
+				syncthing = {
+					enable = true;
+					exposeGUI = true;
+				};
 			};
 		};
 

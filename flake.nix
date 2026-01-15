@@ -391,7 +391,7 @@
 						./hosts/hosts/${host}/quickFixes.nix
 
 						# Server
-						./server/system/filesystem/imports.nix
+						./server/system/importer.nix
 						./server/services/importer.nix
 
 						# User
