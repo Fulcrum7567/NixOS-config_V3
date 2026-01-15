@@ -12,5 +12,6 @@
       default = "inwx";
       description = "The DNS provider used for ACME certificate generation.";
       example = "inwx";
+    };
   };
 }
