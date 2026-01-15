@@ -44,11 +44,11 @@
         };
 
         devices = {
-          /*
+          
           "PET" = {
-            id = ""
+            id = "RW4U4RS-26NEMOV-SFJBHKY-YBOJGOV-TTUPILL-W3IFLFT-Y2MWGXC-CR44HQ3";
           };
-          */
+          
           "Hyprdrive" = {
             id = "6PW3EJM-HRKMYVQ-3OOORYX-7UV6OU2-EGVFUPO-FQOVLYY-IENKT2S-5IWGNQV";
           };
