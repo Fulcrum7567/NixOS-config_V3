@@ -378,6 +378,7 @@
 						./system/options/shortcuts.nix
 						./system/options/hardware.nix
 						./system/options/systemOptions.nix
+						./system/options/hostOptions.nix
 
 						# Scripts
 						./system/scripts/updateInputs.nix
