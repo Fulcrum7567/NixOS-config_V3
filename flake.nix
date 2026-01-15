@@ -392,6 +392,7 @@
 
 						# Server
 						./server/system/filesystem/imports.nix
+						./server/services/importer.nix
 
 						# User
 						./user/bin/user.nix
