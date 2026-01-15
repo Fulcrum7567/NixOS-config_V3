@@ -1,4 +1,4 @@
 { config, lib, ... }:
 {
-  config.server.services.autoBackup.availableConfigs = [ "caddy" ];
+  config.server.services.autoBackup.availableConfigs = [ "default" ];
 }
