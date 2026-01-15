@@ -59,6 +59,11 @@
       };
     };
 
+    # Make sure folder exists with correct permissions
+    systemd.tmpfiles.rules = [
+      "d ${config.server.services.syncthing.defaultDataDir} 0770 ${config.services.syncthing.user} ${config.services.syncthing.group} -"
+    ];
+
     networking.firewall = {
       allowedTCPPorts = [ 8384 22000 ];
       allowedUDPPorts = [ 22000 21027 ];
