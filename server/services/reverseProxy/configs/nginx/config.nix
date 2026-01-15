@@ -50,10 +50,15 @@
           extraConfig = ''
             proxy_read_timeout 600s;
           
-            # TRICK: Wir sagen Syncthing, wir sind "localhost". 
-            # Damit ist der Host-Check zufrieden.
-            proxy_set_header Host localhost;
+            # 1. Wir sagen Syncthing: "Ich bin localhost:8384"
+            proxy_set_header Host 127.0.0.1:8384;
             
+            # 2. WICHTIG: Wir fälschen auch den Ursprung, damit der CSRF-Schutz nicht greift!
+            # Syncthing denkt, der Request kommt von seiner eigenen GUI.
+            proxy_set_header Origin http://127.0.0.1:8384;
+            proxy_set_header Referer http://127.0.0.1:8384;
+
+            # 3. IP-Weiterleitung für Logging (optional, aber gut)
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto $scheme;
