@@ -35,6 +35,15 @@ in
 			key = config.sops.secrets."syncthing/devices/PET/key".path;
 			cert = config.sops.secrets."syncthing/devices/PET/cert".path;
 
+			settings = {
+				folders = {
+					"FH" = {
+						path = "/home/${config.user.settings.username}/Documents/FH";
+						devices = [ "Server" ];
+					};
+				};
+			};
+
 		};
 	};
 } 
