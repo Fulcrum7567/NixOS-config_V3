@@ -64,6 +64,13 @@
       "d ${config.server.services.syncthing.defaultDataDir} 0770 ${config.services.syncthing.user} ${config.services.syncthing.group} -"
     ];
 
+    systemd.services.syncthing = {
+      serviceConfig = {
+        # This allows the service to write to your custom ZFS mount
+        ReadWritePaths = [ config.server.services.syncthing.defaultDataDir ];
+      };
+    };
+
     networking.firewall = {
       allowedTCPPorts = [ 8384 22000 ];
       allowedUDPPorts = [ 22000 21027 ];
