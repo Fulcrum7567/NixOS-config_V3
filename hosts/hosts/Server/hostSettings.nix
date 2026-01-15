@@ -20,7 +20,7 @@
 
 				reverseProxy = {
 					enable = true;
-					activeConfig = "caddy";
+					activeConfig = "nginx";
 				};
 
 				syncthing = {
