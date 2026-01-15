@@ -40,6 +40,7 @@ in
 					"FH" = {
 						path = "/home/${config.user.settings.username}/Documents/FH";
 						devices = [ "Server" ];
+						ignorePatterns = config.packages.${settings.optionName}.commonIgnores;
 					};
 				};
 			};
