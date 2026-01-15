@@ -69,7 +69,7 @@
     systemd.services.syncthing = {
       serviceConfig = {
         # This allows the service to write to your custom ZFS mount
-        ReadWritePaths = [ "${config.server.services.syncthing.defaultDataDir}/../" ];
+        ReadWritePaths = [ "${config.server.services.syncthing.defaultDataDir}/" ];
       };
     };
 
