@@ -24,7 +24,7 @@
 
     services.syncthing = {
       enable = true;
-      openDefaultPorts = true;
+      openDefaultPorts = false;
 
       user = config.user.settings.username;
       dataDir = config.server.services.syncthing.defaultDataDir;

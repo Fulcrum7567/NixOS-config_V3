@@ -48,10 +48,18 @@
 
           proxyWebsockets = true;
           extraConfig = ''
+            # WICHTIG: Erhöhe die Timeouts, damit Syncthing nicht abbricht
+            proxy_read_timeout 600s;
+            proxy_send_timeout 600s;
+
+            # Header müssen explizit so gesetzt werden
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto $scheme;
+            
+            # Manchmal nötig bei strengen CSRF checks:
+            # proxy_set_header X-Forwarded-Host $host;
           '';
         };
       };
