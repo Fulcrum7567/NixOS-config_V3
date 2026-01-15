@@ -5,7 +5,6 @@
 		services.syncthing = {
 			enable = true;
 			user = config.user.settings.username;
-			group = config.user.settings.username;
 
 			
 

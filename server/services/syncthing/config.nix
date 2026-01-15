@@ -27,7 +27,6 @@
       openDefaultPorts = true;
 
       user = config.user.settings.username;
-      group = config.user.settings.username;
       dataDir = config.server.services.syncthing.defaultDataDir;
       configDir = "${config.server.system.filesystem.defaultConfigDir}/syncthing";
 
