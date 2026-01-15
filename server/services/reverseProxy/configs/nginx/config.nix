@@ -45,6 +45,11 @@
 
         locations."/" = {
           proxyPass = "http://127.0.0.1:8384";
+
+          proxyWebsocket = true;
+          extraConfig = ''
+            proxy_set_header Host 127.0.0.1;
+          '';
         };
       };
     };
