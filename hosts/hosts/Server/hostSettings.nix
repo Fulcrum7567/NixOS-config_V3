@@ -12,6 +12,12 @@
 		hardware.displays = {
 		};
 
+		server = {
+			services = {
+				syncthing.enable = true;
+			};
+		};
+
 		packages = {
 			neovim = {
 				enable = true;

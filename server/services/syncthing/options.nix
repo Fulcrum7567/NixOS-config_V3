@@ -19,7 +19,7 @@
       description = "The active Syncthing configuration.";
     };
 
-    defaultSaveDir = lib.mkOption {
+    defaultDataDir = lib.mkOption {
       type = lib.types.str;
       default = "${config.server.system.filesystem.defaultDataDir}/syncthing";
       description = "Default directory to save Syncthing configurations.";

@@ -6,7 +6,7 @@
         
         folders = {
           "Obsidian/FH" = {
-            path = "${config.server.services.syncthing.defaultSaveDir}/obsidian/FH";
+            path = "${config.server.services.syncthing.defaultDataDir}/obsidian/FH";
             devices = [ "PET" "Hyprdrive" ];
           };
         };
