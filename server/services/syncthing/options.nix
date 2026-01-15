@@ -15,7 +15,7 @@
 
     activeConfig = lib.mkOption {
       type = lib.types.enum (config.server.services.syncthing.availableConfigs or []);
-      default = null;
+      default = "default";
       description = "The active Syncthing configuration.";
     };
 
