@@ -1,4 +1,4 @@
-{ config, lib, pkgs-default, ... }:
+{ config, lib, pkgs-default, pkgs, ... }:
 {
   config = lib.mkIf (config.server.services.autoBackup.enable && (config.server.services.autoBackup.activeConfig == "default")) {
     
