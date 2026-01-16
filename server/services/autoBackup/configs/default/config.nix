@@ -48,7 +48,7 @@
           
           # 2. Browse Content
           gum style --foreground 39 "Browsing $SNAPSHOT... (Press Esc to exit)"
-          gum file "$SNAPSHOT_DIR/$SNAPSHOT" --height 15
+          gum file "$SNAPSHOT_DIR/$SNAPSHOT" --height 20
         }
 
         local_restore() {
@@ -62,7 +62,7 @@
           
           # 2. Select File/Folder
           gum style --foreground 39 "Select the file or folder to restore:"
-          TARGET=$(gum file "$SNAPSHOT_DIR/$SNAPSHOT" --height 15 --file --directory)
+          TARGET=$(gum file "$SNAPSHOT_DIR/$SNAPSHOT" --height 20 --file --directory)
           
           if [ -z "$TARGET" ]; then echo "No selection made."; exit 1; fi
 
