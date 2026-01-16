@@ -141,10 +141,10 @@
               wait $RESTIC_PID 2>/dev/null
               
               # Using fusermount for cleaner unmount as user/root
-              fusermount -u "$MOUNT_POINT" 2>/dev/null || umount "$MOUNT_POINT" 2>/dev/null
+              #fusermount -u "$MOUNT_POINT" 2>/dev/null || umount "$MOUNT_POINT" 2>/dev/null
               
               # Remove dir if we created it (optional, safe to leave if empty)
-              rmdir "$MOUNT_POINT" 2>/dev/null
+              #rmdir "$MOUNT_POINT" 2>/dev/null
           }
           trap cleanup EXIT INT TERM
 
