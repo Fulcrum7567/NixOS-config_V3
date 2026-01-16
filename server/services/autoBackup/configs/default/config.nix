@@ -66,7 +66,7 @@
 
           BROWSE_PATH="$TEMP_MOUNT_PATH/snapshots/$VERSION"
           if [ -d "$BROWSE_PATH" ]; then
-            echo "Starting shell in $BROWSE_PATH"
+            echo "Starting shell ($SHELL) in $BROWSE_PATH"
             (cd "$BROWSE_PATH" && exec "$SHELL")
           else
             echo "Version $VERSION not found."
