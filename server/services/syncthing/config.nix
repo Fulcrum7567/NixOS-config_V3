@@ -65,6 +65,8 @@
     # Make sure folder exists with correct permissions
     systemd.tmpfiles.rules = [
       "d ${config.services.syncthing.configDir} 0700 ${config.services.syncthing.user} ${config.services.syncthing.group} - -"
+      "Z ${config.services.syncthing.configDir} 0700 ${config.services.syncthing.user} ${config.services.syncthing.group} - -"
+      "d ${config.server.services.syncthing.defaultDataDir} 0770 ${config.services.syncthing.user} ${config.services.syncthing.group} - -"
       "Z ${config.server.services.syncthing.defaultDataDir} 0770 ${config.services.syncthing.user} ${config.services.syncthing.group} - -"
     ];
 
