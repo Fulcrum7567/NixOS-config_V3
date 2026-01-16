@@ -12,6 +12,10 @@
         resticPassword = config.sops.secrets."restic_password".path;
       in [
       (pkgs-default.writeShellScriptBin "manageBackups" ''
+        if [ "$EUID" -ne 0 ]; then
+          exec sudo "$0" "$@"
+        fi
+
         # --- Configuration & Environment Variables ---
         export PATH="${rclone}/bin:${gum}/bin:${restic}/bin:${pkgs-default.coreutils}/bin:${pkgs-default.gnugrep}/bin:${pkgs-default.util-linux}/bin:${pkgs-default.systemd}/bin:$PATH"
         
