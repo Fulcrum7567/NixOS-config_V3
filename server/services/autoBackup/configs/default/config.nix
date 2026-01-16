@@ -42,7 +42,7 @@
           SNAPSHOT_DIR="/data/.zfs/snapshot"
           
           # 1. List and Select Snapshot
-          SNAPSHOT=$(ls -1 "$SNAPSHOT_DIR" | gum filter --placeholder "Select a snapshot to browse...")
+          SNAPSHOT=$(ls -1 "$SNAPSHOT_DIR" | gum filter --height 20 --placeholder "Select a snapshot to browse...")
           
           if [ -z "$SNAPSHOT" ]; then echo "No snapshot selected."; exit 1; fi
           
@@ -57,7 +57,7 @@
           SNAPSHOT_DIR="/data/.zfs/snapshot"
           
           # 1. List and Select Snapshot
-          SNAPSHOT=$(ls -1 "$SNAPSHOT_DIR" | gum filter --placeholder "Select a snapshot to restore from...")
+          SNAPSHOT=$(ls -1 "$SNAPSHOT_DIR" | gum filter --height 20 --placeholder "Select a snapshot to restore from...")
           if [ -z "$SNAPSHOT" ]; then exit 1; fi
           
           # 2. Select File/Folder
@@ -153,7 +153,7 @@
               exit 1
           fi
 
-          SELECTED_SNAP=$(ls -1 "$SNAPSHOT_ROOT" | gum filter --placeholder "Select a snapshot ID")
+          SELECTED_SNAP=$(ls -1 "$SNAPSHOT_ROOT" | gum filter --height 20 --placeholder "Select a snapshot ID")
           if [ -z "$SELECTED_SNAP" ]; then exit 0; fi
 
           SNAP_PATH="$SNAPSHOT_ROOT/$SELECTED_SNAP"
