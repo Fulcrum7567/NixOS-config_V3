@@ -124,11 +124,24 @@
                 echo "❌ Restore cancelled."
                 return
             fi
+        else if [ ! -d "$(dirname "$dest")" ]; then
+            gum spin --spinner line --title "Creating target directory..." -- \
+                mkdir -p "$(dirname "$dest")"
+          fi
         fi
 
-        gum spin --spinner dot --title "Restoring..." -- rsync -a --info=progress2 "$src" "$dest"
+        local rsync_src="$src"
+        if [ -d "$src" ]; then
+            rsync_src="$src/"
+        fi
+
+        gum spin --spinner dot --title "Restoring..." -- rsync -a --info=progress2 "$rsync_src" "$dest"
         
         if [ $? -eq 0 ]; then
+            if [[ "$dest" == "$LOCAL_ROOT/syncthing"* ]]; then
+                 gum spin --spinner dot --title "Fixing ownership..." -- chown -R fulcrum:syncthing "$dest"
+            fi
+
             gum style --foreground 120 "✅ Restore successful!"
         else
             gum style --foreground 196 "❌ Restore failed."
