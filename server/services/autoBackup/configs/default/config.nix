@@ -3,17 +3,17 @@
   config = lib.mkIf (config.server.services.autoBackup.enable && (config.server.services.autoBackup.activeConfig == "default")) {
     
     environment.systemPackages = let
-        gum = pkgs.gum;
-        rclone = pkgs.rclone;
-        restic = pkgs.restic;
+        gum = pkgs-default.gum;
+        rclone = pkgs-default.rclone;
+        restic = pkgs-default.restic;
         
         # Accessing secrets (assuming sops-nix usage based on prompt)
         rcloneConfig = config.sops.secrets."rclone_config".path;
         resticPassword = config.sops.secrets."restic_password".path;
       in [
-      (pkgs.writeShellScriptBin "manageBackups" ''
+      (pkgs-default.writeShellScriptBin "manageBackups" ''
         # --- Configuration & Environment Variables ---
-        export PATH="${rclone}/bin:${gum}/bin:${restic}/bin:${pkgs.coreutils}/bin:${pkgs.gnugrep}/bin:${pkgs.util-linux}/bin:${pkgs.systemd}/bin:$PATH"
+        export PATH="${rclone}/bin:${gum}/bin:${restic}/bin:${pkgs-default.coreutils}/bin:${pkgs-default.gnugrep}/bin:${pkgs-default.util-linux}/bin:${pkgs-default.systemd}/bin:$PATH"
         
         export RCLONE_CONFIG="${rcloneConfig}"
         REPO="rclone:gdrive:nixos-backup"
