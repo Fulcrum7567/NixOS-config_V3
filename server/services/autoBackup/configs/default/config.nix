@@ -129,9 +129,18 @@
           # Restic blocks, so we need to capture PID to kill it later.
           RESTIC_CMD mount --allow-other "$MOUNT_POINT" &
           RESTIC_PID=$!
+          export RESTIC_PID MOUNT_POINT
           
           # Wait for mount to be ready
-          gum spin --title "Waiting for mount..." -- sleep 3
+          gum spin --title "Waiting for mount..." -- bash -c '
+            count=0
+            while [ ! -d "$MOUNT_POINT/snapshots" ]; do
+              if ! kill -0 "$RESTIC_PID" 2>/dev/null; then exit 1; fi
+              sleep 1
+              count=$((count+1))
+              if [ "$count" -ge 60 ]; then exit 1; fi
+            done
+          '
           
           # Trap cleanup to ensure unmount happens on exit/Ctrl+C
           cleanup() {
@@ -141,10 +150,10 @@
               wait $RESTIC_PID 2>/dev/null
               
               # Using fusermount for cleaner unmount as user/root
-              #fusermount -u "$MOUNT_POINT" 2>/dev/null || umount "$MOUNT_POINT" 2>/dev/null
+              fusermount -u "$MOUNT_POINT" 2>/dev/null || umount "$MOUNT_POINT" 2>/dev/null
               
               # Remove dir if we created it (optional, safe to leave if empty)
-              #rmdir "$MOUNT_POINT" 2>/dev/null
+              rmdir "$MOUNT_POINT" 2>/dev/null
           }
           trap cleanup EXIT INT TERM
 
