@@ -11,7 +11,7 @@
         fi
 
         export RCLONE_CONFIG=${config.sops.secrets."rclone_config".path}
-        export PATH=${pkgs-default.rclone}/bin:$PATH
+        export PATH=${pkgs-default.rclone}/bin:${pkgs-default.gum}/bin:$PATH
 
         RESTIC="${pkgs-default.restic}/bin/restic"
         REPO="rclone:gdrive:nixos-backup"
@@ -30,53 +30,60 @@
           done
 
           if [ -d "$TEMP_MOUNT_PATH" ] && [ "$(ls -A "$TEMP_MOUNT_PATH")" ]; then
-            echo "Directory $TEMP_MOUNT_PATH is not empty."
-            read -p "Do you want to change the temp_mount_path (c) or overwrite/mount over it (o)? [c/O] " CHOICE
-            if [ "$CHOICE" = "c" ] || [ "$CHOICE" = "C" ]; then
-              read -p "Enter new path: " TEMP_MOUNT_PATH
+            gum style --foreground 212 "Directory $TEMP_MOUNT_PATH is not empty."
+            if gum confirm "Overwrite/Mount over it?" --affirmative="Overwrite" --negative="Change Path"; then
+               : # Continue with overwrite
+            else
+               TEMP_MOUNT_PATH=$(gum input --placeholder "Enter new path" --value "$TEMP_MOUNT_PATH")
             fi
           fi
 
           mkdir -p "$TEMP_MOUNT_PATH"
-          echo "Mounting..."
+          
+          # Start mount
           nohup $RESTIC -r "$REPO" --password-file "$PASSWORD_FILE" mount --allow-other "$TEMP_MOUNT_PATH" > /dev/null 2>&1 &
           MOUNT_PID=$!
 
-          echo "Waiting for mount to be ready..."
-          COUNT=0
-          while [ ! -d "$TEMP_MOUNT_PATH/snapshots" ]; do
-            sleep 1
-            COUNT=$((COUNT+1))
-            if [ "$COUNT" -ge 60 ]; then
-              echo "Timed out waiting for mount."
-              exit 1
-            fi
-            if ! kill -0 $MOUNT_PID 2>/dev/null; then
-              echo "Mount process failed to start."
-              exit 1
-            fi
-          done
+          # Wait for mount
+          CHECK_SCRIPT="
+            COUNT=0
+            while [ ! -d \"$TEMP_MOUNT_PATH/snapshots\" ]; do
+              sleep 1
+              COUNT=\$((COUNT+1))
+              if [ \"\$COUNT\" -ge 60 ]; then exit 1; fi
+              if ! kill -0 $MOUNT_PID 2>/dev/null; then exit 2; fi
+            done
+          "
 
-          echo "Mount established."
-          echo "Available versions:"
-          ls "$TEMP_MOUNT_PATH/snapshots"
+          if ! gum spin --spinner dot --title "Mounting repository..." -- bash -c "$CHECK_SCRIPT"; then
+             gum style --foreground 196 "Mount failed or timed out."
+             exit 1
+          fi
 
-          read -p "Select a version to browse [latest]: " VERSION
-          VERSION="''${VERSION:-latest}"
+          gum style --foreground 46 "Mount established successfully."
+          
+          VERSIONS=$(ls "$TEMP_MOUNT_PATH/snapshots" | sort -r)
+          VERSION=$(echo "$VERSIONS" | gum filter --placeholder "Select a version to browse")
+          
+          if [ -z "$VERSION" ]; then
+             gum style --foreground 196 "No version selected."
+             exit 1
+          fi
 
           BROWSE_PATH="$TEMP_MOUNT_PATH/snapshots/$VERSION"
           if [ -d "$BROWSE_PATH" ]; then
-            echo "Starting shell ($SHELL) in $BROWSE_PATH"
+            gum style --foreground 212 "Starting shell in $BROWSE_PATH"
             (cd "$BROWSE_PATH" && exec "$SHELL")
           else
-            echo "Version $VERSION not found."
+            gum style --foreground 196 "Version $VERSION not found."
           fi
 
         elif [ "$COMMAND" = "init" ]; then
-          echo "Are you sure you have NEVER done this before for this REPO?"
-          read -p "Confirm [y/N]: " CONFIRM
-          if [ "$CONFIRM" = "y" ] || [ "$CONFIRM" = "Y" ]; then
+          gum style --foreground 196 --bold "WARNING: You are about to initialize a new repository."
+          if gum confirm "Are you sure you have NEVER done this before for this REPO?"; then
             exec $RESTIC -r "$REPO" --password-file "$PASSWORD_FILE" init
+          else
+            gum style "Aborted."
           fi
 
         else
