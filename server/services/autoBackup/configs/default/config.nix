@@ -112,7 +112,13 @@
         # Remove leading slash if present
         relative_path="''${relative_path#/}"
         
-        local dest="$LOCAL_ROOT/$relative_path"
+        local dest
+        local root_name=$(basename "$LOCAL_ROOT")
+        if [[ "$MODE" == "online" ]] && [[ "$relative_path" == "$root_name"* ]]; then
+            dest="/$relative_path"
+        else
+            dest="$LOCAL_ROOT/$relative_path"
+        fi
 
         echo ""
         gum style --foreground 212 "SOURCE: $src"
