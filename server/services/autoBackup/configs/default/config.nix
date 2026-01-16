@@ -5,6 +5,40 @@
     environment.systemPackages = [
       # run gdrive-backup init ONLY ONCE FOR EVERY NEW REPO!!
       (pkgs-default.writeShellScriptBin "gdrive-backup" ''
+
+        gpick() {
+          local selection
+
+          while true; do
+              # 1. List contents with a special entry for the current folder
+              # sed changes "./" to ". (Pick Current Directory)"
+              selection=$(ls -1ap | sed 's/^\.\/$/\. (Pick Current Directory)/' | gum filter \
+                  --height 15 \
+                  --indicator=">" \
+                  --header "📂 $PWD" \
+                  --placeholder "Browse..." \
+              )
+
+              # 2. Handle Cancel
+              if [[ -z "$selection" ]]; then
+                  return 1
+              fi
+
+              # 3. Logic
+              if [[ "$selection" == ". (Pick Current Directory)" ]]; then
+                  echo "$PWD"
+                  return 0
+              elif [[ "$selection" == */ ]]; then
+                  # If it ends in / it's a directory -> Enter it
+                  cd "$selection" || return
+              else
+                  # It's a file -> Return full path
+                  echo "$PWD/$selection"
+                  return 0
+              fi
+          done
+      }
+
         # Use sudo automatically if not running as root
         if [ "$EUID" -ne 0 ]; then
           exec sudo "$0" "$@"
@@ -72,8 +106,25 @@
 
           BROWSE_PATH="$TEMP_MOUNT_PATH/snapshots/$VERSION"
           if [ -d "$BROWSE_PATH" ]; then
-            gum style --foreground 212 "Starting shell in $BROWSE_PATH"
-            (cd "$BROWSE_PATH" && exec "$SHELL")
+            gum style --foreground 212 "Browsing $BROWSE_PATH..."
+            # Run gpick inside the snapshot directory
+            TARGET=$(cd "$BROWSE_PATH" && gpick)
+            
+            if [ -n "$TARGET" ]; then
+              gum style --foreground 212 "Selected: $TARGET"
+              
+              # Decide where to open the shell
+              if [ -d "$TARGET" ]; then
+                cd "$TARGET"
+              else
+                cd "$(dirname "$TARGET")"
+              fi
+              
+              gum style --foreground 212 "Starting shell in $PWD"
+              exec "$SHELL"
+            else
+              gum style --foreground 212 "Selection cancelled."
+            fi
           else
             gum style --foreground 196 "Version $VERSION not found."
           fi
