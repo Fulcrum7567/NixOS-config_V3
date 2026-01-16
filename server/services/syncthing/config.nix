@@ -68,6 +68,8 @@
     ];
 
     systemd.services.syncthing = {
+
+      wants = [ "sops-nix.service" ];
       # Wait for sops-nix to decrypt secrets
       after = [ "sops-nix.service" ];
 
