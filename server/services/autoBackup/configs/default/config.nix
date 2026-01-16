@@ -1,6 +1,23 @@
-{ config, lib, ... }:
+{ config, lib, pkgs-default, ... }:
 {
   config = lib.mkIf (config.server.services.autoBackup.enable && (config.server.services.autoBackup.activeConfig == "default")) {
+    
+    environment.systemPackages = [
+      (pkgs-default.writeShellScriptBin "gdrive-backup" ''
+        # Use sudo automatically if not running as root, 
+        # because regular users cannot read the /run/secrets files
+        if [ "$EUID" -ne 0 ]; then
+          exec sudo "$0" "$@"
+        fi
+
+        # Execute restic with all arguments pre-filled
+        exec ${pkgs-default.restic}/bin/restic \
+          -r rclone:gdrive:nixos-backup \
+          --password-file ${config.sops.secrets."restic_password".path} \
+          --rclone-config ${config.sops.secrets."rclone_config".path} \
+          "$@"
+      '')
+    ];
     
     services.zfs.autoSnapshot = {
       enable = true;
