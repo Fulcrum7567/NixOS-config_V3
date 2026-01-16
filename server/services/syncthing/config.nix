@@ -63,13 +63,17 @@
 
     # Make sure folder exists with correct permissions
     systemd.tmpfiles.rules = [
+      "d ${config.services.syncthing.configDir} 0700 ${config.services.syncthing.user} ${config.services.syncthing.group} - -"
       "Z ${config.server.services.syncthing.defaultDataDir} 0770 ${config.services.syncthing.user} ${config.services.syncthing.group} - -"
     ];
 
     systemd.services.syncthing = {
       serviceConfig = {
         # This allows the service to write to your custom ZFS mount
-        ReadWritePaths = [ "${config.server.services.syncthing.defaultDataDir}/" ];
+        ReadWritePaths = [ 
+          "${config.server.services.syncthing.defaultDataDir}/" 
+          "${config.services.syncthing.configDir}/"
+        ];
       };
     };
 
