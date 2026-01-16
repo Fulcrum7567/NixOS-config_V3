@@ -3,7 +3,7 @@
 let
   setupSopsScript = pkgs-default.writeShellScriptBin "setup-sops" ''
     # Default location for sops-nix keys
-    KEY_DIR="/home/${config.user.settings.username}/.config/sops/age"
+    KEY_DIR="/var/lib/sops-nix/"
     KEY_FILE="$KEY_DIR/keys.txt"
 
     # Check if running as root
