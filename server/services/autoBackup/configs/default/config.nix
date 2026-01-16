@@ -138,7 +138,7 @@
               if ! kill -0 "$RESTIC_PID" 2>/dev/null; then exit 1; fi
               sleep 1
               count=$((count+1))
-              if [ "$count" -ge 60 ]; then exit 1; fi
+              if [ "$count" -ge 600 ]; then exit 1; fi
             done
           '
           
