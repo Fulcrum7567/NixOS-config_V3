@@ -25,7 +25,7 @@
         
         # Helper to run Restic with standard flags
         RESTIC_CMD() {
-          restic -r "$REPO" --password-file ${config.sops.secrets."restic_password".path} "$@"
+          nohup restic -r "$REPO" --password-file ${config.sops.secrets."restic_password".path} "$@" > /dev/null 2>&1
         }
 
         # --- UI Helpers ---
