@@ -382,6 +382,23 @@ in [
         # Configuration for rclone
         rcloneConfigFile = config.sops.secrets."rclone_config".path;
 
+        rcloneOptions = {
+            # Erhöht die Chunk-Größe (Standard ist 8M). 
+            # Hilft bei Upload/Download Geschwindigkeit, kostet aber mehr RAM.
+            GOOGLE_DRIVE_CHUNK_SIZE = "128M"; 
+            
+            # Begrenzt die Transaktionen pro Sekunde. 
+            # Klingt paradox, aber verhindert, dass Google dich für 30s blockt.
+            RCLONE_TPSLIMIT = "10"; 
+            RCLONE_TPSLIMIT_BURST = "10";
+            
+            # Deaktiviert den Papierkorb für Rclone-Operationen (beschleunigt das Löschen/Pruning massiv)
+            RCLONE_DRIVE_USE_TRASH = "false";
+            
+            # Optional: Cache Attribut-Abfragen
+            RCLONE_DRIVE_P_CER_MIN_SLEEP = "10ms";
+        };
+
         # Schedule: When to run the backup (systemd calendar format)
         timerConfig = {
           OnCalendar = "daily";
