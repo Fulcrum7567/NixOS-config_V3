@@ -68,15 +68,22 @@
     ];
 
     systemd.services.syncthing = {
+      # Wait for sops-nix to decrypt secrets
+      after = [ "sops-nix.service" ];
+
+      unitConfig = {
+        RequiresMountsFor = [ 
+          "${config.server.services.syncthing.defaultDataDir}"
+          "${config.services.syncthing.configDir}"
+        ];
+      };
+
       serviceConfig = {
         # This allows the service to write to your custom ZFS mount
         ReadWritePaths = [ 
           "${config.server.services.syncthing.defaultDataDir}/" 
           "${config.services.syncthing.configDir}/"
         ];
-        
-        # Delay restart to prevent "Start request repeated too quickly"
-        RestartSec = "5s";
       };
     };
 
