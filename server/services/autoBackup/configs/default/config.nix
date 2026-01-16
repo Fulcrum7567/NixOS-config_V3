@@ -2,144 +2,251 @@
 {
   config = lib.mkIf (config.server.services.autoBackup.enable && (config.server.services.autoBackup.activeConfig == "default")) {
     
-    environment.systemPackages = [
-      # run gdrive-backup init ONLY ONCE FOR EVERY NEW REPO!!
-      (pkgs-default.writeShellScriptBin "gdrive-backup" ''
+    environment.systemPackages = let
+        gum = pkgs.gum;
+        rclone = pkgs.rclone;
+        restic = pkgs.restic;
+        
+        # Accessing secrets (assuming sops-nix usage based on prompt)
+        rcloneConfig = config.sops.secrets."rclone_config".path;
+        resticPassword = config.sops.secrets."restic_password".path;
+      in [
+      (pkgs.writeShellScriptBin "manageBackups" ''
+        # --- Configuration & Environment Variables ---
+        export PATH="${rclone}/bin:${gum}/bin:${restic}/bin:${pkgs.coreutils}/bin:${pkgs.gnugrep}/bin:${pkgs.util-linux}/bin:${pkgs.systemd}/bin:$PATH"
+        
+        export RCLONE_CONFIG="${rcloneConfig}"
+        REPO="rclone:gdrive:nixos-backup"
+        PASSWORD_FILE="${resticPassword}"
+        
+        # Helper to run Restic with standard flags
+        RESTIC_CMD() {
+          restic -r "$REPO" --password-file "$PASSWORD_FILE" "$@"
+        }
 
-        gpick() {
-          local selection
+        # --- UI Helpers ---
+        header() {
+          gum style --foreground 212 --border-foreground 212 --border double --align center --width 50 --margin "1 2" --padding "2 4" "$1"
+        }
 
-          while true; do
-              # 1. List contents with a special entry for the current folder
-              # sed changes "./" to ". (Pick Current Directory)"
-              selection=$(ls -1ap | sed 's/^\.\/$/\. (Pick Current Directory)/' | gum filter \
-                  --height 15 \
-                  --indicator=">" \
-                  --header "📂 $PWD" \
-                  --placeholder "Browse..." \
-              )
+        confirm() {
+          gum confirm "$1" || exit 1
+        }
 
-              # 2. Handle Cancel
-              if [[ -z "$selection" ]]; then
-                  return 1
+        # --- Local Operations (ZFS) ---
+
+        local_browse() {
+          header "Local ZFS: Browse"
+          
+          gum style --foreground 240 "Loading snapshots..."
+          SNAPSHOT_DIR="/data/.zfs/snapshot"
+          
+          # 1. List and Select Snapshot
+          SNAPSHOT=$(ls -1 "$SNAPSHOT_DIR" | gum filter --placeholder "Select a snapshot to browse...")
+          
+          if [ -z "$SNAPSHOT" ]; then echo "No snapshot selected."; exit 1; fi
+          
+          # 2. Browse Content
+          gum style --foreground 39 "Browsing $SNAPSHOT... (Press Esc to exit)"
+          gum file "$SNAPSHOT_DIR/$SNAPSHOT" --height 15
+        }
+
+        local_restore() {
+          header "Local ZFS: Restore"
+          
+          SNAPSHOT_DIR="/data/.zfs/snapshot"
+          
+          # 1. List and Select Snapshot
+          SNAPSHOT=$(ls -1 "$SNAPSHOT_DIR" | gum filter --placeholder "Select a snapshot to restore from...")
+          if [ -z "$SNAPSHOT" ]; then exit 1; fi
+          
+          # 2. Select File/Folder
+          gum style --foreground 39 "Select the file or folder to restore:"
+          TARGET=$(gum file "$SNAPSHOT_DIR/$SNAPSHOT" --height 15 --file --directory)
+          
+          if [ -z "$TARGET" ]; then echo "No selection made."; exit 1; fi
+
+          # 3. Calculate Destination
+          # Logic: Remove the snapshot prefix (/data/.zfs/snapshot/SNAPNAME) to get the relative path inside /data
+          REL_PATH="''${TARGET#$SNAPSHOT_DIR/$SNAPSHOT/}"
+          DEST="/data/$REL_PATH"
+
+          gum style --foreground 212 "Source: $TARGET"
+          gum style --foreground 212 "Dest:   $DEST"
+
+          if [ -e "$DEST" ]; then
+            gum confirm "Destination exists. Overwrite?" || exit 0
+          fi
+
+          # 4. Copy
+          gum spin --title "Restoring..." -- cp -r "$TARGET" "$DEST"
+          gum style --foreground 76 "Restore complete!"
+        }
+
+        local_create() {
+          header "Local ZFS: Create Snapshot"
+          
+          DEFAULT_NAME="manualSnapshot-$(date +%Y-%m-%d-%H%M%S)"
+          NAME=$(gum input --value "$DEFAULT_NAME" --placeholder "Enter snapshot name")
+
+          if [ -z "$NAME" ]; then echo "Operation cancelled."; exit 1; fi
+
+          if gum spin --title "Creating snapshot..." -- sudo zfs snapshot "zroot/root/data@$NAME"; then
+              gum style --foreground 76 "Snapshot zroot/root/data@$NAME created successfully."
+          else
+              gum style --foreground 196 "Failed to create snapshot."
+              exit 1
+          fi
+        }
+
+        # --- Online Operations (Restic) ---
+
+        online_mount_and_act() {
+          ACT_TYPE=$1 # "browse" or "restore"
+
+          header "Online Backup: $ACT_TYPE"
+
+          # 1. Mount Point
+          MOUNT_POINT=$(gum input --value "/mnt/restoreTemp" --placeholder "Mount point")
+          
+          # 2. Check/Create Directory
+          if [ ! -d "$MOUNT_POINT" ]; then
+              gum spin --title "Creating directory..." -- mkdir -p "$MOUNT_POINT"
+          else
+              if [ "$(ls -A $MOUNT_POINT)" ]; then
+                  confirm "Directory $MOUNT_POINT is not empty. Continue?" 
               fi
+          fi
 
-              # 3. Logic
-              if [[ "$selection" == ". (Pick Current Directory)" ]]; then
-                  echo "$PWD"
-                  return 0
-              elif [[ "$selection" == */ ]]; then
-                  # If it ends in / it's a directory -> Enter it
-                  cd "$selection" || return
-              else
-                  # It's a file -> Return full path
-                  echo "$PWD/$selection"
-                  return 0
+          # 3. Mount Restic (Background)
+          echo "Mounting repository..."
+          
+          # We run restic in the background. 
+          # Restic blocks, so we need to capture PID to kill it later.
+          RESTIC_CMD mount --allow-other "$MOUNT_POINT" &
+          RESTIC_PID=$!
+          
+          # Wait for mount to be ready
+          gum spin --title "Waiting for mount..." -- sleep 3
+          
+          # Trap cleanup to ensure unmount happens on exit/Ctrl+C
+          cleanup() {
+              echo ""
+              gum style --foreground 240 "Unmounting and cleaning up..."
+              kill $RESTIC_PID 2>/dev/null
+              wait $RESTIC_PID 2>/dev/null
+              
+              # Using fusermount for cleaner unmount as user/root
+              fusermount -u "$MOUNT_POINT" 2>/dev/null || umount "$MOUNT_POINT" 2>/dev/null
+              
+              # Remove dir if we created it (optional, safe to leave if empty)
+              rmdir "$MOUNT_POINT" 2>/dev/null
+          }
+          trap cleanup EXIT INT TERM
+
+          # 4. Pick Snapshot
+          SNAPSHOT_ROOT="$MOUNT_POINT/snapshots"
+          
+          # Check if mount succeeded by looking for snapshots dir
+          if [ ! -d "$SNAPSHOT_ROOT" ]; then
+              gum style --foreground 196 "Failed to access snapshots. Check your Restic password/config."
+              exit 1
+          fi
+
+          SELECTED_SNAP=$(ls -1 "$SNAPSHOT_ROOT" | gum filter --placeholder "Select a snapshot ID")
+          if [ -z "$SELECTED_SNAP" ]; then exit 0; fi
+
+          SNAP_PATH="$SNAPSHOT_ROOT/$SELECTED_SNAP"
+
+          if [ "$ACT_TYPE" == "browse" ]; then
+              gum style --foreground 39 "Browsing snapshot $SELECTED_SNAP..."
+              gum file "$SNAP_PATH" --height 20
+          
+          elif [ "$ACT_TYPE" == "restore" ]; then
+              gum style --foreground 39 "Select item to restore:"
+              TARGET=$(gum file "$SNAP_PATH" --height 20 --file --directory)
+              
+              if [ -n "$TARGET" ]; then
+                  # Attempt to map path back to /data
+                  # Restic structure usually: /mnt/.../snapshots/ID/data/foo or /mnt/.../snapshots/ID/foo
+                  # We assume the user wants to restore to /data.
+                  
+                  # Simple logic: Ask user for destination, defaulting to /data/FILENAME
+                  BASENAME=$(basename "$TARGET")
+                  DEST_DEFAULT="/data/$BASENAME"
+                  
+                  DEST=$(gum input --value "$DEST_DEFAULT" --placeholder "Restore destination path")
+                  
+                  if [ -e "$DEST" ]; then
+                      confirm "Destination $DEST exists. Overwrite?"
+                  fi
+
+                  gum spin --title "Restoring files..." -- cp -r "$TARGET" "$DEST"
+                  gum style --foreground 76 "Restored to $DEST"
               fi
-          done
+          fi
+          
+          # Cleanup happens via trap automatically
       }
 
-        # Use sudo automatically if not running as root
-        if [ "$EUID" -ne 0 ]; then
-          exec sudo "$0" "$@"
-        fi
-
-        export RCLONE_CONFIG=${config.sops.secrets."rclone_config".path}
-        export PATH=${pkgs-default.rclone}/bin:${pkgs-default.gum}/bin:$PATH
-
-        RESTIC="${pkgs-default.restic}/bin/restic"
-        REPO="rclone:gdrive:nixos-backup"
-        PASSWORD_FILE="${config.sops.secrets."restic_password".path}"
-        TEMP_MOUNT_PATH="/mnt/restore_temp/"
-
-        COMMAND="$1"
-
-        if [ "$COMMAND" = "browse" ]; then
-          shift
-          while [ "$#" -gt 0 ]; do
-            case "$1" in
-              -tm|--temp_mount_path) TEMP_MOUNT_PATH="$2"; shift 2;;
-              *) echo "Unknown option: $1"; exit 1;;
-            esac
-          done
-
-          if [ -d "$TEMP_MOUNT_PATH" ] && [ "$(ls -A "$TEMP_MOUNT_PATH")" ]; then
-            gum style --foreground 212 "Directory $TEMP_MOUNT_PATH is not empty."
-            if gum confirm "Overwrite/Mount over it?" --affirmative="Overwrite" --negative="Change Path"; then
-               : # Continue with overwrite
-            else
-               TEMP_MOUNT_PATH=$(gum input --placeholder "Enter new path" --value "$TEMP_MOUNT_PATH")
-            fi
-          fi
-
-          mkdir -p "$TEMP_MOUNT_PATH"
+      online_create() {
+          header "Online Backup: Create"
+          gum spin --title "Starting systemd service..." -- sudo systemctl start restic-backups-gdrive-backup
           
-          # Start mount
-          nohup $RESTIC -r "$REPO" --password-file "$PASSWORD_FILE" mount --allow-other "$TEMP_MOUNT_PATH" > /dev/null 2>&1 &
-          MOUNT_PID=$!
-
-          # Wait for mount
-          CHECK_SCRIPT="
-            COUNT=0
-            while [ ! -d \"$TEMP_MOUNT_PATH/snapshots\" ]; do
-              sleep 1
-              COUNT=\$((COUNT+1))
-              if [ \"\$COUNT\" -ge 60 ]; then exit 1; fi
-              if ! kill -0 $MOUNT_PID 2>/dev/null; then exit 2; fi
-            done
-          "
-
-          if ! gum spin --spinner dot --title "Mounting repository..." -- bash -c "$CHECK_SCRIPT"; then
-             gum style --foreground 196 "Mount failed or timed out."
-             exit 1
-          fi
-
-          gum style --foreground 46 "Mount established successfully."
-          
-          VERSIONS=$(ls "$TEMP_MOUNT_PATH/snapshots" | sort -r)
-          VERSION=$(echo "$VERSIONS" | gum filter --placeholder "Select a version to browse")
-          
-          if [ -z "$VERSION" ]; then
-             gum style --foreground 196 "No version selected."
-             exit 1
-          fi
-
-          BROWSE_PATH="$TEMP_MOUNT_PATH/snapshots/$VERSION"
-          if [ -d "$BROWSE_PATH" ]; then
-            gum style --foreground 212 "Browsing $BROWSE_PATH..."
-            # Run gpick inside the snapshot directory
-            TARGET=$(cd "$BROWSE_PATH" && gpick)
-            
-            if [ -n "$TARGET" ]; then
-              gum style --foreground 212 "Selected: $TARGET"
-              
-              # Decide where to open the shell
-              if [ -d "$TARGET" ]; then
-                cd "$TARGET"
-              else
-                cd "$(dirname "$TARGET")"
-              fi
-              
-              gum style --foreground 212 "Starting shell in $PWD"
-              exec "$SHELL"
-            else
-              gum style --foreground 212 "Selection cancelled."
-            fi
+          # Check status briefly
+          if systemctl is-active --quiet restic-backups-gdrive-backup; then
+              gum style --foreground 76 "Backup service started successfully."
           else
-            gum style --foreground 196 "Version $VERSION not found."
+              gum style --foreground 240 "Service triggered (oneshot)."
           fi
+      }
 
-        elif [ "$COMMAND" = "init" ]; then
-          gum style --foreground 196 --bold "WARNING: You are about to initialize a new repository."
-          if gum confirm "Are you sure you have NEVER done this before for this REPO?"; then
-            exec $RESTIC -r "$REPO" --password-file "$PASSWORD_FILE" init
+      online_init() {
+          header "Online Backup: Initialize"
+          gum style --foreground 196 "WARNING: This will initialize a new Restic repository at $REPO"
+          confirm "Are you absolutely sure you haven't done this before?"
+          
+          if gum spin --title "Initializing..." -- RESTIC_CMD init; then
+              gum style --foreground 76 "Repository initialized successfully."
           else
-            gum style "Aborted."
+              gum style --foreground 196 "Initialization failed."
           fi
+      }
 
-        else
-          exec $RESTIC -r "$REPO" --password-file "$PASSWORD_FILE" "$@"
-        fi
+      # --- Main Dispatch ---
+
+      MODE=$1
+      ACTION=$2
+
+      if [[ -z "$MODE" || -z "$ACTION" ]]; then
+          echo "Usage: manageBackups local|online browse|restore|create|init"
+          exit 1
+      fi
+
+      case "$MODE" in
+          local)
+              case "$ACTION" in
+                  browse)  local_browse ;;
+                  restore) local_restore ;;
+                  create)  local_create ;;
+                  init)    echo "Init not available for local mode."; exit 1 ;;
+                  *)       echo "Unknown action: $ACTION"; exit 1 ;;
+              esac
+              ;;
+          online)
+              case "$ACTION" in
+                  browse)  online_mount_and_act "browse" ;;
+                  restore) online_mount_and_act "restore" ;;
+                  create)  online_create ;;
+                  init)    online_init ;;
+                  *)       echo "Unknown action: $ACTION"; exit 1 ;;
+              esac
+              ;;
+          *)
+              echo "Unknown mode: $MODE (use local or online)"
+              exit 1
+              ;;
+      esac
       '')
     ];
     
