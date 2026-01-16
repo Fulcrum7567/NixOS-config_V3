@@ -4,17 +4,21 @@
     
     environment.systemPackages = [
       (pkgs-default.writeShellScriptBin "gdrive-backup" ''
-        # Use sudo automatically if not running as root, 
-        # because regular users cannot read the /run/secrets files
+        # Use sudo automatically if not running as root
         if [ "$EUID" -ne 0 ]; then
           exec sudo "$0" "$@"
         fi
 
-        # Execute restic with all arguments pre-filled
+        # 1. Set the Rclone config path via environment variable (The Fix)
+        export RCLONE_CONFIG=${config.sops.secrets."rclone_config".path}
+        
+        # 2. Ensure rclone is found in the path
+        export PATH=${pkgs-default.rclone}/bin:$PATH
+
+        # 3. Execute restic
         exec ${pkgs-default.restic}/bin/restic \
           -r rclone:gdrive:nixos-backup \
           --password-file ${config.sops.secrets."restic_password".path} \
-          --rclone-config ${config.sops.secrets."rclone_config".path} \
           "$@"
       '')
     ];
