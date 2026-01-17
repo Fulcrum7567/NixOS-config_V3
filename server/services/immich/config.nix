@@ -37,8 +37,6 @@
           buttonText = "Login with Kanidm";
           issuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich";
           clientId = "immich";
-          autoLaunch = true;
-          
           
           # The placeholder is a string, so toJSON handles it perfectly.
           # SOPS-Nix will replace this string with the actual password in the final file.
