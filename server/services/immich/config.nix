@@ -97,5 +97,10 @@
         scopes = [ "openid" "profile" "email" ];
       };
     };
+
+    # Ensure Immich can reach Kanidm locally for OIDC discovery
+    networking.extraHosts = ''
+      127.0.0.1 ${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}
+    '';
   };
 }
