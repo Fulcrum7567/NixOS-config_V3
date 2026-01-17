@@ -53,8 +53,10 @@
           scope = "openid email profile";
           # clientSecret is provided via environment variable IMMICH_OAUTH_CLIENT_SECRET from secretsFile
           storageLabelClaim = "preferred_username";
-          tokenEndpointAuthMethod = "client_secret_post";
+          # Use Basic Auth (header) which is the default and often more reliable than POST body
+          # tokenEndpointAuthMethod = "client_secret_post"; 
         };
+        server.logLevel = "verbose"; # Enable verbose logs to see OAuth details
       };
 
       environment = {
