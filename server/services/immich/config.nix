@@ -40,6 +40,30 @@
       restartUnits = [ "immich-server.service" ];
     };
 
+    sops.templates."immich.json" = {
+      content = ''
+        {
+          "oauth": {
+            "enabled": true,
+            "autoRegister": true,
+            "buttonText": "Login with Kanidm",
+            "issuerUrl": "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich",
+            "clientId": "immich",
+            "clientSecret": "${config.sops.placeholder."immich/clientSecret"}",
+            "scope": "openid email profile",
+            "storageLabelClaim": "preferred_username",
+            "tokenEndpointAuthMethod": "client_secret_basic",
+            "signingAlgorithm": "ES256"
+          },
+          "server": {
+            "externalDomain": "https://immich.${config.server.webaddress}"
+          }
+        }
+      '';
+      owner = config.services.immich.user;
+      group = config.services.immich.group;
+      restartUnits = [ "immich-server.service" ];
+    };
     
     services.immich = {
       enable = true;
@@ -53,7 +77,7 @@
 
       secretsFile = config.sops.templates."immich.env".path;
 
-      
+      /*
       settings = {
         oauth = {
           enabled = true;
@@ -70,11 +94,15 @@
           signingAlgorithm = "ES256";
         };
       };
+      */
 
       environment = {
-        # Allow self-signed certs (or loopback NAT issues) for the OIDC discovery handshake
+        # 2. NEW: Tells Immich to load OAuth settings from the JSON file
+        IMMICH_CONFIG_FILE = config.sops.templates."immich.json".path;
+        
+        # Keep other env vars
+        IMMICH_LOG_LEVEL = "verbose";
         NODE_TLS_REJECT_UNAUTHORIZED = "0";
-        IMMICH_LOG_LEVEL="verbose";
       };
       
     };
