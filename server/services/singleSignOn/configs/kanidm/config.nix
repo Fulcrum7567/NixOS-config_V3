@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs-unstable, ... }:
 let
   cfg = config.server.services.singleSignOn;
 in
@@ -22,6 +22,7 @@ in
 
     services.kanidm = {
       enableServer = true;
+      package = pkgs-unstable.kanidmWithSecretProvisioning_1_8;
       serverSettings = {
         domain = cfg.subdomain + "." + config.host.settings.domain;
         origin = "https://${cfg.subdomain}.${config.host.settings.domain}";
