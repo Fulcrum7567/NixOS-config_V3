@@ -113,6 +113,25 @@
       wants = [ "kanidm.service" "nginx.service" ];
     };
 
+    # Service to strip newline from sops secret for Kanidm
+    systemd.services.fix-immich-kanidm-secret = {
+      description = "Strip newline from Immich Kanidm secret";
+      requiredBy = [ "kanidm.service" ];
+      before = [ "kanidm.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root";
+      };
+      script = ''
+        mkdir -p /run/kanidm-secrets
+        if [ -f "${config.sops.secrets."immich/oauth/client_secret".path}" ]; then
+          tr -d '\n' < "${config.sops.secrets."immich/oauth/client_secret".path}" > /run/kanidm-secrets/immich_client_secret_clean
+          chown ${config.server.services.singleSignOn.serviceUsername}:${config.server.services.singleSignOn.serviceGroup} /run/kanidm-secrets/immich_client_secret_clean
+          chmod 440 /run/kanidm-secrets/immich_client_secret_clean
+        fi
+      '';
+    };
+
     users.users.${config.services.immich.user}.extraGroups = [ "video" "render" ];
 
     
@@ -146,7 +165,7 @@
         displayName = "Immich";
         originUrl = [ "https://immich.${config.server.webaddress}/auth/login" "app.immich:///oauth-callback"];
         originLanding = "https://immich.${config.server.webaddress}";
-        basicSecretFile = config.sops.secrets."immich/oauth/client_secret".path;
+        basicSecretFile = "/run/kanidm-secrets/immich_client_secret_clean";
         preferShortUsername = true;
         groupName = "immich-users";
         scopes = [ "openid" "profile" "email" ];
