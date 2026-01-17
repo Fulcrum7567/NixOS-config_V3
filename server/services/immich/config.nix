@@ -11,7 +11,7 @@
 
       port = config.server.services.immich.port;
 
-      accellarationDevices = null;
+      accelerationDevices = null;
       
     };
 
