@@ -9,6 +9,8 @@
       group = lib.mkIf (config.services.immich.user == config.user.settings.username) "users";
       mediaLocation = config.server.services.immich.defaultDataDir;
 
+      openFirewall = true;
+
       port = config.server.services.immich.port;
 
       accelerationDevices = null;
