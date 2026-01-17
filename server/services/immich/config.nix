@@ -1,6 +1,6 @@
 { config, lib, pkgs-default, ... }:
 {
-  config = lib.mkIf config.server.services.syncthing.enable {
+  config = lib.mkIf config.server.services.immich.enable {
 
     
     services.immich = {
@@ -13,6 +13,18 @@
 
       accelerationDevices = null;
       
+    };
+
+    services.postgresql = {
+      enable = true;
+      ensureUsers = [
+        {
+          name = config.services.immich.user;
+          ensureDBOwnership = true;
+        }
+      ];
+      # Ensure the database "immich" exists
+      ensureDatabases = [ "immich" ];
     };
 
     users.users.${config.services.immich.user}.extraGroups = [ "video" "render" ];
