@@ -25,59 +25,30 @@
 
     sops.templates."immich.env" = {
       content = ''
-        # Secrets (Keep this!)
+        # Immich automatically reads this env var to fill in the missing setting
         IMMICH_OAUTH_CLIENT_SECRET="${config.sops.placeholder."immich/clientSecret"}"
-        OAUTH_CLIENT_SECRET="${config.sops.placeholder."immich/clientSecret"}"
         
         # Log Level
         IMMICH_LOG_LEVEL="verbose"
-        
-        # REMOVE all the other IMMICH_OAUTH_* lines you added previously.
-        # They are ignored by Immich and are now handled by 'settings' above.
       '';
       owner = config.services.immich.user;
       group = config.services.immich.group;
       restartUnits = [ "immich-server.service" ];
     };
 
-    sops.templates."immich.json" = {
-      content = ''
-        {
-          "oauth": {
-            "enabled": true,
-            "autoRegister": true,
-            "buttonText": "Login with Kanidm",
-            "issuerUrl": "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich",
-            "clientId": "immich",
-            "clientSecret": "${config.sops.placeholder."immich/clientSecret"}",
-            "scope": "openid email profile",
-            "storageLabelClaim": "preferred_username",
-            "tokenEndpointAuthMethod": "client_secret_post",
-            "signingAlgorithm": "ES256"
-          },
-          "server": {
-            "externalDomain": "https://immich.${config.server.webaddress}"
-          }
-        }
-      '';
-      owner = config.services.immich.user;
-      group = config.services.immich.group;
-      restartUnits = [ "immich-server.service" ];
-    };
     
     services.immich = {
       enable = true;
       user = "immich";
       group = lib.mkIf (config.services.immich.user == config.user.settings.username) "users";
       mediaLocation = config.server.services.immich.defaultDataDir;
-
       port = config.server.services.immich.port;
-
       accelerationDevices = null;
 
+      # Load the secret via Environment Variables
       secretsFile = config.sops.templates."immich.env".path;
 
-      /*
+      # Use Native Settings (Cleaner!)
       settings = {
         oauth = {
           enabled = true;
@@ -85,26 +56,24 @@
           buttonText = "Login with Kanidm";
           issuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich";
           clientId = "immich";
+          # clientSecret is OMITTED here. It is loaded from IMMICH_OAUTH_CLIENT_SECRET in the .env file
           scope = "openid email profile";
-          # The secret is loaded from the environment variable automatically
           storageLabelClaim = "preferred_username";
-          tokenEndpointAuthMethod = "client_secret_basic";
-          
-          # ADD THIS LINE TO FIX THE ERROR:
+          tokenEndpointAuthMethod = "client_secret_post"; # Changed to match your working json
           signingAlgorithm = "ES256";
         };
+        server = {
+          externalDomain = "https://immich.${config.server.webaddress}";
+        };
       };
-      */
 
       environment = {
-        # FIX: Point dynamically to the sops template path
-        IMMICH_CONFIG_FILE = config.sops.templates."immich.json".path;
+        # DELETE the IMMICH_CONFIG_FILE line. 
+        # NixOS will now automatically generate the config file from 'settings' above.
         
-        # Keep other env vars
         IMMICH_LOG_LEVEL = "verbose";
         NODE_TLS_REJECT_UNAUTHORIZED = "0";
       };
-      
     };
 
     # Ensure Immich waits for the IDP to be available before starting, 
