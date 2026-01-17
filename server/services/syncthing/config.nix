@@ -20,6 +20,16 @@
         key = "syncthing/cert";
         restartUnits = [ "syncthing.service" ];
       };
+
+      "syncthing/oauth/client_secret" = {
+        owner = config.server.services.singleSignOn.serviceUsername;
+        group = config.server.services.singleSignOn.serviceGroup;
+        sopsFile = ./syncthingSecrets.yaml;
+        format = "yaml";
+        key = "syncthing_oauth_client_secret";
+        restartUnits = [ "kanidm.service" ];
+        mode = "0440";
+      };
     };
 
     services.syncthing = {
@@ -111,6 +121,16 @@
     networking.firewall = {
       allowedTCPPorts = [ 8384 22000 ];
       allowedUDPPorts = [ 22000 21027 ];
+    };
+
+    server.services.singleSignOn.oAuthServices."syncthing" = {
+      displayName = "Syncthing";
+      originUrl = [ "https://syncthing.${config.server.webaddress}/oauth2/callback" ];
+      originLanding = "https://syncthing.${config.server.webaddress}";
+      basicSecretFile = config.sops.secrets."syncthing/oauth/client_secret".path; 
+      preferShortUsername = true;
+      groupName = "syncthing-users";
+      scopes = [ "openid" "profile" "email" ];
     };
   };
 }
