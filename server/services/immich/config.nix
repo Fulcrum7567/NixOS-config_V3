@@ -38,7 +38,7 @@
       environment = {
         # OIDC Configuration
         IMMICH_OAUTH_ENABLED = "true";
-        IMMICH_OAUTH_ISSUER_URL = "https://${config.server.services.singleSignOn.subdomain}.${config.host.settings.domain}/oauth2/openid/immich"; # Note the /immich suffix!
+        IMMICH_OAUTH_ISSUER_URL = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich"; # Note the /immich suffix!
         IMMICH_OAUTH_CLIENT_ID = "immich";
         IMMICH_OAUTH_SCOPE = "openid email profile";
         IMMICH_OAUTH_STORAGE_LABEL_CLAIM = "preferred_username"; # Maps to the short username
@@ -81,8 +81,8 @@
 
       singleSignOn.oAuthServices."immich" = {
         displayName = "Immich";
-        originUrl = [ "https://immich.${config.host.settings.domain}/auth/login" "app.immich:///oauth-callback"];
-        originLanding = "https://immich.${config.host.settings.domain}";
+        originUrl = [ "https://immich.${config.server.webaddress}/auth/login" "app.immich:///oauth-callback"];
+        originLanding = "https://immich.${config.server.webaddress}";
         basicSecretFile = config.sops.secrets."immich/oauth/client_secret".path;
         preferShortUsername = true;
         groupName = "immich-users";
