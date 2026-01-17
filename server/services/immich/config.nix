@@ -31,6 +31,7 @@
       '';
       owner = config.services.immich.user;
       group = config.services.immich.group;
+      restartUnits = [ "immich-server.service" ];
     };
 
     
