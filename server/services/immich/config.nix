@@ -80,14 +80,13 @@
       };
 
       singleSignOn.oAuthServices."immich" = {
-          displayName = "Immich";
-          originUrl = [ "https://immich.${config.host.settings.domain}/auth/login" "app.immich:///oauth-callback"];
-          originLanding = "https://immich.${config.host.settings.domain}";
-          basicSecretFile = config.sops.secrets."immich/oauth/client_secret".path;
-          preferShortUsername = true;
-          groupName = "immich-users";
-          scopes = [ "openid" "profile" "email" ];
-        };
+        displayName = "Immich";
+        originUrl = [ "https://immich.${config.host.settings.domain}/auth/login" "app.immich:///oauth-callback"];
+        originLanding = "https://immich.${config.host.settings.domain}";
+        basicSecretFile = config.sops.secrets."immich/oauth/client_secret".path;
+        preferShortUsername = true;
+        groupName = "immich-users";
+        scopes = [ "openid" "profile" "email" ];
       };
     };
   };
