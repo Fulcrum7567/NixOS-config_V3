@@ -6,7 +6,7 @@
     services.immich = {
       enable = true;
       user = "immich"; #config.user.settings.username;
-      group = (if config.services.immich.user == config.user.settings.username then "users" else config.services.immich.group);
+      group = lib.mkIf (config.services.immich.user == config.user.settings.username) "users";
       mediaLocation = config.server.services.immich.defaultDataDir;
 
       port = config.server.services.immich.port;
