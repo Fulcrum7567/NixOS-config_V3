@@ -62,11 +62,6 @@
       port = config.server.services.immich.port;
       accelerationDevices = null;
 
-      # Load the secret via Environment Variables
-      # secretsFile = config.sops.templates."immich.env".path;
-
-      
-
       environment = {
         # Force Immich to use our sops-generated config file
         IMMICH_CONFIG_FILE = lib.mkForce config.sops.templates."immich.json".path;
