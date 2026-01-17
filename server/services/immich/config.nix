@@ -177,7 +177,7 @@
             proxy_read_timeout 600s;
             proxy_send_timeout 600s;
           '';
-        };
+        }; 
       };
 
       singleSignOn.oAuthServices."immich" = {
