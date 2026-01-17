@@ -182,7 +182,7 @@
 
       singleSignOn.oAuthServices."immich" = {
         displayName = "Immich";
-        originUrl = [ "https://immich.${config.server.webaddress}/auth/login" "app.immich:///oauth-callback"];
+        originUrl = [ "https://immich.${config.server.webaddress}/auth/login" "https://immich.${config.server.webaddress}/user-settings" "app.immich:///oauth-callback"];
         originLanding = "https://immich.${config.server.webaddress}";
         basicSecretFile = "/run/kanidm-secrets/immich_client_secret_clean";
         preferShortUsername = true;
