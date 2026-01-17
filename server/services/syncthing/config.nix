@@ -31,7 +31,7 @@
       dataDir = config.server.services.syncthing.defaultDataDir;
       configDir = "${config.server.system.filesystem.defaultConfigDir}/syncthing";
 
-      guiAddress = "0.0.0.0:${config.server.services.syncthing.port}";
+      guiAddress = "0.0.0.0:${toString config.server.services.syncthing.port}";
 
       key = config.sops.secrets."syncthing/server/key".path;
       cert = config.sops.secrets."syncthing/server/cert".path;
