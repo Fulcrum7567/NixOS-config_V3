@@ -5,8 +5,8 @@ in
 {
   config = lib.mkIf (config.server.services.singleSignOn.enable && (config.server.services.singleSignOn.activeConfig == "kanidm")) {
     
-    cfg.serviceUsername = "kanidm";
-    cfg.serviceGroup = "kanidm";
+    server.services.singleSignOn.serviceUsername = "kanidm";
+    server.services.singleSignOn.serviceGroup = "kanidm";
 
     sops.secrets = {
       # Kanidm OAuth client secret
