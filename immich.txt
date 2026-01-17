@@ -1,100 +1,100 @@
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/sessions, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/statistics, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/preferences, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/preferences, PUT} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/restore, POST} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RoutesResolver] UserController {/api/users}:
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/me, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/me, PUT} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/me/preferences, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/me/preferences, PUT} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, PUT} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, DELETE} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, PUT} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, DELETE} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/:id, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/profile-image, POST} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/profile-image, DELETE} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/users/:id/profile-image, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RoutesResolver] ViewController {/api/view}:
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/view/folder/unique-paths, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/view/folder, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RoutesResolver] WorkflowController {/api/workflows}:
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/workflows, POST} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/workflows, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, GET} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, PUT} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, DELETE} route
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:NestApplication] Nest application successfully started
-Jan 17 19:00:21 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:21     LOG [Api:Bootstrap] Immich Server is listening on http://[::1]:2283 [v2.4.1] [production] 
-Jan 17 19:00:26 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:26    WARN [Api:SystemConfigService] Unknown keys found: {
-Jan 17 19:00:26 Server immich[6853]:   "server": {
-Jan 17 19:00:26 Server immich[6853]:     "logLevel": "verbose"
-Jan 17 19:00:26 Server immich[6853]:   }
-Jan 17 19:00:26 Server immich[6853]: }
-Jan 17 19:00:27 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:27    WARN [Api:ServerService~mfpvg74a] Unknown keys found: {
-Jan 17 19:00:27 Server immich[6853]:   "server": {
-Jan 17 19:00:27 Server immich[6853]:     "logLevel": "verbose"
-Jan 17 19:00:27 Server immich[6853]:   }
-Jan 17 19:00:27 Server immich[6853]: }
-Jan 17 19:00:27 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:27    WARN [Api:ServerService~hjix9l74] Unknown keys found: {
-Jan 17 19:00:27 Server immich[6853]:   "server": {
-Jan 17 19:00:27 Server immich[6853]:     "logLevel": "verbose"
-Jan 17 19:00:27 Server immich[6853]:   }
-Jan 17 19:00:27 Server immich[6853]: }
-Jan 17 19:00:28 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:28    WARN [Api:AuthService~a2c72d27] Unknown keys found: {
-Jan 17 19:00:28 Server immich[6853]:   "server": {
-Jan 17 19:00:28 Server immich[6853]:     "logLevel": "verbose"
-Jan 17 19:00:28 Server immich[6853]:   }
-Jan 17 19:00:28 Server immich[6853]: }
-Jan 17 19:00:28 Server immich[6853]: (node:6853) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
-Jan 17 19:00:28 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:28    WARN [Api:SystemConfigService] Unknown keys found: {
-Jan 17 19:00:28 Server immich[6853]:   "server": {
-Jan 17 19:00:28 Server immich[6853]:     "logLevel": "verbose"
-Jan 17 19:00:28 Server immich[6853]:   }
-Jan 17 19:00:28 Server immich[6853]: }
-Jan 17 19:00:28 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:28    WARN [Api:ServerService~v7o1unta] Unknown keys found: {
-Jan 17 19:00:28 Server immich[6853]:   "server": {
-Jan 17 19:00:28 Server immich[6853]:     "logLevel": "verbose"
-Jan 17 19:00:28 Server immich[6853]:   }
-Jan 17 19:00:28 Server immich[6853]: }
-Jan 17 19:00:28 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:28    WARN [Api:ServerService~8emtq2v9] Unknown keys found: {
-Jan 17 19:00:28 Server immich[6853]:   "server": {
-Jan 17 19:00:28 Server immich[6853]:     "logLevel": "verbose"
-Jan 17 19:00:28 Server immich[6853]:   }
-Jan 17 19:00:28 Server immich[6853]: }
-Jan 17 19:00:28 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:28    WARN [Api:AuthService~297gds3f] Unknown keys found: {
-Jan 17 19:00:28 Server immich[6853]:   "server": {
-Jan 17 19:00:28 Server immich[6853]:     "logLevel": "verbose"
-Jan 17 19:00:28 Server immich[6853]:   }
-Jan 17 19:00:28 Server immich[6853]: }
-Jan 17 19:00:28 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:28   ERROR [Api:OAuthRepository~297gds3f] OAuth login failed: server responded with a challenge in the WWW-Authenticate HTTP Header
-Jan 17 19:00:28 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:28   ERROR [Api:OAuthRepository~297gds3f] WWWAuthenticateChallengeError: server responded with a challenge in the WWW-Authenticate HTTP Header
-Jan 17 19:00:28 Server immich[6853]:     at checkAuthenticationChallenges (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1282:15)
-Jan 17 19:00:28 Server immich[6853]:     at checkOAuthBodyError (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:931:9)
-Jan 17 19:00:28 Server immich[6853]:     at processGenericAccessTokenResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1213:11)
-Jan 17 19:00:28 Server immich[6853]:     at processAuthorizationCodeOAuth2Response (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1447:26)
-Jan 17 19:00:28 Server immich[6853]:     at Module.processAuthorizationCodeResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1391:12)
-Jan 17 19:00:28 Server immich[6853]:     at authorizationCodeGrant (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:972:21)
-Jan 17 19:00:28 Server immich[6853]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-Jan 17 19:00:28 Server immich[6853]:     at async OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:56:28)
-Jan 17 19:00:28 Server immich[6853]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
-Jan 17 19:00:28 Server immich[6853]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22) {
-Jan 17 19:00:28 Server immich[6853]:   cause: [
-Jan 17 19:00:28 Server immich[6853]:     {
-Jan 17 19:00:28 Server immich[6853]:       scheme: 'bearer',
-Jan 17 19:00:28 Server immich[6853]:       parameters: {}
-Jan 17 19:00:28 Server immich[6853]:     }
-Jan 17 19:00:28 Server immich[6853]:   ],
-Jan 17 19:00:28 Server immich[6853]:   code: 'OAUTH_WWW_AUTHENTICATE_CHALLENGE',
-Jan 17 19:00:28 Server immich[6853]:   status: 401
-Jan 17 19:00:28 Server immich[6853]: }
-Jan 17 19:00:28 Server immich[6853]: [Nest] 6853  - 17/01/2026, 19:00:28   ERROR [Api:ErrorInterceptor~297gds3f] Unknown error: Error: OAuth login failed
-Jan 17 19:00:28 Server immich[6853]: Error: OAuth login failed
-Jan 17 19:00:28 Server immich[6853]:     at OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:72:19)
-Jan 17 19:00:28 Server immich[6853]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-Jan 17 19:00:28 Server immich[6853]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
-Jan 17 19:00:28 Server immich[6853]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22)
+Jan 17 19:14:11 Server immich[1697]: }
+Jan 17 19:14:11 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:14:11    WARN [Api:SystemConfigService] Unknown keys found: {
+Jan 17 19:14:11 Server immich[1697]:   "server": {
+Jan 17 19:14:11 Server immich[1697]:     "logLevel": "verbose"
+Jan 17 19:14:11 Server immich[1697]:   }
+Jan 17 19:14:11 Server immich[1697]: }
+Jan 17 19:14:11 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:14:11    WARN [Api:ServerService~9i9asrbu] Unknown keys found: {
+Jan 17 19:14:11 Server immich[1697]:   "server": {
+Jan 17 19:14:11 Server immich[1697]:     "logLevel": "verbose"
+Jan 17 19:14:11 Server immich[1697]:   }
+Jan 17 19:14:11 Server immich[1697]: }
+Jan 17 19:14:11 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:14:11    WARN [Api:ServerService~baakisag] Unknown keys found: {
+Jan 17 19:14:11 Server immich[1697]:   "server": {
+Jan 17 19:14:11 Server immich[1697]:     "logLevel": "verbose"
+Jan 17 19:14:11 Server immich[1697]:   }
+Jan 17 19:14:11 Server immich[1697]: }
+Jan 17 19:14:11 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:14:11    WARN [Api:AuthService~4achc2mh] Unknown keys found: {
+Jan 17 19:14:11 Server immich[1697]:   "server": {
+Jan 17 19:14:11 Server immich[1697]:     "logLevel": "verbose"
+Jan 17 19:14:11 Server immich[1697]:   }
+Jan 17 19:14:11 Server immich[1697]: }
+Jan 17 19:14:11 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:14:11   ERROR [Api:OAuthRepository~4achc2mh] OAuth login failed: server responded with a challenge in the WWW-Authenticate HTTP Header
+Jan 17 19:14:11 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:14:11   ERROR [Api:OAuthRepository~4achc2mh] WWWAuthenticateChallengeError: server responded with a challenge in the WWW-Authenticate HTTP Header
+Jan 17 19:14:11 Server immich[1697]:     at checkAuthenticationChallenges (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1282:15)
+Jan 17 19:14:11 Server immich[1697]:     at checkOAuthBodyError (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:931:9)
+Jan 17 19:14:11 Server immich[1697]:     at processGenericAccessTokenResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1213:11)
+Jan 17 19:14:11 Server immich[1697]:     at processAuthorizationCodeOAuth2Response (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1447:26)
+Jan 17 19:14:11 Server immich[1697]:     at Module.processAuthorizationCodeResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1391:12)
+Jan 17 19:14:11 Server immich[1697]:     at authorizationCodeGrant (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:972:21)
+Jan 17 19:14:11 Server immich[1697]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 19:14:11 Server immich[1697]:     at async OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:56:28)
+Jan 17 19:14:11 Server immich[1697]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 19:14:11 Server immich[1697]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22) {
+Jan 17 19:14:11 Server immich[1697]:   cause: [
+Jan 17 19:14:11 Server immich[1697]:     {
+Jan 17 19:14:11 Server immich[1697]:       scheme: 'bearer',
+Jan 17 19:14:11 Server immich[1697]:       parameters: {}
+Jan 17 19:14:11 Server immich[1697]:     }
+Jan 17 19:14:11 Server immich[1697]:   ],
+Jan 17 19:14:11 Server immich[1697]:   code: 'OAUTH_WWW_AUTHENTICATE_CHALLENGE',
+Jan 17 19:14:11 Server immich[1697]:   status: 401
+Jan 17 19:14:11 Server immich[1697]: }
+Jan 17 19:14:11 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:14:11   ERROR [Api:ErrorInterceptor~4achc2mh] Unknown error: Error: OAuth login failed
+Jan 17 19:14:11 Server immich[1697]: Error: OAuth login failed
+Jan 17 19:14:11 Server immich[1697]:     at OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:72:19)
+Jan 17 19:14:11 Server immich[1697]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 19:14:11 Server immich[1697]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 19:14:11 Server immich[1697]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22)
+Jan 17 19:20:32 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:20:32    WARN [Api:AuthService~wy5276v2] Unknown keys found: {
+Jan 17 19:20:32 Server immich[1697]:   "server": {
+Jan 17 19:20:32 Server immich[1697]:     "logLevel": "verbose"
+Jan 17 19:20:32 Server immich[1697]:   }
+Jan 17 19:20:32 Server immich[1697]: }
+Jan 17 19:20:32 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:20:32    WARN [Api:SystemConfigService] Unknown keys found: {
+Jan 17 19:20:32 Server immich[1697]:   "server": {
+Jan 17 19:20:32 Server immich[1697]:     "logLevel": "verbose"
+Jan 17 19:20:32 Server immich[1697]:   }
+Jan 17 19:20:32 Server immich[1697]: }
+Jan 17 19:20:32 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:20:32    WARN [Api:ServerService~3mr0qf23] Unknown keys found: {
+Jan 17 19:20:32 Server immich[1697]:   "server": {
+Jan 17 19:20:32 Server immich[1697]:     "logLevel": "verbose"
+Jan 17 19:20:32 Server immich[1697]:   }
+Jan 17 19:20:32 Server immich[1697]: }
+Jan 17 19:20:32 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:20:32    WARN [Api:ServerService~zf7nxys6] Unknown keys found: {
+Jan 17 19:20:32 Server immich[1697]:   "server": {
+Jan 17 19:20:32 Server immich[1697]:     "logLevel": "verbose"
+Jan 17 19:20:32 Server immich[1697]:   }
+Jan 17 19:20:32 Server immich[1697]: }
+Jan 17 19:20:32 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:20:32    WARN [Api:AuthService~4izp8feg] Unknown keys found: {
+Jan 17 19:20:32 Server immich[1697]:   "server": {
+Jan 17 19:20:32 Server immich[1697]:     "logLevel": "verbose"
+Jan 17 19:20:32 Server immich[1697]:   }
+Jan 17 19:20:32 Server immich[1697]: }
+Jan 17 19:20:32 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:20:32   ERROR [Api:OAuthRepository~4izp8feg] OAuth login failed: server responded with a challenge in the WWW-Authenticate HTTP Header
+Jan 17 19:20:32 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:20:32   ERROR [Api:OAuthRepository~4izp8feg] WWWAuthenticateChallengeError: server responded with a challenge in the WWW-Authenticate HTTP Header
+Jan 17 19:20:32 Server immich[1697]:     at checkAuthenticationChallenges (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1282:15)
+Jan 17 19:20:32 Server immich[1697]:     at checkOAuthBodyError (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:931:9)
+Jan 17 19:20:32 Server immich[1697]:     at processGenericAccessTokenResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1213:11)
+Jan 17 19:20:32 Server immich[1697]:     at processAuthorizationCodeOAuth2Response (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1447:26)
+Jan 17 19:20:32 Server immich[1697]:     at Module.processAuthorizationCodeResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1391:12)
+Jan 17 19:20:32 Server immich[1697]:     at authorizationCodeGrant (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:972:21)
+Jan 17 19:20:32 Server immich[1697]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 19:20:32 Server immich[1697]:     at async OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:56:28)
+Jan 17 19:20:32 Server immich[1697]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 19:20:32 Server immich[1697]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22) {
+Jan 17 19:20:32 Server immich[1697]:   cause: [
+Jan 17 19:20:32 Server immich[1697]:     {
+Jan 17 19:20:32 Server immich[1697]:       scheme: 'bearer',
+Jan 17 19:20:32 Server immich[1697]:       parameters: {}
+Jan 17 19:20:32 Server immich[1697]:     }
+Jan 17 19:20:32 Server immich[1697]:   ],
+Jan 17 19:20:32 Server immich[1697]:   code: 'OAUTH_WWW_AUTHENTICATE_CHALLENGE',
+Jan 17 19:20:32 Server immich[1697]:   status: 401
+Jan 17 19:20:32 Server immich[1697]: }
+Jan 17 19:20:32 Server immich[1697]: [Nest] 1697  - 17/01/2026, 19:20:32   ERROR [Api:ErrorInterceptor~4izp8feg] Unknown error: Error: OAuth login failed
+Jan 17 19:20:32 Server immich[1697]: Error: OAuth login failed
+Jan 17 19:20:32 Server immich[1697]:     at OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:72:19)
+Jan 17 19:20:32 Server immich[1697]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 19:20:32 Server immich[1697]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 19:20:32 Server immich[1697]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22)
