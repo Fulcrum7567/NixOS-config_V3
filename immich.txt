@@ -1,100 +1,100 @@
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/system-metadata/admin-onboarding, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/system-metadata/admin-onboarding, POST} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/system-metadata/reverse-geocoding-state, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/system-metadata/version-check-state, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RoutesResolver] TagController {/api/tags}:
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/tags, POST} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/tags, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/tags, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/tags/assets, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/tags/:id, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/tags/:id, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/tags/:id, DELETE} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/tags/:id/assets, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/tags/:id/assets, DELETE} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RoutesResolver] TimelineController {/api/timeline}:
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/timeline/buckets, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/timeline/bucket, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RoutesResolver] TrashController {/api/trash}:
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/trash/empty, POST} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/trash/restore, POST} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/trash/restore/assets, POST} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RoutesResolver] UserAdminController {/api/admin/users}:
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/admin/users, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/admin/users, POST} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id, DELETE} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/sessions, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/statistics, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/preferences, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/preferences, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/restore, POST} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RoutesResolver] UserController {/api/users}:
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/me, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/me, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/me/preferences, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/me/preferences, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, DELETE} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, DELETE} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/:id, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/profile-image, POST} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/profile-image, DELETE} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/users/:id/profile-image, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RoutesResolver] ViewController {/api/view}:
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/view/folder/unique-paths, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/view/folder, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RoutesResolver] WorkflowController {/api/workflows}:
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/workflows, POST} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/workflows, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, GET} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, PUT} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, DELETE} route
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:NestApplication] Nest application successfully started
-Jan 17 19:32:06 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:06     LOG [Api:Bootstrap] Immich Server is listening on http://[::1]:2283 [v2.4.1] [production] 
-Jan 17 19:32:29 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:29   DEBUG [Api:LoggingInterceptor] GET /custom.css 200 15.31ms 91.35.206.45
-Jan 17 19:32:29 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:29   DEBUG [Api:LoggingInterceptor~mvmbaumj] GET /api/server/config 200 15.07ms 91.35.206.45
-Jan 17 19:32:29 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:29   DEBUG [Api:LoggingInterceptor~888hzw9f] GET /api/server/features 200 9.68ms 91.35.206.45
-Jan 17 19:32:29 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:29   DEBUG [Api:LoggingInterceptor~im6hjr1n] GET /api/server/media-types 200 0.52ms 91.35.206.45
-Jan 17 19:32:30 Server immich[5418]: (node:5418) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
-Jan 17 19:32:30 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:30   DEBUG [Api:LoggingInterceptor~o3eeiqg9] POST /api/oauth/authorize 201 109.65ms 91.35.206.45
-Jan 17 19:32:30 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:30 VERBOSE [Api:LoggingInterceptor~o3eeiqg9] {"redirectUri":"https://immich.aurek.eu/auth/login"}
-Jan 17 19:32:30 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:30   DEBUG [Api:LoggingInterceptor] GET /custom.css 200 7.90ms 91.35.206.45
-Jan 17 19:32:31 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:31   DEBUG [Api:LoggingInterceptor~qoxn2rch] GET /api/server/config 200 13.91ms 91.35.206.45
-Jan 17 19:32:31 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:31   DEBUG [Api:LoggingInterceptor~hzu57yy6] GET /api/server/features 200 9.89ms 91.35.206.45
-Jan 17 19:32:31 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:31   DEBUG [Api:LoggingInterceptor~ylyl8g8e] GET /api/server/media-types 200 0.40ms 91.35.206.45
-Jan 17 19:32:31 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:31   ERROR [Api:OAuthRepository~8nxbvv58] OAuth login failed: server responded with a challenge in the WWW-Authenticate HTTP Header
-Jan 17 19:32:31 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:31   ERROR [Api:OAuthRepository~8nxbvv58] WWWAuthenticateChallengeError: server responded with a challenge in the WWW-Authenticate HTTP Header
-Jan 17 19:32:31 Server immich[5418]:     at checkAuthenticationChallenges (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1282:15)
-Jan 17 19:32:31 Server immich[5418]:     at checkOAuthBodyError (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:931:9)
-Jan 17 19:32:31 Server immich[5418]:     at processGenericAccessTokenResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1213:11)
-Jan 17 19:32:31 Server immich[5418]:     at processAuthorizationCodeOAuth2Response (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1447:26)
-Jan 17 19:32:31 Server immich[5418]:     at Module.processAuthorizationCodeResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1391:12)
-Jan 17 19:32:31 Server immich[5418]:     at authorizationCodeGrant (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:972:21)
-Jan 17 19:32:31 Server immich[5418]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-Jan 17 19:32:31 Server immich[5418]:     at async OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:56:28)
-Jan 17 19:32:31 Server immich[5418]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
-Jan 17 19:32:31 Server immich[5418]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22) {
-Jan 17 19:32:31 Server immich[5418]:   cause: [
-Jan 17 19:32:31 Server immich[5418]:     {
-Jan 17 19:32:31 Server immich[5418]:       scheme: 'bearer',
-Jan 17 19:32:31 Server immich[5418]:       parameters: {}
-Jan 17 19:32:31 Server immich[5418]:     }
-Jan 17 19:32:31 Server immich[5418]:   ],
-Jan 17 19:32:31 Server immich[5418]:   code: 'OAUTH_WWW_AUTHENTICATE_CHALLENGE',
-Jan 17 19:32:31 Server immich[5418]:   status: 401
-Jan 17 19:32:31 Server immich[5418]: }
-Jan 17 19:32:31 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:31   ERROR [Api:ErrorInterceptor~8nxbvv58] Unknown error: Error: OAuth login failed
-Jan 17 19:32:31 Server immich[5418]: Error: OAuth login failed
-Jan 17 19:32:31 Server immich[5418]:     at OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:72:19)
-Jan 17 19:32:31 Server immich[5418]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-Jan 17 19:32:31 Server immich[5418]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
-Jan 17 19:32:31 Server immich[5418]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22)
-Jan 17 19:32:31 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:31   DEBUG [Api:LoggingInterceptor~8nxbvv58] POST /api/oauth/callback 201 46.80ms 91.35.206.45
-Jan 17 19:32:31 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:31 VERBOSE [Api:LoggingInterceptor~8nxbvv58] {"url":"https://immich.aurek.eu/auth/login?code=eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4R0NNIiwia2lkIjoiZTMwYmM5MTVkYjQ1MTdhNDVmNmFkMWVlMGY3N2JiODcifQ.-hylC2d49UOAfAEwkkfWik0vN1v82tyY.dkokWF9SkE9LLhXv.7YElt8JEbswNaBgWU4BncU3SdGjlliWOQTE1TiyuU7fPx5zHLJgdovpwF357NLzdQfyL6TaGTHqrstrH_UG2qWl8zf7Tx9bvKXtj0jSAK1CCTynclln9tYOY4wjRZdX4Xq5HuR46_PHfszR5adtSa0vzE5YP2s3YZsS8k0M41La1MUc_Co8xkCG-KQ1aRPYcYhyGVdceHo1D58CFcUHfozhwshD9cxFdQGkC-rc5wkwoOytEj489s6UIDVqFJByH_U6g-EzZTkvuJKeYz-Yea2uy0RQcpg8LCh94vv-AJeXE2PhS6Hd9WnanHFUByYcON3k3nHmo80t_ODhQnYPfGwIXQuTOZ_t1aatTShO_FHqt8ngsfWuw0jaamRGSpiWr1jiTmU8.D8uZRXTLmZvBfQRul391sA&state=w6r1iqjTKKS_G6t5tB8XC2WiyW6EauUNi5HoQEincwY"}
-Jan 17 19:32:31 Server immich[5418]: [Nest] 5418  - 17/01/2026, 19:32:31   DEBUG [Api:GlobalExceptionFilter~8nxbvv58] HttpException(500): {"message":"Failed to finish oauth","error":"Internal Server Error","statusCode":500}
+Jan 17 19:45:10 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:10   DEBUG [Api:LoggingInterceptor~5z27jizj] GET /api/server/media-types 200 0.52ms 91.35.206.45
+Jan 17 19:45:11 Server immich[8041]: (node:8041) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+Jan 17 19:45:11 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:11   DEBUG [Api:LoggingInterceptor~7zwggv0r] POST /api/oauth/authorize 201 111.85ms 91.35.206.45
+Jan 17 19:45:11 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:11 VERBOSE [Api:LoggingInterceptor~7zwggv0r] {"redirectUri":"https://immich.aurek.eu/auth/login"}
+Jan 17 19:45:12 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:12   DEBUG [Api:LoggingInterceptor] GET /custom.css 200 8.26ms 91.35.206.45
+Jan 17 19:45:12 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:12   DEBUG [Api:LoggingInterceptor~j6vll7ef] GET /api/server/config 200 24.92ms 91.35.206.45
+Jan 17 19:45:12 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:12   DEBUG [Api:LoggingInterceptor~nf4npyqp] GET /api/server/features 200 10.54ms 91.35.206.45
+Jan 17 19:45:12 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:12   DEBUG [Api:LoggingInterceptor~1sssaqgk] GET /api/server/media-types 200 0.43ms 91.35.206.45
+Jan 17 19:45:12 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:12   ERROR [Api:OAuthRepository~4wrkl8c7] OAuth login failed: invalid response encountered
+Jan 17 19:45:12 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:12   ERROR [Api:OAuthRepository~4wrkl8c7] ClientError: invalid response encountered
+Jan 17 19:45:12 Server immich[8041]:     at e (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:116:12)
+Jan 17 19:45:12 Server immich[8041]:     at errorHandler (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:139:23)
+Jan 17 19:45:12 Server immich[8041]:     at authorizationCodeGrant (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:991:9)
+Jan 17 19:45:12 Server immich[8041]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 19:45:12 Server immich[8041]:     at async OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:56:28)
+Jan 17 19:45:12 Server immich[8041]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 19:45:12 Server immich[8041]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22) {
+Jan 17 19:45:12 Server immich[8041]:   code: 'OAUTH_INVALID_RESPONSE',
+Jan 17 19:45:12 Server immich[8041]:   [cause]: OperationProcessingError: unexpected JWT "alg" header parameter
+Jan 17 19:45:12 Server immich[8041]:       at OPE (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:116:12)
+Jan 17 19:45:12 Server immich[8041]:       at checkSigningAlgorithm (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:2007:19)
+Jan 17 19:45:12 Server immich[8041]:       at validateJwt (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1733:5)
+Jan 17 19:45:12 Server immich[8041]:       at processGenericAccessTokenResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1253:39)
+Jan 17 19:45:12 Server immich[8041]:       at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 19:45:12 Server immich[8041]:       at async processAuthorizationCodeOAuth2Response (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1447:20)
+Jan 17 19:45:12 Server immich[8041]:       at async authorizationCodeGrant (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:980:18)
+Jan 17 19:45:12 Server immich[8041]:       at async OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:56:28)
+Jan 17 19:45:12 Server immich[8041]:       at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 19:45:12 Server immich[8041]:       at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22) {
+Jan 17 19:45:12 Server immich[8041]:     code: 'OAUTH_INVALID_RESPONSE',
+Jan 17 19:45:12 Server immich[8041]:     [cause]: {
+Jan 17 19:45:12 Server immich[8041]:       header: {
+Jan 17 19:45:12 Server immich[8041]:         alg: 'ES256',
+Jan 17 19:45:12 Server immich[8041]:         kid: 'dfb0cdeca2237a8da90da4e278e17893'
+Jan 17 19:45:12 Server immich[8041]:       },
+Jan 17 19:45:12 Server immich[8041]:       expected: 'RS256',
+Jan 17 19:45:12 Server immich[8041]:       reason: 'client configuration'
+Jan 17 19:45:12 Server immich[8041]:     }
+Jan 17 19:45:12 Server immich[8041]:   }
+Jan 17 19:45:12 Server immich[8041]: }
+Jan 17 19:45:12 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:12   ERROR [Api:ErrorInterceptor~4wrkl8c7] Unknown error: Error: OAuth login failed
+Jan 17 19:45:12 Server immich[8041]: Error: OAuth login failed
+Jan 17 19:45:12 Server immich[8041]:     at OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:72:19)
+Jan 17 19:45:12 Server immich[8041]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 19:45:12 Server immich[8041]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 19:45:12 Server immich[8041]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22)
+Jan 17 19:45:12 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:12   DEBUG [Api:LoggingInterceptor~4wrkl8c7] POST /api/oauth/callback 201 69.71ms 91.35.206.45
+Jan 17 19:45:12 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:12 VERBOSE [Api:LoggingInterceptor~4wrkl8c7] {"url":"https://immich.aurek.eu/auth/login?code=eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4R0NNIiwia2lkIjoiZTMwYmM5MTVkYjQ1MTdhNDVmNmFkMWVlMGY3N2JiODcifQ.RUtUT_Pw2nItEH_tGqUTodV1wiu22OgY.291Vu1v7TUP3SYwl.a9HvQ9VK_e7gBBypr9uJsYwBW-za1iVn6fYZdm7Wyr5kTRG7n6193AX0i_OqGO2WuDHYVDP6nViPtoFedPK7HTaldAjXAj_DxYTL1WnaluEnqgx6LkwbCE6dtHqCSyC48YgEQx6j-QMsGKu40uFa89jOYWt0gUPteS4YwHeU23jZqmerdSxAAzc2i3ZC1pcBL4hbwancPWN7Fqpi0HdFHNDumU3Z2zT6vqfCnuXWJrzMLM8SNVPohOZbV_yyxSp-H8XP3ApyT8rIJvq_dm-yDakt8YM4Qc-w-sYx7-KShZbV0z1Wlyq6fYgnE370sQ0ol_N7rj8_pG-qdEFpQBLnjkKdonoKYHdlY0vkunOHgd99RPz8AE6i-LvqRLdT3r29gFkQaxY.xl86hdYMbdNvENssPvqLag&state=uUD3CqAh-lj735mKyIcD2Q8qZMKSBII9gRUHgndO2M0"}
+Jan 17 19:45:12 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:45:12   DEBUG [Api:GlobalExceptionFilter~4wrkl8c7] HttpException(500): {"message":"Failed to finish oauth","error":"Internal Server Error","statusCode":500}
+Jan 17 19:46:43 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:43   DEBUG [Api:LoggingInterceptor] GET /custom.css 200 21.54ms 91.35.206.45
+Jan 17 19:46:43 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:43   DEBUG [Api:LoggingInterceptor~bihg306u] GET /api/server/config 200 17.33ms 91.35.206.45
+Jan 17 19:46:43 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:43   DEBUG [Api:LoggingInterceptor~uk8nmsja] GET /api/server/features 200 13.69ms 91.35.206.45
+Jan 17 19:46:43 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:43   DEBUG [Api:LoggingInterceptor~wq87prla] GET /api/server/media-types 200 0.29ms 91.35.206.45
+Jan 17 19:46:44 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:44   DEBUG [Api:LoggingInterceptor~7iv2zq5r] POST /api/oauth/authorize 201 35.62ms 91.35.206.45
+Jan 17 19:46:44 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:44 VERBOSE [Api:LoggingInterceptor~7iv2zq5r] {"redirectUri":"https://immich.aurek.eu/auth/login"}
+Jan 17 19:46:44 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:44   DEBUG [Api:LoggingInterceptor] GET /custom.css 200 13.69ms 91.35.206.45
+Jan 17 19:46:45 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:45   DEBUG [Api:LoggingInterceptor~tesexjii] GET /api/server/config 200 16.50ms 91.35.206.45
+Jan 17 19:46:45 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:45   DEBUG [Api:LoggingInterceptor~jx4bbk0q] GET /api/server/features 200 13.11ms 91.35.206.45
+Jan 17 19:46:45 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:45   DEBUG [Api:LoggingInterceptor~54541vij] GET /api/server/media-types 200 0.26ms 91.35.206.45
+Jan 17 19:46:45 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:45   ERROR [Api:OAuthRepository~bsb3e4sm] OAuth login failed: invalid response encountered
+Jan 17 19:46:45 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:45   ERROR [Api:OAuthRepository~bsb3e4sm] ClientError: invalid response encountered
+Jan 17 19:46:45 Server immich[8041]:     at e (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:116:12)
+Jan 17 19:46:45 Server immich[8041]:     at errorHandler (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:139:23)
+Jan 17 19:46:45 Server immich[8041]:     at authorizationCodeGrant (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:991:9)
+Jan 17 19:46:45 Server immich[8041]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 19:46:45 Server immich[8041]:     at async OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:56:28)
+Jan 17 19:46:45 Server immich[8041]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 19:46:45 Server immich[8041]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22) {
+Jan 17 19:46:45 Server immich[8041]:   code: 'OAUTH_INVALID_RESPONSE',
+Jan 17 19:46:45 Server immich[8041]:   [cause]: OperationProcessingError: unexpected JWT "alg" header parameter
+Jan 17 19:46:45 Server immich[8041]:       at OPE (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:116:12)
+Jan 17 19:46:45 Server immich[8041]:       at checkSigningAlgorithm (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:2007:19)
+Jan 17 19:46:45 Server immich[8041]:       at validateJwt (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1733:5)
+Jan 17 19:46:45 Server immich[8041]:       at processGenericAccessTokenResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1253:39)
+Jan 17 19:46:45 Server immich[8041]:       at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 19:46:45 Server immich[8041]:       at async processAuthorizationCodeOAuth2Response (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1447:20)
+Jan 17 19:46:45 Server immich[8041]:       at async authorizationCodeGrant (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:980:18)
+Jan 17 19:46:45 Server immich[8041]:       at async OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:56:28)
+Jan 17 19:46:45 Server immich[8041]:       at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 19:46:45 Server immich[8041]:       at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22) {
+Jan 17 19:46:45 Server immich[8041]:     code: 'OAUTH_INVALID_RESPONSE',
+Jan 17 19:46:45 Server immich[8041]:     [cause]: {
+Jan 17 19:46:45 Server immich[8041]:       header: {
+Jan 17 19:46:45 Server immich[8041]:         alg: 'ES256',
+Jan 17 19:46:45 Server immich[8041]:         kid: 'dfb0cdeca2237a8da90da4e278e17893'
+Jan 17 19:46:45 Server immich[8041]:       },
+Jan 17 19:46:45 Server immich[8041]:       expected: 'RS256',
+Jan 17 19:46:45 Server immich[8041]:       reason: 'client configuration'
+Jan 17 19:46:45 Server immich[8041]:     }
+Jan 17 19:46:45 Server immich[8041]:   }
+Jan 17 19:46:45 Server immich[8041]: }
+Jan 17 19:46:45 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:45   ERROR [Api:ErrorInterceptor~bsb3e4sm] Unknown error: Error: OAuth login failed
+Jan 17 19:46:45 Server immich[8041]: Error: OAuth login failed
+Jan 17 19:46:45 Server immich[8041]:     at OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:72:19)
+Jan 17 19:46:45 Server immich[8041]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 19:46:45 Server immich[8041]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 19:46:45 Server immich[8041]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22)
+Jan 17 19:46:45 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:45   DEBUG [Api:LoggingInterceptor~bsb3e4sm] POST /api/oauth/callback 201 43.69ms 91.35.206.45
+Jan 17 19:46:45 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:45 VERBOSE [Api:LoggingInterceptor~bsb3e4sm] {"url":"https://immich.aurek.eu/auth/login?code=eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4R0NNIiwia2lkIjoiZTMwYmM5MTVkYjQ1MTdhNDVmNmFkMWVlMGY3N2JiODcifQ.Z0vrSCRDKgnYIw3sh_uHriY-BLaMhbbn.afWo3dvZPIVUub-D.tni5LkBlUhDX_IVpdiENwhyBZLEmTfcpVrh9CEiyLHM8FJNp79L4Xb307lqjFfqxv0B5qao4CGexxmBbrCq-sMrmZZVm-zM_PqU9qlMEMErEIBFdSd53w_pxqFaLH8ujFuKp-cS7Ign8NfvUsyDQNrXGo1ARQn-AiAYdp-c33KbVJRnsBn6wcqiFZXc17XiIb3a0WJgwQrYK_yM1osGl78x5k_lFHyKn1EoJdkhtlH327em-P8zkKfQ6Qisk6YF5cZ8lNg2esgB6BNoZ9GF1cDHbGHY8z1jl55w4Ova0_d5ujEfTbL0BJOa8lvnenVMqVdya9G9CdNWaNHv1YlJD0haTJlWqbqMy_ZlSUfVb5cXwNJYdB_aCPyFYej_wXH3pVTcOCFM.Op0DW2j2jcH9EiHPehO13Q&state=IabMFLX3KqADL5_osDxOc5I6HDXKSi5JIaHfD9qHxOs"}
+Jan 17 19:46:45 Server immich[8041]: [Nest] 8041  - 17/01/2026, 19:46:45   DEBUG [Api:GlobalExceptionFilter~bsb3e4sm] HttpException(500): {"message":"Failed to finish oauth","error":"Internal Server Error","statusCode":500}
