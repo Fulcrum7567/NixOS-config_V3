@@ -91,6 +91,7 @@ in
             proxy_set_header X-Forwarded-Proto $scheme;
           '';
         };
-      };    
+      };
+    };
   };
 }
