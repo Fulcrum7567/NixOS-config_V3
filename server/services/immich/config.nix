@@ -25,9 +25,23 @@
 
     sops.templates."immich.env" = {
       content = ''
+        # Secrets
         IMMICH_OAUTH_CLIENT_SECRET="${config.sops.placeholder."immich/clientSecret"}"
         OAUTH_CLIENT_SECRET="${config.sops.placeholder."immich/clientSecret"}"
         DB_PASSWORD=nothing
+        
+        # OAuth Configuration (Moved from settings.oauth)
+        IMMICH_OAUTH_ENABLED=true
+        IMMICH_OAUTH_AUTO_REGISTER=true
+        IMMICH_OAUTH_BUTTON_TEXT="Login with Kanidm"
+        IMMICH_OAUTH_ISSUER_URL="https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich"
+        IMMICH_OAUTH_CLIENT_ID="immich"
+        IMMICH_OAUTH_SCOPE="openid email profile"
+        IMMICH_OAUTH_STORAGE_LABEL_CLAIM="preferred_username"
+        IMMICH_OAUTH_TOKEN_ENDPOINT_AUTH_METHOD="client_secret_basic"
+        
+        # Log Level
+        IMMICH_LOG_LEVEL="verbose"
       '';
       owner = config.services.immich.user;
       group = config.services.immich.group;
@@ -47,6 +61,7 @@
 
       secretsFile = config.sops.templates."immich.env".path;
 
+      /*
       settings = {
         oauth = {
           enabled = true;
@@ -61,6 +76,7 @@
           tokenEndpointAuthMethod = "client_secret_basic"; 
         };
       };
+      */
 
       environment = {
         # Allow self-signed certs (or loopback NAT issues) for the OIDC discovery handshake
