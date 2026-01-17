@@ -97,7 +97,7 @@
 
       environment = {
         # 2. NEW: Tells Immich to load OAuth settings from the JSON file
-        IMMICH_CONFIG_FILE = config.sops.templates."immich.json".path;
+        IMMICH_CONFIG_FILE = "/run/immich-config/config.json";
         
         # Keep other env vars
         IMMICH_LOG_LEVEL = "verbose";
@@ -113,21 +113,39 @@
       wants = [ "kanidm.service" "nginx.service" ];
     };
 
-    # Service to strip newline from sops secret for Kanidm
-    systemd.services.fix-immich-kanidm-secret = {
-      description = "Strip newline from Immich Kanidm secret";
-      requiredBy = [ "kanidm.service" ];
-      before = [ "kanidm.service" ];
+    # Service to strip newline from sops secret for Kanidm AND generate Immich config
+    systemd.services.prepare-immich-secrets = {
+      description = "Prepare secrets and config for Immich and Kanidm";
+      requiredBy = [ "kanidm.service" "immich-server.service" ];
+      before = [ "kanidm.service" "immich-server.service" ];
       serviceConfig = {
         Type = "oneshot";
         User = "root";
+        RuntimeDirectory = "immich-config"; # Creates /run/immich-config
       };
       script = ''
+        # 1. Clean secret for Kanidm
         mkdir -p /run/kanidm-secrets
         if [ -f "${config.sops.secrets."immich/oauth/client_secret".path}" ]; then
+          # Strip newline
           tr -d '\n' < "${config.sops.secrets."immich/oauth/client_secret".path}" > /run/kanidm-secrets/immich_client_secret_clean
+          
+          # Set permissions for Kanidm
           chown ${config.server.services.singleSignOn.serviceUsername}:${config.server.services.singleSignOn.serviceGroup} /run/kanidm-secrets/immich_client_secret_clean
           chmod 440 /run/kanidm-secrets/immich_client_secret_clean
+
+          # 2. Generate config for Immich
+          # Copy template to runtime dir
+          cp "${config.sops.templates."immich.json".path}" /run/immich-config/config.json
+          chmod 600 /run/immich-config/config.json
+          
+          # Inject secret using jq
+          SECRET=$(cat /run/kanidm-secrets/immich_client_secret_clean)
+          ${pkgs-default.jq}/bin/jq --arg s "$SECRET" '.oauth.clientSecret = $s' /run/immich-config/config.json > /run/immich-config/config.json.tmp && mv /run/immich-config/config.json.tmp /run/immich-config/config.json
+          
+          # Set permissions for Immich
+          chown ${config.services.immich.user}:${config.services.immich.group} /run/immich-config/config.json
+          chmod 440 /run/immich-config/config.json
         fi
       '';
     };
