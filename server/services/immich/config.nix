@@ -18,13 +18,13 @@
         sopsFile = ./immichSecrets.yaml;
         format = "yaml";
         key = "immich_client_secret";
-        restartUnits = [ "immich.service" ];
+        restartUnits = [ "immich-server.service" ];
       };
     };
 
     sops.templates."immich.env" = {
       content = ''
-        IMMICH_OAUTH_CLIENT_SECRET=${config.sops.placeholder."immich/clientSecret"}
+        IMMICH_OAUTH_CLIENT_SECRET="${config.sops.placeholder."immich/clientSecret"}"
       '';
       owner = config.services.immich.user;
       group = config.services.immich.group;
