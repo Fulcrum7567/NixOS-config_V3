@@ -52,11 +52,18 @@
         IMMICH_OAUTH_STORAGE_LABEL_CLAIM = "preferred_username"; # Maps to the short username
         IMMICH_OAUTH_BUTTON_TEXT = "Login with Kanidm";
         IMMICH_OAUTH_AUTO_REGISTER = "true";
+        # Allow self-signed certs (or loopback NAT issues) for the OIDC discovery handshake
+        NODE_TLS_REJECT_UNAUTHORIZED = "0";
       };
       
     };
 
-    
+    # Ensure Immich waits for the IDP to be available before starting, 
+    # otherwise OIDC discovery fails and OAuth is disabled.
+    systemd.services.immich-server = {
+      after = [ "kanidm.service" "nginx.service" ];
+      wants = [ "kanidm.service" "nginx.service" ];
+    };
 
     users.users.${config.services.immich.user}.extraGroups = [ "video" "render" ];
 
