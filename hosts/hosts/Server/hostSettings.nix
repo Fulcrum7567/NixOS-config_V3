@@ -23,6 +23,11 @@
 					activeConfig = "nginx";
 				};
 
+				singleSignOn = {
+					enable = true;
+					activeConfig = "kanidm";
+				};
+
 				autoBackup = {
 					enable = true;
 					activeConfig = "default";
