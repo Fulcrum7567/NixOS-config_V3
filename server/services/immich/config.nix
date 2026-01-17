@@ -54,7 +54,8 @@
           scope = "openid email profile";
           # clientSecret is provided via environment variable IMMICH_OAUTH_CLIENT_SECRET from secretsFile
           storageLabelClaim = "preferred_username";
-          tokenEndpointAuthMethod = "client_secret_post";
+          # CHANGE THIS LINE:
+          tokenEndpointAuthMethod = "client_secret_basic"; 
         };
         server.logLevel = "verbose"; # Enable verbose logs to see OAuth details
       };
