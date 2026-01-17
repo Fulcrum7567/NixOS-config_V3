@@ -9,7 +9,7 @@
         sopsFile = ./immichSecrets.yaml;
         format = "yaml";
         key = "immich_client_secret";
-        restartUnits = [ "immich.service" ];
+        restartUnits = [ "kanidm.service" ];
         mode = "0440";
       };
 
@@ -49,7 +49,6 @@
             "buttonText": "Login with Kanidm",
             "issuerUrl": "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich",
             "clientId": "immich",
-            "clientSecret": "${config.sops.placeholder."immich/clientSecret"}",
             "scope": "openid email profile",
             "storageLabelClaim": "preferred_username",
             "tokenEndpointAuthMethod": "client_secret_post",
