@@ -45,7 +45,7 @@ in
           "${config.user.settings.username}" = {
             displayName = config.user.settings.displayName;
             legalName = config.user.settings.displayName;
-            mailAddresses = [];
+            mailAddresses = [ "dragon.fighter@outlook.de" ];
             present = true;
           };
         };
