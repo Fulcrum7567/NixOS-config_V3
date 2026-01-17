@@ -97,8 +97,8 @@
       */
 
       environment = {
-        # 2. NEW: Tells Immich to load OAuth settings from the JSON file
-        IMMICH_CONFIG_FILE = "/run/immich-config/config.json";
+        # FIX: Point dynamically to the sops template path
+        IMMICH_CONFIG_FILE = config.sops.templates."immich.json".path;
         
         # Keep other env vars
         IMMICH_LOG_LEVEL = "verbose";
