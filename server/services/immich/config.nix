@@ -25,26 +25,15 @@
 
     sops.templates."immich.env" = {
       content = ''
-        # Secrets
+        # Secrets (Keep this!)
         IMMICH_OAUTH_CLIENT_SECRET="${config.sops.placeholder."immich/clientSecret"}"
         OAUTH_CLIENT_SECRET="${config.sops.placeholder."immich/clientSecret"}"
-        DB_PASSWORD=nothing
         
-        # OAuth Configuration
-        IMMICH_OAUTH_ENABLED=true
-        IMMICH_OAUTH_AUTO_REGISTER=true
-        IMMICH_OAUTH_BUTTON_TEXT="Login with Kanidm"
-        IMMICH_OAUTH_ISSUER_URL="https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich"
-        IMMICH_OAUTH_CLIENT_ID="immich"
-        IMMICH_OAUTH_SCOPE="openid email profile"
-        IMMICH_OAUTH_STORAGE_LABEL_CLAIM="preferred_username"
-        IMMICH_OAUTH_TOKEN_ENDPOINT_AUTH_METHOD="client_secret_basic"
-        
-        # ADD THIS LINE:
-        IMMICH_OAUTH_SIGNING_ALGORITHM="ES256"
-
         # Log Level
         IMMICH_LOG_LEVEL="verbose"
+        
+        # REMOVE all the other IMMICH_OAUTH_* lines you added previously.
+        # They are ignored by Immich and are now handled by 'settings' above.
       '';
       owner = config.services.immich.user;
       group = config.services.immich.group;
@@ -64,7 +53,7 @@
 
       secretsFile = config.sops.templates."immich.env".path;
 
-      /*
+      
       settings = {
         oauth = {
           enabled = true;
@@ -73,13 +62,14 @@
           issuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich";
           clientId = "immich";
           scope = "openid email profile";
-          # clientSecret is provided via environment variable IMMICH_OAUTH_CLIENT_SECRET from secretsFile
+          # The secret is loaded from the environment variable automatically
           storageLabelClaim = "preferred_username";
-          # CHANGE THIS LINE:
-          tokenEndpointAuthMethod = "client_secret_basic"; 
+          tokenEndpointAuthMethod = "client_secret_basic";
+          
+          # ADD THIS LINE TO FIX THE ERROR:
+          signingAlgorithm = "ES256";
         };
       };
-      */
 
       environment = {
         # Allow self-signed certs (or loopback NAT issues) for the OIDC discovery handshake
