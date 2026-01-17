@@ -122,6 +122,7 @@
         Type = "oneshot";
         User = "root";
         RuntimeDirectory = "immich-config"; # Creates /run/immich-config
+        RemainAfterExit = true;
       };
       script = ''
         # 1. Clean secret for Kanidm
