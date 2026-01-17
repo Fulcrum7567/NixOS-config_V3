@@ -24,8 +24,8 @@ in
       enableServer = true;
       package = pkgs-unstable.kanidmWithSecretProvisioning_1_8;
       serverSettings = {
-        domain = cfg.subdomain + "." + config.server.domain;
-        origin = "https://${cfg.subdomain}.${config.server.domain}";
+        domain = cfg.subdomain + "." + config.server.webaddress;
+        origin = "https://${cfg.subdomain}.${config.server.webaddress}";
         bindaddress = "[::1]:${toString cfg.port}";
         # Kanidm requires TLS internally usually, but if behind local reverse proxy
         # strictly on localhost, you can sometimes run http. 
