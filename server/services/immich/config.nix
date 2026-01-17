@@ -64,7 +64,7 @@
       environment = {
         # Allow self-signed certs (or loopback NAT issues) for the OIDC discovery handshake
         NODE_TLS_REJECT_UNAUTHORIZED = "0";
-        IMMICH_LOG_LEVEL="verbose"
+        IMMICH_LOG_LEVEL="verbose";
       };
       
     };
