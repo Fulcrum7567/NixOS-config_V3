@@ -32,8 +32,8 @@ in
         # However, standard practice is to let Kanidm manage its certs or point to existing ones.
         # For this example, we assume you might be using ACME certs or self-signed for localhost.
         # If using ACME from Nginx, Kanidm needs access to those certs.
-        tls_chain = "/var/lib/acme/${config.server.domain}/fullchain.pem";
-        tls_key = "/var/lib/acme/${config.server.domain}/key.pem";
+        tls_chain = "/var/lib/acme/${config.server.webaddress}/fullchain.pem";
+        tls_key = "/var/lib/acme/${config.server.webaddress}/key.pem";
       };
 
       provision = {
