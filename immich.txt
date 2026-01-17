@@ -1,100 +1,100 @@
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/admin/users, POST} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id, PUT} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id, DELETE} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/sessions, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/statistics, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/preferences, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/preferences, PUT} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/restore, POST} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RoutesResolver] UserController {/api/users}:
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/me, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/me, PUT} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/me/preferences, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/me/preferences, PUT} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, PUT} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, DELETE} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, PUT} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, DELETE} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/:id, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/profile-image, POST} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/profile-image, DELETE} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/users/:id/profile-image, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RoutesResolver] ViewController {/api/view}:
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/view/folder/unique-paths, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/view/folder, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RoutesResolver] WorkflowController {/api/workflows}:
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/workflows, POST} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/workflows, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, GET} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, PUT} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, DELETE} route
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:NestApplication] Nest application successfully started
-Jan 17 20:34:49 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:34:49     LOG [Api:Bootstrap] Immich Server is listening on http://[::1]:2283 [v2.4.1] [production] 
-Jan 17 20:35:14 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:14   DEBUG [Api:LoggingInterceptor] GET /custom.css 200 15.36ms 91.35.206.45
-Jan 17 20:35:14 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:14   DEBUG [Api:LoggingInterceptor~pmkujsyo] GET /api/server/config 200 15.67ms 91.35.206.45
-Jan 17 20:35:14 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:14   DEBUG [Api:LoggingInterceptor~aefoal3g] GET /api/server/features 200 10.26ms 91.35.206.45
-Jan 17 20:35:14 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:14   DEBUG [Api:LoggingInterceptor~rqeliiuc] GET /api/server/media-types 200 0.53ms 91.35.206.45
-Jan 17 20:35:15 Server immich[10866]: (node:10866) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
-Jan 17 20:35:15 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:15   DEBUG [Api:LoggingInterceptor~bp5ttyzc] POST /api/oauth/authorize 201 114.42ms 91.35.206.45
-Jan 17 20:35:15 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:15 VERBOSE [Api:LoggingInterceptor~bp5ttyzc] {"redirectUri":"https://immich.aurek.eu/auth/login"}
-Jan 17 20:35:16 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:16   DEBUG [Api:LoggingInterceptor] GET /custom.css 200 6.58ms 91.35.206.45
-Jan 17 20:35:16 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:16   DEBUG [Api:LoggingInterceptor~opmqy22w] GET /api/server/config 200 32.88ms 91.35.206.45
-Jan 17 20:35:16 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:16   DEBUG [Api:LoggingInterceptor~2ikt6eu8] GET /api/server/features 200 12.86ms 91.35.206.45
-Jan 17 20:35:16 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:16   DEBUG [Api:LoggingInterceptor~zvegxj1g] GET /api/server/media-types 200 0.26ms 91.35.206.45
-Jan 17 20:35:16 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:16   ERROR [Api:OAuthRepository~p1f3enhr] OAuth login failed: server responded with a challenge in the WWW-Authenticate HTTP Header
-Jan 17 20:35:16 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:16   ERROR [Api:OAuthRepository~p1f3enhr] WWWAuthenticateChallengeError: server responded with a challenge in the WWW-Authenticate HTTP Header
-Jan 17 20:35:16 Server immich[10866]:     at checkAuthenticationChallenges (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1282:15)
-Jan 17 20:35:16 Server immich[10866]:     at checkOAuthBodyError (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:931:9)
-Jan 17 20:35:16 Server immich[10866]:     at processGenericAccessTokenResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1213:11)
-Jan 17 20:35:16 Server immich[10866]:     at processAuthorizationCodeOAuth2Response (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1447:26)
-Jan 17 20:35:16 Server immich[10866]:     at Module.processAuthorizationCodeResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1391:12)
-Jan 17 20:35:16 Server immich[10866]:     at authorizationCodeGrant (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:972:21)
-Jan 17 20:35:16 Server immich[10866]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-Jan 17 20:35:16 Server immich[10866]:     at async OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:56:28)
-Jan 17 20:35:16 Server immich[10866]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
-Jan 17 20:35:16 Server immich[10866]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22) {
-Jan 17 20:35:16 Server immich[10866]:   cause: [
-Jan 17 20:35:16 Server immich[10866]:     {
-Jan 17 20:35:16 Server immich[10866]:       scheme: 'bearer',
-Jan 17 20:35:16 Server immich[10866]:       parameters: {}
-Jan 17 20:35:16 Server immich[10866]:     }
-Jan 17 20:35:16 Server immich[10866]:   ],
-Jan 17 20:35:16 Server immich[10866]:   code: 'OAUTH_WWW_AUTHENTICATE_CHALLENGE',
-Jan 17 20:35:16 Server immich[10866]:   status: 401
-Jan 17 20:35:16 Server immich[10866]: }
-Jan 17 20:35:16 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:16   ERROR [Api:ErrorInterceptor~p1f3enhr] Unknown error: Error: OAuth login failed
-Jan 17 20:35:16 Server immich[10866]: Error: OAuth login failed
-Jan 17 20:35:16 Server immich[10866]:     at OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:72:19)
-Jan 17 20:35:16 Server immich[10866]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-Jan 17 20:35:16 Server immich[10866]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
-Jan 17 20:35:16 Server immich[10866]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22)
-Jan 17 20:35:16 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:16   DEBUG [Api:LoggingInterceptor~p1f3enhr] POST /api/oauth/callback 201 34.07ms 91.35.206.45
-Jan 17 20:35:16 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:16 VERBOSE [Api:LoggingInterceptor~p1f3enhr] {"url":"https://immich.aurek.eu/auth/login?code=eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4R0NNIiwia2lkIjoiZTMwYmM5MTVkYjQ1MTdhNDVmNmFkMWVlMGY3N2JiODcifQ.1jq86rLpBdIkOsIDO3J3fXOU5SANFhHX.S9-Jti2NpOlXaAyY.e8vQ48hTllY62JsvREbCeeNwV_9NNEz_2PRIa2cBzJNIHq6WIaqzxbEC1dwpMh1EnJmJxnKLF0WEc1i517_k_5KUFBOquJPrMggzcpf0guT2sYxQm7Ge9pBxjkI8AFaCzyETWbyWydR6q5XISUXlbfKJanzGvz4sDAKwJ4uw4nqL43zAhD7amT7Y02W45fiwk1hrJ_HXjxWLq0OW--wUkjD8Fo_R2VRXE23QBmrzvanhDwWTt5PRTLeMdBUjQm3rj4W-r0hla1cdLhOLtl8qbvOQdRywB2JEDbRzhNQJqT1Yo8xuNK13REDxdcItP1NoU4QIe8SZii_B4U_Ytsf8i5wOZhzBQEEI1Hwlq2oxXRfZHAP3PNR1Rd5luKEh_EyabgtTu3Q.DUBI-I1gAGEC_9LPBVs5Bw&state=11k-nQ31sNdCXkL0ypjF0q1298WxcvvpGzHzar-K1Yk"}
-Jan 17 20:35:16 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:16   DEBUG [Api:GlobalExceptionFilter~p1f3enhr] HttpException(500): {"message":"Failed to finish oauth","error":"Internal Server Error","statusCode":500}
-Jan 17 20:35:23 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:23   DEBUG [Api:LoggingInterceptor~8p5huwuk] POST /api/auth/login 201 115.16ms 91.35.206.45
-Jan 17 20:35:23 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:23 VERBOSE [Api:LoggingInterceptor~8p5huwuk] {"email":"stoetzel.mario+immich@gmail.com","password":"********"}
-Jan 17 20:35:23 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:23   DEBUG [Api:LoggingInterceptor~j50f11uj] GET /api/users/me/preferences 200 18.48ms 91.35.206.45
-Jan 17 20:35:23 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:23   DEBUG [Api:LoggingInterceptor~vkr0v74j] GET /api/users/me 200 22.68ms 91.35.206.45
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24   DEBUG [Api:LoggingInterceptor~cxhkwdev] GET /api/server/about 200 612.77ms 91.35.206.45
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24     LOG [Api:WebsocketRepository] Websocket Connect:    QXcbHzSIox31E6dpAAAB
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24   DEBUG [Api:LoggingInterceptor~soejie3m] GET /api/server/storage 200 4.53ms 91.35.206.45
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24   DEBUG [Api:LoggingInterceptor~e67w5gls] GET /api/notifications?unread=true 200 20.64ms 91.35.206.45
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24   DEBUG [Api:LoggingInterceptor~6h999di8] GET /api/memories?for=2026-01-17T20%3A35%3A24.386Z 200 38.41ms 91.35.206.45
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24   DEBUG [Api:LoggingInterceptor~swebd3ig] GET /api/server/storage 200 3.31ms 91.35.206.45
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24   DEBUG [Api:LoggingInterceptor~83usrqh3] GET /api/albums 200 41.28ms 91.35.206.45
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24   DEBUG [Api:LoggingInterceptor~y37cyzgm] GET /api/notifications?unread=true 200 4.68ms 91.35.206.45
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24   DEBUG [Api:LoggingInterceptor~g5e1mvgb] GET /api/timeline/buckets?visibility=timeline&withPartners=true&withStacked=true 200 25.04ms 91.35.206.45
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24   DEBUG [Api:LoggingInterceptor~unydoepf] GET /api/server/version-history 200 0.91ms 91.35.206.45
-Jan 17 20:35:24 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:24   DEBUG [Api:LoggingInterceptor~aorf79po] GET /api/server/about 200 1.36ms 91.35.206.45
-Jan 17 20:35:26 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:26   DEBUG [Api:LoggingInterceptor~ppoyidcs] GET /api/server/storage 200 2.05ms 91.35.206.45
-Jan 17 20:35:26 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:26   DEBUG [Api:LoggingInterceptor~skdacnpq] GET /api/system-config 200 13.47ms 91.35.206.45
-Jan 17 20:35:26 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:26   DEBUG [Api:LoggingInterceptor~lmkk8lwg] GET /api/admin/users?withDeleted=true 200 3.82ms 91.35.206.45
-Jan 17 20:35:26 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:26   DEBUG [Api:LoggingInterceptor~2ewgt2nt] GET /api/system-config/defaults 200 0.42ms 91.35.206.45
-Jan 17 20:35:26 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:26   DEBUG [Api:LoggingInterceptor~v6yk0w4p] GET /api/notifications?unread=true 200 2.78ms 91.35.206.45
-Jan 17 20:35:28 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:28   DEBUG [Api:LoggingInterceptor~c9e5xz6q] GET /api/system-config 200 9.94ms 91.35.206.45
-Jan 17 20:35:28 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:28   DEBUG [Api:LoggingInterceptor~auobtmfb] GET /api/system-config/defaults 200 0.29ms 91.35.206.45
-Jan 17 20:35:28 Server immich[10866]: [Nest] 10866  - 17/01/2026, 20:35:28   DEBUG [Api:LoggingInterceptor~ynknp3wu] GET /api/notifications?unread=true 200 2.84ms 91.35.206.45
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RoutesResolver] TrashController {/api/trash}:
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/trash/empty, POST} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/trash/restore, POST} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/trash/restore/assets, POST} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RoutesResolver] UserAdminController {/api/admin/users}:
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/admin/users, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/admin/users, POST} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id, PUT} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id, DELETE} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/sessions, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/statistics, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/preferences, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/preferences, PUT} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/restore, POST} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RoutesResolver] UserController {/api/users}:
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/me, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/me, PUT} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/me/preferences, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/me/preferences, PUT} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, PUT} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, DELETE} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, PUT} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, DELETE} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/:id, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/profile-image, POST} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/profile-image, DELETE} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/users/:id/profile-image, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RoutesResolver] ViewController {/api/view}:
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/view/folder/unique-paths, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/view/folder, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RoutesResolver] WorkflowController {/api/workflows}:
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/workflows, POST} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/workflows, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, GET} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, PUT} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, DELETE} route
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:NestApplication] Nest application successfully started
+Jan 17 20:45:37 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:37     LOG [Api:Bootstrap] Immich Server is listening on http://[::1]:2283 [v2.4.1] [production] 
+Jan 17 20:45:52 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:52   DEBUG [Api:LoggingInterceptor] GET /custom.css 200 15.56ms 91.35.206.45
+Jan 17 20:45:52 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:52   DEBUG [Api:LoggingInterceptor~b9qjcnwn] GET /api/server/config 200 15.62ms 91.35.206.45
+Jan 17 20:45:52 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:52   DEBUG [Api:LoggingInterceptor~b0c61zb3] GET /api/server/features 200 10.04ms 91.35.206.45
+Jan 17 20:45:52 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:52   DEBUG [Api:LoggingInterceptor~nppi3884] GET /api/server/media-types 200 0.50ms 91.35.206.45
+Jan 17 20:45:53 Server immich[18089]: (node:18089) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+Jan 17 20:45:53 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:53   DEBUG [Api:LoggingInterceptor~xqoic0vd] POST /api/oauth/authorize 201 109.93ms 91.35.206.45
+Jan 17 20:45:53 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:53 VERBOSE [Api:LoggingInterceptor~xqoic0vd] {"redirectUri":"https://immich.aurek.eu/auth/login"}
+Jan 17 20:45:53 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:53   DEBUG [Api:LoggingInterceptor] GET /custom.css 200 10.34ms 91.35.206.45
+Jan 17 20:45:54 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:54   DEBUG [Api:LoggingInterceptor~vahq0x4b] GET /api/server/config 200 22.83ms 91.35.206.45
+Jan 17 20:45:54 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:54   DEBUG [Api:LoggingInterceptor~9u732ocj] GET /api/server/features 200 10.25ms 91.35.206.45
+Jan 17 20:45:54 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:54   DEBUG [Api:LoggingInterceptor~mjsswdvm] GET /api/server/media-types 200 0.39ms 91.35.206.45
+Jan 17 20:45:54 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:54   DEBUG [Api:AuthService~arv9x8bp] Logging in with OAuth: {"iss":"https://sso.aurek.eu/oauth2/openid/immich","sub":"0742a2a1-6d7c-49f6-90a4-0f268b588668","aud":"immich","exp":1768680054,"nbf":1768679154,"iat":1768679154,"azp":"immich","jti":"6b914a30-25be-426b-93f3-bf7467851013","name":"Fulcrum","preferred_username":"fulcrum","email":"dragon.fighter@outlook.de","email_verified":true,"scopes":["email","openid","profile"]}
+Jan 17 20:45:54 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:54     LOG [Api:AuthService~arv9x8bp] Registering new user: 0742a2a1-6d7c-49f6-90a4-0f268b588668/dragon.fighter@outlook.de
+Jan 17 20:45:54 Server immich[18089]: Query failed : {
+Jan 17 20:45:54 Server immich[18089]:   durationMs: 3.72316900000078,
+Jan 17 20:45:54 Server immich[18089]:   error: PostgresError: duplicate key value violates unique constraint "user_storageLabel_uq"
+Jan 17 20:45:54 Server immich[18089]:       at ErrorResponse (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/postgres@3.4.7/node_modules/postgres/cjs/src/connection.js:794:26)
+Jan 17 20:45:54 Server immich[18089]:       at handle (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/postgres@3.4.7/node_modules/postgres/cjs/src/connection.js:480:6)
+Jan 17 20:45:54 Server immich[18089]:       at Socket.data (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/postgres@3.4.7/node_modules/postgres/cjs/src/connection.js:315:9)
+Jan 17 20:45:54 Server immich[18089]:       at Socket.emit (node:events:508:28)
+Jan 17 20:45:54 Server immich[18089]:       at addChunk (node:internal/streams/readable:559:12)
+Jan 17 20:45:54 Server immich[18089]:       at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+Jan 17 20:45:54 Server immich[18089]:       at Readable.push (node:internal/streams/readable:390:5)
+Jan 17 20:45:54 Server immich[18089]:       at Pipe.onStreamRead (node:internal/stream_base_commons:189:23) {
+Jan 17 20:45:54 Server immich[18089]:     severity_local: 'ERROR',
+Jan 17 20:45:54 Server immich[18089]:     severity: 'ERROR',
+Jan 17 20:45:54 Server immich[18089]:     code: '23505',
+Jan 17 20:45:54 Server immich[18089]:     detail: 'Key ("storageLabel")=(fulcrum) already exists.',
+Jan 17 20:45:54 Server immich[18089]:     schema_name: 'public',
+Jan 17 20:45:54 Server immich[18089]:     table_name: 'user',
+Jan 17 20:45:54 Server immich[18089]:     constraint_name: 'user_storageLabel_uq',
+Jan 17 20:45:54 Server immich[18089]:     file: 'nbtinsert.c',
+Jan 17 20:45:54 Server immich[18089]:     line: '673',
+Jan 17 20:45:54 Server immich[18089]:     routine: '_bt_check_unique'
+Jan 17 20:45:54 Server immich[18089]:   },
+Jan 17 20:45:54 Server immich[18089]:   sql: `insert into "user" ("name", "email", "oauthId", "quotaSizeInBytes", "storageLabel", "isAdmin") values ($1, $2, $3, $4, $5, $6) returning "id", "name", "email", "avatarColor", "profileImagePath", "profileChangedAt", "createdAt", "updatedAt", "deletedAt", "isAdmin", "status", "oauthId", "profileImagePath", "shouldChangePassword", "storageLabel", "quotaSizeInBytes", "quotaUsageInBytes", (select coalesce(json_agg(agg), '[]') from (select "user_metadata"."key", "user_metadata"."value" from "user_metadata" where "user"."id" = "user_metadata"."userId") as agg) as "metadata"`,
+Jan 17 20:45:54 Server immich[18089]:   params: [
+Jan 17 20:45:54 Server immich[18089]:     'Fulcrum',
+Jan 17 20:45:54 Server immich[18089]:     'dragon.fighter@outlook.de',
+Jan 17 20:45:54 Server immich[18089]:     '0742a2a1-6d7c-49f6-90a4-0f268b588668',
+Jan 17 20:45:54 Server immich[18089]:     null,
+Jan 17 20:45:54 Server immich[18089]:     'fulcrum',
+Jan 17 20:45:54 Server immich[18089]:     false
+Jan 17 20:45:54 Server immich[18089]:   ]
+Jan 17 20:45:54 Server immich[18089]: }
+Jan 17 20:45:54 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:54   ERROR [Api:ErrorInterceptor~arv9x8bp] Unknown error: PostgresError: duplicate key value violates unique constraint "user_storageLabel_uq"
+Jan 17 20:45:54 Server immich[18089]: PostgresError: duplicate key value violates unique constraint "user_storageLabel_uq"
+Jan 17 20:45:54 Server immich[18089]:     at ErrorResponse (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/postgres@3.4.7/node_modules/postgres/cjs/src/connection.js:794:26)
+Jan 17 20:45:54 Server immich[18089]:     at handle (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/postgres@3.4.7/node_modules/postgres/cjs/src/connection.js:480:6)
+Jan 17 20:45:54 Server immich[18089]:     at Socket.data (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/postgres@3.4.7/node_modules/postgres/cjs/src/connection.js:315:9)
+Jan 17 20:45:54 Server immich[18089]:     at Socket.emit (node:events:508:28)
+Jan 17 20:45:54 Server immich[18089]:     at addChunk (node:internal/streams/readable:559:12)
+Jan 17 20:45:54 Server immich[18089]:     at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+Jan 17 20:45:54 Server immich[18089]:     at Readable.push (node:internal/streams/readable:390:5)
+Jan 17 20:45:54 Server immich[18089]:     at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+Jan 17 20:45:54 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:54   DEBUG [Api:LoggingInterceptor~arv9x8bp] POST /api/oauth/callback 201 81.19ms 91.35.206.45
+Jan 17 20:45:54 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:54 VERBOSE [Api:LoggingInterceptor~arv9x8bp] {"url":"https://immich.aurek.eu/auth/login?code=eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4R0NNIiwia2lkIjoiZTMwYmM5MTVkYjQ1MTdhNDVmNmFkMWVlMGY3N2JiODcifQ.V_a-YRRvmOY1RfjfgwcA8cbHaeKjuzl_.xJzrhUZYE_Hur7Qa.lEevrBIugWiHbdOMXFO0lM7umiNXioOrRWE-UrVsEaTgvaSqzp5y_Zlr4zb65IOLPTO8HJu66m5z99B8CuyTxFwVLwolZhseGDRS5Z6xzx8sjDFSopIBtqWyqbUcba7Macpv_FqNZ9zuoC-BsywHE2VVHhFwq7FVNRIixZpePheZlLOTSCE5LBqng9MoApNDkSktrCHT2XcnPmUHdTfbqEwBtDGfggO0D1sOipboskIa2X4GZAuqp4eyxU0eVk22Pm5xXV8thv_yGUpHK8akgW4FUK5hmtI_bzj8454R8O-Ce2nD-ikkYIwRC4s1F4Uif20YeI3S4dD-bvkgxkniF9f-rhvybaQEHnbVG7UXGa7oJPTyGPCyxUWESXxVUYeW8INimbM.LTzo-tdVfwhaDfUN_-mLZg&state=UKFwMMQOl3z4dcFuBADq-t2UJeCXbTEnoE-cvPr14e0"}
+Jan 17 20:45:54 Server immich[18089]: [Nest] 18089  - 17/01/2026, 20:45:54   DEBUG [Api:GlobalExceptionFilter~arv9x8bp] HttpException(500): {"message":"Failed to finish oauth","error":"Internal Server Error","statusCode":500}
