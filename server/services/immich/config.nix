@@ -23,17 +23,34 @@
       };
     };
 
-    sops.templates."immich.env" = {
-      content = ''
-        # Immich automatically reads this env var to fill in the missing setting
-        IMMICH_OAUTH_CLIENT_SECRET="${config.sops.placeholder."immich/clientSecret"}"
-        
-        # Log Level
-        IMMICH_LOG_LEVEL="verbose"
-      '';
+    sops.templates."immich.json" = {
       owner = config.services.immich.user;
       group = config.services.immich.group;
       restartUnits = [ "immich-server.service" ];
+      
+      # We define the settings here in Nix, and convert to JSON automatically.
+      # This keeps it clean but allows us to inject the secret placeholder.
+      content = builtins.toJSON {
+        oauth = {
+          enabled = true;
+          autoRegister = true;
+          buttonText = "Login with Kanidm";
+          issuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich";
+          clientId = "immich";
+          
+          # The placeholder is a string, so toJSON handles it perfectly.
+          # SOPS-Nix will replace this string with the actual password in the final file.
+          clientSecret = config.sops.placeholder."immich/clientSecret";
+          
+          scope = "openid email profile";
+          storageLabelClaim = "preferred_username";
+          tokenEndpointAuthMethod = "client_secret_post";
+          signingAlgorithm = "ES256";
+        };
+        server = {
+          externalDomain = "https://immich.${config.server.webaddress}";
+        };
+      };
     };
 
     
@@ -48,28 +65,11 @@
       # Load the secret via Environment Variables
       secretsFile = config.sops.templates."immich.env".path;
 
-      # Use Native Settings (Cleaner!)
-      settings = {
-        oauth = {
-          enabled = true;
-          autoRegister = true;
-          buttonText = "Login with Kanidm";
-          issuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich";
-          clientId = "immich";
-          # clientSecret is OMITTED here. It is loaded from IMMICH_OAUTH_CLIENT_SECRET in the .env file
-          scope = "openid email profile";
-          storageLabelClaim = "preferred_username";
-          tokenEndpointAuthMethod = "client_secret_post"; # Changed to match your working json
-          signingAlgorithm = "ES256";
-        };
-        server = {
-          externalDomain = "https://immich.${config.server.webaddress}";
-        };
-      };
+      
 
       environment = {
-        # DELETE the IMMICH_CONFIG_FILE line. 
-        # NixOS will now automatically generate the config file from 'settings' above.
+        # Force Immich to use our sops-generated config file
+        IMMICH_CONFIG_FILE = lib.mkForce config.sops.templates."immich.json".path;
         
         IMMICH_LOG_LEVEL = "verbose";
         NODE_TLS_REJECT_UNAUTHORIZED = "0";
