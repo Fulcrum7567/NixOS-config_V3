@@ -43,15 +43,21 @@
 
       secretsFile = config.sops.templates."immich.env".path;
 
+      settings = {
+        oauth = {
+          enabled = true;
+          autoRegister = true;
+          buttonText = "Login with Kanidm";
+          issuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich";
+          clientId = "immich";
+          scope = "openid email profile";
+          # clientSecret is provided via environment variable IMMICH_OAUTH_CLIENT_SECRET from secretsFile
+          storageLabelClaim = "preferred_username";
+          tokenEndpointAuthMethod = "client_secret_post";
+        };
+      };
+
       environment = {
-        # OIDC Configuration
-        IMMICH_OAUTH_ENABLED = "true";
-        IMMICH_OAUTH_ISSUER_URL = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/immich"; # Note the /immich suffix!
-        IMMICH_OAUTH_CLIENT_ID = "immich";
-        IMMICH_OAUTH_SCOPE = "openid email profile";
-        IMMICH_OAUTH_STORAGE_LABEL_CLAIM = "preferred_username"; # Maps to the short username
-        IMMICH_OAUTH_BUTTON_TEXT = "Login with Kanidm";
-        IMMICH_OAUTH_AUTO_REGISTER = "true";
         # Allow self-signed certs (or loopback NAT issues) for the OIDC discovery handshake
         NODE_TLS_REJECT_UNAUTHORIZED = "0";
       };
