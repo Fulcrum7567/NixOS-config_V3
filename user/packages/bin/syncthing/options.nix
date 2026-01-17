@@ -86,6 +86,19 @@
         "bin"                   # Go/General bin folder
         "obj"                   # C# / General obj folder
 
+        # --- LaTeX ---
+        "*.aux"
+        "*.bbl"
+        "*.blg"
+        "*.fls"
+        "*.fdb_latexmk"
+        "*.synctex.gz"
+        "*.toc"
+        "*.out"
+        "*.xdv"
+        "*.lof"
+        "*.lot"
+
         # --- Infrastructure ---
         ".terraform"            # Terraform
         ".vagrant"              # Vagrant
