@@ -28,6 +28,11 @@
 					activeConfig = "default";
 				};
 
+				immich = {
+					enable = true;
+					exposeGUI = true;
+				};
+
 				syncthing = {
 					enable = true;
 					exposeGUI = true;
