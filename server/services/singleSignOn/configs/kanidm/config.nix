@@ -24,16 +24,16 @@ in
       enableServer = true;
       package = pkgs-unstable.kanidmWithSecretProvisioning_1_8;
       serverSettings = {
-        domain = cfg.subdomain + "." + config.host.settings.domain;
-        origin = "https://${cfg.subdomain}.${config.host.settings.domain}";
+        domain = cfg.subdomain + "." + config.server.domain;
+        origin = "https://${cfg.subdomain}.${config.server.domain}";
         bindaddress = "[::1]:${toString cfg.port}";
         # Kanidm requires TLS internally usually, but if behind local reverse proxy
         # strictly on localhost, you can sometimes run http. 
         # However, standard practice is to let Kanidm manage its certs or point to existing ones.
         # For this example, we assume you might be using ACME certs or self-signed for localhost.
         # If using ACME from Nginx, Kanidm needs access to those certs.
-        tls_chain = "/var/lib/acme/${config.host.settings.domain}/fullchain.pem";
-        tls_key = "/var/lib/acme/${config.host.settings.domain}/key.pem";
+        tls_chain = "/var/lib/acme/${config.server.domain}/fullchain.pem";
+        tls_key = "/var/lib/acme/${config.server.domain}/key.pem";
       };
 
       provision = {
