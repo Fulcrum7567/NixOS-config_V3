@@ -26,7 +26,7 @@ in
       serverSettings = {
         domain = cfg.subdomain + "." + config.server.webaddress;
         origin = "https://${cfg.subdomain}.${config.server.webaddress}";
-        bindaddress = "[::1]:${toString cfg.port}";
+        bindaddress = "127.0.0.1:${toString cfg.port}";
         # Kanidm requires TLS internally usually, but if behind local reverse proxy
         # strictly on localhost, you can sometimes run http. 
         # However, standard practice is to let Kanidm manage its certs or point to existing ones.
@@ -82,7 +82,7 @@ in
 
         locations."/" = {
           path = "/";
-          to = "http://[::1]:${toString cfg.port}";
+          to = "https://127.0.0.1:${toString cfg.port}";
           proxyWebsockets = true;
           extraConfig = ''
             proxy_ssl_verify off; # Since Kanidm might use self-signed certs internally
