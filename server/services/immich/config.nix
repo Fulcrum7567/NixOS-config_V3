@@ -10,6 +10,7 @@
         format = "yaml";
         key = "immich_client_secret";
         restartUnits = [ "immich.service" ];
+        mode = "0440";
       };
 
       "immich/clientSecret" = {
