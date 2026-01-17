@@ -5,11 +5,9 @@
     
     services.immich = {
       enable = true;
-      user = "immich"; #config.user.settings.username;
+      user = "immich";
       group = lib.mkIf (config.services.immich.user == config.user.settings.username) "users";
       mediaLocation = config.server.services.immich.defaultDataDir;
-
-      openFirewall = true;
 
       port = config.server.services.immich.port;
 
@@ -37,7 +35,7 @@
 
       locations."/" = {
         path = "/";
-        to = "http://127.0.0.1:${toString config.server.services.immich.port}";
+        to = "http://[::1]:${toString config.services.immich.port}";
         proxyWebsockets = true;
         extraConfig = ''
           proxy_read_timeout 600s;
