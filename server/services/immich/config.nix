@@ -33,7 +33,7 @@
 
       locations."/" = {
         path = "/";
-        to = "http://127.0.0.1:${config.server.services.immich.port}";
+        to = "http://127.0.0.1:${toString config.server.services.immich.port}";
         proxyWebsockets = true;
         extraConfig = ''
           proxy_read_timeout 600s;

@@ -99,7 +99,7 @@
 
       locations."/" = {
         path = "/";
-        to = "http://127.0.0.1:${config.server.services.syncthing.port}";
+        to = "http://127.0.0.1:${toString config.server.services.syncthing.port}";
         proxyWebsockets = true;
         extraConfig = ''
           proxy_read_timeout 600s;
