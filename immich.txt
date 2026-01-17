@@ -1,1 +1,100 @@
--- No entries --
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/admin/users/:id/restore, POST} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RoutesResolver] UserController {/api/users}:
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/me, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/me, PUT} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/me/preferences, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/me/preferences, PUT} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, PUT} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/me/license, DELETE} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, PUT} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/me/onboarding, DELETE} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/:id, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/profile-image, POST} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/profile-image, DELETE} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/users/:id/profile-image, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RoutesResolver] ViewController {/api/view}:
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/view/folder/unique-paths, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/view/folder, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RoutesResolver] WorkflowController {/api/workflows}:
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/workflows, POST} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/workflows, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, GET} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, PUT} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:RouterExplorer] Mapped {/api/workflows/:id, DELETE} route
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:NestApplication] Nest application successfully started
+Jan 17 18:54:20 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:20     LOG [Api:Bootstrap] Immich Server is listening on http://[::1]:2283 [v2.4.1] [production] 
+Jan 17 18:54:22 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:22     LOG [Api:WebsocketRepository] Websocket Connect:    dTrPMoN0KADK6lH9AAAB
+Jan 17 18:54:35 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:35     LOG [Api:WebsocketRepository] Websocket Disconnect: dTrPMoN0KADK6lH9AAAB
+Jan 17 18:54:38 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:38    WARN [Api:SystemConfigService] Unknown keys found: {
+Jan 17 18:54:38 Server immich[4566]:   "server": {
+Jan 17 18:54:38 Server immich[4566]:     "logLevel": "verbose"
+Jan 17 18:54:38 Server immich[4566]:   }
+Jan 17 18:54:38 Server immich[4566]: }
+Jan 17 18:54:38 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:38    WARN [Api:ServerService~meo3v26a] Unknown keys found: {
+Jan 17 18:54:38 Server immich[4566]:   "server": {
+Jan 17 18:54:38 Server immich[4566]:     "logLevel": "verbose"
+Jan 17 18:54:38 Server immich[4566]:   }
+Jan 17 18:54:38 Server immich[4566]: }
+Jan 17 18:54:38 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:38    WARN [Api:ServerService~pgpmfecp] Unknown keys found: {
+Jan 17 18:54:38 Server immich[4566]:   "server": {
+Jan 17 18:54:38 Server immich[4566]:     "logLevel": "verbose"
+Jan 17 18:54:38 Server immich[4566]:   }
+Jan 17 18:54:38 Server immich[4566]: }
+Jan 17 18:54:39 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:39     LOG [Api:WebsocketRepository] Websocket Connect:    mx5PFiMf5ewFcOiyAAAD
+Jan 17 18:54:41 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:41     LOG [Api:WebsocketRepository] Websocket Disconnect: mx5PFiMf5ewFcOiyAAAD
+Jan 17 18:54:43 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:43    WARN [Api:AuthService~a222pthf] Unknown keys found: {
+Jan 17 18:54:43 Server immich[4566]:   "server": {
+Jan 17 18:54:43 Server immich[4566]:     "logLevel": "verbose"
+Jan 17 18:54:43 Server immich[4566]:   }
+Jan 17 18:54:43 Server immich[4566]: }
+Jan 17 18:54:43 Server immich[4566]: (node:4566) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+Jan 17 18:54:43 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:43    WARN [Api:SystemConfigService] Unknown keys found: {
+Jan 17 18:54:43 Server immich[4566]:   "server": {
+Jan 17 18:54:43 Server immich[4566]:     "logLevel": "verbose"
+Jan 17 18:54:43 Server immich[4566]:   }
+Jan 17 18:54:43 Server immich[4566]: }
+Jan 17 18:54:43 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:43    WARN [Api:ServerService~ipzksxli] Unknown keys found: {
+Jan 17 18:54:43 Server immich[4566]:   "server": {
+Jan 17 18:54:43 Server immich[4566]:     "logLevel": "verbose"
+Jan 17 18:54:43 Server immich[4566]:   }
+Jan 17 18:54:43 Server immich[4566]: }
+Jan 17 18:54:43 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:43    WARN [Api:ServerService~ahql43x7] Unknown keys found: {
+Jan 17 18:54:43 Server immich[4566]:   "server": {
+Jan 17 18:54:43 Server immich[4566]:     "logLevel": "verbose"
+Jan 17 18:54:43 Server immich[4566]:   }
+Jan 17 18:54:43 Server immich[4566]: }
+Jan 17 18:54:43 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:43    WARN [Api:AuthService~va3c3idg] Unknown keys found: {
+Jan 17 18:54:43 Server immich[4566]:   "server": {
+Jan 17 18:54:43 Server immich[4566]:     "logLevel": "verbose"
+Jan 17 18:54:43 Server immich[4566]:   }
+Jan 17 18:54:43 Server immich[4566]: }
+Jan 17 18:54:43 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:43   ERROR [Api:OAuthRepository~va3c3idg] OAuth login failed: server responded with a challenge in the WWW-Authenticate HTTP Header
+Jan 17 18:54:43 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:43   ERROR [Api:OAuthRepository~va3c3idg] WWWAuthenticateChallengeError: server responded with a challenge in the WWW-Authenticate HTTP Header
+Jan 17 18:54:43 Server immich[4566]:     at checkAuthenticationChallenges (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1282:15)
+Jan 17 18:54:43 Server immich[4566]:     at checkOAuthBodyError (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:931:9)
+Jan 17 18:54:43 Server immich[4566]:     at processGenericAccessTokenResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1213:11)
+Jan 17 18:54:43 Server immich[4566]:     at processAuthorizationCodeOAuth2Response (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1447:26)
+Jan 17 18:54:43 Server immich[4566]:     at Module.processAuthorizationCodeResponse (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/oauth4webapi@3.8.3/node_modules/oauth4webapi/build/index.js:1391:12)
+Jan 17 18:54:43 Server immich[4566]:     at authorizationCodeGrant (file:///nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/node_modules/.pnpm/openid-client@6.8.1/node_modules/openid-client/build/index.js:972:21)
+Jan 17 18:54:43 Server immich[4566]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 18:54:43 Server immich[4566]:     at async OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:56:28)
+Jan 17 18:54:43 Server immich[4566]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 18:54:43 Server immich[4566]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22) {
+Jan 17 18:54:43 Server immich[4566]:   cause: [
+Jan 17 18:54:43 Server immich[4566]:     {
+Jan 17 18:54:43 Server immich[4566]:       scheme: 'bearer',
+Jan 17 18:54:43 Server immich[4566]:       parameters: {}
+Jan 17 18:54:43 Server immich[4566]:     }
+Jan 17 18:54:43 Server immich[4566]:   ],
+Jan 17 18:54:43 Server immich[4566]:   code: 'OAUTH_WWW_AUTHENTICATE_CHALLENGE',
+Jan 17 18:54:43 Server immich[4566]:   status: 401
+Jan 17 18:54:43 Server immich[4566]: }
+Jan 17 18:54:43 Server immich[4566]: [Nest] 4566  - 17/01/2026, 18:54:43   ERROR [Api:ErrorInterceptor~va3c3idg] Unknown error: Error: OAuth login failed
+Jan 17 18:54:43 Server immich[4566]: Error: OAuth login failed
+Jan 17 18:54:43 Server immich[4566]:     at OAuthRepository.getProfile (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/repositories/oauth.repository.js:72:19)
+Jan 17 18:54:43 Server immich[4566]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+Jan 17 18:54:43 Server immich[4566]:     at async AuthService.callback (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/services/auth.service.js:188:25)
+Jan 17 18:54:43 Server immich[4566]:     at async OAuthController.finishOAuth (/nix/store/iyhh16bddvk24v95h57swwnjb6s7q6s1-immich-2.4.1/lib/node_modules/immich/dist/controllers/oauth.controller.js:47:22)
