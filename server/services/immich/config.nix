@@ -52,7 +52,7 @@
             "clientSecret": "${config.sops.placeholder."immich/clientSecret"}",
             "scope": "openid email profile",
             "storageLabelClaim": "preferred_username",
-            "tokenEndpointAuthMethod": "client_secret_basic",
+            "tokenEndpointAuthMethod": "client_secret_post",
             "signingAlgorithm": "ES256"
           },
           "server": {
