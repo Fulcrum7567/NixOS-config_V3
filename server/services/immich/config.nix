@@ -5,7 +5,7 @@
     
     services.immich = {
       enable = true;
-      user = config.user.settings.username;
+      user = "immich"; #config.user.settings.username;
       group = (if config.services.immich.user == config.user.settings.username then "users" else config.services.immich.group);
       mediaLocation = config.server.services.immich.defaultDataDir;
 
@@ -15,17 +15,7 @@
       
     };
 
-    services.postgresql = {
-      enable = true;
-      ensureUsers = [
-        {
-          name = config.services.immich.user;
-          ensureDBOwnership = true;
-        }
-      ];
-      # Ensure the database "immich" exists
-      ensureDatabases = [ "immich" ];
-    };
+    
 
     users.users.${config.services.immich.user}.extraGroups = [ "video" "render" ];
 
