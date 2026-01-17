@@ -22,10 +22,10 @@
     activeRedirects = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule {
         options = {
-          from = lib.mkOption {
+          subdomain = lib.mkOption {
             type = lib.types.str;
             description = "The address to redirect from (e.g. domain).";
-            example = "myservice.example.com";
+            example = "\"myservice\" for myservice.example.com";
           };
           useACMEHost = lib.mkOption {
             type = lib.types.bool;

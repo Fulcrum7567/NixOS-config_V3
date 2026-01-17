@@ -1,10 +1,10 @@
 { config, lib, ... }:
 {
-  options.server.services.syncthing = {
+  options.server.services.immich = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Enable Syncthing service.";
+      description = "Enable Immich service.";
     };
 
     availableConfigs = lib.mkOption {
@@ -14,27 +14,27 @@
     };
 
     activeConfig = lib.mkOption {
-      type = lib.types.enum (config.server.services.syncthing.availableConfigs or []);
+      type = lib.types.enum (config.server.services.immich.availableConfigs or []);
       default = "default";
-      description = "The active Syncthing configuration.";
+      description = "The active Immich configuration.";
     };
 
     port = lib.mkOption {
       type = lib.types.int;
-      default = 8384;
-      description = "Port for Syncthing web interface.";
+      default = 2283;
+      description = "Port for Immich web interface.";
     };
 
     defaultDataDir = lib.mkOption {
       type = lib.types.str;
-      default = "${config.server.system.filesystem.defaultDataDir}/syncthing";
-      description = "Default directory to save Syncthing configurations.";
+      default = "${config.server.system.filesystem.defaultDataDir}/immich";
+      description = "Default directory to save Immich configurations.";
     };
 
     exposeGUI = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Expose Syncthing web GUI via reverse proxy.";
+      description = "Expose Immich web GUI via reverse proxy.";
     };
 
   };

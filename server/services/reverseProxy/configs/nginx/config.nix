@@ -46,7 +46,7 @@
       '';
 
       virtualHosts = lib.listToAttrs (lib.mapAttrsToList (_: redirect: {
-        name = redirect.from;
+        name = redirect.subdomain + "." + config.server.webaddress;
         value = {
           forceSSL = redirect.forceSSL;
           useACMEHost = if redirect.useACMEHost then config.server.webaddress else null;

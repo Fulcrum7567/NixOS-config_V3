@@ -31,7 +31,7 @@
       dataDir = config.server.services.syncthing.defaultDataDir;
       configDir = "${config.server.system.filesystem.defaultConfigDir}/syncthing";
 
-      guiAddress = "0.0.0.0:8384";
+      guiAddress = "0.0.0.0:${config.server.services.syncthing.port}";
 
       key = config.sops.secrets."syncthing/server/key".path;
       cert = config.sops.secrets."syncthing/server/cert".path;
@@ -92,14 +92,14 @@
       };
     };
 
-    server.services.reverseProxy.activeRedirects."syncthing" = {
-      from = "syncthing.${config.server.webaddress}";
+    server.services.reverseProxy.activeRedirects."syncthing" = lib.mkIf config.server.services.syncthing.exposeGUI {
+      subdomain = "syncthing";
       useACMEHost = true;
       forceSSL = true;
 
       locations."/" = {
         path = "/";
-        to = "http://127.0.0.1:8384";
+        to = "http://127.0.0.1:${config.server.services.syncthing.port}";
         proxyWebsockets = true;
         extraConfig = ''
           proxy_read_timeout 600s;
