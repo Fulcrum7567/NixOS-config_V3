@@ -26,6 +26,7 @@
     sops.templates."immich.env" = {
       content = ''
         IMMICH_OAUTH_CLIENT_SECRET="${config.sops.placeholder."immich/clientSecret"}"
+        OAUTH_CLIENT_SECRET="${config.sops.placeholder."immich/clientSecret"}"
         DB_PASSWORD=nothing
       '';
       owner = config.services.immich.user;
