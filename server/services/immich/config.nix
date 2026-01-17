@@ -63,7 +63,7 @@
       accelerationDevices = null;
 
       # Load the secret via Environment Variables
-      secretsFile = config.sops.templates."immich.env".path;
+      # secretsFile = config.sops.templates."immich.env".path;
 
       
 
