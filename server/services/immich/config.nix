@@ -2,6 +2,26 @@
 {
   config = lib.mkIf config.server.services.immich.enable {
 
+    sops.secrets = {
+      "immich/oauth/client_secret" = {
+        owner = config.server.services.singleSignOn.serviceUsername;
+        group = config.server.services.singleSignOn.serviceGroup;
+        sopsFile = ./immichSecrets.yaml;
+        format = "yaml";
+        key = "immich_client_secret";
+        restartUnits = [ "immich.service" ];
+      };
+
+      "immich/clientSecret" = {
+        owner = config.services.immich.user;
+        group = config.services.immich.group;
+        sopsFile = ./immichSecrets.yaml;
+        format = "yaml";
+        key = "immich_client_secret";
+        restartUnits = [ "immich.service" ];
+      };
+    };
+
     
     services.immich = {
       enable = true;
@@ -12,6 +32,19 @@
       port = config.server.services.immich.port;
 
       accelerationDevices = null;
+
+      secretsFile = config.sops.secrets."immich/clientSecret".path;
+
+      environment = {
+        # OIDC Configuration
+        IMMICH_OAUTH_ENABLED = "true";
+        IMMICH_OAUTH_ISSUER_URL = "https://${config.server.services.singleSignOn.subdomain}.${config.host.settings.domain}/oauth2/openid/immich"; # Note the /immich suffix!
+        IMMICH_OAUTH_CLIENT_ID = "immich";
+        IMMICH_OAUTH_SCOPE = "openid email profile";
+        IMMICH_OAUTH_STORAGE_LABEL_CLAIM = "preferred_username"; # Maps to the short username
+        IMMICH_OAUTH_BUTTON_TEXT = "Login with Kanidm";
+        IMMICH_OAUTH_AUTO_REGISTER = "true";
+      };
       
     };
 
@@ -28,19 +61,33 @@
 
     
 
-    server.services.reverseProxy.activeRedirects."immich" = lib.mkIf config.server.services.immich.exposeGUI {
-      subdomain = "immich";
-      useACMEHost = true;
-      forceSSL = true;
+    server.services = {
+      reverseProxy.activeRedirects."immich" = lib.mkIf config.server.services.immich.exposeGUI {
+        subdomain = "immich";
+        useACMEHost = true;
+        forceSSL = true;
 
-      locations."/" = {
-        path = "/";
-        to = "http://[::1]:${toString config.services.immich.port}";
-        proxyWebsockets = true;
-        extraConfig = ''
-          proxy_read_timeout 600s;
-          proxy_send_timeout 600s;
-        '';
+        locations."/" = {
+          path = "/";
+          to = "http://[::1]:${toString config.services.immich.port}";
+          proxyWebsockets = true;
+          extraConfig = ''
+            client_max_body_size 50G;
+            proxy_read_timeout 600s;
+            proxy_send_timeout 600s;
+          '';
+        };
+      };
+
+      singleSignOn.oAuthServices."immich" = {
+          displayName = "Immich";
+          originUrl = [ "https://immich.${config.host.settings.domain}/auth/login" "app.immich:///oauth-callback"];
+          originLanding = "https://immich.${config.host.settings.domain}";
+          basicSecretFile = config.sops.secrets."immich/oauth/client_secret".path;
+          preferShortUsername = true;
+          groupName = "immich-users";
+          scopes = [ "openid" "profile" "email" ];
+        };
       };
     };
   };
