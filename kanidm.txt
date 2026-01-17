@@ -1,20 +1,3 @@
-Jan 17 19:52:54 Server kanidmd[1337]: 15deb985-8404-4caf-b336-d5c3ee118dc9 INFO     request [ 14.5ms | 2.00% / 100.00% ] method: POST | uri: /v1/auth | version: HTTP/1.1 | connection_address: "127.0.0.1:60872" | client_address: "127.0.0.1" | latency: 14 | kopid: "15deb985-8404-4caf-b336-d5c3ee118dc9" | status_code: 200
-Jan 17 19:52:54 Server kanidmd[1337]: 15deb985-8404-4caf-b336-d5c3ee118dc9 INFO     ┝━ pre_validate_client_auth_info [ 12.9µs | 0.08% / 0.09% ]
-Jan 17 19:52:54 Server kanidmd[1337]: 15deb985-8404-4caf-b336-d5c3ee118dc9 INFO     │  ┕━ validate_client_auth_info_to_uat [ 1.96µs | 0.01% ]
-Jan 17 19:52:54 Server kanidmd[1337]: 15deb985-8404-4caf-b336-d5c3ee118dc9 INFO     ┕━ auth [ 14.2ms | 97.91% ]
-Jan 17 19:52:54 Server kanidmd[1337]: 15deb985-8404-4caf-b336-d5c3ee118dc9 INFO        ┝━ ｉ [info]: Begin auth event | event_tag_id: 10 | sessionid: Some(00000000-696b-da86-1c8a-c32389c6d9fa) | req: Cred(Password(_))
-Jan 17 19:52:54 Server kanidmd[1337]: 15deb985-8404-4caf-b336-d5c3ee118dc9 INFO        ┝━ ｉ [info]: Handler::Password -> Result::Success | event_tag_id: 10
-Jan 17 19:52:54 Server kanidmd[1337]: 15deb985-8404-4caf-b336-d5c3ee118dc9 INFO        ┝━ ｉ [info]: Issuing Token session (ReadWrite) 37b0dae7-da02-4ae0-b767-1170bfc8af3d for idm_admin@sso.aurek.eu 00000000-0000-0000-0000-000000000018 | event_tag_id: 10
-Jan 17 19:52:54 Server kanidmd[1337]: 15deb985-8404-4caf-b336-d5c3ee118dc9 INFO        ┕━ ｉ [info]: Sending auth result | event_tag_id: 10 | res: Ok(AuthResult { sessionid: 00000000-696b-da86-1c8a-c32389c6d9fa, state: AuthState::Success(Token) })
-Jan 17 19:52:54 Server kanidmd[1337]: 56c492bf-3843-40d0-8ea1-c7be53763685 INFO     process_delayed_action [ 4.79ms | 100.00% ]
-Jan 17 19:52:54 Server kanidmd[1337]: 56c492bf-3843-40d0-8ea1-c7be53763685 INFO     ┕━ ｉ [info]: Persisting auth session | session_id: 37b0dae7-da02-4ae0-b767-1170bfc8af3d
-Jan 17 19:52:54 Server kanidmd[1337]: 6f0eef46-ddd4-4dd7-9db2-69ac3db149a1 INFO     request [ 18.5ms | 9.15% / 100.00% ] method: GET | uri: /v1/group | version: HTTP/1.1 | connection_address: "127.0.0.1:60872" | client_address: "127.0.0.1" | latency: 18 | kopid: "6f0eef46-ddd4-4dd7-9db2-69ac3db149a1" | status_code: 200
-Jan 17 19:52:54 Server kanidmd[1337]: 6f0eef46-ddd4-4dd7-9db2-69ac3db149a1 INFO     ┝━ pre_validate_client_auth_info [ 689µs | 0.07% / 3.72% ]
-Jan 17 19:52:54 Server kanidmd[1337]: 6f0eef46-ddd4-4dd7-9db2-69ac3db149a1 INFO     │  ┕━ validate_client_auth_info_to_uat [ 675µs | 3.65% ]
-Jan 17 19:52:54 Server kanidmd[1337]: 6f0eef46-ddd4-4dd7-9db2-69ac3db149a1 INFO     ┕━ handle_internalsearch [ 16.1ms | 76.83% / 87.13% ]
-Jan 17 19:52:54 Server kanidmd[1337]: 6f0eef46-ddd4-4dd7-9db2-69ac3db149a1 INFO        ┝━ validate_client_auth_info_to_ident [ 1.91ms | 10.30% ]
-Jan 17 19:52:54 Server kanidmd[1337]: 6f0eef46-ddd4-4dd7-9db2-69ac3db149a1 INFO        │  ┕━ ｉ [info]: A valid limited session value exists for this token | event_tag_id: 10
-Jan 17 19:52:54 Server kanidmd[1337]: 6f0eef46-ddd4-4dd7-9db2-69ac3db149a1 INFO        ┕━ ｉ [info]: search | event_tag_id: 10 | initiator: User( idm_admin@sso.aurek.eu, 00000000-0000-0000-0000-000000000018 ) (37b0dae7-da02-4ae0-b767-1170bfc8af3d, read write)
 Jan 17 19:52:54 Server kanidmd[1337]: 8e548a39-0236-45cd-a84c-783522766c5a INFO     request [ 3.87ms | 16.94% / 100.00% ] method: GET | uri: /v1/person | version: HTTP/1.1 | connection_address: "127.0.0.1:60872" | client_address: "127.0.0.1" | latency: 3 | kopid: "8e548a39-0236-45cd-a84c-783522766c5a" | status_code: 200
 Jan 17 19:52:54 Server kanidmd[1337]: 8e548a39-0236-45cd-a84c-783522766c5a INFO     ┝━ pre_validate_client_auth_info [ 343µs | 0.38% / 8.88% ]
 Jan 17 19:52:54 Server kanidmd[1337]: 8e548a39-0236-45cd-a84c-783522766c5a INFO     │  ┕━ validate_client_auth_info_to_uat [ 329µs | 8.50% ]
@@ -98,3 +81,20 @@ Jan 17 19:58:27 Server kanidmd[1337]: f7633a5c-7698-46a9-83e2-d0a6b643b35b INFO 
 Jan 17 19:58:27 Server kanidmd[1337]: c7800cf3-4c9e-4254-ac77-ac9364c1bf38 INFO     request [ 812µs | 39.88% / 100.00% ] method: POST | uri: /oauth2/token | version: HTTP/1.1 | connection_address: "127.0.0.1:47976" | client_address: "127.0.0.1" | latency: 0 | kopid: "c7800cf3-4c9e-4254-ac77-ac9364c1bf38" | status_code: 401
 Jan 17 19:58:27 Server kanidmd[1337]: c7800cf3-4c9e-4254-ac77-ac9364c1bf38 INFO     ┕━ handle_oauth2_token_exchange [ 488µs | 60.12% ]
 Jan 17 19:58:27 Server kanidmd[1337]: c7800cf3-4c9e-4254-ac77-ac9364c1bf38 INFO        ┕━ ｉ [info]: Invalid OAuth2 authentication - no secret in access token request - this can happen if you're expecting a public client and configured a basic one.
+Jan 17 20:02:53 Server kanidmd[1337]: 92dcb538-29ad-4b36-b0cd-1d5311c03bbc INFO     handle_purgetombstoneevent [ 9.02ms | 100.00% ]
+Jan 17 20:02:53 Server kanidmd[1337]: 92dcb538-29ad-4b36-b0cd-1d5311c03bbc INFO     ┕━ ｉ [info]: Tombstone purge operation success | event_tag_id: 3
+Jan 17 20:02:53 Server kanidmd[1337]: 6b74d310-4bb3-44d3-916e-d156d5189544 INFO     handle_purgerecycledevent [ 160µs | 100.00% ]
+Jan 17 20:02:53 Server kanidmd[1337]: 6fbad0d0-c666-449d-b79e-802edc569af6 INFO     handle_purge_delete_after_event [ 238µs | 100.00% ]
+Jan 17 20:09:47 Server kanidmd[1337]: c611b866-bdee-48e7-aefc-26f7d1bad832 INFO     request [ 241µs | 60.25% / 100.00% ] method: GET | uri: /oauth2/openid/immich/.well-known/openid-configuration | version: HTTP/1.1 | connection_address: "127.0.0.1:38148" | client_address: "127.0.0.1" | latency: 0 | kopid: "c611b866-bdee-48e7-aefc-26f7d1bad832" | status_code: 200
+Jan 17 20:09:47 Server kanidmd[1337]: c611b866-bdee-48e7-aefc-26f7d1bad832 INFO     ┕━ handle_oauth2_openid_discovery [ 95.9µs | 39.75% ]
+Jan 17 20:09:47 Server kanidmd[1337]: b078271a-ad89-4d4a-b261-c5c540bb4f5f INFO     request [ 2.14ms | 14.78% / 100.00% ] method: GET | uri: /ui/oauth2?redirect_uri=https%3A%2F%2Fimmich.aurek.eu%2Fauth%2Flogin&scope=openid+email+profile&state=WfZdACSEGo32rqTTOtV_yd79zo77z8uKbmkmD9p1B80&code_challenge=303dnbw49gNdjapUsG3EEpffe2UaSRVg-6vHSBSJ5RU&code_challenge_method=S256&client_id=immich&response_type=code | version: HTTP/1.1 | connection_address: "127.0.0.1:38164" | client_address: "127.0.0.1" | latency: 2 | kopid: "b078271a-ad89-4d4a-b261-c5c540bb4f5f" | status_code: 303
+Jan 17 20:09:47 Server kanidmd[1337]: b078271a-ad89-4d4a-b261-c5c540bb4f5f INFO     ┝━ pre_validate_client_auth_info [ 830µs | 0.75% / 38.77% ]
+Jan 17 20:09:47 Server kanidmd[1337]: b078271a-ad89-4d4a-b261-c5c540bb4f5f INFO     │  ┕━ validate_client_auth_info_to_uat [ 814µs | 38.02% ]
+Jan 17 20:09:47 Server kanidmd[1337]: b078271a-ad89-4d4a-b261-c5c540bb4f5f INFO     ┕━ handle_oauth2_authorise [ 995µs | 6.00% / 46.45% ]
+Jan 17 20:09:47 Server kanidmd[1337]: b078271a-ad89-4d4a-b261-c5c540bb4f5f INFO        ┕━ validate_client_auth_info_to_ident [ 866µs | 40.44% ]
+Jan 17 20:09:47 Server kanidmd[1337]: b078271a-ad89-4d4a-b261-c5c540bb4f5f INFO           ┕━ ｉ [info]: A valid limited session value exists for this token | event_tag_id: 10
+Jan 17 20:09:47 Server kanidmd[1337]: 53d16519-0ddf-46de-914a-f975c1c87e5b INFO     request [ 231µs | 59.03% / 100.00% ] method: GET | uri: /oauth2/openid/immich/.well-known/openid-configuration | version: HTTP/1.1 | connection_address: "127.0.0.1:38170" | client_address: "127.0.0.1" | latency: 0 | kopid: "53d16519-0ddf-46de-914a-f975c1c87e5b" | status_code: 200
+Jan 17 20:09:47 Server kanidmd[1337]: 53d16519-0ddf-46de-914a-f975c1c87e5b INFO     ┕━ handle_oauth2_openid_discovery [ 94.8µs | 40.97% ]
+Jan 17 20:09:47 Server kanidmd[1337]: 872d1efa-a70d-49db-8142-c6f19d3a5b4f INFO     request [ 723µs | 20.71% / 100.00% ] method: POST | uri: /oauth2/token | version: HTTP/1.1 | connection_address: "127.0.0.1:38182" | client_address: "127.0.0.1" | latency: 0 | kopid: "872d1efa-a70d-49db-8142-c6f19d3a5b4f" | status_code: 401
+Jan 17 20:09:47 Server kanidmd[1337]: 872d1efa-a70d-49db-8142-c6f19d3a5b4f INFO     ┕━ handle_oauth2_token_exchange [ 573µs | 79.29% ]
+Jan 17 20:09:47 Server kanidmd[1337]: 872d1efa-a70d-49db-8142-c6f19d3a5b4f INFO        ┕━ ｉ [info]: Invalid OAuth2 client_id secret
