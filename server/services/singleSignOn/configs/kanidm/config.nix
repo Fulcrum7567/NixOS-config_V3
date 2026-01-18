@@ -73,6 +73,7 @@ in
       };
     };
 
+    /*
     systemd.services.kanidm-declarative-options = {
       description = "Kanidm declarative database options";
       after = [ "kanidm.service" "nginx.service" "kanidm-provision.service" ];
@@ -118,6 +119,7 @@ in
         $KANIDM system info -H "$KANIDM_URL" --name admin
       '';
     };
+    */
 
     users.users.${cfg.serviceUsername}.extraGroups = [ "nginx" ];
 
@@ -141,5 +143,63 @@ in
         };
       };
     };
+
+    systemd.services.kanidm-bootstrap = {
+      description = "Kanidm Bootstrap: Recover and Enforce Admin Password";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "kanidm.service" ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root"; # Root needed to stop/start services and read sops
+      };
+
+      path = with pkgs-default; [ gnugrep gawk systemd ];
+
+      script = ''
+        KANIDM_URL="https://${cfg.subdomain}.${config.server.webaddress}"
+        ADMIN="admin"
+        SOPS_PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
+        KANIDM_BIN="${config.services.kanidm.package}/bin/kanidm"
+
+        echo "🔍 Checking if Admin password matches Sops secret..."
+
+        if sudo -u kanidm $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")" 2>/dev/null; then
+          echo "✅ Admin password is already correct. No action needed."
+          exit 0
+        fi
+
+        echo "⚠️  Password mismatch or fresh install. Starting recovery..."
+
+        systemctl stop kanidm
+
+        echo "🔓 Recovering Admin account..."
+
+        RECOVER_OUTPUT=$(sudo -u kanidm $KANIDM_BIN recover-account "$ADMIN" 2>&1)
+
+        TEMP_PASS=$(echo "$RECOVER_OUTPUT" | grep -oP 'new_password: "\K[^"]+')
+
+        if [ -z "$TEMP_PASS" ]; then
+          echo "❌ Failed to capture recovery password. Output was:"
+          echo "$RECOVER_OUTPUT"
+          exit 1
+        fi
+
+        echo "🔄 Restarting Kanidm..."
+        systemctl start kanidm
+
+        until sudo -u kanidm $KANIDM_BIN healthcheck; do sleep 1; done
+
+        echo "🔐 Updating Admin password to match Sops secret..."
+
+        sudo -u kanidm $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$TEMP_PASS"
+
+        sudo -u kanidm $KANIDM_BIN person credential update "$ADMIN" --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
+
+        echo "✅ Admin password successfully synchronized."
+      '';
+    };
+
+
   };
 }
