@@ -90,18 +90,16 @@ in
         
         # Kanidm needs a writable HOME for session config
         export HOME=$(mktemp -d)
-        
-        echo $ADMIN_PASS_FILE
-        echo $KANIDM
+
         # Function to check connectivity
         check_status() {
-          tr -d '\n' < "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin >/dev/null 2>&1
+          $KANIDM login -H "$KANIDM_URL" --name admin --password "$(cat "$ADMIN_PASS_FILE")" >/dev/null 2>&1
         }
 
         echo "Waiting for Kanidm to be ready at $KANIDM_URL..."
         
         # Retry loop
-        MAX_RETRIES=5
+        MAX_RETRIES=30
         COUNT=0
         until check_status || [ $COUNT -eq $MAX_RETRIES ]; do
           echo "Kanidm not reachable yet... ($COUNT/$MAX_RETRIES)"
@@ -112,7 +110,7 @@ in
         if [ $COUNT -eq $MAX_RETRIES ]; then
           echo "Failed to connect to Kanidm after $MAX_RETRIES attempts."
           echo "Last error:"
-          tr -d '\n' < "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin
+          $KANIDM login -H "$KANIDM_URL" --name admin --password "$(cat "$ADMIN_PASS_FILE")"
           exit 1
         fi
 
