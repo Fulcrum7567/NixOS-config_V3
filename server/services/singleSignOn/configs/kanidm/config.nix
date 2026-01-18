@@ -90,13 +90,13 @@ in
 
         # Function to check connectivity
         check_status() {
-          cat "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin >/dev/null 2>&1
+          tr -d '\n' < "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin >/dev/null 2>&1
         }
 
         echo "Waiting for Kanidm to be ready at $KANIDM_URL..."
         
         # Retry loop
-        MAX_RETRIES=10
+        MAX_RETRIES=30
         COUNT=0
         until check_status || [ $COUNT -eq $MAX_RETRIES ]; do
           echo "Kanidm not reachable yet... ($COUNT/$MAX_RETRIES)"
@@ -107,7 +107,7 @@ in
         if [ $COUNT -eq $MAX_RETRIES ]; then
           echo "Failed to connect to Kanidm after $MAX_RETRIES attempts."
           echo "Last error:"
-          cat "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin
+          tr -d '\n' < "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin
           exit 1
         fi
 
