@@ -94,5 +94,30 @@ in
         };
       };
     };
+
+    systemd.services.kanidm-enforce-policy = {
+      description = "Enforce Kanidm Account Policies";
+      after = [ "kanidm.service" ];
+      wants = [ "kanidm.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        User = "kanidm";
+        Group = "kanidm";
+        # Point this to your configuration file if it's not at the default location
+        # Environment = "KANIDM_CONFIG=/etc/kanidm/server.toml";
+      };
+      script = ''
+        # Wait for Kanidm to be responsive before running commands
+        until ${pkgs.kanidm}/bin/kanidmd healthcheck; do
+          echo "Waiting for Kanidm..."
+          sleep 2
+        done
+
+        # Set session timeout to 4 hours (14400 seconds) for all users
+        # 'idm_all_persons' is the default group containing all human users
+        ${pkgs.kanidm}/bin/kanidm group account-policy auth-expiry idm_all_persons 14400
+      '';
+    };
   };
 }
