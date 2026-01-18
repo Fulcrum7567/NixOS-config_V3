@@ -165,6 +165,9 @@
         set-xauthrequest = "true";
         # Optional: ensure we can handle long syncthing requests
         upstream-timeout = "600s";
+        
+        # Kanidm enforces PKCE for clients
+        code-challenge-method = "S256";
       };
     };
 
