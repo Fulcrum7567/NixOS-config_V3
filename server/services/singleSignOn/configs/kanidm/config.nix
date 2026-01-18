@@ -154,7 +154,7 @@ in
         User = "root"; # Root needed to stop/start services and read sops
       };
 
-      path = with pkgs-default; [ gnugrep gawk systemd ];
+      path = with pkgs-default; [ gnugrep gawk systemd sudo ];
 
       script = ''
         KANIDM_URL="https://${cfg.subdomain}.${config.server.webaddress}"
