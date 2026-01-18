@@ -75,8 +75,8 @@ in
 
     systemd.services.kanidm-declarative-options = {
       description = "Kanidm declarative database options";
-      after = [ "kanidm.service" ];
-      wants = [ "kanidm.service" ];
+      after = [ "kanidm.service" "nginx.service" ];
+      wants = [ "kanidm.service" "nginx.service" ];
       serviceConfig = {
         Type = "oneshot";
         User = cfg.serviceUsername;
@@ -106,6 +106,8 @@ in
 
         if [ $COUNT -eq $MAX_RETRIES ]; then
           echo "Failed to connect to Kanidm after $MAX_RETRIES attempts."
+          echo "Last error:"
+          $KANIDM login -H "$KANIDM_URL" -n admin --password-file "$ADMIN_PASS_FILE"
           exit 1
         fi
 
