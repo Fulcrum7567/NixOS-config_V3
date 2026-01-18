@@ -102,15 +102,15 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "oneshot";
-        User = "kanidm";  # Must match the 'owner' of your sops secret
+        User = "kanidm";
         Group = "kanidm";
+        # Ensure the client has a place to write the session token
+        Environment = "HOME=/var/lib/kanidm"; 
       };
       script = ''
         # --- Configuration ---
         KANIDM_URL="https://127.0.0.1:8443"
         ADMIN_USER="admin"
-        
-        # Nix automatically inserts the correct path to your sops secret here
         PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
 
         # --- Pre-flight Checks ---
@@ -126,11 +126,11 @@ in
         done
 
         # --- Authentication ---
-        # Log in using the password from the sops secret
+        # Log in using the password from the sops secret.
+        # The session token will be saved to $HOME/.config/kanidm
         cat "$PASS_FILE" | ${config.services.kanidm.package}/bin/kanidm login \
           --url "$KANIDM_URL" \
-          --name "$ADMIN_USER" \
-          --force
+          --name "$ADMIN_USER"
 
         # --- Apply Policy ---
         echo "Enforcing 4-hour session limit on idm_all_persons..."
