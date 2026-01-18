@@ -163,6 +163,12 @@ in
         KANIDM_BIN="${config.services.kanidm.package}/bin/kanidm"
         KANIDMD_BIN="${config.services.kanidm.package}/bin/kanidmd"
 
+        echo "KANIDM_URL: $KANIDM_URL"
+        echo "ADMIN: $ADMIN"
+        echo "SOPS_PASS_FILE: $SOPS_PASS_FILE"
+        echo "KANIDM_BIN: $KANIDM_BIN"
+        echo "KANIDMD_BIN: $KANIDMD_BIN"
+
         echo "🔍 Checking if Admin password matches Sops secret..."
 
         if sudo -u kanidm $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")" 2>/dev/null; then
