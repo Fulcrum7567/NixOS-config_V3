@@ -150,6 +150,7 @@
       httpAddress = "127.0.0.1:8385";
 
       clientSecret = "";
+      cookie.secret = "";
 
       oidcIssuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/syncthing";
       email.domains = [ "*" ];
