@@ -165,6 +165,8 @@
         
         # Kanidm enforces PKCE for clients
         code-challenge-method = "S256";
+        
+        skip-provider-button = "true";
       };
     };
 
