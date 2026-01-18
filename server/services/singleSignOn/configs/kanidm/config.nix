@@ -102,21 +102,41 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "oneshot";
-        User = "kanidm";
+        User = "kanidm";  # Must match the 'owner' of your sops secret
         Group = "kanidm";
-        # Point this to your configuration file if it's not at the default location
-        # Environment = "KANIDM_CONFIG=/etc/kanidm/server.toml";
       };
       script = ''
-        # Wait for Kanidm to be responsive before running commands
-        until ${config.services.kanidm.package}/bin/kanidmd healthcheck; do
+        # --- Configuration ---
+        KANIDM_URL="https://127.0.0.1:8443"
+        ADMIN_USER="admin"
+        
+        # Nix automatically inserts the correct path to your sops secret here
+        PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
+
+        # --- Pre-flight Checks ---
+        if [ ! -f "$PASS_FILE" ]; then
+          echo "⚠️  Secret file not found at $PASS_FILE. Skipping."
+          exit 0
+        fi
+
+        # Wait for Kanidm to be responsive
+        until ${pkgs.kanidm}/bin/kanidmd healthcheck; do
           echo "Waiting for Kanidm..."
           sleep 2
         done
 
-        # Set session timeout to 4 hours (14400 seconds) for all users
-        # 'idm_all_persons' is the default group containing all human users
-        ${config.services.kanidm.package}/bin/kanidm group account-policy auth-expiry idm_all_persons 14400
+        # --- Authentication ---
+        # Log in using the password from the sops secret
+        cat "$PASS_FILE" | ${pkgs.kanidm}/bin/kanidm login \
+          --url "$KANIDM_URL" \
+          --name "$ADMIN_USER" \
+          --force
+
+        # --- Apply Policy ---
+        echo "Enforcing 4-hour session limit on idm_all_persons..."
+        ${pkgs.kanidm}/bin/kanidm group account-policy auth-expiry idm_all_persons 14400 \
+          --url "$KANIDM_URL" \
+          --name "$ADMIN_USER"
       '';
     };
   };
