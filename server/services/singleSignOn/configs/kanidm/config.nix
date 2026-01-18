@@ -90,10 +90,12 @@ in
         
         # Kanidm needs a writable HOME for session config
         export HOME=$(mktemp -d)
-
+        
+        echo $ADMIN_PASS_FILE
+        echo $KANIDM
         # Function to check connectivity
         check_status() {
-          tr -d '\n' < cat "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin >/dev/null 2>&1
+          tr -d '\n' < "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin >/dev/null 2>&1
         }
 
         echo "Waiting for Kanidm to be ready at $KANIDM_URL..."
