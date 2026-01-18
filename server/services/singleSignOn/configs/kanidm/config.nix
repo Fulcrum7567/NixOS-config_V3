@@ -178,8 +178,6 @@ in
 
         echo "⚠️  Password mismatch or fresh install. Starting recovery..."
 
-        systemctl stop kanidm
-
         echo "🔓 Recovering Admin account..."
 
         RECOVER_OUTPUT=$(sudo -u kanidm $KANIDMD_BIN recover-account "$ADMIN" 2>&1)
