@@ -73,6 +73,47 @@ in
       };
     };
 
+    systemd.services.kanidm-declarative-options = {
+      description = "Kanidm declarative database options";
+      after = [ "kanidm.service" ];
+      wants = [ "kanidm.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        User = cfg.serviceUsername;
+        Group = cfg.serviceGroup;
+      };
+      script = ''
+        # Helper variables
+        KANIDM="${config.services.kanidm.package}/bin/kanidm"
+        KANIDM_URL="https://${cfg.subdomain}.${config.server.webaddress}"
+        ADMIN_PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
+
+        # Function to check connectivity
+        check_status() {
+          $KANIDM login -H "$KANIDM_URL" -n admin --password-file "$ADMIN_PASS_FILE" >/dev/null 2>&1
+        }
+
+        echo "Waiting for Kanidm to be ready at $KANIDM_URL..."
+        
+        # Retry loop
+        MAX_RETRIES=30
+        COUNT=0
+        until check_status || [ $COUNT -eq $MAX_RETRIES ]; do
+          echo "Kanidm not reachable yet... ($COUNT/$MAX_RETRIES)"
+          sleep 2
+          COUNT=$((COUNT+1))
+        done
+
+        if [ $COUNT -eq $MAX_RETRIES ]; then
+          echo "Failed to connect to Kanidm after $MAX_RETRIES attempts."
+          exit 1
+        fi
+
+        echo "Kanidm is reachable. Authenticating and listing info..."
+        $KANIDM system info -H "$KANIDM_URL" -n admin --password-file "$ADMIN_PASS_FILE"
+      '';
+    };
+
     users.users.${cfg.serviceUsername}.extraGroups = [ "nginx" ];
 
     server.services = {
