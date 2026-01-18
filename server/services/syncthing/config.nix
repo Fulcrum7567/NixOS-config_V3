@@ -151,9 +151,9 @@
 
       oidcIssuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/syncthing";
       email.domains = [ "*" ];
-      redirectUrl = "https://syncthing.${config.server.webaddress}/oauth2/callback";
-
+      
       extraConfig = {
+        redirect-url = "https://syncthing.${config.server.webaddress}/oauth2/callback";
         client-secret-file = config.sops.secrets."syncthing/oauth/proxy_client_secret".path;
         cookie-secret-file = config.sops.secrets."syncthing/oauth/proxy_cookie_secret".path;
       
