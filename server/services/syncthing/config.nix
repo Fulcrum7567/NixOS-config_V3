@@ -149,6 +149,8 @@
       upstream = [ "http://127.0.0.1:${toString config.server.services.syncthing.port}" ];
       httpAddress = "127.0.0.1:8385";
 
+      clientSecret = "";
+
       oidcIssuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/syncthing";
       email.domains = [ "*" ];
       
