@@ -120,21 +120,21 @@ in
         fi
 
         # Wait for Kanidm to be responsive
-        until ${pkgs.kanidm}/bin/kanidmd healthcheck; do
+        until ${config.services.kanidm.package}/bin/kanidmd healthcheck; do
           echo "Waiting for Kanidm..."
           sleep 2
         done
 
         # --- Authentication ---
         # Log in using the password from the sops secret
-        cat "$PASS_FILE" | ${pkgs.kanidm}/bin/kanidm login \
+        cat "$PASS_FILE" | ${config.services.kanidm.package}/bin/kanidm login \
           --url "$KANIDM_URL" \
           --name "$ADMIN_USER" \
           --force
 
         # --- Apply Policy ---
         echo "Enforcing 4-hour session limit on idm_all_persons..."
-        ${pkgs.kanidm}/bin/kanidm group account-policy auth-expiry idm_all_persons 14400 \
+        ${config.services.kanidm.package}/bin/kanidm group account-policy auth-expiry idm_all_persons 14400 \
           --url "$KANIDM_URL" \
           --name "$ADMIN_USER"
       '';
