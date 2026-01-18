@@ -63,6 +63,7 @@ in
           originUrl = service.originUrl;
           originLanding = service.originLanding;
           basicSecretFile = service.basicSecretFile;
+          imageFile = service.imageFile;
           preferShortUsername = service.preferShortUsername;
           scopeMaps = {
             "${service.groupName}" = service.scopes;
