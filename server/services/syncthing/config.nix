@@ -48,7 +48,7 @@
         key = "syncthing_oauth_cookie_secret";
         restartUnits = [ "oauth2-proxy.service" ];
       };
-    };
+    }; 
 
     services.syncthing = {
       enable = true;
