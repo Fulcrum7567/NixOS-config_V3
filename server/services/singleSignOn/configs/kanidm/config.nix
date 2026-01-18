@@ -202,7 +202,7 @@ in
 
         echo "🔄 Restarting Kanidm..."
 
-        until sudo -u kanidm $KANIDM_BIN healthcheck; do sleep 1; done
+        until sudo -u kanidm $KANIDMD_BIN healthcheck; do sleep 1; done
 
         echo "🔐 Updating Admin password to match Sops secret..."
 
