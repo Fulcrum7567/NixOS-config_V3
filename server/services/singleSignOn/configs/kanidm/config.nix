@@ -184,7 +184,7 @@ in
 
         echo "🔓 Recovering Admin account..."
 
-        
+        echo $(sudo -u kanidm $KANIDMD_BIN healthcheck)
 
         RECOVER_OUTPUT=$(sudo -u kanidm $KANIDMD_BIN recover-account "$ADMIN" 2>&1)
 
