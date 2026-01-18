@@ -116,6 +116,7 @@
         originLanding = "https://immich.${config.server.webaddress}";
         basicSecretFile = config.sops.secrets."immich/oauth/client_secret".path; 
         preferShortUsername = true;
+        imageFile = ./immich.svg;
         groupName = "immich-users";
         scopes = [ "openid" "profile" "email" ];
       };
