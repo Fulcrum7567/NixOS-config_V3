@@ -102,7 +102,7 @@
 			components = {
 
 				shutdownTimes = {
-					enable = false;
+					enable = true;
 					shutdownAt = "22:00";
 					wakeUpAt = "06:00";
 				};
