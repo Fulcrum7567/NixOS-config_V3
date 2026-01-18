@@ -30,6 +30,24 @@
         restartUnits = [ "kanidm.service" ];
         mode = "0440";
       };
+
+      "syncthing/oauth/proxy_client_secret" = {
+        owner = "oauth2-proxy";
+        group = "oauth2-proxy";
+        sopsFile = ./syncthingSecrets.yaml;
+        format = "yaml";
+        key = "syncthing_oauth_client_secret";
+        restartUnits = [ "oauth2-proxy.service" ];
+      };
+
+      "syncthing/oauth/proxy_cookie_secret" = {
+        owner = "oauth2-proxy";
+        group = "oauth2-proxy";
+        sopsFile = ./syncthingSecrets.yaml;
+        format = "yaml";
+        key = "syncthing_oauth_cookie_secret";
+        restartUnits = [ "oauth2-proxy.service" ];
+      };
     };
 
     services.syncthing = {
@@ -41,7 +59,7 @@
       dataDir = config.server.services.syncthing.defaultDataDir;
       configDir = "${config.server.system.filesystem.defaultConfigDir}/syncthing";
 
-      guiAddress = "0.0.0.0:${toString config.server.services.syncthing.port}";
+      guiAddress = "127.0.0.1:${toString config.server.services.syncthing.port}";
 
       key = config.sops.secrets."syncthing/server/key".path;
       cert = config.sops.secrets."syncthing/server/cert".path;
@@ -109,7 +127,7 @@
 
       locations."/" = {
         path = "/";
-        to = "http://127.0.0.1:${toString config.server.services.syncthing.port}";
+        to = "http://127.0.0.1:8385";
         proxyWebsockets = true;
         extraConfig = ''
           proxy_read_timeout 600s;
@@ -119,8 +137,31 @@
     };
 
     networking.firewall = {
-      allowedTCPPorts = [ 8384 22000 ];
+      allowedTCPPorts = [ 22000 ];
       allowedUDPPorts = [ 22000 21027 ];
+    };
+
+    services.oauth2-proxy = {
+      enable = true;
+      provider = "oidc";
+      clientID = "syncthing";
+      clientSecretFile = config.sops.secrets."syncthing/oauth/proxy_client_secret".path;
+      cookie.secretFile = config.sops.secrets."syncthing/oauth/proxy_cookie_secret".path;
+
+      upstream = [ "http://127.0.0.1:${toString config.server.services.syncthing.port}" ];
+      httpAddress = "127.0.0.1:8385";
+
+      oidcIssuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/syncthing";
+      emailDomain = "*";
+      redirectUrl = "https://syncthing.${config.server.webaddress}/oauth2/callback";
+
+      extraConfig = {
+        pass-access-token = true;
+        pass-authorization-header = true;
+        set-xauthrequest = true;
+        # Optional: ensure we can handle long syncthing requests
+        upstream-timeout = "600s";
+      };
     };
 
     server.services.singleSignOn.oAuthServices."syncthing" = {
