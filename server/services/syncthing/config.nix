@@ -145,9 +145,7 @@
       enable = true;
       provider = "oidc";
       clientID = "syncthing";
-      clientSecretFile = config.sops.secrets."syncthing/oauth/proxy_client_secret".path;
-      cookie.secretFile = config.sops.secrets."syncthing/oauth/proxy_cookie_secret".path;
-
+      
       upstream = [ "http://127.0.0.1:${toString config.server.services.syncthing.port}" ];
       httpAddress = "127.0.0.1:8385";
 
@@ -156,9 +154,12 @@
       redirectUrl = "https://syncthing.${config.server.webaddress}/oauth2/callback";
 
       extraConfig = {
-        pass-access-token = true;
-        pass-authorization-header = true;
-        set-xauthrequest = true;
+        client-secret-file = config.sops.secrets."syncthing/oauth/proxy_client_secret".path;
+        cookie-secret-file = config.sops.secrets."syncthing/oauth/proxy_cookie_secret".path;
+      
+        pass-access-token = "true";
+        pass-authorization-header = "true";
+        set-xauthrequest = "true";
         # Optional: ensure we can handle long syncthing requests
         upstream-timeout = "600s";
       };
