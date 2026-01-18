@@ -99,7 +99,7 @@ in
         echo "Waiting for Kanidm to be ready at $KANIDM_URL..."
         
         # Retry loop
-        MAX_RETRIES=30
+        MAX_RETRIES=5
         COUNT=0
         until check_status || [ $COUNT -eq $MAX_RETRIES ]; do
           echo "Kanidm not reachable yet... ($COUNT/$MAX_RETRIES)"
