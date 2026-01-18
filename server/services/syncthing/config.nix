@@ -150,7 +150,7 @@
       httpAddress = "127.0.0.1:8385";
 
       oidcIssuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/syncthing";
-      emailDomain = "*";
+      email.domains = [ "*" ];
       redirectUrl = "https://syncthing.${config.server.webaddress}/oauth2/callback";
 
       extraConfig = {
