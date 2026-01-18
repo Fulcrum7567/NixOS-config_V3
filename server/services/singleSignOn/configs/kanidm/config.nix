@@ -177,7 +177,11 @@ in
 
         RECOVER_OUTPUT=$(sudo -u kanidm $KANIDM_BIN recover-account "$ADMIN" 2>&1)
 
+        echo "Old Admin password recovery output: $RECOVER_OUTPUT"
+
         TEMP_PASS=$(echo "$RECOVER_OUTPUT" | grep -oP 'new_password: "\K[^"]+')
+
+        echo "Temporary recovered password: $TEMP_PASS"
 
         if [ -z "$TEMP_PASS" ]; then
           echo "❌ Failed to capture recovery password. Output was:"
