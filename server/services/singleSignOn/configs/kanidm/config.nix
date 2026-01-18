@@ -169,6 +169,10 @@ in
         echo "KANIDM_BIN: $KANIDM_BIN"
         echo "KANIDMD_BIN: $KANIDMD_BIN"
 
+        echo "🏷️  Ensuring Kanidm service is running..."
+
+        until systemctl is-active --quiet kanidm; do sleep 1; done
+
         echo "🔍 Checking if Admin password matches Sops secret..."
 
         if sudo -u kanidm $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")" 2>/dev/null; then
@@ -180,7 +184,7 @@ in
 
         echo "🔓 Recovering Admin account..."
 
-        until sudo -u kanidm $KANIDMD_BIN healthcheck; do sleep 1; done
+        
 
         RECOVER_OUTPUT=$(sudo -u kanidm $KANIDMD_BIN recover-account "$ADMIN" 2>&1)
 
