@@ -157,6 +157,9 @@ in
       path = with pkgs-default; [ gnugrep gawk systemd sudo ];
 
       script = ''
+        # Set HOME to a temp directory to ensure clean session and no permission issues
+        export HOME=$(mktemp -d)
+
         KANIDM_URL="https://${cfg.subdomain}.${config.server.webaddress}"
         ADMIN="admin"
         SOPS_PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
@@ -175,7 +178,8 @@ in
 
         echo "🔍 Checking if Admin password matches Sops secret..."
 
-        if sudo -u kanidm $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")" 2>/dev/null; then
+        # Try to login with the SOPS secret.
+        if $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
           echo "✅ Admin password is already correct. No action needed."
           exit 0
         fi
@@ -183,8 +187,6 @@ in
         echo "⚠️  Password mismatch or fresh install. Starting recovery..."
 
         echo "🔓 Recovering Admin account..."
-
-        echo $(sudo -u kanidm $KANIDMD_BIN healthcheck)
 
         RECOVER_OUTPUT=$(sudo -u kanidm $KANIDMD_BIN recover-account "$ADMIN" 2>&1)
 
@@ -206,9 +208,14 @@ in
 
         echo "🔐 Updating Admin password to match Sops secret..."
 
-        $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$TEMP_PASS"
+        if ! $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$TEMP_PASS"; then
+            echo "❌ Failed to login with temporary password."
+            exit 1
+        fi
 
-        if $KANIDM_BIN person credential update "$ADMIN" --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")"; then
+        NEW_PW=$(cat "$SOPS_PASS_FILE")
+
+        if printf "pass\n%s\n%s\ncommit\n" "$NEW_PW" "$NEW_PW" | $KANIDM_BIN person credential update "$ADMIN" --url "$KANIDM_URL" --name "$ADMIN"; then
           echo "✅ Admin password updated successfully."
         else
           echo "❌ Failed to update Admin password."
