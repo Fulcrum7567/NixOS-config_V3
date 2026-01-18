@@ -208,9 +208,12 @@ in
 
         $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$TEMP_PASS"
 
-        $KANIDM_BIN person credential update "$ADMIN" --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
-
-        echo "✅ Admin password successfully synchronized."
+        if $KANIDM_BIN person credential update "$ADMIN" --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")"; then
+          echo "✅ Admin password updated successfully."
+        else
+          echo "❌ Failed to update Admin password."
+          exit 1
+        fi
       '';
     };
 
