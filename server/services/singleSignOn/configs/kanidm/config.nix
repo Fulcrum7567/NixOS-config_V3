@@ -180,6 +180,8 @@ in
 
         echo "🔓 Recovering Admin account..."
 
+        until sudo -u kanidm $KANIDMD_BIN healthcheck; do sleep 1; done
+
         RECOVER_OUTPUT=$(sudo -u kanidm $KANIDMD_BIN recover-account "$ADMIN" 2>&1)
 
         echo "Old Admin password recovery output: $RECOVER_OUTPUT"
@@ -195,7 +197,6 @@ in
         fi
 
         echo "🔄 Restarting Kanidm..."
-        systemctl start kanidm
 
         until sudo -u kanidm $KANIDM_BIN healthcheck; do sleep 1; done
 
