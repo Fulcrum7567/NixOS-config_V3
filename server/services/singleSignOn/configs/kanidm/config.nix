@@ -1,4 +1,4 @@
-{ config, lib, pkgs-unstable, ... }:
+{ config, lib, pkgs-unstable, pkgs-default, ... }:
 let
   cfg = config.server.services.singleSignOn;
 in
@@ -109,14 +109,14 @@ in
       };
       script = ''
         # Wait for Kanidm to be responsive before running commands
-        until ${pkgs.kanidm}/bin/kanidmd healthcheck; do
+        until ${pkgs-default.kanidm}/bin/kanidmd healthcheck; do
           echo "Waiting for Kanidm..."
           sleep 2
         done
 
         # Set session timeout to 4 hours (14400 seconds) for all users
         # 'idm_all_persons' is the default group containing all human users
-        ${pkgs.kanidm}/bin/kanidm group account-policy auth-expiry idm_all_persons 14400
+        ${pkgs-default.kanidm}/bin/kanidm group account-policy auth-expiry idm_all_persons 14400
       '';
     };
   };
