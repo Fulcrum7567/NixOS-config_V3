@@ -75,8 +75,8 @@ in
 
     systemd.services.kanidm-declarative-options = {
       description = "Kanidm declarative database options";
-      after = [ "kanidm.service" "nginx.service" ];
-      wants = [ "kanidm.service" "nginx.service" ];
+      after = [ "kanidm.service" "nginx.service" "kanidm-provision.service" ];
+      wants = [ "kanidm.service" "nginx.service" "kanidm-provision.service" ];
       serviceConfig = {
         Type = "oneshot";
         User = cfg.serviceUsername;
@@ -87,10 +87,13 @@ in
         KANIDM="${config.services.kanidm.package}/bin/kanidm"
         KANIDM_URL="https://${cfg.subdomain}.${config.server.webaddress}"
         ADMIN_PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
+        
+        # Kanidm needs a writable HOME for session config
+        export HOME=$(mktemp -d)
 
         # Function to check connectivity
         check_status() {
-          tr -d '\n' < "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin >/dev/null 2>&1
+          cat "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin >/dev/null 2>&1
         }
 
         echo "Waiting for Kanidm to be ready at $KANIDM_URL..."
@@ -107,7 +110,7 @@ in
         if [ $COUNT -eq $MAX_RETRIES ]; then
           echo "Failed to connect to Kanidm after $MAX_RETRIES attempts."
           echo "Last error:"
-          tr -d '\n' < "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin
+          cat "$ADMIN_PASS_FILE" | $KANIDM login -H "$KANIDM_URL" --name admin
           exit 1
         fi
 
