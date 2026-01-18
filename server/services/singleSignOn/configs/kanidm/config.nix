@@ -161,6 +161,7 @@ in
         ADMIN="admin"
         SOPS_PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
         KANIDM_BIN="${config.services.kanidm.package}/bin/kanidm"
+        KANIDMD_BIN="${config.services.kanidm.package}/bin/kanidmd"
 
         echo "🔍 Checking if Admin password matches Sops secret..."
 
@@ -175,7 +176,7 @@ in
 
         echo "🔓 Recovering Admin account..."
 
-        RECOVER_OUTPUT=$(sudo -u kanidm $KANIDM_BIN recover-account "$ADMIN" 2>&1)
+        RECOVER_OUTPUT=$(sudo -u kanidm $KANIDMD_BIN recover-account "$ADMIN" 2>&1)
 
         echo "Old Admin password recovery output: $RECOVER_OUTPUT"
 
