@@ -206,9 +206,9 @@ in
 
         echo "🔐 Updating Admin password to match Sops secret..."
 
-        sudo -u kanidm $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$TEMP_PASS"
+        $KANIDM_BIN login --url "$KANIDM_URL" --name "$ADMIN" --password "$TEMP_PASS"
 
-        sudo -u kanidm $KANIDM_BIN person credential update "$ADMIN" --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
+        $KANIDM_BIN person credential update "$ADMIN" --url "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
 
         echo "✅ Admin password successfully synchronized."
       '';
