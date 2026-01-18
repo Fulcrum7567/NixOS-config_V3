@@ -94,50 +94,5 @@ in
         };
       };
     };
-
-    systemd.services.kanidm-enforce-policy = {
-      description = "Enforce Kanidm Account Policies";
-      after = [ "kanidm.service" ];
-      wants = [ "kanidm.service" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        User = "kanidm";
-        Group = "kanidm";
-        # Ensure the client has a place to write the session token
-        Environment = "HOME=/var/lib/kanidm"; 
-      };
-      script = ''
-        # --- Configuration ---
-        KANIDM_URL="https://127.0.0.1:8443"
-        ADMIN_USER="admin"
-        PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
-
-        # --- Pre-flight Checks ---
-        if [ ! -f "$PASS_FILE" ]; then
-          echo "⚠️  Secret file not found at $PASS_FILE. Skipping."
-          exit 0
-        fi
-
-        # Wait for Kanidm to be responsive
-        until ${config.services.kanidm.package}/bin/kanidmd healthcheck; do
-          echo "Waiting for Kanidm..."
-          sleep 2
-        done
-
-        # --- Authentication ---
-        # Log in using the password from the sops secret.
-        # The session token will be saved to $HOME/.config/kanidm
-        cat "$PASS_FILE" | ${config.services.kanidm.package}/bin/kanidm login \
-          --url "$KANIDM_URL" \
-          --name "$ADMIN_USER"
-
-        # --- Apply Policy ---
-        echo "Enforcing 4-hour session limit on idm_all_persons..."
-        ${config.services.kanidm.package}/bin/kanidm group account-policy auth-expiry idm_all_persons 14400 \
-          --url "$KANIDM_URL" \
-          --name "$ADMIN_USER"
-      '';
-    };
   };
 }

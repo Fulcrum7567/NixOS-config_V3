@@ -62,6 +62,11 @@
             type = lib.types.path;
             description = "Path to the file containing the basic secret for this OAuth service.";
           };
+          imageFile = lib.mkOption {
+            type = lib.types.path;
+            default = ./sso.svg
+            description = "Path to an image file (e.g., logo) for this OAuth service.";
+          };
           preferShortUsername = lib.mkOption {
             type = lib.types.bool;
             default = true;
