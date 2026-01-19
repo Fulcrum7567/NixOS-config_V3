@@ -187,6 +187,16 @@ in
 
         echo "✅ Admin password matches Sops secret."
 
+        echo "🔄 Applying declarative configuration to Kanidm..."
+
+        # Setting image for OAuth clients
+        echo "🔧 Setting OAuth client images..."
+        $KANIDM_BIN system domain set-image ${../../sso.svg} -H "$KANIDM_URL" --name "$ADMIN"
+
+
+        # Log out after operations
+        $KANIDM_BIN logout -H "$KANIDM_URL" --name "$ADMIN"
+        echo "✅ Declarative configuration applied successfully."
       '';
     };
   };
