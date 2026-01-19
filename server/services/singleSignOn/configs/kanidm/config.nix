@@ -190,7 +190,8 @@ in
         echo "🔄 Applying declarative configuration to Kanidm..."
 
         # Setting image for OAuth clients
-        echo "🔧 Setting OAuth client images..."
+        echo "🔧 Setting OAuth client images with this command:"
+        echo "$KANIDM_BIN system domain set-image ${../../sso.svg} svg --url \"$KANIDM_URL\" --name \"$ADMIN\""
         $KANIDM_BIN system domain set-image ${../../sso.svg} svg --url "$KANIDM_URL" --name "$ADMIN"
 
 
