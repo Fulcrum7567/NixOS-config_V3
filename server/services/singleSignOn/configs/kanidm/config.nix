@@ -191,7 +191,7 @@ in
 
         # Setting image for OAuth clients
         echo "🔧 Setting OAuth client images..."
-        $KANIDM_BIN system domain set-image ${../../sso.svg} -H "$KANIDM_URL" --name "$ADMIN"
+        $KANIDM_BIN system domain set-image ${../../sso.svg} svg --url "$KANIDM_URL" --name "$ADMIN"
 
 
         # Log out after operations
