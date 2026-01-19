@@ -145,5 +145,49 @@ in
     };
 
 
+
+    systemd.services.kanidm-ensure-declarativity = {
+      description = "Kanidm ensure declarative configuration matches NixOS configuration";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "kanidm.service" ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root"; # Root needed to stop/start services and read sops
+      };
+
+      path = with pkgs-default; [ gnugrep gawk systemd sudo ];
+
+      script = ''
+        # Set HOME to a temp directory to ensure clean session and no permission issues
+        export HOME=$(mktemp -d)
+
+        KANIDM_URL="https://${cfg.subdomain}.${config.server.webaddress}"
+        ADMIN="idm_admin"
+        SOPS_PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
+        KANIDM_BIN="${config.services.kanidm.package}/bin/kanidm"
+        KANIDMD_BIN="${config.services.kanidm.package}/bin/kanidmd"
+
+        echo "KANIDM_URL: $KANIDM_URL"
+        echo "ADMIN: $ADMIN"
+        echo "SOPS_PASS_FILE: $SOPS_PASS_FILE"
+        echo "KANIDM_BIN: $KANIDM_BIN"
+        echo "KANIDMD_BIN: $KANIDMD_BIN"
+
+        echo "🏷️  Ensuring Kanidm service is running..."
+
+        until systemctl is-active --quiet kanidm; do sleep 1; done
+
+        echo "🔍 Checking if Admin password matches Sops secret..."
+
+        if ! $KANIDM_BIN login -H "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
+          echo "X Error: Admin password does not match Sops secret. Aborting."
+          exit 1
+        fi
+
+        echo "✅ Admin password matches Sops secret."
+
+      '';
+    };
   };
 }
