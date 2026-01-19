@@ -178,6 +178,41 @@ in
 
         until systemctl is-active --quiet kanidm; do sleep 1; done
 
+        if sudo /nix/store/vlkx5d6v2n3lk7lz3xw07w9a1i561rli-kanidm-with-secret-provisioning-1.8.5/bin/kanidm group list-members system_admins --url "https://sso.aurek.eu" --name "idm_admin" | grep -q "idm_admin"; then
+            echo "✅ idm_admin is a super user (member of system_admins)."
+        else
+            echo "❌ idm_admin is NOT a super user, adding to system_admins group..."
+
+            echo "🔓 Recovering Admin account..."
+
+            RECOVER_OUTPUT=$(sudo -u kanidm $KANIDMD_BIN recover-account "$ADMIN" 2>&1)
+
+            echo "Old Admin password recovery output: $RECOVER_OUTPUT"
+
+            TEMP_PASS=$(echo "$RECOVER_OUTPUT" | grep -oP 'new_password: "\K[^"]+')
+
+            echo "Temporary recovered password: $TEMP_PASS"
+
+            if [ -z "$TEMP_PASS" ]; then
+              echo "❌ Failed to capture recovery password. Output was:"
+              echo "$RECOVER_OUTPUT"
+              exit 1
+            fi
+
+            if $KANIDM_BIN login --url "$KANIDM_URL" --name "admin" --password "$TEMP_PASS"; then
+
+              if $KANIDM_BIN group add-member system_admins "$ADMIN" --url "$KANIDM_URL" --name "admin"; then
+                  echo "✅ idm_admin added to system_admins group."
+              else
+                  echo "❌ Failed to add idm_admin to system_admins group."
+                  exit 1
+              fi
+            else
+              echo "❌ Failed to login with temporary password."
+              exit 1
+            fi
+        fi
+
         echo "🔍 Checking if Admin password matches Sops secret..."
 
         if ! $KANIDM_BIN login -H "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
