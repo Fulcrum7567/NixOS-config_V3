@@ -1,4 +1,4 @@
-{ config, lib, pkgs-unstable, pkgs-default, ... }:
+{ config, lib, pkgs-unstable, pkgs-default, currentHost, ... }:
 let
   cfg = config.server.services.singleSignOn;
 in
@@ -228,6 +228,10 @@ in
         echo "🔧 Setting OAuth client images with this command:"
         echo "$KANIDM_BIN system domain set-image ${../../sso.svg} svg --url \"$KANIDM_URL\" --name \"$ADMIN\""
         $KANIDM_BIN system domain set-image ${../../sso.svg} svg --url "$KANIDM_URL" --name "$ADMIN"
+
+        echo "🔧 Setting OAuth client display name with this command:"
+        echo "$KANIDM_BIN system domain set-displayname \"${currentHost}\" --name \"$ADMIN\" --url \"$KANIDM_URL\""
+        $KANIDM_BIN system domain set-displayname "${currentHost}" --name "$ADMIN" --url "$KANIDM_URL"
 
 
         # Log out after operations
