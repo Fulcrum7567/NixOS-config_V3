@@ -185,7 +185,7 @@ in
 
             echo "🔓 Recovering Admin account..."
 
-            RECOVER_OUTPUT=$(sudo -u kanidm $KANIDMD_BIN recover-account "$ADMIN" 2>&1)
+            RECOVER_OUTPUT=$(sudo -u kanidm $KANIDMD_BIN recover-account "admin" 2>&1)
 
             echo "Old Admin password recovery output: $RECOVER_OUTPUT"
 
