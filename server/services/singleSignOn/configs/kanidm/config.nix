@@ -201,7 +201,7 @@ in
 
             if $KANIDM_BIN login --url "$KANIDM_URL" --name "admin" --password "$TEMP_PASS"; then
 
-              if $KANIDM_BIN group add-member system_admins "$ADMIN" --url "$KANIDM_URL" --name "admin"; then
+              if $KANIDM_BIN group add-members system_admins "$ADMIN" --url "$KANIDM_URL" --name "admin"; then
                   echo "✅ idm_admin added to system_admins group."
               else
                   echo "❌ Failed to add idm_admin to system_admins group."
