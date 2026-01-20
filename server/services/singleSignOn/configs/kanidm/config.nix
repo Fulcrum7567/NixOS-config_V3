@@ -149,7 +149,7 @@ in
     systemd.services.kanidm-ensure-declarativity = {
       description = "Kanidm ensure declarative configuration matches NixOS configuration";
       wantedBy = [ "multi-user.target" ];
-      after = [ "kanidm.service" ];
+      after = [ "kanidm.service" "sops-nix.service" ];
 
       serviceConfig = {
         Type = "oneshot";
