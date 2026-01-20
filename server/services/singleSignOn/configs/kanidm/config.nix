@@ -178,10 +178,10 @@ in
 
         until systemctl is-active --quiet kanidm; do sleep 1; done
 
-        if sudo /nix/store/vlkx5d6v2n3lk7lz3xw07w9a1i561rli-kanidm-with-secret-provisioning-1.8.5/bin/kanidm group list-members system_admins --url "https://sso.aurek.eu" --name "idm_admin" | grep -q "idm_admin"; then
-            echo "✅ idm_admin is a super user (member of system_admins)."
+        if sudo $KANIDM_BIN group list-members system_admins --url "$KANIDM_URL" --name "$ADMIN" | grep -q "$ADMIN"; then
+            echo "✅ $ADMIN is a super user (member of system_admins)."
         else
-            echo "❌ idm_admin is NOT a super user, adding to system_admins group..."
+            echo "❌ $ADMIN is NOT a super user, adding to system_admins group..."
 
             echo "🔓 Recovering Admin account..."
 
@@ -215,7 +215,7 @@ in
 
         echo "🔍 Checking if Admin password matches Sops secret..."
 
-        if ! $KANIDM_BIN login -H "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
+        if ! $KANIDM_BIN login -H "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")"; then
           echo "X Error: Admin password does not match Sops secret. Aborting."
           exit 1
         fi
