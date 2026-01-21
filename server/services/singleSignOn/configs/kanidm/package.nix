@@ -94,6 +94,7 @@ let
       cp ${cfg.favicon} "$TARGET_PKG_DIR/img/favicon.png"
 
       ${lib.optionalString (cfg.customCss != null) ''
+        echo "removing $TARGET_PKG_DIR/style.css"
         rm -f "$TARGET_PKG_DIR/style.css"
         cp ${cfg.customCss} "$TARGET_PKG_DIR/style.css"
       ''}
