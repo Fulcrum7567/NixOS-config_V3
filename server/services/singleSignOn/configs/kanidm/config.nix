@@ -56,22 +56,26 @@ in
         adminPasswordFile = config.sops.secrets."kanidm/adminPassword".path;
         idmAdminPasswordFile = config.sops.secrets."kanidm/adminPassword".path;
 
-        persons = {
-          "${config.user.settings.username}" = {
-            displayName = config.user.settings.displayName;
-            legalName = config.user.settings.displayName;
-            mailAddresses = [ "dragon.fighter@outlook.de" ];
-            present = true;
-          };
-        };
+        persons = lib.mapAttrs (name: user: {
+          displayName = user.displayName;
+          legalName = user.legalName;
+          mailAddresses = user.mailAddresses;
+          present = user.present;
+          groups = user.groups;
+        }) config.server.users;
 
         groups = lib.listToAttrs (map (service: {
           name = service.groupName;
           value = {
             present = true;
-            members = [ config.user.settings.username ];
+            members = [ ];
           };
-        }) (lib.attrValues cfg.oAuthServices));
+        }) (lib.attrValues cfg.oAuthServices)) // {
+          "all_services" = {
+            present = true;
+            members = [ ];
+          };
+        };
 
         systems.oauth2 = lib.mapAttrs (name: service: {
           displayName = service.displayName;
