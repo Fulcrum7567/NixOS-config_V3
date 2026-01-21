@@ -1,4 +1,6 @@
 { config, lib, pkgs-default, ... }:
+with lib;
+
 let
   cfg = config.server.services.oauthProxy;
 in
