@@ -34,9 +34,6 @@ let
                     const mime = ext === ".png" ? "image/png" : "image/jpeg";
                     const b64 = imgData.toString("base64");
                     
-                    // FIXED LINE BELOW:
-                    // 1. Used ''${...} to tell Nix "this is a literal ${"
-                    // 2. Used normal backticks ` for JS template literal
                     img.setAttribute("href", `data:''${mime};base64,''${b64}`);
                 }
             }
