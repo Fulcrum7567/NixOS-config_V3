@@ -75,10 +75,12 @@
 
     # Ensure Immich waits for the IDP to be available before starting, 
     # otherwise OIDC discovery fails and OAuth is disabled.
+    /*
     systemd.services.immich-server = {
       after = [ "kanidm.service" "nginx.service" ];
       wants = [ "kanidm.service" "nginx.service" ];
     };
+    */
 
     # Service to strip newline from sops secret for Kanidm AND generate Immich config
     
