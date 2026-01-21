@@ -66,7 +66,7 @@ let
       echo "Un-symlinking UI directory at $TARGET_PKG_DIR..."
 
       ORIG_DIR=$(readlink -f "$TARGET_PKG_DIR")
-      rm "$TARGET_PKG_DIR"
+      rm -rf "$TARGET_PKG_DIR"
       cp -r "$ORIG_DIR" "$TARGET_PKG_DIR"
       
       echo "Injecting custom assets..."
