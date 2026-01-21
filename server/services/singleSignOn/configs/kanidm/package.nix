@@ -9,8 +9,12 @@ let
     # We need JSDOM available to Node.js
     NODE_PATH = "${pkgs-default.nodePackages.jsdom}/lib/node_modules";
   } ''
-    # 1. Create the Node.js script (from the Tricked.dev article)
-    cat > embed.js <<EOF
+    # Copy source so we can access it locally
+    cp ${src} ./input-image
+
+    # Create the Node.js script
+    # We use 'EOF' (quoted) to stop bash from messing with variables
+    cat > embed.js <<'EOF'
     const fs = require("fs").promises;
     const path = require("path");
     const { JSDOM } = require("jsdom");
@@ -23,14 +27,17 @@ let
             
             for (const img of doc.querySelectorAll("image")) {
                 let href = img.getAttribute("href");
-                // If it points to our local file, embed it
                 if (href && !href.startsWith("data:")) {
                     const imgPath = path.resolve(path.dirname(inputSvg), href);
                     const imgData = await fs.readFile(imgPath);
                     const ext = path.extname(imgPath).toLowerCase();
                     const mime = ext === ".png" ? "image/png" : "image/jpeg";
                     const b64 = imgData.toString("base64");
-                    img.setAttribute("href", \`data:\${mime};base64,\${b64}\`);
+                    
+                    // FIXED LINE BELOW:
+                    // 1. Used ''${...} to tell Nix "this is a literal ${"
+                    // 2. Used normal backticks ` for JS template literal
+                    img.setAttribute("href", `data:''${mime};base64,''${b64}`);
                 }
             }
             await fs.writeFile(outputSvg, dom.serialize());
@@ -40,17 +47,14 @@ let
     run(args[0], args[1]);
     EOF
 
-    # 2. Create the blueprint SVG
-    # We copy the source image here so the script can read it locally
-    cp ${src} ./input-image
-    
+    # Create the blueprint SVG
     cat > blueprint.svg <<EOF
     <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
       <image href="./input-image" x="0" y="0" width="64" height="64" preserveAspectRatio="xMidYMid meet"/>
     </svg>
     EOF
 
-    # 3. Run the transformation
+    # Run the transformation
     node embed.js blueprint.svg $out
   '';
 
