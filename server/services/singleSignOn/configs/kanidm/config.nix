@@ -140,8 +140,8 @@ in
 
         # Setting image for OAuth clients
         echo "🔧 Setting OAuth client images with this command:"
-        echo "$KANIDM_BIN system domain set-image ${../../sso.svg} svg --url \"$KANIDM_URL\" --name \"$ADMIN\""
-        $KANIDM_BIN system domain set-image ${../../sso.svg} svg --url "$KANIDM_URL" --name "$ADMIN"
+        echo "$KANIDM_BIN system domain set-image ${cfg.domainIcon} svg --url \"$KANIDM_URL\" --name \"$ADMIN\""
+        $KANIDM_BIN system domain set-image ${cfg.domainIcon} svg --url "$KANIDM_URL" --name "$ADMIN"
 
         echo "🔧 Setting OAuth client display name with this command:"
         echo "$KANIDM_BIN system domain set-displayname \"${currentHost}\" --name \"$ADMIN\" --url \"$KANIDM_URL\""
