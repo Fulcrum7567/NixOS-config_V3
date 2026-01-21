@@ -1,4 +1,4 @@
-{ config, lib, pkgs-unstable, ... }:
+{ config, lib, pkgs-unstable, pkgs-default, ... }:
 let
   custom-css = ''
     :root {
@@ -240,6 +240,8 @@ let
     }
 
   '';
+
+  cssFile = pkgs-default.writeText "custom-style.css" custom-css;
 in
 {
   config.server.services.singleSignOn.availableConfigs = [ "kanidm" ];
@@ -266,8 +268,8 @@ in
       };
 
       customCss = lib.mkOption {
-        type = lib.types.str;
-        default = custom-css;
+        type = lib.types.path;
+        default = cssFile;
         description = "Custom CSS to apply to Kanidm SSO pages.";
       };
     };
