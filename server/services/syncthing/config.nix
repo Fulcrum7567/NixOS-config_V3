@@ -138,26 +138,29 @@
       allowedUDPPorts = [ 22000 21027 ];
     };
 
-    server.services.oauthProxy.services = {
-      "syncthing" = {
-        provider = "oidc";
-        clientID = "syncthing";
-        httpAddress = "127.0.0.1:8385";
-        upstream = [ "http://127.0.0.1:${toString config.server.services.syncthing.port}" ];
-        
-        clientSecretFile = config.sops.secrets."syncthing/oauth/proxy_client_secret".path;
-        cookieSecretFile = config.sops.secrets."syncthing/oauth/proxy_cookie_secret".path;
-        
-        oidcIssuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/syncthing";
-        
-        extraConfig = {
-          redirect_url = "https://syncthing.${config.server.webaddress}/oauth2/callback";
-          pass_access_token = "true";
-          pass_authorization_header = "true";
-          set_xauthrequest = "true";
-          upstream_timeout = "600s";
-          code_challenge_method = "S256";
-          skip_provider_button = "true";
+    server.services.oauthProxy = {
+      enable = true;
+      services = {
+        "syncthing" = {
+          provider = "oidc";
+          clientID = "syncthing";
+          httpAddress = "127.0.0.1:8385";
+          upstream = [ "http://127.0.0.1:${toString config.server.services.syncthing.port}" ];
+          
+          clientSecretFile = config.sops.secrets."syncthing/oauth/proxy_client_secret".path;
+          cookieSecretFile = config.sops.secrets."syncthing/oauth/proxy_cookie_secret".path;
+          
+          oidcIssuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/syncthing";
+          
+          extraConfig = {
+            redirect_url = "https://syncthing.${config.server.webaddress}/oauth2/callback";
+            pass_access_token = "true";
+            pass_authorization_header = "true";
+            set_xauthrequest = "true";
+            upstream_timeout = "600s";
+            code_challenge_method = "S256";
+            skip_provider_button = "true";
+          };
         };
       };
     };
