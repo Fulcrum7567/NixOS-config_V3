@@ -106,6 +106,13 @@ in
 {
   config = lib.mkIf cfg.enable {
     services.kanidm.package = lib.mkForce customKanidmPackage;
+
+    systemd.services.kanidm.serviceConfig.BindReadOnlyPaths = [
+      # Syntax: "Source:Destination"
+      # We map the NEW UI directory (from custom package)
+      # ON TOP OF the OLD UI directory (from base package)
+      "${customKanidmPackage}/ui:${config.server.services.singleSignOn.kanidm.basePackage}/ui"
+    ];
   };
 
 
