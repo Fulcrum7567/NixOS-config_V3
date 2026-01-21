@@ -8,6 +8,19 @@ in
     server.services.singleSignOn.serviceUsername = "kanidm";
     server.services.singleSignOn.serviceGroup = "kanidm";
 
+
+    systemd.tmpfiles.rules = [
+      "d /data/kanidm 0700 ${cfg.serviceUsername} ${cfg.serviceGroup} -"
+      "Z /data/kanidm 0700 ${cfg.serviceUsername} ${cfg.serviceGroup} -"
+    ];
+
+    fileSystems."/var/lib/kanidm" = {
+      device = "/data/kanidm";
+      options = [ "bind" ];
+    };
+
+    systemd.services.kanidm.requiresMountsFor = [ "/var/lib/kanidm" ];
+
     sops.secrets = {
       "kanidm/adminPassword" = {
         owner = cfg.serviceUsername;
