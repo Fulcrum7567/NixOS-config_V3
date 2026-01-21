@@ -271,6 +271,12 @@ in
         default = cssFile;
         description = "Custom CSS to apply to Kanidm SSO pages.";
       };
+
+      backgroundImage = lib.mkOption {
+        type = lib.types.path;
+        default = ../../bin/images/background.jpg;
+        description = "Path to the background image for Kanidm SSO pages.";
+      };  
     };
   };
 }

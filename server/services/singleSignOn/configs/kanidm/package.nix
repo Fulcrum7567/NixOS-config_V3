@@ -1,6 +1,7 @@
 { config, lib, pkgs-default, ... }:
 let
   cfg = config.server.services.singleSignOn.kanidm.customStyling;
+  cfgb = config.server.services.singleSignOn.kanidm;
   
   # 1. The Transformation Logic (Build-time helper)
   # This function takes a source image (png/jpg) and builds a valid Kanidm SVG from it.
@@ -56,48 +57,46 @@ let
     };
 
     postBuild = ''
-      # 1. FINDING THE SOURCE
-      # We look for the 'hpkg' directory inside the ORIGINAL base package.
-      # This guarantees we find the real source files.
-      SOURCE_PKG_DIR=$(find ${config.server.services.singleSignOn.kanidm.basePackage} -type d -name "hpkg" | head -n 1)
+      # 1. FIND SOURCE
+      SOURCE_PKG_DIR=$(find ${cfgb.basePackage} -type d -name "hpkg" | head -n 1)
+      if [ -z "$SOURCE_PKG_DIR" ]; then echo "Error: Could not find 'hpkg'"; exit 1; fi
 
-      if [ -z "$SOURCE_PKG_DIR" ]; then
-        echo "Error: Could not find 'hpkg' in base package."
-        exit 1
-      fi
-
-      # 2. FINDING THE DESTINATION
-      # We determine where that directory ended up in our new $out path.
-      # We strip the base package prefix to get the relative path.
-      REL_PATH=''${SOURCE_PKG_DIR#${config.server.services.singleSignOn.kanidm.basePackage}/}
+      # 2. PREPARE TARGET
+      REL_PATH=''${SOURCE_PKG_DIR#${cfgb.basePackage}/}
       TARGET_PKG_DIR="$out/$REL_PATH"
-
-      echo "Replacing UI directory..."
-      echo "  Source: $SOURCE_PKG_DIR"
-      echo "  Target: $TARGET_PKG_DIR"
-
-      # 3. REPLACE WITH WRITABLE COPY
-      # Remove the symlinked directory created by symlinkJoin
+      
+      # Remove the symlink and copy the real directory so we can edit it
       rm -rf "$TARGET_PKG_DIR"
-      
-      # Copy the original directory contents to the target
       cp -r "$SOURCE_PKG_DIR" "$TARGET_PKG_DIR"
-      
-      # Make it writable (cp from Nix store is read-only by default)
       chmod -R +w "$TARGET_PKG_DIR"
       
-      # 4. INJECT ASSETS
-      echo "Injecting custom assets..."
+      echo "Injecting custom assets into $TARGET_PKG_DIR..."
       
-      # We use -f to force overwrite just in case
-      rm -f "$TARGET_PKG_DIR/img/favicon.png"
-      cp ${cfg.favicon} "$TARGET_PKG_DIR/img/favicon.png"
 
-      ${lib.optionalString (cfg.customCss != null) ''
-        echo "removing $TARGET_PKG_DIR/style.css"
-        rm -f "$TARGET_PKG_DIR/style.css"
-        echo "copying custom css to $TARGET_PKG_DIR/style.css"
-        cp ${cfg.customCss} "$TARGET_PKG_DIR/style.css"
+      # 4. INJECT FAVICON (PNG)
+      ${lib.optionalString (cfg.favicon != null) ''
+        rm -f "$TARGET_PKG_DIR/img/favicon.png"
+        cp -f ${cfg.favicon} "$TARGET_PKG_DIR/img/favicon.png"
+      ''}
+
+
+      # 6. INJECT BACKGROUND IMAGE & CSS AUTO-FIX
+      # We copy the image to the folder and APPEND the CSS rule to style.css
+      # This ensures the path is correct (/pkg/img/background.jpg)
+      ${lib.optionalString (cfg.backgroundImage != null) ''
+        cp -f ${cfg.backgroundImage} "$TARGET_PKG_DIR/img/custom-background.jpg"
+        
+        # Append the CSS rule to load this specific image
+        # Note: Kanidm maps this directory to /pkg/
+        cat >> "$TARGET_PKG_DIR/style.css" <<EOF
+        
+        /* Auto-injected background from Nix */
+        body {
+          background-image: url("/pkg/img/custom-background.jpg") !important;
+          background-size: cover !important;
+          background-position: center !important;
+        }
+        EOF
       ''}
     '';
   };
