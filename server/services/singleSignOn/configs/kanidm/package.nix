@@ -99,7 +99,6 @@ let
         echo "copying custom css to $TARGET_PKG_DIR/style.css"
         cp ${cfg.customCss} "$TARGET_PKG_DIR/style.css"
       ''}
-      exit 1
     '';
   };
 
