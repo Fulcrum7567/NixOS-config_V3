@@ -54,6 +54,7 @@ in
         enable = true;
         # This file is used to authenticate the provisioner against the server
         adminPasswordFile = config.sops.secrets."kanidm/adminPassword".path;
+        idmAdminPasswordFile = config.sops.secrets."kanidm/adminPassword".path;
 
         persons = {
           "${config.user.settings.username}" = {
