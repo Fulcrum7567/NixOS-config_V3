@@ -7,20 +7,13 @@ let
   mkKanidmSvg = name: src: pkgs-default.runCommand "${name}.svg" {
     nativeBuildInputs = [ pkgs-default.python3 ];
   } ''
-    # 1. Prepare source image
-    # We copy the source to a fixed name so the script can find it easily
     cp ${src} ./input-image
 
-    # 2. Create the Python script
-    # We use python3 (standard in NixOS) to avoid 'nodePackages' missing errors.
     cat > embed.py <<'EOF'
     import sys, os, base64
 
-    # Files passed as arguments
     svg_out = sys.argv[1]
 
-    # Detect MIME type by reading the file magic bytes
-    # This is more robust than file extensions in the nix store
     mime = "application/octet-stream"
     with open("./input-image", "rb") as f:
         data = f.read()
@@ -37,9 +30,6 @@ let
     b64_data = base64.b64encode(data).decode('utf-8')
     data_uri = f"data:{mime};base64,{b64_data}"
 
-    # Generate the SVG content
-    # We construct the SVG manually here rather than parsing a blueprint file.
-    # This prevents any XML parsing issues and keeps the script tiny.
     svg_content = f"""<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
       <image href="{data_uri}" x="0" y="0" width="64" height="64" preserveAspectRatio="xMidYMid meet"/>
     </svg>"""
@@ -49,44 +39,63 @@ let
         f.write(svg_content)
     EOF
 
-    # 3. Run the transformation
-    # We essentially generate the SVG from scratch using the python script
     python3 embed.py "$out"
   '';
+
+  customKanidmPackage = pkgs-default.symlinkJoin {
+    name = "kanidm-customized";
+    paths = [ config.server.services.singleSignOn.kanidm.basePackage ]; # Use the basePackage defined in options
+    buildInputs = [ pkgs-default.makeWrapper ];
+    postBuild = ''
+      # Locate the 'pkg' directory in the output (which is currently a symlink)
+      TARGET_PKG_DIR=$(find $out -type d -name "pkg" | head -n 1)
+
+      if [ -z "$TARGET_PKG_DIR" ]; then
+        echo "Error: Could not find Kanidm 'pkg' directory."
+        exit 1
+      fi
+
+      echo "Un-symlinking UI directory at $TARGET_PKG_DIR..."
+
+      # CRITICAL STEP:
+      # symlinkJoin creates symlinks to the read-only Nix store. 
+      # We cannot edit files inside a symlinked directory.
+      # We must remove the symlink and copy the actual directory contents to make it writable.
+      
+      # 1. Resolve where the symlink points to (the original read-only dir)
+      ORIG_DIR=$(readlink -f "$TARGET_PKG_DIR")
+      
+      # 2. Remove the symlink from our new package tree
+      rm "$TARGET_PKG_DIR"
+      
+      # 3. Copy the original directory contents here (now writable!)
+      cp -r "$ORIG_DIR" "$TARGET_PKG_DIR"
+      
+      # 4. Now we can safely overwrite the files
+      echo "Injecting custom assets..."
+      
+      cp ${cfg.favicon} "$TARGET_PKG_DIR/img/favicon.svg"
+    '';
+  };
 
 in
 {
   config = lib.mkIf cfg.enable {
-    services.kanidm.package = lib.mkForce (config.server.services.singleSignOn.kanidm.basePackage.overrideAttrs (oldAttrs: {
-      postInstall = (oldAttrs.postInstall or "") + ''
-        # Locate the UI directory
-        UI_DIR=$(find $out -type d -name "*pkg" | head -n 1)
-        
-        if [ -n "$UI_DIR" ]; then
-          echo "Injecting custom UI assets..."
-
-          cp ${cfg.favicon} "$UI_DIR/img/favicon.png"
-          
-          
-        else
-          echo "WARNING: Could not find Kanidm UI directory to patch."
-        fi
-      '';
-    }));
+    services.kanidm.package = lib.mkForce customKanidmPackage;
   };
 
 
           /*
-          # 1. Inject the Logo
-          # cp ${mkKanidmSvg "logo" cfg.logo} "$UI_DIR/img/logo.svg"
-          
-          # 2. Inject the Square Logo
-          # cp ${mkKanidmSvg "logo-square" cfg.logoSquare} "$UI_DIR/img/logo-square.svg"
-          
-          # 3. Inject CSS (if provided)
-          #${lib.optionalString (cfg.customCss != null) ''
-          #  cp ${cfg.customCss} "$UI_DIR/style.css"
-          ''}
+          rm "$TARGET_PKG_DIR/img/logo.svg"
+      cp ${mkKanidmSvg "logo" cfg.logo} "$TARGET_PKG_DIR/img/logo.svg"
+
+      rm "$TARGET_PKG_DIR/img/logo-square.svg"
+      cp ${mkKanidmSvg "logo-square" cfg.logoSquare} "$TARGET_PKG_DIR/img/logo-square.svg"
+
+      ${lib.optionalString (cfg.customCss != null) ''
+        rm "$TARGET_PKG_DIR/style.css"
+        cp ${cfg.customCss} "$TARGET_PKG_DIR/style.css"
+      ''}
           */
 
 }
