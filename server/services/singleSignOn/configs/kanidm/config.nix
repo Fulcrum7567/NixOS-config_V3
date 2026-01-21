@@ -94,6 +94,7 @@ in
           preferShortUsername = service.preferShortUsername;
           scopeMaps = {
             "${service.groupName}" = service.scopes;
+            "all_services" = service.scopes;
           };
         }) cfg.oAuthServices;
 
