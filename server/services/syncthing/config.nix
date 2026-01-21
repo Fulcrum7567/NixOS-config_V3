@@ -138,35 +138,27 @@
       allowedUDPPorts = [ 22000 21027 ];
     };
 
-    services.oauth2-proxy = {
-      enable = true;
-      provider = "oidc";
-      clientID = "syncthing";
-      
-      upstream = [ "http://127.0.0.1:${toString config.server.services.syncthing.port}" ];
-      httpAddress = "127.0.0.1:8385";
-
-      clientSecret = "";
-      cookie.secret = "";
-
-      oidcIssuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/syncthing";
-      email.domains = [ "*" ];
-      
-      extraConfig = {
-        redirect-url = "https://syncthing.${config.server.webaddress}/oauth2/callback";
-        client-secret-file = config.sops.secrets."syncthing/oauth/proxy_client_secret".path;
-        cookie-secret-file = config.sops.secrets."syncthing/oauth/proxy_cookie_secret".path;
-      
-        pass-access-token = "true";
-        pass-authorization-header = "true";
-        set-xauthrequest = "true";
-        # Optional: ensure we can handle long syncthing requests
-        upstream-timeout = "600s";
+    server.services.oauthProxy.services = {
+      "syncthing" = {
+        provider = "oidc";
+        clientID = "syncthing";
+        httpAddress = "127.0.0.1:8385";
+        upstream = [ "http://127.0.0.1:${toString config.server.services.syncthing.port}" ];
         
-        # Kanidm enforces PKCE for clients
-        code-challenge-method = "S256";
+        clientSecretFile = config.sops.secrets."syncthing/oauth/proxy_client_secret".path;
+        cookieSecretFile = config.sops.secrets."syncthing/oauth/proxy_cookie_secret".path;
         
-        skip-provider-button = "true";
+        oidcIssuerUrl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/syncthing";
+        
+        extraConfig = {
+          redirect_url = "https://syncthing.${config.server.webaddress}/oauth2/callback";
+          pass_access_token = "true";
+          pass_authorization_header = "true";
+          set_xauthrequest = "true";
+          upstream_timeout = "600s";
+          code_challenge_method = "S256";
+          skip_provider_button = "true";
+        };
       };
     };
 
