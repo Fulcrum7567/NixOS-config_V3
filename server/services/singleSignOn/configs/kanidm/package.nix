@@ -56,10 +56,10 @@ let
     };
 
     postBuild = ''
-      TARGET_PKG_DIR=$(find $out -type d -name "pkg" | head -n 1)
+      TARGET_PKG_DIR=$(find $out -type d -name "hpkg" | head -n 1)
 
       if [ -z "$TARGET_PKG_DIR" ]; then
-        echo "Error: Could not find Kanidm 'pkg' directory."
+        echo "Error: Could not find Kanidm 'hpkg' directory."
         exit 1
       fi
 
