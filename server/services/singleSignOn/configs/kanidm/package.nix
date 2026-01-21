@@ -60,28 +60,26 @@ in
   config = lib.mkIf cfg.enable {
     services.kanidm.package = lib.mkForce (cfg.basePackage.overrideAttrs (oldAttrs: {
       postInstall = (oldAttrs.postInstall or "") + ''
-            # Locate the UI directory
-            UI_DIR=$(find $out -type d -name "*pkg" | head -n 1)
-            
-            if [ -n "$UI_DIR" ]; then
-              echo "Injecting custom UI assets..."
+        # Locate the UI directory
+        UI_DIR=$(find $out -type d -name "*pkg" | head -n 1)
+        
+        if [ -n "$UI_DIR" ]; then
+          echo "Injecting custom UI assets..."
 
-              cp ${cfg.favicon} "$UI_DIR/img/favicon.png"
-              
-              
-              # 1. Inject the Logo
-              # cp ${mkKanidmSvg "logo" cfg.logo} "$UI_DIR/img/logo.svg"
-              
-              # 2. Inject the Square Logo
-              # cp ${mkKanidmSvg "logo-square" cfg.logoSquare} "$UI_DIR/img/logo-square.svg"
-              
-            else
-              echo "WARNING: Could not find Kanidm UI directory to patch."
-            fi
-          '';
-        });
-      })
-    ];
+          cp ${cfg.favicon} "$UI_DIR/img/favicon.png"
+          
+          
+          # 1. Inject the Logo
+          # cp ${mkKanidmSvg "logo" cfg.logo} "$UI_DIR/img/logo.svg"
+          
+          # 2. Inject the Square Logo
+          # cp ${mkKanidmSvg "logo-square" cfg.logoSquare} "$UI_DIR/img/logo-square.svg"
+          
+        else
+          echo "WARNING: Could not find Kanidm UI directory to patch."
+        fi
+      '';
+    }));
   };
 
 
