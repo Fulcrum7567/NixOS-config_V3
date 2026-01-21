@@ -48,10 +48,11 @@ let
     buildInputs = [ pkgs-default.makeWrapper ];
     
     # FIX: Explicitly pass through the required flag from the original package
-    passthru = {
+    passthru = (config.server.services.singleSignOn.kanidm.basePackage.passthru or {}) // {
       enableSecretProvisioning = config.server.services.singleSignOn.kanidm.basePackage.enableSecretProvisioning or false;
       # Pass through the version just in case other things need it
       version = config.server.services.singleSignOn.kanidm.basePackage.version or "custom";
+      eolMessage = config.server.services.singleSignOn.kanidm.basePackage.eolMessage or "";
     };
 
     postBuild = ''
