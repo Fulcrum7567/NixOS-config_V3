@@ -68,12 +68,6 @@ in
           cp ${cfg.favicon} "$UI_DIR/img/favicon.png"
           
           
-          # 1. Inject the Logo
-          # cp ${mkKanidmSvg "logo" cfg.logo} "$UI_DIR/img/logo.svg"
-          
-          # 2. Inject the Square Logo
-          # cp ${mkKanidmSvg "logo-square" cfg.logoSquare} "$UI_DIR/img/logo-square.svg"
-          
         else
           echo "WARNING: Could not find Kanidm UI directory to patch."
         fi
@@ -82,11 +76,17 @@ in
   };
 
 
-              /*
-              # 3. Inject CSS (if provided)
-              #${lib.optionalString (cfg.customCss != null) ''
-              #  cp ${cfg.customCss} "$UI_DIR/style.css"
-              ''}
-              */
+          /*
+          # 1. Inject the Logo
+          # cp ${mkKanidmSvg "logo" cfg.logo} "$UI_DIR/img/logo.svg"
+          
+          # 2. Inject the Square Logo
+          # cp ${mkKanidmSvg "logo-square" cfg.logoSquare} "$UI_DIR/img/logo-square.svg"
+          
+          # 3. Inject CSS (if provided)
+          #${lib.optionalString (cfg.customCss != null) ''
+          #  cp ${cfg.customCss} "$UI_DIR/style.css"
+          ''}
+          */
 
 }
