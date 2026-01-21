@@ -65,6 +65,8 @@
       environment = {
         # Force Immich to use our sops-generated config file
         IMMICH_CONFIG_FILE = lib.mkForce config.sops.templates."immich.json".path;
+
+        IMMICH_API_URL_EXTERNAL = "https://immich.${config.server.webaddress}/api";
         
         IMMICH_LOG_LEVEL = "verbose";
         NODE_TLS_REJECT_UNAUTHORIZED = "0";
