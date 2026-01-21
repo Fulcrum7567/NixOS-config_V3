@@ -32,8 +32,8 @@
       };
 
       "syncthing/oauth/proxy_client_secret" = {
-        owner = "oauth2-proxy";
-        group = "oauth2-proxy";
+        #owner = "oauth2-proxy";
+        #group = "oauth2-proxy";
         sopsFile = ./syncthingSecrets.yaml;
         format = "yaml";
         key = "syncthing_oauth_client_secret";
@@ -41,8 +41,8 @@
       };
 
       "syncthing/oauth/proxy_cookie_secret" = {
-        owner = "oauth2-proxy";
-        group = "oauth2-proxy";
+        #owner = "oauth2-proxy";
+        #group = "oauth2-proxy";
         sopsFile = ./syncthingSecrets.yaml;
         format = "yaml";
         key = "syncthing_oauth_cookie_secret";
