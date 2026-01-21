@@ -58,7 +58,7 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    services.kanidm.package = lib.mkForce (cfg.basePackage.overrideAttrs (oldAttrs: {
+    services.kanidm.package = lib.mkForce (config.server.services.singleSignOn.kanidm.basePackage.overrideAttrs (oldAttrs: {
       postInstall = (oldAttrs.postInstall or "") + ''
         # Locate the UI directory
         UI_DIR=$(find $out -type d -name "*pkg" | head -n 1)
