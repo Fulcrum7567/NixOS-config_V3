@@ -56,22 +56,42 @@ let
     };
 
     postBuild = ''
-      TARGET_PKG_DIR=$(find $out -type d -name "hpkg" | head -n 1)
+      # 1. FINDING THE SOURCE
+      # We look for the 'hpkg' directory inside the ORIGINAL base package.
+      # This guarantees we find the real source files.
+      SOURCE_PKG_DIR=$(find ${cfg.basePackage} -type d -name "hpkg" | head -n 1)
 
-      if [ -z "$TARGET_PKG_DIR" ]; then
-        echo "Error: Could not find Kanidm 'hpkg' directory."
+      if [ -z "$SOURCE_PKG_DIR" ]; then
+        echo "Error: Could not find 'hpkg' in base package."
         exit 1
       fi
 
-      echo "Un-symlinking UI directory at $TARGET_PKG_DIR..."
+      # 2. FINDING THE DESTINATION
+      # We determine where that directory ended up in our new $out path.
+      # We strip the base package prefix to get the relative path.
+      REL_PATH=''${SOURCE_PKG_DIR#${cfg.basePackage}/}
+      TARGET_PKG_DIR="$out/$REL_PATH"
 
-      ORIG_DIR=$(readlink -f "$TARGET_PKG_DIR")
+      echo "Replacing UI directory..."
+      echo "  Source: $SOURCE_PKG_DIR"
+      echo "  Target: $TARGET_PKG_DIR"
+
+      # 3. REPLACE WITH WRITABLE COPY
+      # Remove the symlinked directory created by symlinkJoin
       rm -rf "$TARGET_PKG_DIR"
-      cp -r "$ORIG_DIR" "$TARGET_PKG_DIR"
       
+      # Copy the original directory contents to the target
+      cp -r "$SOURCE_PKG_DIR" "$TARGET_PKG_DIR"
+      
+      # Make it writable (cp from Nix store is read-only by default)
+      chmod -R +w "$TARGET_PKG_DIR"
+      
+      # 4. INJECT ASSETS
       echo "Injecting custom assets..."
       
-      cp ${cfg.favicon} "$TARGET_PKG_DIR/img/favicon.svg"
+      # We use -f to force overwrite just in case
+      rm -f "$TARGET_PKG_DIR/img/favicon.png"
+      cp ${cfg.favicon} "$TARGET_PKG_DIR/img/favicon.png"
     '';
   };
 
