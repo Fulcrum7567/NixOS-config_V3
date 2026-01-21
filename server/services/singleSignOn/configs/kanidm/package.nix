@@ -58,11 +58,8 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    # Apply the overlay to inject the generated files
-    nixpkgs.overlays = [
-      (self: super: {
-        ${config.services.kanidm.package} = super.${config.services.kanidm.package}.overrideAttrs (old: {
-          postInstall = (old.postInstall or "") + ''
+    services.kanidm.package = lib.mkForce (cfg.basePackage.overrideAttrs (oldAttrs: {
+      postInstall = (oldAttrs.postInstall or "") + ''
             # Locate the UI directory
             UI_DIR=$(find $out -type d -name "*pkg" | head -n 1)
             
@@ -78,10 +75,6 @@ in
               # 2. Inject the Square Logo
               # cp ${mkKanidmSvg "logo-square" cfg.logoSquare} "$UI_DIR/img/logo-square.svg"
               
-              # 3. Inject CSS (if provided)
-              #${lib.optionalString (cfg.customCss != null) ''
-              #  cp ${cfg.customCss} "$UI_DIR/style.css"
-              #''}
             else
               echo "WARNING: Could not find Kanidm UI directory to patch."
             fi
@@ -90,5 +83,13 @@ in
       })
     ];
   };
+
+
+              /*
+              # 3. Inject CSS (if provided)
+              #${lib.optionalString (cfg.customCss != null) ''
+              #  cp ${cfg.customCss} "$UI_DIR/style.css"
+              ''}
+              */
 
 }

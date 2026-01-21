@@ -1,8 +1,15 @@
-{ config, lib, ... }:
+{ config, lib, pkgs-unstable, ... }:
 {
   config.server.services.singleSignOn.availableConfigs = [ "kanidm" ];
 
   options.server.services.singleSignOn.kanidm = {
+
+    basePackage = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs-unstable.kanidmWithSecretProvisioning_1_8;
+      description = "The base Kanidm package to use for the SSO service.";
+    };
+
     customStyling = {
       enable = lib.mkOption {
         type = lib.types.bool;

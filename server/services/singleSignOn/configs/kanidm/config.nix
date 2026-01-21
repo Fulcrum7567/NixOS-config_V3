@@ -36,7 +36,7 @@ in
 
     services.kanidm = {
       enableServer = true;
-      package = pkgs-unstable.kanidmWithSecretProvisioning_1_8;
+      package = lib.mkDefault pkgs-unstable.kanidmWithSecretProvisioning_1_8;
       serverSettings = {
         domain = cfg.subdomain + "." + config.server.webaddress;
         origin = "https://${cfg.subdomain}.${config.server.webaddress}";
