@@ -96,6 +96,7 @@ let
       ${lib.optionalString (cfg.customCss != null) ''
         echo "removing $TARGET_PKG_DIR/style.css"
         rm -f "$TARGET_PKG_DIR/style.css"
+        echo "copying custom css to $TARGET_PKG_DIR/style.css"
         cp ${cfg.customCss} "$TARGET_PKG_DIR/style.css"
       ''}
     '';

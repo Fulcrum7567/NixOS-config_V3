@@ -234,7 +234,6 @@ let
     }
 
     body {
-      // all assets in the hpkg folder are hosted in the `/pkg` path in Kanidm
       background-image: url(${../../bin/images/background.jpg});
       background-size: cover;
     }
