@@ -9,8 +9,7 @@ in
     server.services.singleSignOn.serviceGroup = "kanidm";
 
     sops.secrets = {
-      # Kanidm OAuth client secret
-      "kanidm/oauth/client_secret" = {
+      "kanidm/adminPassword" = {
         owner = cfg.serviceUsername;
         group = cfg.serviceGroup;
         sopsFile = ./kanidmSecrets.yaml;
@@ -39,7 +38,7 @@ in
       provision = {
         enable = true;
         # This file is used to authenticate the provisioner against the server
-        idmAdminPasswordFile = config.sops.secrets."kanidm/oauth/client_secret".path;
+        adminPasswordFile = config.sops.secrets."kanidm/adminPassword".path;
 
         persons = {
           "${config.user.settings.username}" = {
@@ -72,54 +71,6 @@ in
 
       };
     };
-
-    /*
-    systemd.services.kanidm-declarative-options = {
-      description = "Kanidm declarative database options";
-      after = [ "kanidm.service" "nginx.service" "kanidm-provision.service" ];
-      wants = [ "kanidm.service" "nginx.service" "kanidm-provision.service" ];
-      serviceConfig = {
-        Type = "oneshot";
-        User = cfg.serviceUsername;
-        Group = cfg.serviceGroup;
-      };
-      script = ''
-        # Helper variables
-        KANIDM="${config.services.kanidm.package}/bin/kanidm"
-        KANIDM_URL="https://${cfg.subdomain}.${config.server.webaddress}"
-        ADMIN_PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
-        
-        # Kanidm needs a writable HOME for session config
-        export HOME=$(mktemp -d)
-
-        # Function to check connectivity
-        check_status() {
-          $KANIDM login -H "$KANIDM_URL" --name admin --password "$(cat "$ADMIN_PASS_FILE")" >/dev/null 2>&1
-        }
-
-        echo "Waiting for Kanidm to be ready at $KANIDM_URL..."
-        
-        # Retry loop
-        MAX_RETRIES=30
-        COUNT=0
-        until check_status || [ $COUNT -eq $MAX_RETRIES ]; do
-          echo "Kanidm not reachable yet... ($COUNT/$MAX_RETRIES)"
-          sleep 2
-          COUNT=$((COUNT+1))
-        done
-
-        if [ $COUNT -eq $MAX_RETRIES ]; then
-          echo "Failed to connect to Kanidm after $MAX_RETRIES attempts."
-          echo "Last error:"
-          $KANIDM login -H "$KANIDM_URL" --name admin --password "$(cat "$ADMIN_PASS_FILE")"
-          exit 1
-        fi
-
-        echo "Kanidm is reachable. Authenticating and listing info..."
-        $KANIDM system info -H "$KANIDM_URL" --name admin
-      '';
-    };
-    */
 
     users.users.${cfg.serviceUsername}.extraGroups = [ "nginx" ];
 
@@ -163,8 +114,8 @@ in
         export HOME=$(mktemp -d)
 
         KANIDM_URL="https://${cfg.subdomain}.${config.server.webaddress}"
-        ADMIN="idm_admin"
-        SOPS_PASS_FILE="${config.sops.secrets."kanidm/oauth/client_secret".path}"
+        ADMIN="admin"
+        SOPS_PASS_FILE="${config.sops.secrets."kanidm/adminPassword".path}"
         KANIDM_BIN="${config.services.kanidm.package}/bin/kanidm"
         KANIDMD_BIN="${config.services.kanidm.package}/bin/kanidmd"
 
@@ -178,45 +129,8 @@ in
 
         until systemctl is-active --quiet kanidm; do sleep 1; done
 
-        if sudo $KANIDM_BIN group list-members system_admins --url "$KANIDM_URL" --name "$ADMIN" | grep -q "$ADMIN"; then
-            echo "✅ $ADMIN is a super user (member of system_admins)."
-        else
-            echo "❌ $ADMIN is NOT a super user, adding to system_admins group..."
-
-            echo "🔓 Recovering Admin account..."
-
-            RECOVER_OUTPUT=$(sudo -u kanidm $KANIDMD_BIN recover-account "admin" 2>&1)
-
-            echo "Old Admin password recovery output: $RECOVER_OUTPUT"
-
-            TEMP_PASS=$(echo "$RECOVER_OUTPUT" | grep -oP 'new_password: "\K[^"]+')
-
-            echo "Temporary recovered password: $TEMP_PASS"
-
-            if [ -z "$TEMP_PASS" ]; then
-              echo "❌ Failed to capture recovery password. Output was:"
-              echo "$RECOVER_OUTPUT"
-              exit 1
-            fi
-
-            if $KANIDM_BIN login --url "$KANIDM_URL" --name "admin" --password "$TEMP_PASS"; then
-
-              if $KANIDM_BIN group add-members system_admins "$ADMIN" --url "$KANIDM_URL" --name "admin"; then
-                  echo "✅ idm_admin added to system_admins group."
-              else
-                  echo "❌ Failed to add idm_admin to system_admins group."
-                  exit 1
-              fi
-            else
-              echo "❌ Failed to login with temporary password."
-              exit 1
-            fi
-        fi
-
-        echo "🔍 Checking if Admin password matches Sops secret..."
-
         if ! $KANIDM_BIN login -H "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")"; then
-          echo "X Error: Admin password does not match Sops secret. Aborting."
+          echo "Error: Admin password does not match Sops secret. Aborting."
           exit 1
         fi
 
