@@ -19,7 +19,9 @@ in
       options = [ "bind" ];
     };
 
-    systemd.services.kanidm.requiresMountsFor = [ "/var/lib/kanidm" ];
+    systemd.services.kanidm.unitConfig = {
+      RequiresMountsFor = "/var/lib/kanidm";
+    };
 
     sops.secrets = {
       "kanidm/adminPassword" = {
