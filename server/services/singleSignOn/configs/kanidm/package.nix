@@ -59,7 +59,7 @@ let
       # 1. FINDING THE SOURCE
       # We look for the 'hpkg' directory inside the ORIGINAL base package.
       # This guarantees we find the real source files.
-      SOURCE_PKG_DIR=$(find ${cfg.basePackage} -type d -name "hpkg" | head -n 1)
+      SOURCE_PKG_DIR=$(find ${config.server.services.singleSignOn.kanidm.basePackage} -type d -name "hpkg" | head -n 1)
 
       if [ -z "$SOURCE_PKG_DIR" ]; then
         echo "Error: Could not find 'hpkg' in base package."
@@ -69,7 +69,7 @@ let
       # 2. FINDING THE DESTINATION
       # We determine where that directory ended up in our new $out path.
       # We strip the base package prefix to get the relative path.
-      REL_PATH=''${SOURCE_PKG_DIR#${cfg.basePackage}/}
+      REL_PATH=''${SOURCE_PKG_DIR#${config.server.services.singleSignOn.kanidm.basePackage}/}
       TARGET_PKG_DIR="$out/$REL_PATH"
 
       echo "Replacing UI directory..."
