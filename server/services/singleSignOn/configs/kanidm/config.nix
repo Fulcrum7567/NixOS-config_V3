@@ -75,14 +75,6 @@ in
             present = true;
             members = [ ];
           };
-          "admin" = {
-            present = true;
-            members = [ ];
-          };
-          "users" = {
-            present = true;
-            members = [ ];
-          };
         };
 
         systems.oauth2 = lib.mapAttrs (name: service: {
