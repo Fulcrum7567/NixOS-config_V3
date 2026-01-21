@@ -44,10 +44,17 @@ let
 
   customKanidmPackage = pkgs-default.symlinkJoin {
     name = "kanidm-customized";
-    paths = [ config.server.services.singleSignOn.kanidm.basePackage ]; # Use the basePackage defined in options
+    paths = [ config.server.services.singleSignOn.kanidm.basePackage ]; 
     buildInputs = [ pkgs-default.makeWrapper ];
+    
+    # FIX: Explicitly pass through the required flag from the original package
+    passthru = {
+      enableSecretProvisioning = config.server.services.singleSignOn.kanidm.basePackage.enableSecretProvisioning or false;
+      # Pass through the version just in case other things need it
+      version = config.server.services.singleSignOn.kanidm.basePackage.version or "custom";
+    };
+
     postBuild = ''
-      # Locate the 'pkg' directory in the output (which is currently a symlink)
       TARGET_PKG_DIR=$(find $out -type d -name "pkg" | head -n 1)
 
       if [ -z "$TARGET_PKG_DIR" ]; then
@@ -57,21 +64,10 @@ let
 
       echo "Un-symlinking UI directory at $TARGET_PKG_DIR..."
 
-      # CRITICAL STEP:
-      # symlinkJoin creates symlinks to the read-only Nix store. 
-      # We cannot edit files inside a symlinked directory.
-      # We must remove the symlink and copy the actual directory contents to make it writable.
-      
-      # 1. Resolve where the symlink points to (the original read-only dir)
       ORIG_DIR=$(readlink -f "$TARGET_PKG_DIR")
-      
-      # 2. Remove the symlink from our new package tree
       rm "$TARGET_PKG_DIR"
-      
-      # 3. Copy the original directory contents here (now writable!)
       cp -r "$ORIG_DIR" "$TARGET_PKG_DIR"
       
-      # 4. Now we can safely overwrite the files
       echo "Injecting custom assets..."
       
       cp ${cfg.favicon} "$TARGET_PKG_DIR/img/favicon.svg"
