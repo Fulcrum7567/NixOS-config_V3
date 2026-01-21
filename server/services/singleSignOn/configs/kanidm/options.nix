@@ -240,7 +240,7 @@ let
     }
 
   '';
-
+in
 {
   config.server.services.singleSignOn.availableConfigs = [ "kanidm" ];
 
