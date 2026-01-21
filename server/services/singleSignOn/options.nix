@@ -45,7 +45,7 @@
 
     domainIcon = lib.mkOption {
       type = lib.types.path;
-      default = ./bin/icons/lockPerson.svg;
+      default = ./bin/icons/passkey.svg;
       description = "Path to an image file (e.g., logo) for the single sign-on service.";
     };
 
