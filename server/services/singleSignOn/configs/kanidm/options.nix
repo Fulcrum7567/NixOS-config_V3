@@ -26,7 +26,7 @@ let
     }
 
     .form-signin {
-      padding: 2rem;
+      padding: 4rem;
       max-width: 800px;
       position: relative;
       background: rgba(255, 255, 255, 0.15);
