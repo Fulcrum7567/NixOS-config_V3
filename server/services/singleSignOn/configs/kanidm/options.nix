@@ -28,7 +28,11 @@ let
     .form-signin {
       padding: 4rem;
       max-width: 800px;
-      position: relative;
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(2px) saturate(180%);
       border: 1px solid rgba(255, 255, 255, 0.8);
