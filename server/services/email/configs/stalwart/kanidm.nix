@@ -25,6 +25,7 @@ in
       directory."kanidm" = {
         type = "ldap";
         url = "ldaps://${config.server.services.singleSignOn.fullDomainName}:636";
+        base-dn = "dc=kanidm,dc=local";
 
         bind = {
           dn = "dn=token"; # Adjust based on Kanidm config
@@ -48,7 +49,6 @@ in
 
         # Default query for finding users
         search = {
-          base = "dc=kanidm,dc=local"; # Adjust to your Kanidm domain
           filter = "(&(objectClass=person)(mail=%{email}))";
         };
       };

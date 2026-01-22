@@ -12,7 +12,7 @@
       };
     };
 
-    users.users.stalwart-mail.extraGroups = [ "acme" ];
+    users.users.stalwart-mail.extraGroups = [ "nginx" ];
 
     services.stalwart-mail = {
       enable = true;
