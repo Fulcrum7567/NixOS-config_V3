@@ -37,7 +37,7 @@ in
       };
     };
 
-    server.services.singleSignOn.oAuthServices."stalwart" = {
+    server.services.singleSignOn.oAuthServices."stalwart-mail" = {
       displayName = "Stalwart Mail";
       originUrl = [ "https://${config.server.services.email.fullDomainName}/auth/oidc" ];
       originLanding = "https://${config.server.services.email.fullDomainName}";
@@ -82,9 +82,9 @@ in
 
       authentication.oidc = {
         method = "oidc";
-        client-id = "stalwart";
+        client-id = "stalwart-mail";
         client-secret = "%{file:${config.sops.secrets."stalwart/oidc_secret".path}}%";
-        issuer = "https://${config.server.services.singleSignOn.fullDomainName}/oauth2/openid/stalwart";
+        issuer = "https://${config.server.services.singleSignOn.fullDomainName}/oauth2/openid/stalwart-mail";
         scopes = [ "openid" "profile" "email" ];
         redirect-url = "https://${config.server.services.email.fullDomainName}/auth/oidc";
         directory = "kanidm";
