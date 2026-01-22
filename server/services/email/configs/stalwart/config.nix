@@ -15,7 +15,7 @@
     services.stalwart-mail = {
       enable = true;
       
-      data-dir = "${config.server.system.filesystem.defaultDataDir}/stalwart-mail";
+      dataDir = "${config.server.system.filesystem.defaultDataDir}/stalwart-mail";
       # Stalwart Settings (Reference: https://stalw.art/docs/config)
       settings = {
         server = {

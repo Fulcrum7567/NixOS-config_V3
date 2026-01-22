@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  stalwartTokenFile = "${config.services.stalwart-mail.data-dir}/kanidm_bind_token";
+  stalwartTokenFile = "${config.services.stalwart-mail.dataDir}/kanidm_bind_token";
 in
 {
   config = lib.mkIf (config.server.services.email.enable && (config.server.services.email.activeConfig == "stalwart") && 
