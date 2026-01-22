@@ -39,7 +39,7 @@
 
     fullDomainName = lib.mkOption {
       type = lib.types.str;
-      default = "${config.server.services.singleSignOn.subdomain}.${config.server.domainName}";
+      default = "${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}";
       description = "The full domain name to access the single sign-on service.";
     };
 
