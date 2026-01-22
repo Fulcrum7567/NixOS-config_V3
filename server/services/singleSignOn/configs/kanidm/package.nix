@@ -75,6 +75,7 @@ let
       ${lib.optionalString (cfg.customCss != null) ''
         rm -f "$TARGET_PKG_DIR/style.css"
         cp -f ${cfg.customCss} "$TARGET_PKG_DIR/style.css"
+        chmod +w "$TARGET_PKG_DIR/style.css"
       ''}
       
 
