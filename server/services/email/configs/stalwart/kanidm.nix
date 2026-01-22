@@ -17,7 +17,7 @@ in
     };
     
     services.stalwart-mail.settings = {
-      directory.kanidm = {
+      directory."kanidm" = {
         type = "ldap";
         address = "ldaps://${config.server.services.singleSignOn.fullDomainName}:636";
 
