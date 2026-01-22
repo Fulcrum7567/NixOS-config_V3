@@ -27,7 +27,7 @@
 
     fullDomainName = lib.mkOption {
       type = lib.types.str;
-      default = "${config.server.services.email.subdomain}.${config.server.domainName}";
+      default = "${config.server.services.email.subdomain}.${config.server.webaddress}";
       description = "The full domain name to access the Email service.";
     };
 
