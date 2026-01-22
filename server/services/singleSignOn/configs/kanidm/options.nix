@@ -262,7 +262,7 @@ in
 
       favicon = lib.mkOption {
         type = lib.types.path;
-        default = ../../bin/icons/lockPerson.png;
+        default = ../../bin/icons/holocron.png;
         description = "Path to the favicon for Kanidm SSO pages. Has to be a PNG image.";
       };
 
