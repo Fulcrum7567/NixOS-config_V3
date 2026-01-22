@@ -74,7 +74,7 @@ in
         # CAUTION: Output format parsing. We assume the token is the last line or specific format.
         # Kanidm usually outputs: "Token: <ActualToken>"
         
-        RAW_OUTPUT=$($KANIDM_BIN service-account api-token generate --name "$MANAGED_BY" "$STALWART_USER" "stalwart-ldap-bind" --url "$KANIDM_URL" --name "$IDM_ADMIN")
+        RAW_OUTPUT=$($KANIDM_BIN service-account api-token generate --name "$MANAGED_BY" "$STALWART_USER" "stalwart-ldap-bind" --url "$KANIDM_URL")
         
         # Extract the token (simple awk to get the last word if format is "Token: XXXXX")
         # Adjust this parsing if your kanidm version output differs.
