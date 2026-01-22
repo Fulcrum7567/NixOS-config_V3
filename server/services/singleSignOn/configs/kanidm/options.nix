@@ -27,7 +27,7 @@ let
 
     .form-signin {
       padding: 4rem;
-      max-width: 800px;
+      max-width: 600px;
       width: 100%;
       position: absolute;
       top: 50%;
