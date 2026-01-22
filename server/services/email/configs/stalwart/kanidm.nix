@@ -54,6 +54,10 @@ in
       };
 
       storage.directory = "kanidm";
+
+      authentication.kanidm = {
+        directory = "kanidm";
+      };
     };
 
 
