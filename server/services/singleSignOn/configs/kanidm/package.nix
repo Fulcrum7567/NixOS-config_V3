@@ -71,6 +71,11 @@ let
       chmod -R +w "$TARGET_PKG_DIR"
       
       echo "Injecting custom assets into $TARGET_PKG_DIR..."
+
+      ${lib.optionalString (cfg.customCss != null) ''
+        rm -f "$TARGET_PKG_DIR/style.css"
+        cp -f ${cfg.customCss} "$TARGET_PKG_DIR/style.css"
+      ''}
       
 
       # 4. INJECT FAVICON (PNG)
