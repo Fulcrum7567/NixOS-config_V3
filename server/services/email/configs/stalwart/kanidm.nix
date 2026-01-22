@@ -55,20 +55,20 @@
         STALWART_USER="stalwart"
         # Path to the secret provided by sops-nix
         SECRET_FILE="${config.sops.secrets."stalwart/kanidm_bind_password".path}"
-        MANAGED_BY="admin"
+        MANAGED_BY="idm_admin"
         
         # 1. Create the account if it doesn't exist
         # We suppress output to keep logs clean, checking exit code
-        if ! $KANIDM_BIN service-account get "$STALWART_USER" --url "$KANIDM_URL" --name "$ADMIN" >/dev/null 2>&1; then
+        if ! $KANIDM_BIN service-account get "$STALWART_USER" --url "$KANIDM_URL" --name "$IDM_ADMIN" >/dev/null 2>&1; then
           echo "Creating Stalwart service account..."
-          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$MANAGED_BY" --url "$KANIDM_URL" --name "$ADMIN"
+          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$MANAGED_BY" --url "$KANIDM_URL" --name "$IDM_ADMIN"
         fi
 
         # 2. Sync the password
         # We always update the password to match what is in the sops secret.
         # This ensures that if you rotate the secret in sops, Kanidm gets updated automatically.
         if [ -f "$SECRET_FILE" ]; then
-          cat "$SECRET_FILE" | $KANIDM_BIN service-account credential update-password "$STALWART_USER" --url "$KANIDM_URL" --name "$ADMIN"
+          cat "$SECRET_FILE" | $KANIDM_BIN service-account credential update-password "$STALWART_USER" --url "$KANIDM_URL" --name "$IDM_ADMIN"
         else
           echo "WARNING: Stalwart secret file not found at $SECRET_FILE"
         fi
