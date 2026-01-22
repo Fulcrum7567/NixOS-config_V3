@@ -26,6 +26,7 @@ let
     }
 
     .form-signin {
+      padding: 2rem;
       max-width: 800px;
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(20px);
