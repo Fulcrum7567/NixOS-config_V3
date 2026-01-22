@@ -78,7 +78,7 @@ in
         
         # Extract the token (simple awk to get the last word if format is "Token: XXXXX")
         # Adjust this parsing if your kanidm version output differs.
-        TOKEN=$(echo "$RAW_OUTPUT" | awk '/Token:/ {print $NF}')
+        TOKEN=$(echo "$RAW_OUTPUT" | tail -n 1 | tr -d '[:space:]')
         
         if [ -n "$TOKEN" ]; then
           # Ensure the directory exists
