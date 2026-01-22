@@ -49,6 +49,7 @@
           proxyWebsockets = true;
         }; 
       };
+    };
 
 
     networking.firewall.allowedTCPPorts = [ 
