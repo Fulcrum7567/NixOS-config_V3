@@ -46,6 +46,37 @@
             enable = true;
             implicit = true; # Enforce TLS
           };
+          listener = {
+            "smtp" = {
+              bind = [ "[::]:25" ];
+              protocol = "smtp";
+              tls.implicit = false;
+            };
+            "submission" = {
+              bind = [ "[::]:587" ];
+              protocol = "smtp";
+              tls.implicit = false;
+            };
+            "submissions" = {
+              bind = [ "[::]:465" ];
+              protocol = "smtp";
+              tls.implicit = true;
+            };
+            "imaps" = {
+              bind = [ "[::]:993" ];
+              protocol = "imap";
+              tls.implicit = true;
+            };
+            "managesieve" = {
+              bind = [ "[::]:4190" ];
+              protocol = "managesieve";
+              tls.implicit = true;
+            };
+            "http" = {
+              bind = [ "127.0.0.1:8080" ];
+              protocol = "http";
+            };
+          };
         };
 
         authentication.fallback-admin = {
