@@ -68,7 +68,7 @@
         # We always update the password to match what is in the sops secret.
         # This ensures that if you rotate the secret in sops, Kanidm gets updated automatically.
         if [ -f "$SECRET_FILE" ]; then
-          cat "$SECRET_FILE" | $KANIDM_BIN service-account credential update-password "$STALWART_USER" --url "$KANIDM_URL" --name "$IDM_ADMIN"
+          cat "$SECRET_FILE" | $KANIDM_BIN account reset-password "$STALWART_USER" --url "$KANIDM_URL" --name "$IDM_ADMIN" || echo "Failed to set password. See logs."
         else
           echo "WARNING: Stalwart secret file not found at $SECRET_FILE"
         fi
