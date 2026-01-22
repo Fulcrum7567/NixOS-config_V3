@@ -48,6 +48,8 @@ in
         # If using ACME from Nginx, Kanidm needs access to those certs.
         tls_chain = "/var/lib/acme/${config.server.webaddress}/fullchain.pem";
         tls_key = "/var/lib/acme/${config.server.webaddress}/key.pem";
+
+        ldapbindaddress = "[::]:636";
       };
 
       provision = {
@@ -116,8 +118,6 @@ in
       };
     };
 
-
-
     systemd.services.kanidm-ensure-declarativity = {
       description = "Kanidm ensure declarative configuration matches NixOS configuration";
       wantedBy = [ "multi-user.target" ];
@@ -159,6 +159,12 @@ in
 
         echo "🔄 Applying declarative configuration to Kanidm..."
 
+        ${if cfg.kanidm.extraIterativeSteps != "" then
+          cfg.kanidm.extraIterativeSteps
+        else
+          ""
+        }
+
         # Setting image for OAuth clients
         echo "🔧 Setting OAuth client images with this command:"
         echo "$KANIDM_BIN system domain set-image ${cfg.domainIcon} svg --url \"$KANIDM_URL\" --name \"$ADMIN\""
@@ -174,5 +180,7 @@ in
         echo "✅ Declarative configuration applied successfully."
       '';
     };
+
+    networking.firewall.allowedTCPPorts = [ 636 ];
   };
 }

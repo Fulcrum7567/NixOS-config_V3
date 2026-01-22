@@ -37,6 +37,12 @@
       description = "The subdomain to use for the single sign-on service.";
     };
 
+    fullDomainName = lib.mkOption {
+      type = lib.types.str;
+      default = "${config.server.services.singleSignOn.subdomain}.${config.server.domainName}";
+      description = "The full domain name to access the single sign-on service.";
+    };
+
     port = lib.mkOption {
       type = lib.types.int;
       default = 8443;

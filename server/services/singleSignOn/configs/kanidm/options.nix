@@ -315,6 +315,12 @@ in
       description = "The base Kanidm package to use for the SSO service.";
     };
 
+    extraIterativeSteps = lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+      description = "Extra iterative steps to run during Kanidm provisioning.";
+    };
+
     customStyling = {
       enable = lib.mkOption {
         type = lib.types.bool;

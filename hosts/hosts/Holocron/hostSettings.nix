@@ -38,6 +38,11 @@
 					exposeGUI = true;
 				};
 
+				email = {
+					enable = true;
+					activeConfig = "stalwart";
+				};
+
 				syncthing = {
 					enable = true;
 					exposeGUI = true;
