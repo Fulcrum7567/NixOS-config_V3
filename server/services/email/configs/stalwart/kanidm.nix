@@ -55,12 +55,13 @@
         STALWART_USER="stalwart"
         # Path to the secret provided by sops-nix
         SECRET_FILE="${config.sops.secrets."stalwart/kanidm_bind_password".path}"
+        MANAGED_BY="admin"
         
         # 1. Create the account if it doesn't exist
         # We suppress output to keep logs clean, checking exit code
         if ! $KANIDM_BIN service-account get "$STALWART_USER" >/dev/null 2>&1; then
           echo "Creating Stalwart service account..."
-          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail"
+          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$MANAGED_BY"
         fi
 
         # 2. Sync the password
