@@ -12,6 +12,8 @@
       };
     };
 
+    users.users.stalwart-mail.extraGroups = [ "acme" ];
+
     services.stalwart-mail = {
       enable = true;
       

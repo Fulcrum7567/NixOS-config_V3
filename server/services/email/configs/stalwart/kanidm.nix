@@ -6,6 +6,11 @@ in
   config = lib.mkIf (config.server.services.email.enable && (config.server.services.email.activeConfig == "stalwart") && 
   (config.server.services.singleSignOn.enable && (config.server.services.singleSignOn.activeConfig == "kanidm"))) {
 
+    systemd.services.stalwart-mail = {
+      requires = [ "kanidm-ensure-declarativity.service" ];
+      after = [ "kanidm-ensure-declarativity.service" ];
+    };
+
     sops.secrets = {
       "stalwart/kanidm_bind_password" = {
         owner = "stalwart-mail";
@@ -19,7 +24,7 @@ in
     services.stalwart-mail.settings = {
       directory."kanidm" = {
         type = "ldap";
-        address = "ldaps://${config.server.services.singleSignOn.fullDomainName}:636";
+        url = "ldaps://${config.server.services.singleSignOn.fullDomainName}:636";
 
         bind = {
           dn = "dn=token"; # Adjust based on Kanidm config
