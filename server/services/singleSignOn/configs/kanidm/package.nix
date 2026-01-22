@@ -67,8 +67,18 @@ let
       
       # Remove the symlink and copy the real directory so we can edit it
       rm -rf "$TARGET_PKG_DIR"
-      cp -r "$SOURCE_PKG_DIR" "$TARGET_PKG_DIR"
-      chmod -R +w "$TARGET_PKG_DIR"
+
+      cp -r --no-preserve=mode "$SOURCE_PKG_DIR" "$TARGET_PKG_DIR"
+
+      # 3. FIX PERMISSIONS SURGICALLY
+      # Make the main directories writable so we can add/remove files
+      chmod u+w "$TARGET_PKG_DIR"
+      chmod u+w "$TARGET_PKG_DIR/img"
+      
+      # Make style.css writable specifically (ignoring other files to avoid symlink errors)
+      if [ -f "$TARGET_PKG_DIR/style.css" ]; then
+        chmod u+w "$TARGET_PKG_DIR/style.css"
+      fi
       
       echo "Injecting custom assets into $TARGET_PKG_DIR..."
 
