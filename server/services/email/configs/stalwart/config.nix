@@ -20,6 +20,26 @@
       dataDir = "${config.server.system.filesystem.defaultDataDir}/stalwart-mail";
       # Stalwart Settings (Reference: https://stalw.art/docs/config)
       settings = {
+        config.local-keys = [
+          "store.*"
+          "directory.*"
+          "tracer.*"
+          "!server.blocked-ip.*"
+          "!server.allowed-ip.*"
+          "server.*"
+          "authentication.fallback-admin.*"
+          "cluster.*"
+          "config.local-keys.*"
+          "storage.data"
+          "storage.blob"
+          "storage.lookup"
+          "storage.fts"
+          "storage.directory"
+          "certificate.*"
+          "resolver.*"
+          "spam-filter.*"
+          "webadmin.*"
+        ];
         server = {
           hostname = config.server.services.email.fullDomainName;
           tls = {
