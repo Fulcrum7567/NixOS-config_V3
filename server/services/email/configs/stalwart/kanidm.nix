@@ -1,4 +1,7 @@
 { config, lib, ... }:
+let
+  stalwartTokenFile = "${config.services.stalwart-mail.data-dir}/kanidm_bind_token";
+in
 {
   config = lib.mkIf (config.server.services.email.enable && (config.server.services.email.activeConfig == "stalwart") && 
   (config.server.services.singleSignOn.enable && (config.server.services.singleSignOn.activeConfig == "kanidm"))) {
@@ -19,8 +22,8 @@
         address = "ldaps://${config.server.services.singleSignOn.fullDomainName}:636";
 
         bind = {
-          dn = "name=stalwart,cn=services,dc=kanidm,dc=local"; # Adjust based on Kanidm config
-          secret = "%{file:${config.sops.secrets."stalwart/kanidm_bind_password".path}}%";
+          dn = "dn=token"; # Adjust based on Kanidm config
+          secret = "%{file:${stalwartTokenFile}}%";
         };
 
         # LDAP Mapping
@@ -50,34 +53,54 @@
 
 
     server.services.singleSignOn.kanidm.extraIterativeIdmSteps = ''
-        # --- Stalwart Service Account Provisioning ---
-        
-        STALWART_USER="stalwart"
-        # Path to the secret provided by sops-nix
-        SECRET_FILE="${config.sops.secrets."stalwart/kanidm_bind_password".path}"
-        MANAGED_BY="idm_admin"
-        
-        # 1. Create the account if it doesn't exist
-        # We suppress output to keep logs clean, checking exit code
-        if ! $KANIDM_BIN service-account get "$STALWART_USER" --url "$KANIDM_URL" --name "$IDM_ADMIN" >/dev/null 2>&1; then
-          echo "Creating Stalwart service account..."
-          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$MANAGED_BY" --url "$KANIDM_URL" --name "$IDM_ADMIN"
-        fi
+      # --- Stalwart Service Account & Token Provisioning ---
+      
+      STALWART_USER="stalwart"
+      MANAGED_BY="idm_admin"
+      TOKEN_FILE="${stalwartTokenFile}"
+      
+      # 1. Create the account if it doesn't exist
+      if ! $KANIDM_BIN service-account get "$STALWART_USER" --url "$KANIDM_URL" --name "$IDM_ADMIN" >/dev/null 2>&1; then
+        echo "Creating Stalwart service account..."
+        $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$MANAGED_BY" --url "$KANIDM_URL" --name "$IDM_ADMIN"
+      fi
 
-        # 2. Sync the password
-        # We always update the password to match what is in the sops secret.
-        # This ensures that if you rotate the secret in sops, Kanidm gets updated automatically.
-        if [ -f "$SECRET_FILE" ]; then
-          cat "$SECRET_FILE" | $KANIDM_BIN account reset-password "$STALWART_USER" --url "$KANIDM_URL" --name "$IDM_ADMIN" || echo "Failed to set password. See logs."
+      # 2. Provision the Token (Stateful Check)
+      # We only generate a token if the file doesn't exist on disk.
+      if [ ! -f "$TOKEN_FILE" ]; then
+        echo "Generating new API Token for Stalwart..."
+        
+        # We ask Kanidm for a new token. 
+        # CAUTION: Output format parsing. We assume the token is the last line or specific format.
+        # Kanidm usually outputs: "Token: <ActualToken>"
+        
+        RAW_OUTPUT=$($KANIDM_BIN service-account api-token generate --name "$MANAGED_BY" "$STALWART_USER" "stalwart-ldap-bind" --url "$KANIDM_URL" --name "$IDM_ADMIN")
+        
+        # Extract the token (simple awk to get the last word if format is "Token: XXXXX")
+        # Adjust this parsing if your kanidm version output differs.
+        TOKEN=$(echo "$RAW_OUTPUT" | awk '/Token:/ {print $NF}')
+        
+        if [ -n "$TOKEN" ]; then
+          # Ensure the directory exists
+          mkdir -p $(dirname "$TOKEN_FILE")
+          
+          # Write to file
+          echo -n "$TOKEN" > "$TOKEN_FILE"
+          
+          # Secure the file (Stalwart needs to read it)
+          chown stalwart-mail:stalwart-mail "$TOKEN_FILE"
+          chmod 600 "$TOKEN_FILE"
+          
+          echo "✅ Token generated and saved to $TOKEN_FILE"
         else
-          echo "WARNING: Stalwart secret file not found at $SECRET_FILE"
+          echo "❌ Failed to extract token from Kanidm output."
+          echo "Raw output: $RAW_OUTPUT"
         fi
-
-        # 3. (Optional) Permissions
-        # By default, a service account can read public info (which is usually enough 
-        # for Stalwart to find users). If Stalwart logs errors about permissions,
-        # you might need to add the account to a group with read claims, 
-        # but standard LDAP bind/search usually works out of the box.
-      '';
+      else
+        # Ensure permissions are correct even if file exists
+        chown stalwart-mail:stalwart-mail "$TOKEN_FILE"
+        chmod 600 "$TOKEN_FILE"
+      fi
+    '';
   };
 }
