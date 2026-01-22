@@ -61,14 +61,14 @@
         # We suppress output to keep logs clean, checking exit code
         if ! $KANIDM_BIN service-account get "$STALWART_USER" >/dev/null 2>&1; then
           echo "Creating Stalwart service account..."
-          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$MANAGED_BY"
+          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$MANAGED_BY" --url "$KANIDM_URL" --name "$ADMIN"
         fi
 
         # 2. Sync the password
         # We always update the password to match what is in the sops secret.
         # This ensures that if you rotate the secret in sops, Kanidm gets updated automatically.
         if [ -f "$SECRET_FILE" ]; then
-          cat "$SECRET_FILE" | $KANIDM_BIN service-account credential update-password "$STALWART_USER"
+          cat "$SECRET_FILE" | $KANIDM_BIN service-account credential update-password "$STALWART_USER" --url "$KANIDM_URL" --name "$ADMIN"
         else
           echo "WARNING: Stalwart secret file not found at $SECRET_FILE"
         fi
