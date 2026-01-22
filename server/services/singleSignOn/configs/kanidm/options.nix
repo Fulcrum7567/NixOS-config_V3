@@ -315,10 +315,16 @@ in
       description = "The base Kanidm package to use for the SSO service.";
     };
 
+    extraIterativeIdmSteps = lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+      description = "Extra iterative steps to run during Kanidm provisioning. Run with idm_admin account.";
+    };
+
     extraIterativeSteps = lib.mkOption {
       type = lib.types.lines;
       default = "";
-      description = "Extra iterative steps to run during Kanidm provisioning.";
+      description = "Extra iterative steps to run during Kanidm provisioning. Run with admin account.";
     };
 
     customStyling = {

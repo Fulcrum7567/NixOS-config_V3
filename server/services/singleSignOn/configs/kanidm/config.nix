@@ -136,6 +136,7 @@ in
 
         KANIDM_URL="https://${cfg.subdomain}.${config.server.webaddress}"
         ADMIN="admin"
+        IDM_ADMIN="idm_admin"
         SOPS_PASS_FILE="${config.sops.secrets."kanidm/adminPassword".path}"
         KANIDM_BIN="${config.services.kanidm.package}/bin/kanidm"
         KANIDMD_BIN="${config.services.kanidm.package}/bin/kanidmd"
@@ -149,6 +150,22 @@ in
         echo "🏷️  Ensuring Kanidm service is running..."
 
         until systemctl is-active --quiet kanidm; do sleep 1; done
+
+        if ! $KANIDM_BIN login -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"; then
+          echo "Error: IDM admin password does not match Sops secret. Aborting."
+          exit 1
+        fi
+
+        echo "✅ IDM admin password matches Sops secret."
+
+        ${if cfg.kanidm.extraIterativeIdmSteps != "" then
+          cfg.kanidm.extraIterativeIdmSteps
+        else
+          ""
+        }
+
+        $KANIDM_BIN logout -H "$KANIDM_URL" --name "$IDM_ADMIN"
+
 
         if ! $KANIDM_BIN login -H "$KANIDM_URL" --name "$ADMIN" --password "$(cat "$SOPS_PASS_FILE")"; then
           echo "Error: Admin password does not match Sops secret. Aborting."

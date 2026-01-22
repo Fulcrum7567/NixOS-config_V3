@@ -49,7 +49,7 @@
     };
 
 
-    server.services.singleSignOn.kanidm.extraIterativeSteps = ''
+    server.services.singleSignOn.kanidm.extraIterativeIdmSteps = ''
         # --- Stalwart Service Account Provisioning ---
         
         STALWART_USER="stalwart"
@@ -59,7 +59,7 @@
         
         # 1. Create the account if it doesn't exist
         # We suppress output to keep logs clean, checking exit code
-        if ! $KANIDM_BIN service-account get "$STALWART_USER" >/dev/null 2>&1; then
+        if ! $KANIDM_BIN service-account get "$STALWART_USER" --url "$KANIDM_URL" --name "$ADMIN" >/dev/null 2>&1; then
           echo "Creating Stalwart service account..."
           $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$MANAGED_BY" --url "$KANIDM_URL" --name "$ADMIN"
         fi
