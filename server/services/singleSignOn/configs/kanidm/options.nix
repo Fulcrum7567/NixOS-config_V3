@@ -199,6 +199,13 @@ let
       border-radius: 2rem;
       box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), 
                   inset 0 4px 20px rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 40px rgba(31, 38, 135, 0.4), 
+                  inset 0 4px 20px rgba(255, 255, 255, 0.3);
     }
 
     .card::after {
