@@ -19,6 +19,31 @@ in
         format = "yaml";
         key = "kanidm_link";
       };
+
+      "stalwart/oidc_secret" = {
+        owner = "stalwart-mail";
+        group = "stalwart-mail";
+        sopsFile = ./stalwartSecrets.yaml;
+        format = "yaml";
+        key = "oidc_secret";
+      };
+
+      "kanidm/stalwart_oidc_secret" = {
+        owner = config.server.services.singleSignOn.serviceUsername;
+        group = config.server.services.singleSignOn.serviceGroup;
+        sopsFile = ./stalwartSecrets.yaml;
+        format = "yaml";
+        key = "oidc_secret";
+      };
+    };
+
+    server.services.singleSignOn.oAuthServices."stalwart" = {
+      displayName = "Stalwart Mail";
+      originUrl = [ "https://${config.server.services.email.fullDomainName}/auth/oidc" ];
+      originLanding = "https://${config.server.services.email.fullDomainName}";
+      basicSecretFile = config.sops.secrets."kanidm/stalwart_oidc_secret".path;
+      groupName = "stalwart_users";
+      scopes = [ "openid" "profile" "email" ];
     };
     
     services.stalwart-mail.settings = {
@@ -55,7 +80,13 @@ in
 
       storage.directory = "kanidm";
 
-      authentication.kanidm = {
+      authentication.oidc = {
+        method = "oidc";
+        client-id = "stalwart";
+        client-secret = "%{file:${config.sops.secrets."stalwart/oidc_secret".path}}%";
+        issuer = "https://${config.server.services.singleSignOn.fullDomainName}/oauth2/openid/stalwart";
+        scopes = [ "openid" "profile" "email" ];
+        redirect-url = "https://${config.server.services.email.fullDomainName}/auth/oidc";
         directory = "kanidm";
       };
     };
