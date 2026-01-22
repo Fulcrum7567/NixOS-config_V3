@@ -233,6 +233,12 @@ let
       cursor: pointer;
     }
 
+    .footer {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(2px) saturate(180%);
+      opacity: 0.8;
+    }
+
     @media (forced-colors: active) and (prefers-color-scheme: light) {
       .form-check-input:checked {
         background-color: ButtonText !important;
