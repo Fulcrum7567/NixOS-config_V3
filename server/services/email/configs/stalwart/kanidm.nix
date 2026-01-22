@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  stalwartTokenFile = "${config.services.stalwart-mail.dataDir}/kanidm_bind_token";
+  stalwartTokenFile = "${config.services.stalwart-mail.dataDir}/kanidm_bind_token_v2";
 in
 {
   config = lib.mkIf (config.server.services.email.enable && (config.server.services.email.activeConfig == "stalwart") && 
@@ -37,7 +37,7 @@ in
       };
     };
 
-    server.services.singleSignOn.oAuthServices."stalwart-mail" = {
+    server.services.singleSignOn.oAuthServices."stalwart-sso" = {
       displayName = "Stalwart Mail";
       originUrl = [ "https://${config.server.services.email.fullDomainName}/auth/oidc" ];
       originLanding = "https://${config.server.services.email.fullDomainName}";
@@ -82,9 +82,9 @@ in
 
       authentication.oidc = {
         method = "oidc";
-        client-id = "stalwart-mail";
+        client-id = "stalwart-sso";
         client-secret = "%{file:${config.sops.secrets."stalwart/oidc_secret".path}}%";
-        issuer = "https://${config.server.services.singleSignOn.fullDomainName}/oauth2/openid/stalwart-mail";
+        issuer = "https://${config.server.services.singleSignOn.fullDomainName}/oauth2/openid/stalwart-sso";
         scopes = [ "openid" "profile" "email" ];
         redirect-url = "https://${config.server.services.email.fullDomainName}/auth/oidc";
         directory = "kanidm";
@@ -95,7 +95,7 @@ in
     server.services.singleSignOn.kanidm.extraIterativeIdmSteps = ''
       # --- Stalwart Service Account & Token Provisioning ---
       
-      STALWART_USER="stalwart"
+      STALWART_USER="stalwart-ldap"
       MANAGED_BY="idm_admin"
       TOKEN_FILE="${stalwartTokenFile}"
       
