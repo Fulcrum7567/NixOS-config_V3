@@ -119,7 +119,7 @@ in
         preferShortUsername = true; 
         groupName = "stalwart-users"; 
         scopes = [ "openid" "profile" "email" ];
-        extraconfig = ''
+        extraConfig = ''
           proxy_set_header X-Forwarded-Proto $scheme;
         '';
       };
