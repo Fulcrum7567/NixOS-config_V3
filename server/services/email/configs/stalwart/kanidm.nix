@@ -52,6 +52,9 @@ in
           bind = {
             dn = "name=stalwart-ldap"; # Adjust based on Kanidm config
             secret = "%{file:${stalwartTokenFile}}%";
+            auth = {
+              method = "lookup";
+            };
           };
           
           # Construct Base DN from domain (e.g. aurek.eu -> dc=aurek,dc=eu)
@@ -68,7 +71,7 @@ in
 
         "kanidm-oidc" = {
           type = "oidc";
-          url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/stalwart-mail"; 
+          url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/stalwart-mail/userinfo"; 
           client-id = "stalwart-mail";
           client-secret = "%{file:${config.sops.secrets."stalwart/clientSecret".path}}%";
           
@@ -103,7 +106,7 @@ in
         directory = "kanidm-oidc"; 
       };
 
-      storage.directory = "kanidm-ldap";
+      # storage.directory = "kanidm-ldap";
     };
 
 
