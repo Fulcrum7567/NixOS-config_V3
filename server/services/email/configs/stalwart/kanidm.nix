@@ -94,7 +94,9 @@ in
       };
 
       # Allow users to be automatically created when they login
-      session.auth.auto-create = trueuthentication.fallback-ldap = {
+      session.auth.auto-create = true;
+      
+      authentication.fallback-ldap = {
         directory = "kanidm-ldap";
       };
 
