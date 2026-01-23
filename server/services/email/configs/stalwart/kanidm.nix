@@ -53,6 +53,12 @@ in
             dn = "name=stalwart-ldap"; # Adjust based on Kanidm config
             secret = "%{file:${stalwartTokenFile}}%";
           };
+          
+          # IMPORTANT: We need a Base DN for LDAP queries.
+          # Kanidm usually uses a flat structure, but we need to specify a base to start searching.
+          # We can't query the root DSE freely without it.
+          # For Kanidm, we can usually search from the top.
+          base-dn = "";
 
           # LDAP Mapping
           # Kanidm uses standard attributes usually, but double check your schema
@@ -69,6 +75,9 @@ in
           client-id = "stalwart-mail";
           client-secret = "%{file:${config.sops.secrets."stalwart/clientSecret".path}}%";
           
+          # We must specify the endpoint method. 'post' is standard for client_secret_post
+          endpoint.method = "post"; 
+
           # Map OIDC claims to Stalwart attributes
           map = {
             name = "name";
