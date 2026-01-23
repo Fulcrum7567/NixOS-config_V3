@@ -54,11 +54,8 @@ in
             secret = "%{file:${stalwartTokenFile}}%";
           };
           
-          # IMPORTANT: We need a Base DN for LDAP queries.
-          # Kanidm usually uses a flat structure, but we need to specify a base to start searching.
-          # We can't query the root DSE freely without it.
-          # For Kanidm, we can usually search from the top.
-          base-dn = "";
+          # Construct Base DN from domain (e.g. aurek.eu -> dc=aurek,dc=eu)
+          base-dn = builtins.concatStringsSep "," (map (s: "dc=${s}") (lib.splitString "." config.server.webaddress));
 
           # LDAP Mapping
           # Kanidm uses standard attributes usually, but double check your schema
@@ -75,8 +72,8 @@ in
           client-id = "stalwart-mail";
           client-secret = "%{file:${config.sops.secrets."stalwart/clientSecret".path}}%";
           
-          # We must specify the endpoint method. 'post' is standard for client_secret_post
-          endpoint.method = "post"; 
+          # Use userinfo endpoint to fetch claims (standard for OIDC directories)
+          endpoint.method = "userinfo"; 
 
           # Map OIDC claims to Stalwart attributes
           map = {
@@ -106,6 +103,16 @@ in
 
         # 2. Provision the Token
         # We only generate a token if the file doesn't exist on disk.
+        
+        # Helper check: If service account is missing but token exists, force token regeneration
+        # This handles cases where account was deleted but file remained.
+        if ! $KANIDM_BIN service-account get "$STALWART_USER" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
+           if [ -f "$TOKEN_FILE" ]; then
+             echo "Updating state: Service account missing but token file exists. Validating..."
+             # We assume token is invalid if account is gone.
+             rm "$TOKEN_FILE"
+           fi
+        fi
         if [ ! -f "$TOKEN_FILE" ]; then
           echo "Token file missing. Setting up service account and token..."
 
