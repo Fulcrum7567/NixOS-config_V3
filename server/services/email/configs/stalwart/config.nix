@@ -82,6 +82,18 @@
           };
         };
 
+        directory."static" = {
+          type = "memory";
+          principals = [
+            # --- Your Domain ---
+            {
+              class = "domain";
+              name = "${config.server.webaddress}";
+              description = "Main domain for ${config.server.webaddress}";
+            }
+          ];
+        };
+
         authentication.fallback-admin = {
           user = "admin";
           secret = "%{file:${config.sops.secrets."stalwart/admin_password".path}}%";
