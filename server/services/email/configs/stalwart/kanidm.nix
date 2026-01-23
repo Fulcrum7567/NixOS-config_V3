@@ -90,12 +90,11 @@ in
         };
       };
 
-        client-auth = "client_secret_post";
-      };
+      client-auth = "client_secret_post";
 
       # Allow users to be automatically created when they login
       session.auth.auto-create = true;
-      
+
       authentication.fallback-ldap = {
         directory = "kanidm-ldap";
       };
