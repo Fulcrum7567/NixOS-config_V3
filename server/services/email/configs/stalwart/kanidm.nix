@@ -95,25 +95,30 @@ in
         STALWART_USER="stalwart-ldap"
         TOKEN_FILE="${stalwartTokenFile}"
 
-        # 1. Create the account if it doesn't exist
-        if ! $KANIDM_BIN service-account get "$STALWART_USER" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
-          echo "Creating $STALWART_USER service account..."
-          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" \
-            -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
-        fi
-
         # 2. Provision the Token
         # We only generate a token if the file doesn't exist on disk.
         if [ ! -f "$TOKEN_FILE" ]; then
+          echo "Token file missing. Setting up service account and token..."
+
+          # If the account exists, we MUST delete it to ensure a fresh state compatible with API tokens.
+          # The previous account might have been created with 'service-account-creds' proto which causes issues.
+          if $KANIDM_BIN service-account get "$STALWART_USER" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
+             echo "Resetting existing $STALWART_USER service account..."
+             $KANIDM_BIN service-account delete "$STALWART_USER" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
+          fi
+
+          echo "Creating $STALWART_USER service account..."
+          # Create standard service account (supports API tokens)
+          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" \
+            -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
+
           echo "Generating new API Token for Stalwart..."
-          
-          # We ask Kanidm for a new token. 
           RAW_OUTPUT=$($KANIDM_BIN service-account api-token generate --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" -H "$KANIDM_URL" "$STALWART_USER" "stalwart-ldap-bind")
           
           # Extract the token (taking the last word of the output)
-          TOKEN=$(echo "$RAW_OUTPUT" | awk '{print $NF}' | tr -d '[:space:]')
+          TOKEN=$(echo "$RAW_OUTPUT" | awk '{print $NF}')
           
-          if [ -n "$TOKEN" ]; then
+          if [ -n "$TOKEN" ] && [[ "$TOKEN" != *"Error"* ]]; then
             # Ensure the directory exists
             mkdir -p $(dirname "$TOKEN_FILE")
             
@@ -132,8 +137,10 @@ in
           fi
         else
           # Ensure permissions are correct even if file exists
-          chown stalwart-mail:stalwart-mail "$TOKEN_FILE"
-          chmod 600 "$TOKEN_FILE"
+          if [ -f "$TOKEN_FILE" ]; then
+            chown stalwart-mail:stalwart-mail "$TOKEN_FILE"
+            chmod 600 "$TOKEN_FILE"
+          fi
         fi
       '';
 
