@@ -101,15 +101,13 @@ in
           echo "Token file missing. Setting up service account and token..."
 
           # If the account exists, we MUST delete it to ensure a fresh state compatible with API tokens.
-          # The previous account might have been created with 'service-account-creds' proto which causes issues.
-          if $KANIDM_BIN service-account get "$STALWART_USER" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
-             echo "Resetting existing $STALWART_USER service account..."
-             $KANIDM_BIN service-account delete "$STALWART_USER" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
-          fi
+          # We execute delete and ignore failures (e.g. if it doesn't exist) to keep it idempotent.
+          $KANIDM_BIN service-account delete "$STALWART_USER" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1 || true
 
           echo "Creating $STALWART_USER service account..."
           # Create standard service account (supports API tokens)
-          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" \
+          # Usage: service-account create <account_id> <display_name> <managed_by>
+          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$IDM_ADMIN" \
             -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
 
           echo "Generating new API Token for Stalwart..."
