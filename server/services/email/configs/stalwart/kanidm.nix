@@ -1,6 +1,8 @@
 { config, lib, ... }:
 let
-  stalwartTokenFile = "${config.services.stalwart-mail.dataDir}/kanidm_bind_token_v2";
+  cfg = config.server.services.singleSignOn;
+  emailCfg = config.server.services.email;
+  kanidmDomain = "${cfg.subdomain}.${config.server.webaddress}";
 in
 {
   config = lib.mkIf (config.server.services.email.enable && (config.server.services.email.activeConfig == "stalwart") && 
@@ -38,157 +40,87 @@ in
     };
     
     services.stalwart-mail.settings = {
-      directory = {
-        "kanidm-ldap" = {
-          type = "ldap";
-          url = "ldaps://${config.server.services.singleSignOn.fullDomainName}:636";
-          timeout = "15s";
+      # LDAP Directory configuration for Kanidm
+      directory."kanidm" = {
+        type = "ldap";
+        url = "ldaps://${kanidmDomain}:636";
+        base-dn = "dc=${lib.concatStringsSep ",dc=" (lib.splitString "." kanidmDomain)}";
+        timeout = "30s";
+        
+        tls = {
+          enable = true;
+          allow-invalid-certs = false;
+        };
 
-          tls = {
-            enable = true;
-            allow-invalid-certs = true;
-          };
-
-          bind = {
-            dn = "name=stalwart-ldap";
-            secret = "%{file:${stalwartTokenFile}}%";
-            # Use lookup-based bind authentication (Kanidm doesn't expose password hashes)
-            auth.enable = true;
-          };
+        bind = {
+          # Bind DN for the stalwart service account (created in Kanidm)
+          dn = "dn=token";
+          secret = "%{file:${config.sops.secrets."stalwart/kanidm_bind_password".path}}%";
           
-          # Construct Base DN from domain (e.g. aurek.eu -> dc=aurek,dc=eu)
-          base-dn = builtins.concatStringsSep "," (map (s: "dc=${s}") (lib.splitString "." config.server.webaddress));
-
-          filter = {
-            # Filter to find users by username (name attribute in Kanidm)
-            name = "(&(objectClass=person)(name=?))";
-            # Filter to find users by email
-            email = "(&(objectClass=person)(|(mail=?)(mailAlias=?)))";
-          };
-
-          # LDAP attribute mapping for Kanidm
-          attributes = {
-            name = "name";
-            class = "objectClass";
-            email = "mail";
-            description = "displayname";
+          auth = {
+            # Use lookup method to find the user DN and then bind as the user
+            method = "lookup";
           };
         };
 
-        "kanidm-oidc" = {
-          type = "oidc";
-          timeout = "15s";
-          
-          # Kanidm userinfo endpoint
-          endpoint = {
-            url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/stalwart-mail/userinfo";
-            method = "userinfo";
-          };
+        filter = {
+          name = "(&(|(objectClass=person)(objectClass=account))(name=?))";
+          email = "(&(|(objectClass=person)(objectClass=account))(|(mail=?)))";
+        };
 
-          # Kanidm certificates might be self-signed or internal
-          tls.allow-invalid-certs = true;
-
-          # Map OIDC claims to Stalwart principal attributes
-          fields = {
-            email = "email";
-            username = "preferred_username";
-            full-name = "name";
-          };
+        attributes = {
+          name = "name";
+          class = "objectClass";
+          description = "displayname";
+          email = "mail";
+          groups = "memberof";
+          quota = "quota";
         };
       };
 
-      # Allow users to be automatically created when they login via LDAP/OIDC
+      # OIDC Directory configuration for OAuth/web login
+      directory."kanidm-oidc" = {
+        type = "oidc";
+        timeout = "5s";
+        endpoint = {
+          url = "https://${kanidmDomain}/oauth2/openid/stalwart/userinfo";
+          method = "userinfo";
+        };
+        fields = {
+          email = "email";
+          username = "preferred_username";
+          full-name = "name";
+        };
+      };
+
+      # Use Kanidm LDAP as the primary directory for authentication
+      storage.directory = "kanidm";
+
+      # Enable auto-creation of accounts on first login
       session.auth.auto-create = true;
 
-      # Use Kanidm LDAP as the primary directory for user authentication
-      # This allows users to log in to the web interface with their Kanidm credentials
-      storage.directory = "kanidm-ldap";
-
-      # Fallback authentication methods
-      authentication.fallback-admin = {
-        user = "admin";
-        secret = "%{file:${config.sops.secrets."stalwart/admin_password".path}}%";
-      };
-
-      # OIDC directory for mail clients using OAUTHBEARER SASL
-      authentication.oidc = {
-        directory = "kanidm-oidc"; 
+      # OAuth/OIDC configuration for web interface login
+      authentication.oidc."kanidm" = {
+        display-name = "Login with Kanidm";
+        issuer-url = "https://${kanidmDomain}/oauth2/openid/stalwart";
+        client-id = "stalwart";
+        client-secret = "%{file:${config.sops.secrets."stalwart/clientSecret".path}}%";
+        scopes = [ "openid" "profile" "email" ];
+        directory = "kanidm-oidc";
       };
     };
 
-
-    server.services.singleSignOn = {
-      kanidm.extraIterativeIdmSteps = lib.mkAfter ''
-        STALWART_USER="stalwart-ldap"
-        TOKEN_FILE="${stalwartTokenFile}"
-
-        # 2. Provision the Token
-        # We only generate a token if the file doesn't exist on disk.
-        
-        # Helper check: If service account is missing but token exists, force token regeneration
-        # This handles cases where account was deleted but file remained.
-        if ! $KANIDM_BIN service-account get "$STALWART_USER" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
-           if [ -f "$TOKEN_FILE" ]; then
-             echo "Updating state: Service account missing but token file exists. Validating..."
-             # We assume token is invalid if account is gone.
-             rm "$TOKEN_FILE"
-           fi
-        fi
-        if [ ! -f "$TOKEN_FILE" ]; then
-          echo "Token file missing. Setting up service account and token..."
-
-          # If the account exists, we MUST delete it to ensure a fresh state compatible with API tokens.
-          # We execute delete and ignore failures (e.g. if it doesn't exist) to keep it idempotent.
-          $KANIDM_BIN service-account delete "$STALWART_USER" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1 || true
-
-          echo "Creating $STALWART_USER service account..."
-          # Create standard service account (supports API tokens)
-          # Usage: service-account create <account_id> <display_name> <managed_by>
-          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$IDM_ADMIN" \
-            -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
-
-          echo "Generating new API Token for Stalwart..."
-          RAW_OUTPUT=$($KANIDM_BIN service-account api-token generate --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" -H "$KANIDM_URL" "$STALWART_USER" "stalwart-ldap-bind")
-          
-          # Extract the token (taking the last word of the output)
-          TOKEN=$(echo "$RAW_OUTPUT" | awk '{print $NF}')
-          
-          if [ -n "$TOKEN" ] && [[ "$TOKEN" != *"Error"* ]]; then
-            # Ensure the directory exists
-            mkdir -p $(dirname "$TOKEN_FILE")
-            
-            # Write to file
-            echo -n "$TOKEN" > "$TOKEN_FILE"
-            
-            # Secure the file (Stalwart needs to read it)
-            chown stalwart-mail:stalwart-mail "$TOKEN_FILE"
-            chmod 600 "$TOKEN_FILE"
-            
-            echo "✅ Token generated and saved to $TOKEN_FILE"
-          else
-            echo "❌ Failed to extract token from Kanidm output."
-            echo "Raw output: $RAW_OUTPUT"
-            exit 1
-          fi
-        else
-          # Ensure permissions are correct even if file exists
-          if [ -f "$TOKEN_FILE" ]; then
-            chown stalwart-mail:stalwart-mail "$TOKEN_FILE"
-            chmod 600 "$TOKEN_FILE"
-          fi
-        fi
-      '';
-
-      oAuthServices."stalwart-mail" = {
-        displayName = "Stalwart Mail";
-        originUrl = [ "https://${config.server.services.email.fullDomainName}/auth/oidc" ]; 
-        originLanding = "https://${config.server.services.email.fullDomainName}";
-        basicSecretFile = config.sops.secrets."stalwart/oauth/clientSecret".path;
-        preferShortUsername = true; 
-        groupName = "stalwart-users"; 
-        scopes = [ "openid" "profile" "email" ];
-      };
-
+    # Register Stalwart as an OAuth client in Kanidm
+    server.services.singleSignOn.oAuthServices."stalwart" = {
+      displayName = "Stalwart Mail";
+      originUrl = [ 
+        "${emailCfg.fullHttpsUrl}/authorize/code" 
+      ];
+      originLanding = "${emailCfg.fullHttpsUrl}";
+      basicSecretFile = config.sops.secrets."stalwart/oauth/clientSecret".path;
+      preferShortUsername = true;
+      groupName = "mail-users";
+      scopes = [ "openid" "profile" "email" ];
     };
   };
 }

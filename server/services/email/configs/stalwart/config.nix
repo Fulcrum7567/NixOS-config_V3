@@ -43,6 +43,33 @@
           "spam-filter.*"
           "webadmin.*"
         ];
+
+        # Internal data store configuration
+        store."rocksdb" = {
+          type = "rocksdb";
+          path = "${config.services.stalwart-mail.dataDir}/data";
+          compression = "lz4";
+        };
+
+        store."fs" = {
+          type = "fs";
+          path = "${config.services.stalwart-mail.dataDir}/blobs";
+        };
+
+        # Storage configuration
+        storage = {
+          data = "rocksdb";
+          blob = "fs";
+          lookup = "rocksdb";
+          fts = "rocksdb";
+        };
+
+        # Fallback admin for initial setup / recovery
+        authentication.fallback-admin = {
+          user = "admin";
+          secret = "%{file:${config.sops.secrets."stalwart/admin_password".path}}%";
+        };
+
         server = {
           hostname = config.server.services.email.fullDomainName;
           tls = {
@@ -79,32 +106,6 @@
               bind = [ "127.0.0.1:8080" ];
               protocol = "http";
             };
-          };
-        };
-
-        authentication.fallback-admin = {
-          user = "admin";
-          secret = "%{file:${config.sops.secrets."stalwart/admin_password".path}}%";
-        };
-
-        certificate.default = {
-          cert = "%{file:/var/lib/acme/${config.server.webaddress}/fullchain.pem}%";
-          private-key = "%{file:/var/lib/acme/${config.server.webaddress}/key.pem}%";
-        };
-
-        storage = {
-          data = "rocksdb";
-          blob = "fs";
-        };
-        
-        store = {
-          "rocksdb" = { 
-            type = "rocksdb";
-            path = "${config.services.stalwart-mail.dataDir}/data"; 
-          };
-          "fs" = { 
-            type = "fs"; 
-            path = "${config.services.stalwart-mail.dataDir}/blobs"; 
           };
         };
       };
