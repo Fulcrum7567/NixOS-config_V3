@@ -90,7 +90,7 @@ in
             "${service.groupName}" = service.scopes;
             "all_services" = service.scopes;
           };
-        }) (lib.filterAttrs (n: v: n != "stalwart") cfg.oAuthServices);
+        }) cfg.oAuthServices;
 
       };
     };

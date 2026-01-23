@@ -51,7 +51,7 @@
           displayName = config.user.settings.displayName;
           legalName = config.user.settings.displayName;
           mailAddresses = [ "dragon.fighter@outlook.de" ];
-          groups = [ "all_services" ];
+          groups = [ "all_services" "mail-users" ];
           present = true;
         };
       };
