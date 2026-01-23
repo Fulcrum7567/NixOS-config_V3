@@ -20,127 +20,110 @@ in
         key = "kanidm_link";
       };
 
-      "stalwart/oidc_secret" = {
+      "stalwart/clientSecret" = {
         owner = "stalwart-mail";
         group = "stalwart-mail";
         sopsFile = ./stalwartSecrets.yaml;
         format = "yaml";
-        key = "oidc_secret";
+        key = "stalwart_client_secret";
       };
 
-      "kanidm/stalwart_oidc_secret" = {
+      "stalwart/oauth/clientSecret" = {
         owner = config.server.services.singleSignOn.serviceUsername;
         group = config.server.services.singleSignOn.serviceGroup;
         sopsFile = ./stalwartSecrets.yaml;
         format = "yaml";
-        key = "oidc_secret";
+        key = "stalwart_client_secret";
       };
-    };
-
-    server.services.singleSignOn.oAuthServices."stalwart-sso" = {
-      displayName = "Stalwart Mail";
-      originUrl = [ "https://${config.server.services.email.fullDomainName}/auth/oidc" ];
-      originLanding = "https://${config.server.services.email.fullDomainName}";
-      basicSecretFile = config.sops.secrets."kanidm/stalwart_oidc_secret".path;
-      groupName = "stalwart_users";
-      scopes = [ "openid" "profile" "email" ];
     };
     
     services.stalwart-mail.settings = {
-      directory."kanidm" = {
-        type = "ldap";
-        url = "ldaps://${config.server.services.singleSignOn.fullDomainName}:636";
-        base-dn = "dc=kanidm,dc=local";
+      directory = {
+        "kanidm-ldap" = {
+          type = "ldap";
+          url = "ldaps://${config.server.services.singleSignOn.fullDomainName}:636";
+          timeout = "5s";
 
-        bind = {
-          dn = "dn=token"; # Adjust based on Kanidm config
-          secret = "%{file:${stalwartTokenFile}}%";
+          tls = {
+            enable = true;
+            allow-invalid-certs = true;
+          };
+
+          bind = {
+            dn = "name=stalwart"; # Adjust based on Kanidm config
+            secret = "%{file:${config.sops.secrets."stalwart/kanidm_bind_password".path}}%";
+          };
+
+          # LDAP Mapping
+          # Kanidm uses standard attributes usually, but double check your schema
+          map = {
+            name = "name";       # Kanidm display name
+            email = "mail";    # Kanidm email attribute
+            # Secret removed to force Bind authentication, as Kanidm does not expose password hashes
+          };
         };
 
-        # LDAP Mapping
-        # Kanidm uses standard attributes usually, but double check your schema
-        map = {
-          name = "cn";       # Kanidm display name
-          email = "mail";    # Kanidm email attribute
-          secret = "userPassword";
-        };
-
-        # Authentication Mode
-        # Kanidm does not expose cleartext passwords. Stalwart must 
-        # send the credentials to Kanidm to verify (Bind Auth).
-        auth = {
-          method = "bind";
-        };
-
-        # Default query for finding users
-        search = {
-          filter = "(&(objectClass=person)(mail=%{email}))";
+        "kanidm-oidc" = {
+          type = "oidc";
+          url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/stalwart"; 
+          client-id = "stalwart";
+          client-secret = "%{file:${config.sops.secrets."stalwart/clientSecret".path}}%";
+          
+          # Map OIDC claims to Stalwart attributes
+          map = {
+            name = "name";
+            email = "email";
+            username = "preferred_username";
+          };
         };
       };
 
-      storage.directory = "kanidm";
+      authentication.fallback-ldap = {
+        directory = "kanidm-ldap";
+      };
 
       authentication.oidc = {
-        method = "oidc";
-        client-id = "stalwart-sso";
-        client-secret = "%{file:${config.sops.secrets."stalwart/oidc_secret".path}}%";
-        issuer = "https://${config.server.services.singleSignOn.fullDomainName}/oauth2/openid/stalwart-sso";
-        scopes = [ "openid" "profile" "email" ];
-        redirect-url = "https://${config.server.services.email.fullDomainName}/auth/oidc";
-        directory = "kanidm";
+        directory = "kanidm-oidc"; 
       };
+
+      storage.directory = "kanidm-ldap";
     };
 
 
-    server.services.singleSignOn.kanidm.extraIterativeIdmSteps = ''
-      # --- Stalwart Service Account & Token Provisioning ---
-      
-      STALWART_USER="stalwart-ldap"
-      MANAGED_BY="idm_admin"
-      TOKEN_FILE="${stalwartTokenFile}"
-      
-      # 1. Create the account if it doesn't exist
-      if ! $KANIDM_BIN service-account get "$STALWART_USER" --url "$KANIDM_URL" --name "$IDM_ADMIN" >/dev/null 2>&1; then
-        echo "Creating Stalwart service account..."
-        $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" "$MANAGED_BY" --url "$KANIDM_URL" --name "$IDM_ADMIN"
-      fi
-
-      # 2. Provision the Token (Stateful Check)
-      # We only generate a token if the file doesn't exist on disk.
-      if [ ! -f "$TOKEN_FILE" ]; then
-        echo "Generating new API Token for Stalwart..."
-        
-        # We ask Kanidm for a new token. 
-        # CAUTION: Output format parsing. We assume the token is the last line or specific format.
-        # Kanidm usually outputs: "Token: <ActualToken>"
-        
-        RAW_OUTPUT=$($KANIDM_BIN service-account api-token generate --name "$MANAGED_BY" "$STALWART_USER" "stalwart-ldap-bind" --url "$KANIDM_URL")
-        
-        # Extract the token (simple awk to get the last word if format is "Token: XXXXX")
-        # Adjust this parsing if your kanidm version output differs.
-        TOKEN=$(echo "$RAW_OUTPUT" | tail -n 1 | tr -d '[:space:]')
-        
-        if [ -n "$TOKEN" ]; then
-          # Ensure the directory exists
-          mkdir -p $(dirname "$TOKEN_FILE")
-          
-          # Write to file
-          echo -n "$TOKEN" > "$TOKEN_FILE"
-          
-          # Secure the file (Stalwart needs to read it)
-          chown stalwart-mail:stalwart-mail "$TOKEN_FILE"
-          chmod 600 "$TOKEN_FILE"
-          
-          echo "✅ Token generated and saved to $TOKEN_FILE"
-        else
-          echo "❌ Failed to extract token from Kanidm output."
-          echo "Raw output: $RAW_OUTPUT"
+    server.services.singleSignOn = {
+      kanidm.extraIterativeIdmSteps = lib.mkAfter ''
+        if ! $KANIDM_BIN service-account get "stalwart" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
+          echo "Creating stalwart service account..."
+          $KANIDM_BIN service-account create "stalwart" "Stalwart Mail" \
+            --proto service-account-creds \
+            -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
         fi
-      else
-        # Ensure permissions are correct even if file exists
-        chown stalwart-mail:stalwart-mail "$TOKEN_FILE"
-        chmod 600 "$TOKEN_FILE"
-      fi
-    '';
+
+        STALWART_PW_FILE="${config.sops.secrets."stalwart/kanidm_bind_password".path}"
+        
+        if [ -f "$STALWART_PW_FILE" ]; then
+           echo "Updating stalwart service account password..."
+           cat "$STALWART_PW_FILE" | $KANIDM_BIN service-account credential update "stalwart" \
+             --proto service-account-credentials \
+             -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
+        else
+           echo "Warning: Stalwart bind password file not found at $STALWART_PW_FILE"
+        fi
+      '';
+
+      oAuthServices."stalwart" = {
+        displayName = "Stalwart Mail";
+        originUrl = [ "https://${config.server.services.email.fullDomainName}/auth/oidc" ]; 
+        originLanding = "https://${config.server.services.email.fullDomainName}";
+        basicSecretFile = config.sops.secrets."stalwart/oauth/clientSecret".path;
+        preferShortUsername = true; 
+        groupName = "stalwart-users"; 
+        scopes = [ "openid" "profile" "email" ];
+        extraconfig = ''
+          proxy_set_header X-Forwarded-Proto $scheme;
+        '';
+      };
+
+    };
   };
 }

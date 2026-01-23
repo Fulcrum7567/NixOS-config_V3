@@ -28,6 +28,8 @@
           "!server.allowed-ip.*"
           "server.*"
           "authentication.fallback-admin.*"
+          "authentication.fallback-ldap.*"
+          "authentication.oidc.*"
           "cluster.*"
           "config.local-keys.*"
           "storage.data"
@@ -87,6 +89,22 @@
         certificate.default = {
           cert = "%{file:/var/lib/acme/${config.server.webaddress}/fullchain.pem}%";
           private-key = "%{file:/var/lib/acme/${config.server.webaddress}/key.pem}%";
+        };
+
+        storage = {
+          data = "rocksdb";
+          blob = "fs";
+        };
+        
+        store = {
+          "rocksdb" = { 
+            type = "rocksdb";
+            path = "${config.services.stalwart-mail.dataDir}/data"; 
+          };
+          "fs" = { 
+            type = "fs"; 
+            path = "${config.services.stalwart-mail.dataDir}/blobs"; 
+          };
         };
       };
     };

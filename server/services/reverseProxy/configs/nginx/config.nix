@@ -62,6 +62,10 @@
         };
       }) config.server.services.reverseProxy.activeRedirects);
     };
+
+    networking.extraHosts = ''
+      127.0.0.1 ${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}
+    '';
     
   };
 }
