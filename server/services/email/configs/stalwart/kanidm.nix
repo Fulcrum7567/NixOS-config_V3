@@ -42,7 +42,7 @@ in
         "kanidm-ldap" = {
           type = "ldap";
           url = "ldaps://${config.server.services.singleSignOn.fullDomainName}:636";
-          timeout = "5s";
+          timeout = "15s";
 
           tls = {
             enable = true;
@@ -50,63 +50,70 @@ in
           };
 
           bind = {
-            dn = "name=stalwart-ldap"; # Adjust based on Kanidm config
+            dn = "name=stalwart-ldap";
             secret = "%{file:${stalwartTokenFile}}%";
-            auth = {
-              method = "lookup";
-            };
+            # Use lookup-based bind authentication (Kanidm doesn't expose password hashes)
+            auth.enable = true;
           };
           
           # Construct Base DN from domain (e.g. aurek.eu -> dc=aurek,dc=eu)
           base-dn = builtins.concatStringsSep "," (map (s: "dc=${s}") (lib.splitString "." config.server.webaddress));
 
-          # LDAP Mapping
-          # Kanidm uses standard attributes usually, but double check your schema
-          map = {
-            name = "name";       # Kanidm display name
-            email = "mail";    # Kanidm email attribute
-            # Secret removed to force Bind authentication, as Kanidm does not expose password hashes
+          filter = {
+            # Filter to find users by username (name attribute in Kanidm)
+            name = "(&(objectClass=person)(name=?))";
+            # Filter to find users by email
+            email = "(&(objectClass=person)(|(mail=?)(mailAlias=?)))";
+          };
+
+          # LDAP attribute mapping for Kanidm
+          attributes = {
+            name = "name";
+            class = "objectClass";
+            email = "mail";
+            description = "displayname";
           };
         };
 
         "kanidm-oidc" = {
           type = "oidc";
-          url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/stalwart-mail/userinfo"; 
-          client-id = "stalwart-mail";
-          client-secret = "%{file:${config.sops.secrets."stalwart/clientSecret".path}}%";
+          timeout = "15s";
           
-          # Use userinfo endpoint to fetch claims (standard for OIDC directories)
-          endpoint.method = "userinfo"; 
-
-          # Kanidm certificates might be self-signed or internal
-          tls = {
-             enable = true;
-             allow-invalid-certs = true;
+          # Kanidm userinfo endpoint
+          endpoint = {
+            url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/stalwart-mail/userinfo";
+            method = "userinfo";
           };
 
-          # Map OIDC claims to Stalwart attributes
-          map = {
-            name = "name";
+          # Kanidm certificates might be self-signed or internal
+          tls.allow-invalid-certs = true;
+
+          # Map OIDC claims to Stalwart principal attributes
+          fields = {
             email = "email";
             username = "preferred_username";
+            full-name = "name";
           };
         };
       };
 
-      client-auth = "client_secret_post";
-
-      # Allow users to be automatically created when they login
+      # Allow users to be automatically created when they login via LDAP/OIDC
       session.auth.auto-create = true;
 
-      authentication.fallback-ldap = {
-        directory = "kanidm-ldap";
+      # Use Kanidm LDAP as the primary directory for user authentication
+      # This allows users to log in to the web interface with their Kanidm credentials
+      storage.directory = "kanidm-ldap";
+
+      # Fallback authentication methods
+      authentication.fallback-admin = {
+        user = "admin";
+        secret = "%{file:${config.sops.secrets."stalwart/admin_password".path}}%";
       };
 
+      # OIDC directory for mail clients using OAUTHBEARER SASL
       authentication.oidc = {
         directory = "kanidm-oidc"; 
       };
-
-      # storage.directory = "kanidm-ldap";
     };
 
 
