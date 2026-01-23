@@ -51,7 +51,7 @@ in
 
           bind = {
             dn = "name=stalwart-ldap"; # Adjust based on Kanidm config
-            secret = "%{file:${config.sops.secrets."stalwart/kanidm_bind_password".path}}%";
+            secret = "%{file:${stalwartTokenFile}}%";
           };
 
           # LDAP Mapping
@@ -92,22 +92,48 @@ in
 
     server.services.singleSignOn = {
       kanidm.extraIterativeIdmSteps = lib.mkAfter ''
-        if ! $KANIDM_BIN service-account get "stalwart-ldap" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
-          echo "Creating stalwart-ldap service account..."
-          $KANIDM_BIN service-account create "stalwart-ldap" "Stalwart Mail" \
-            --proto service-account-creds \
+        STALWART_USER="stalwart-ldap"
+        TOKEN_FILE="${stalwartTokenFile}"
+
+        # 1. Create the account if it doesn't exist
+        if ! $KANIDM_BIN service-account get "$STALWART_USER" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
+          echo "Creating $STALWART_USER service account..."
+          $KANIDM_BIN service-account create "$STALWART_USER" "Stalwart Mail" \
             -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
         fi
 
-        STALWART_PW_FILE="${config.sops.secrets."stalwart/kanidm_bind_password".path}"
-        
-        if [ -f "$STALWART_PW_FILE" ]; then
-           echo "Updating stalwart-ldap service account password..."
-           cat "$STALWART_PW_FILE" | $KANIDM_BIN service-account credential update "stalwart-ldap" \
-             --proto service-account-credentials \
-             -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
+        # 2. Provision the Token
+        # We only generate a token if the file doesn't exist on disk.
+        if [ ! -f "$TOKEN_FILE" ]; then
+          echo "Generating new API Token for Stalwart..."
+          
+          # We ask Kanidm for a new token. 
+          RAW_OUTPUT=$($KANIDM_BIN service-account api-token generate --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" -H "$KANIDM_URL" "$STALWART_USER" "stalwart-ldap-bind")
+          
+          # Extract the token (taking the last word of the output)
+          TOKEN=$(echo "$RAW_OUTPUT" | awk '{print $NF}' | tr -d '[:space:]')
+          
+          if [ -n "$TOKEN" ]; then
+            # Ensure the directory exists
+            mkdir -p $(dirname "$TOKEN_FILE")
+            
+            # Write to file
+            echo -n "$TOKEN" > "$TOKEN_FILE"
+            
+            # Secure the file (Stalwart needs to read it)
+            chown stalwart-mail:stalwart-mail "$TOKEN_FILE"
+            chmod 600 "$TOKEN_FILE"
+            
+            echo "✅ Token generated and saved to $TOKEN_FILE"
+          else
+            echo "❌ Failed to extract token from Kanidm output."
+            echo "Raw output: $RAW_OUTPUT"
+            exit 1
+          fi
         else
-           echo "Warning: Stalwart bind password file not found at $STALWART_PW_FILE"
+          # Ensure permissions are correct even if file exists
+          chown stalwart-mail:stalwart-mail "$TOKEN_FILE"
+          chmod 600 "$TOKEN_FILE"
         fi
       '';
 
