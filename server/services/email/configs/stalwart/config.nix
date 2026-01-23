@@ -27,6 +27,7 @@
           "!server.blocked-ip.*"
           "!server.allowed-ip.*"
           "server.*"
+          "session.auth.auto-create"
           "authentication.fallback-admin.*"
           "authentication.fallback-ldap.*"
           "authentication.oidc.*"

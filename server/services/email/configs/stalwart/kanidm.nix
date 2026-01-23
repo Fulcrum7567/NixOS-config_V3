@@ -75,6 +75,12 @@ in
           # Use userinfo endpoint to fetch claims (standard for OIDC directories)
           endpoint.method = "userinfo"; 
 
+          # Kanidm certificates might be self-signed or internal
+          tls = {
+             enable = true;
+             allow-invalid-certs = true;
+          };
+
           # Map OIDC claims to Stalwart attributes
           map = {
             name = "name";
@@ -84,7 +90,11 @@ in
         };
       };
 
-      authentication.fallback-ldap = {
+        client-auth = "client_secret_post";
+      };
+
+      # Allow users to be automatically created when they login
+      session.auth.auto-create = trueuthentication.fallback-ldap = {
         directory = "kanidm-ldap";
       };
 
