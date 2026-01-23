@@ -50,7 +50,7 @@ in
           };
 
           bind = {
-            dn = "name=stalwart"; # Adjust based on Kanidm config
+            dn = "name=stalwart-ldap"; # Adjust based on Kanidm config
             secret = "%{file:${config.sops.secrets."stalwart/kanidm_bind_password".path}}%";
           };
 
@@ -65,8 +65,8 @@ in
 
         "kanidm-oidc" = {
           type = "oidc";
-          url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/stalwart"; 
-          client-id = "stalwart";
+          url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/stalwart-mail"; 
+          client-id = "stalwart-mail";
           client-secret = "%{file:${config.sops.secrets."stalwart/clientSecret".path}}%";
           
           # Map OIDC claims to Stalwart attributes
@@ -92,9 +92,9 @@ in
 
     server.services.singleSignOn = {
       kanidm.extraIterativeIdmSteps = lib.mkAfter ''
-        if ! $KANIDM_BIN service-account get "stalwart" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
-          echo "Creating stalwart service account..."
-          $KANIDM_BIN service-account create "stalwart" "Stalwart Mail" \
+        if ! $KANIDM_BIN service-account get "stalwart-ldap" -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")" >/dev/null 2>&1; then
+          echo "Creating stalwart-ldap service account..."
+          $KANIDM_BIN service-account create "stalwart-ldap" "Stalwart Mail" \
             --proto service-account-creds \
             -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
         fi
@@ -102,8 +102,8 @@ in
         STALWART_PW_FILE="${config.sops.secrets."stalwart/kanidm_bind_password".path}"
         
         if [ -f "$STALWART_PW_FILE" ]; then
-           echo "Updating stalwart service account password..."
-           cat "$STALWART_PW_FILE" | $KANIDM_BIN service-account credential update "stalwart" \
+           echo "Updating stalwart-ldap service account password..."
+           cat "$STALWART_PW_FILE" | $KANIDM_BIN service-account credential update "stalwart-ldap" \
              --proto service-account-credentials \
              -H "$KANIDM_URL" --name "$IDM_ADMIN" --password "$(cat "$SOPS_PASS_FILE")"
         else
@@ -111,7 +111,7 @@ in
         fi
       '';
 
-      oAuthServices."stalwart" = {
+      oAuthServices."stalwart-mail" = {
         displayName = "Stalwart Mail";
         originUrl = [ "https://${config.server.services.email.fullDomainName}/auth/oidc" ]; 
         originLanding = "https://${config.server.services.email.fullDomainName}";
