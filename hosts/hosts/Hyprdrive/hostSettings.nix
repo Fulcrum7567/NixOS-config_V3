@@ -93,13 +93,13 @@
 				amdDrivers.enable = true;
 
 				kernelVersion = {
-					enable = true;
+					enable = false;
 					activeConfig = "cachy";
 					cachy.version = pkgs.linuxPackages_cachyos-lts;
 				};
 
 				scheduler = {
-					enable = true;
+					enable = false;
 					activeConfig = "scx";
 				};
 
