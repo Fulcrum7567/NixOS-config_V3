@@ -33,6 +33,8 @@
 			signal.enable = true;
 			supergfxd.enable = true;
 
+			moonlight.enable = true;
+
 			bottles.enable = true;
 
 			neovim = {
