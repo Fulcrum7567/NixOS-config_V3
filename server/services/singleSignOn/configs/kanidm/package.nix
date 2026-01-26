@@ -119,7 +119,7 @@ let
 
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && config.server.services.singleSignOn.enable) {
     services.kanidm.package = lib.mkForce customKanidmPackage;
 
     systemd.services.kanidm.serviceConfig.BindReadOnlyPaths = [

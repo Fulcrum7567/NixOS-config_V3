@@ -51,7 +51,7 @@
 
 			solaar.enable = true;
 
-			sunshine.enable = false;
+			sunshine.enable = true;
 			moonlight.enable = lib.mkForce false;
 
 			bottles.enable = true;
