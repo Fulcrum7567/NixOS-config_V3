@@ -2,10 +2,6 @@
 {
 	config = {
 
-		services.displayManager = {
-			autoLogin.enable = true;
-			autoLogin.user = config.user.settings.username;
-		};
 
 		hardware.i2c.enable = true;
 
