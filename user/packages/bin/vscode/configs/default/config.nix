@@ -49,6 +49,9 @@ in
 					  "github.copilot.nextEditSuggestions.enabled" = true;
 					  "git.openRepositoryInParentFolders" = "always";
 					  "redhat.telemetry.enabled" = false;
+					  "python.analysis.typeCheckingMode" = "standard";
+					  "explorer.confirmPasteNative" = false;
+					  "git.autofetch" = true;
 				};
 			};
 		};

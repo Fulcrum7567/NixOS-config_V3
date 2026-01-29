@@ -44,6 +44,8 @@
 				activeConfig = "Hyprdrive";
 			};
 
+			docker.enable = true;
+
 			signal.enable = true;
 			vscode.enable = true;
 
