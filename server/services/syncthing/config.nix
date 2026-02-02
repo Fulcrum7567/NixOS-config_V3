@@ -171,6 +171,7 @@
       originLanding = "https://syncthing.${config.server.webaddress}";
       basicSecretFile = config.sops.secrets."syncthing/oauth/client_secret".path; 
       preferShortUsername = true;
+      imageFile = ./google_sync.png; 
       groupName = "syncthing-users";
       scopes = [ "openid" "profile" "email" ];
     };
