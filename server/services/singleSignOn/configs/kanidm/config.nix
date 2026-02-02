@@ -86,6 +86,7 @@ in
           basicSecretFile = service.basicSecretFile;
           imageFile = service.imageFile;
           preferShortUsername = service.preferShortUsername;
+          allowInsecureClientDisablePkce = service.allowInsecureClientDisablePkce;
           scopeMaps = {
             "${service.groupName}" = service.scopes;
             "all_services" = service.scopes;

@@ -100,6 +100,8 @@ in
         # imageFile = ./vikunja.svg; 
         groupName = "vikunja_users";
         scopes = [ "openid" "profile" "email" ];
+        # Vikunja 0.24.x doesn't support PKCE, so we need to disable it
+        allowInsecureClientDisablePkce = true;
       };
     };
     

@@ -94,6 +94,12 @@
             type = lib.types.listOf lib.types.str;
             description = "The OAuth scopes to request for this service.";
           };
+
+          allowInsecureClientDisablePkce = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Allow this OAuth client to skip PKCE. Only enable for legacy clients that don't support PKCE.";
+          };
         };      
       });
       default = { };
