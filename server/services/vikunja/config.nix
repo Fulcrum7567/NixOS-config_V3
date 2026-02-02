@@ -41,18 +41,25 @@ in
           publicurl = "https://${domain}/";
           timezone = cfg.timezone;
         };
-        auth.openid = {
-          enabled = true;
-          providers = [
-            {
-              name = "kanidm"; # This name appears on the login button
-              # Kanidm OIDC Discovery URL
-              authurl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}";
-              clientid = clientId;
-              # Sops-Nix replaces this placeholder with the actual secret string
-              clientsecret = config.sops.placeholder."vikunja/clientSecret";
-            }
-          ];
+        auth = {
+          local = {
+            enabled = false; # Disable local auth to force SSO
+          };
+          openid = {
+            enabled = true;
+            providers = [
+              {
+                name = "kanidm"; # This name appears on the login button and is used in redirect URL
+                # Kanidm OIDC Discovery URL (issuer URL)
+                authurl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}";
+                logouturl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/ui/logout";
+                clientid = clientId;
+                # Sops-Nix replaces this placeholder with the actual secret string
+                clientsecret = config.sops.placeholder."vikunja/clientSecret";
+                scope = "openid profile email";
+              }
+            ];
+          };
         };
       };
     };
@@ -104,7 +111,11 @@ in
       singleSignOn.oAuthServices."${clientId}" = {
         displayName = "Vikunja";
         # Vikunja redirect URL format: <publicurl>/auth/openid/<provider-name>
-        originUrl = [ "https://${domain}/auth/openid/kanidm" ]; 
+        # Also include the base URL for token refresh scenarios
+        originUrl = [ 
+          "https://${domain}/auth/openid/kanidm" 
+          "https://${domain}/"
+        ]; 
         originLanding = "https://${domain}";
         # This points Kanidm to the SAME secret file Vikunja is reading
         basicSecretFile = config.sops.secrets."vikunja/oauth/client_secret".path;
