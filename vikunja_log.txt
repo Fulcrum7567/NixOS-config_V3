@@ -1,50 +1,50 @@
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/Settings-D3FoCDpw.js 315.123µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/Settings-legacy-nplI1MMw.js 344.246µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/sk-SK-Cfg6SYOQ.js 4.536871ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/sk-SK-legacy-B_FrH4ze.js 11.342946ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/sl-BqCHGdDt.js 397.325µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/sl-legacy-BeY8ZYbm.js 425.611µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/sl-SI-DjTKuVWn.js 5.53476ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/sl-SI-legacy-BnAZA2i0.js 4.763575ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/sr-CS-Cfg6SYOQ.js 5.423852ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/sr-CS-legacy-B_FrH4ze.js 4.593163ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/sv-SE-5onEOZ_t.js 5.488176ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/sv-SE-legacy-Ckzh_hx9.js 4.724324ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:43 Holocron vikunja[26640]: 2026-02-02T16:21:43+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/TaskDetailView-BmmdKN98.css 1.064167ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/TaskDetailView-legacy-dgpgV_PR.js 13.045879ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/TaskDetailView-wNkOYDPY.js 8.361713ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/TipTap-CV7hVRfS.css 618.651µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/TipTap-D762hfPH.js 53.256065ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/TipTap-legacy-CPU33Kc2.js 53.694527ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/TOTP-BGb7sYv0.js 498.316µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/TOTP-legacy-BdsFTY8l.js 1.295621ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/tr-TR-Cfg6SYOQ.js 4.570953ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/tr-TR-legacy-B_FrH4ze.js 4.520598ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/uk-DvjOkLdc.js 509.559µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/uk-legacy-BcC1CRWG.js 455.573µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/uk-UA-legacy-CWleX0n9.js 6.455822ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:44 Holocron vikunja[26640]: 2026-02-02T16:21:44+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/uk-UA-QKLIHqjy.js 6.074351ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/useCopyToClipboard-BbCgRPUy.js 248.005µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/useCopyToClipboard-legacy-DIs8Tn_r.js 894.593µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/vi-legacy-B-1xZwk4.js 378.398µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/vi-OuINsBJz.js 339.497µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/vi-VN-D6fPGvzA.js 5.003339ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/vi-VN-legacy-Bd9akHpW.js 4.801917ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/zh-CN-D-EZ1AWa.js 11.675529ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/zh-cn-DnE_LT7W.js 388.107µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/zh-CN-legacy-BVSd5i69.js 4.217349ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/zh-cn-legacy-C7u3VxYX.js 462.976µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/zh-TW-Cfg6SYOQ.js 4.55056ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /assets/zh-TW-legacy-B_FrH4ze.js 4.568299ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /index.html 356.468µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /images/icons/android-chrome-192x192.png 754.841µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /images/icons/android-chrome-512x512.png 1.188624ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:45 Holocron vikunja[26640]: 2026-02-02T16:21:45+01:00: WEB         ▶ 31.169.53.64  GET 200 /images/icons/icon-maskable.png 1.111799ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:46 Holocron vikunja[26640]: 2026-02-02T16:21:46+01:00: WEB         ▶ 31.169.53.64  GET 200 /manifest.webmanifest 291.656µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:46 Holocron vikunja[26640]: 2026-02-02T16:21:46+01:00: WEB         ▶ 31.169.53.64  GET 200 /login 328.602µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:46 Holocron vikunja[26640]: 2026-02-02T16:21:46+01:00: WEB         ▶ 31.169.53.64  GET 304 /assets/index-i4VRmjeA.css 162.659µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:46 Holocron vikunja[26640]: 2026-02-02T16:21:46+01:00: WEB         ▶ 31.169.53.64  GET 304 /assets/index-BdIWn3Ve.js 167.478µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:47 Holocron vikunja[26640]: 2026-02-02T16:21:47+01:00: WEB         ▶ 31.169.53.64  GET 200 /api/v1/info 201.84µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:21:47 Holocron vikunja[26640]: 2026-02-02T16:21:47+01:00: WEB         ▶ 31.169.53.64  GET 304 /sw.js 154.418µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
-Feb 02 16:23:26 Holocron vikunja[26640]: 2026-02-02T16:23:26+01:00: ERROR        ▶ 0f7 Wrong username or password
-Feb 02 16:23:26 Holocron vikunja[26640]: 2026-02-02T16:23:26+01:00: WEB         ▶ 31.169.53.64  POST 412 /api/v1/login 965.476366ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
+Feb 02 16:38:05 Holocron vikunja[30184]: net/http.serverHandler.ServeHTTP({0xc0005b6100?}, {0x40741d8?, 0xc00056a0f0?}, 0x6?)
+Feb 02 16:38:05 Holocron vikunja[30184]:         net/http/server.go:3340 +0x8e
+Feb 02 16:38:05 Holocron vikunja[30184]: net/http.(*conn).serve(0xc00058e1b0, {0x4076848, 0xc000494210})
+Feb 02 16:38:05 Holocron vikunja[30184]:         net/http/server.go:2109 +0x665
+Feb 02 16:38:05 Holocron vikunja[30184]: created by net/http.(*Server).Serve in goroutine 38
+Feb 02 16:38:05 Holocron vikunja[30184]:         net/http/server.go:3493 +0x485
+Feb 02 16:38:05 Holocron vikunja[30184]: goroutine 1 [chan receive, 1 minutes]:
+Feb 02 16:38:05 Holocron vikunja[30184]: code.vikunja.io/api/pkg/cmd.init.func27(0xc00022f800?, {0x18fcf7f?, 0x4?, 0x18fcf83?})
+Feb 02 16:38:05 Holocron vikunja[30184]:         code.vikunja.io/api/pkg/cmd/web.go:98 +0x15d
+Feb 02 16:38:05 Holocron vikunja[30184]: github.com/spf13/cobra.(*Command).execute(0x4b3d400, {0xc0000401e0, 0x0, 0x0})
+Feb 02 16:38:05 Holocron vikunja[30184]:         github.com/spf13/cobra@v1.8.1/command.go:989 +0xb1b
+Feb 02 16:38:05 Holocron vikunja[30184]: github.com/spf13/cobra.(*Command).ExecuteC(0x4b3d400)
+Feb 02 16:38:05 Holocron vikunja[30184]:         github.com/spf13/cobra@v1.8.1/command.go:1117 +0x44f
+Feb 02 16:38:05 Holocron vikunja[30184]: github.com/spf13/cobra.(*Command).Execute(...)
+Feb 02 16:38:05 Holocron vikunja[30184]:         github.com/spf13/cobra@v1.8.1/command.go:1041
+Feb 02 16:38:05 Holocron vikunja[30184]: code.vikunja.io/api/pkg/cmd.Execute()
+Feb 02 16:38:05 Holocron vikunja[30184]:         code.vikunja.io/api/pkg/cmd/cmd.go:44 +0x1a
+Feb 02 16:38:05 Holocron vikunja[30184]: main.main()
+Feb 02 16:38:05 Holocron vikunja[30184]:         code.vikunja.io/api/main.go:22 +0xf
+Feb 02 16:38:05 Holocron vikunja[30184]: goroutine 10 [select, 1 minutes]:
+Feb 02 16:38:05 Holocron vikunja[30184]: database/sql.(*DB).connectionOpener(0xc0004fdc70, {0x4076880, 0xc00024b590})
+Feb 02 16:38:05 Holocron vikunja[30184]:         database/sql/sql.go:1261 +0x87
+Feb 02 16:38:05 Holocron vikunja[30184]: created by database/sql.OpenDB in goroutine 1
+Feb 02 16:38:05 Holocron vikunja[30184]:         database/sql/sql.go:841 +0x130
+Feb 02 16:38:05 Holocron vikunja[30184]: goroutine 35 [select, 1 minutes]:
+Feb 02 16:38:05 Holocron vikunja[30184]: github.com/robfig/cron/v3.(*Cron).run(0xc000410b40)
+Feb 02 16:38:05 Holocron vikunja[30184]:         github.com/robfig/cron/v3@v3.0.1/cron.go:263 +0xb1c
+Feb 02 16:38:05 Holocron vikunja[30184]: created by github.com/robfig/cron/v3.(*Cron).Start in goroutine 1
+Feb 02 16:38:05 Holocron vikunja[30184]:         github.com/robfig/cron/v3@v3.0.1/cron.go:222 +0xb6
+Feb 02 16:38:05 Holocron vikunja[30184]: goroutine 36 [chan receive, 1 minutes]:
+Feb 02 16:38:05 Holocron vikunja[30184]: github.com/ThreeDotsLabs/watermill/message.(*Router).Run(0xc00037c000, {0x4076340?, 0x4cdd7e0?})
+Feb 02 16:38:05 Holocron vikunja[30184]:         github.com/ThreeDotsLabs/watermill@v1.3.7/message/router.go:378 +0x29d
+Feb 02 16:38:05 Holocron vikunja[30184]: code.vikunja.io/api/pkg/events.InitEvents()
+Feb 02 16:38:05 Holocron vikunja[30184]:         code.vikunja.io/api/pkg/events/events.go:96 +0x3d4
+Feb 02 16:38:05 Holocron vikunja[30184]: code.vikunja.io/api/pkg/initialize.FullInit.func1()
+Feb 02 16:38:05 Holocron vikunja[30184]:         code.vikunja.io/api/pkg/initialize/init.go:106 +0x19b
+Feb 02 16:38:05 Holocron vikunja[30184]: created by code.vikunja.io/api/pkg/initialize.FullInit in goroutine 1
+Feb 02 16:38:05 Holocron vikunja[30184]:         code.vikunja.io/api/pkg/initialize/init.go:102 +0x77
+Feb 02 16:38:05 Holocron vikunja[30184]: goroutine 16 [select, 1 minutes]:
+Feb 02 16:38:05 Holocron vikunja[30184]: github.com/ThreeDotsLabs/watermill/pubsub/gochannel.(*GoChannel).Subscribe.func1(0xc00018da90, 0xc0000f6900)
+Feb 02 16:38:05 Holocron vikunja[30184]:         github.com/ThreeDotsLabs/watermill@v1.3.7/pubsub/gochannel/pubsub.go:198 +0xaa
+Feb 02 16:38:05 Holocron vikunja[30184]: created by github.com/ThreeDotsLabs/watermill/pubsub/gochannel.(*GoChannel).Subscribe in goroutine 36
+Feb 02 16:38:05 Holocron vikunja[30184]:         github.com/ThreeDotsLabs/watermill@v1.3.7/pubsub/gochannel/pubsub.go:197 +0x448
+Feb 02 16:38:05 Holocron vikunja[30184]: goroutine 37 [select, 1 minutes]:
+Feb 02 16:38:05 Holocron vikunja[30184]: github.com/ulule/limiter/v3/drivers/store/memory.(*cleaner).Run(0xc00012a860, 0xc0004fac00)
+Feb 02 16:38:05 Holocron vikunja[30184]:         github.com/ulule/limiter/v3@v3.11.2/dri
+Feb 02 16:38:05 Holocron vikunja[30184]: 2026-02-02T16:38:05+01:00: WEB         ▶ 31.169.53.64  GET 500 /api/v1/info 2.613592ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
+Feb 02 16:38:05 Holocron vikunja[30184]: 2026-02-02T16:38:05+01:00: WEB         ▶ 31.169.53.64  GET 304 /assets/OpenSans_wght__54a65da5-BSoKZk7G.woff2 2.636569ms - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
+Feb 02 16:38:05 Holocron vikunja[30184]: 2026-02-02T16:38:05+01:00: WEB         ▶ 31.169.53.64  GET 304 /assets/Quicksand_wght__87bdcc7f-CH4TLDJK.woff2 295.427µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
+Feb 02 16:38:06 Holocron vikunja[30184]: 2026-02-02T16:38:06+01:00: WEB         ▶ 31.169.53.64  GET 304 /sw.js 593.509µs - Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0
