@@ -8,6 +8,13 @@ in
 {
   config = lib.mkIf cfg.enable {
 
+    users.groups.${cfg.group} = {};
+    users.users.${cfg.user} = {
+      isSystemUser = true;
+      group = "${cfg.group}";
+      # This ensures the user exists before sops-install-secrets runs
+    };
+
     sops.secrets = {
       "vikunja/oauth/client_secret" = {
         owner = config.server.services.singleSignOn.serviceUsername;
