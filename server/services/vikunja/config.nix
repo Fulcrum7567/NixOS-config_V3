@@ -32,9 +32,9 @@ in
       content = ''
         database:
           type: sqlite
-          path: ${cfg.defaultDataDir}/vikunja.db
+          path: /var/lib/vikunja/vikunja.db
         files:
-          basepath: ${cfg.defaultDataDir}/files
+          basepath: /var/lib/vikunja/files
         service:
           interface: ":${toString cfg.port}"
           frontendurl: "https://${domain}/"
@@ -57,26 +57,30 @@ in
       '';
     };
 
+    # Create the data directory and bind mount it to /var/lib/vikunja
+    # This allows the DynamicUser to access it while storing data in our backup location
+    systemd.tmpfiles.rules = [
+      "d ${cfg.defaultDataDir} 0700 root root - -"
+    ];
+
+    fileSystems."/var/lib/vikunja" = {
+      device = cfg.defaultDataDir;
+      options = [ "bind" ];
+    };
+
     services.vikunja = {
       enable = true;
       port = cfg.port; 
       frontendScheme = "https";
       frontendHostname = domain;
     };
+
+    systemd.services.vikunja.unitConfig = {
+      RequiresMountsFor = "/var/lib/vikunja";
+    };
     
     # Override the config file location to use our sops-generated config
     environment.etc."vikunja/config.yaml".source = lib.mkForce config.sops.templates."vikunja-config.yaml".path;
-
-    # Make sure data folder exists with correct permissions
-    systemd.tmpfiles.rules = [
-      "d ${cfg.defaultDataDir} 0770 root root - -"
-      "d ${cfg.defaultDataDir}/files 0770 root root - -"
-    ];
-
-    # Ensure Vikunja can write to the data directory
-    systemd.services.vikunja.serviceConfig = {
-      ReadWritePaths = [ cfg.defaultDataDir ];
-    };
 
     server.services = {
       reverseProxy.activeRedirects."vikunja" = {
