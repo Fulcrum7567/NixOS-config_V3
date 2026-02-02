@@ -45,8 +45,6 @@ in
             enabled: false
           openid:
             enabled: true
-            # Auto-redirect to Kanidm when login is required
-            redirecturl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}"
             providers:
               - name: "kanidm"
                 authurl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}"
@@ -87,6 +85,15 @@ in
         subdomain = cfg.subdomain;
         useACMEHost = true;
         forceSSL = true;
+
+        # Auto-redirect login page to Kanidm SSO
+        locations."/login" = {
+          path = "/login";
+          to = "http://[::1]:${toString cfg.port}";
+          extraConfig = ''
+            return 302 /auth/openid/kanidm;
+          '';
+        };
 
         locations."/" = {
           path = "/";
