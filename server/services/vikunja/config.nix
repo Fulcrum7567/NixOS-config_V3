@@ -8,10 +8,10 @@ in
 {
   config = lib.mkIf cfg.enable {
 
-    users.groups.${cfg.group} = {};
-    users.users.${cfg.user} = {
+    users.groups.${cfg.serviceGroup} = {};
+    users.users.${cfg.serviceUsername} = {
       isSystemUser = true;
-      group = "${cfg.group}";
+      group = "${cfg.serviceGroup}";
       # This ensures the user exists before sops-install-secrets runs
     };
 
