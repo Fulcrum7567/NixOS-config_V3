@@ -52,6 +52,7 @@ in
 					  "python.analysis.typeCheckingMode" = "standard";
 					  "explorer.confirmPasteNative" = false;
 					  "git.autofetch" = true;
+					  "git.enableSmartCommit" = true;
 				};
 			};
 		};

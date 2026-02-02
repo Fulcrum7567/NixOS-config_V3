@@ -12,8 +12,8 @@ in
 				enableFishIntegration = config.packages.fish.enable or false;
 				
 				settings = {
-					background-opacity = lib.mkForce 0;
-					background-blur = lib.mkForce false;
+					background-opacity = 0.8;
+					background-blur = true;
 				};
 				
 			};
