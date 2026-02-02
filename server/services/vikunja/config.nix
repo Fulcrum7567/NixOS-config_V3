@@ -1,9 +1,12 @@
-{ config, lib, pkgs-default, ... }:
+{ config, lib, pkgs-default, pkgs, ... }:
 let 
   cfg = config.server.services.vikunja;
 
   domain = "${cfg.subdomain}.${config.server.webaddress}";
   clientId = "vikunja";
+  
+  # Generate YAML config with the secret placeholder
+  vikunjaConfig = pkgs.formats.yaml { };
 in 
 {
   config = lib.mkIf cfg.enable {
@@ -21,12 +24,32 @@ in
       };
     };
 
-    # Environment file for the client secret
-    # Vikunja reads VIKUNJA_AUTH_OPENID_PROVIDERS_0_CLIENTSECRET from environment
-    sops.templates."vikunja.env" = {
+    # Generate complete config file with secret via sops template
+    sops.templates."vikunja-config.yaml" = {
       restartUnits = [ "vikunja.service" ];
       content = ''
-        VIKUNJA_AUTH_OPENID_PROVIDERS_0_CLIENTSECRET=${config.sops.placeholder."vikunja/oauth/client_secret"}
+        database:
+          type: sqlite
+          path: /var/lib/vikunja/vikunja.db
+        files:
+          basepath: /var/lib/vikunja/files
+        service:
+          interface: ":${toString cfg.port}"
+          frontendurl: "https://${domain}/"
+          publicurl: "https://${domain}/"
+          timezone: "${cfg.timezone}"
+        auth:
+          local:
+            enabled: false
+          openid:
+            enabled: true
+            providers:
+              - name: "kanidm"
+                authurl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}"
+                logouturl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/ui/logout"
+                clientid: "${clientId}"
+                clientsecret: "${config.sops.placeholder."vikunja/oauth/client_secret"}"
+                scope: "openid profile email"
       '';
     };
 
@@ -35,37 +58,10 @@ in
       port = cfg.port; 
       frontendScheme = "https";
       frontendHostname = domain;
-      
-      # Pass the secret via environment file
-      environmentFiles = [ config.sops.templates."vikunja.env".path ];
-      
-      # Configure Vikunja settings properly via NixOS module
-      settings = {
-        service = {
-          publicurl = "https://${domain}/";
-          timezone = cfg.timezone;
-        };
-        auth = {
-          local = {
-            enabled = false; # Disable local auth to force SSO
-          };
-          openid = {
-            enabled = true;
-            providers = [
-              {
-                name = "kanidm"; # This name appears on the login button and is used in redirect URL
-                # Kanidm OIDC Discovery URL (issuer URL)
-                authurl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}";
-                logouturl = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/ui/logout";
-                clientid = clientId;
-                # clientsecret is injected via environmentFiles above
-                scope = "openid profile email";
-              }
-            ];
-          };
-        };
-      };
     };
+    
+    # Override the config file location to use our sops-generated config
+    environment.etc."vikunja/config.yaml".source = lib.mkForce config.sops.templates."vikunja-config.yaml".path;
 
     server.services = {
       reverseProxy.activeRedirects."vikunja" = {
