@@ -38,6 +38,10 @@
 					exposeGUI = true;
 				};
 
+				vikunja = {
+					enable = true;
+				};
+
 				email = {
 					enable = false;
 					activeConfig = "stalwart";
