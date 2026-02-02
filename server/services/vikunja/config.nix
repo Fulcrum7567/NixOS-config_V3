@@ -85,16 +85,6 @@ in
         subdomain = cfg.subdomain;
         useACMEHost = true;
         forceSSL = true;
-
-        # Auto-redirect login page to Kanidm SSO
-        locations."/login" = {
-          path = "/login";
-          to = "http://[::1]:${toString cfg.port}";
-          extraConfig = ''
-            return 302 /auth/openid/kanidm;
-          '';
-        };
-
         locations."/" = {
           path = "/";
           to = "http://[::1]:${toString cfg.port}";
@@ -121,7 +111,7 @@ in
         basicSecretFile = config.sops.secrets."vikunja/oauth/client_secret".path;
         preferShortUsername = true;
         # Ensure you have a suitable icon or remove this line
-        # imageFile = ./vikunja.svg; 
+        imageFile = ./checklist.png; 
         groupName = "vikunja_users";
         scopes = [ "openid" "profile" "email" ];
         # Vikunja 0.24.x doesn't support PKCE, so we need to disable it
