@@ -32,9 +32,9 @@ in
       content = ''
         database:
           type: sqlite
-          path: /var/lib/vikunja/vikunja.db
+          path: ${cfg.defaultDataDir}/vikunja.db
         files:
-          basepath: /var/lib/vikunja/files
+          basepath: ${cfg.defaultDataDir}/files
         service:
           interface: ":${toString cfg.port}"
           frontendurl: "https://${domain}/"
@@ -45,6 +45,8 @@ in
             enabled: false
           openid:
             enabled: true
+            # Auto-redirect to Kanidm when login is required
+            redirecturl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}"
             providers:
               - name: "kanidm"
                 authurl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}"
@@ -64,6 +66,17 @@ in
     
     # Override the config file location to use our sops-generated config
     environment.etc."vikunja/config.yaml".source = lib.mkForce config.sops.templates."vikunja-config.yaml".path;
+
+    # Make sure data folder exists with correct permissions
+    systemd.tmpfiles.rules = [
+      "d ${cfg.defaultDataDir} 0770 root root - -"
+      "d ${cfg.defaultDataDir}/files 0770 root root - -"
+    ];
+
+    # Ensure Vikunja can write to the data directory
+    systemd.services.vikunja.serviceConfig = {
+      ReadWritePaths = [ cfg.defaultDataDir ];
+    };
 
     server.services = {
       reverseProxy.activeRedirects."vikunja" = {
