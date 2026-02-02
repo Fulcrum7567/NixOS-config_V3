@@ -26,6 +26,8 @@ in
 
     # Generate complete config file with secret via sops template
     sops.templates."vikunja-config.yaml" = {
+      # Make readable by Vikunja's dynamic user
+      mode = "0444";
       restartUnits = [ "vikunja.service" ];
       content = ''
         database:
