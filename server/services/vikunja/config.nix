@@ -55,10 +55,18 @@ in
       '';
     };
 
+    # Create a static user for vikunja (instead of DynamicUser)
+    users.users.${cfg.serviceUsername} = {
+      isSystemUser = true;
+      group = cfg.serviceGroup;
+      home = "/var/lib/vikunja";
+    };
+    users.groups.${cfg.serviceGroup} = { };
+
     # Create the data directory and bind mount it to /var/lib/vikunja
-    # This allows the DynamicUser to access it while storing data in our backup location
     systemd.tmpfiles.rules = [
-      "d ${cfg.defaultDataDir} 0700 root root - -"
+      "d ${cfg.defaultDataDir} 0750 ${cfg.serviceUsername} ${cfg.serviceGroup} - -"
+      "Z ${cfg.defaultDataDir} 0750 ${cfg.serviceUsername} ${cfg.serviceGroup} - -"
     ];
 
     fileSystems."/var/lib/vikunja" = {
@@ -73,8 +81,14 @@ in
       frontendHostname = domain;
     };
 
-    systemd.services.vikunja.unitConfig = {
-      RequiresMountsFor = "/var/lib/vikunja";
+    # Override systemd service to use static user instead of DynamicUser
+    systemd.services.vikunja = {
+      unitConfig.RequiresMountsFor = "/var/lib/vikunja";
+      serviceConfig = {
+        DynamicUser = lib.mkForce false;
+        User = cfg.serviceUsername;
+        Group = cfg.serviceGroup;
+      };
     };
     
     # Override the config file location to use our sops-generated config

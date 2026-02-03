@@ -74,6 +74,7 @@
         "coverage"              # Test coverage reports
         ".npm"                  # NPM logs/cache
         ".yarn"                 # Yarn cache
+        ".pnpm-store"            # PNPM store
 
         # --- C / C++ / Rust / Go ---
         "*.o"                   # Object files
