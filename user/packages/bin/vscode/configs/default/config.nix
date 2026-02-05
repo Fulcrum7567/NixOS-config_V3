@@ -53,6 +53,7 @@ in
 					  "explorer.confirmPasteNative" = false;
 					  "git.autofetch" = true;
 					  "git.enableSmartCommit" = true;
+  					"git.confirmSync" = false;
 				};
 			};
 		};
