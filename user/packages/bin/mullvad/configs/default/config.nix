@@ -11,7 +11,7 @@ in
 
 		# Auto enable
 
-		systemd.services.mullvad-connect-delayed = lib.mkIf (option.autoEnableDelay != -1) {
+		systemd.services.mullvad-connect-delayed = lib.mkIf (option.autoEnableDelay > -1) {
 			description = "Connect to Mullvad VPN after a set delay";
 
 			wantedBy = [ "multi-user.target" ];

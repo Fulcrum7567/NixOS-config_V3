@@ -7,6 +7,7 @@ in
 		packages = {
 			git.enable = true;
 			vscode.enable = true;
+			devtoolbox.enable = true;
 		};
 	};
 } 

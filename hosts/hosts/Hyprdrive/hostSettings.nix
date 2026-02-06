@@ -66,7 +66,7 @@
 
 			mullvad = {
 				enable = true;
-				autoEnableDelay = 0;
+				autoEnableDelay = 1;
 			};
 
 			groups = {
