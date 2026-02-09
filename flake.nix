@@ -161,11 +161,19 @@
 			url = "github:NotAShelf/nvf";
 			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
+		
+		nix-gaming.url = "github:fufexan/nix-gaming";
 
+		nix-citizen = {
+			url = "github:LovingMelody/nix-citizen";
+			inputs.nix-gaming.follows = "nix-gaming";
+		};
+		
+		preload-ng.url = "github:miguel-b-p/preload-ng";
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix-stable, sops-nix-unstable, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, noctalia-stable, noctalia-unstable, nixos-anywhere, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix-stable, sops-nix-unstable, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, noctalia-stable, noctalia-unstable, nixos-anywhere, nix-gaming, preload-ng, nix-citizen, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗

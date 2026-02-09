@@ -51,10 +51,9 @@
 
 			alvr.enable = true;
 
-			solaar.enable = true;
 
 			sunshine.enable = true;
-			moonlight.enable = lib.mkForce false;
+			moonlight.enable = lib.mkForce true;
 
 			bottles.enable = true;
 
@@ -67,6 +66,10 @@
 			mullvad = {
 				enable = true;
 				autoEnableDelay = 1;
+			};
+
+			starCitizen = {
+				enable = true;
 			};
 
 			groups = {
@@ -117,14 +120,14 @@
 		fileSystems."/mnt/SSD-Games" = {
 		  	device = "/dev/nvme0n1p5";
 		  	fsType = "ext4";
-		  	options = [ "defaults" ];
+		  	options = [ "defaults" "nofail" ];
 		};
 		
 		
 		fileSystems."/mnt/HDD" = {
 		  	device = "/dev/disk/by-uuid/f5d38b42-7564-4996-931a-89758fa4ee0d";
 		  	fsType = "ext4";
-		  	options = [ "defaults" ];
+		  	options = [ "defaults" "nofail" "x-systemd.automount" "noauto" "x-systemd.device-timeout=1ms" ];
 		};
 		
 	};

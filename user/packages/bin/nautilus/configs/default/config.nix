@@ -29,5 +29,23 @@ in
 			enable = true;
 			terminal = config.packages.defaults.terminal.active;
 		};
+
+		# improve startup times
+		systemd.user.services.nautilus-background = {
+			description = "Nautilus Background Service";
+			
+			# NixOS uses 'wantedBy' instead of 'Install.WantedBy'
+			wantedBy = [ "graphical-session.target" ];
+			after = [ "graphical-session.target" ];
+
+			# Actual service settings go inside 'serviceConfig'
+			serviceConfig = {
+				ExecStart = "${pkgs-default.nautilus}/bin/nautilus --gapplication-service";
+				Restart = "on-failure";
+				# Resource limits (optional)
+				CPUQuota = "20%";
+				MemoryHigh = "500M";
+			};
+		};
 	};
 } 

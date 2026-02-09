@@ -4,6 +4,8 @@ let
 in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
-		virtualisation.docker.enableOnBoot = false;
+		home-manager.users.${config.user.settings.username} = {
+			
+		};
 	};
 } 

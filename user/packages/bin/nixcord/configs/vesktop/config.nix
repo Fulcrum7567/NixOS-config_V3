@@ -11,6 +11,7 @@ in
 				vesktop = {
 					enable = true;
 					package = pkgs-stable.vesktop.overrideAttrs (prev: {
+						
 						desktopItems = [
 							(pkgs-stable.makeDesktopItem {
 								name = "discord";
