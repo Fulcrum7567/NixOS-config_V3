@@ -7,6 +7,9 @@
 {
 	config = {
 
+		# fix for suspend?
+		boot.kernelParams = [ "button.lid_init_state=open" ];
+
 		# Swap-file
 		swapDevices = [
 			{
