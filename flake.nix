@@ -165,9 +165,12 @@
 		nix-gaming.url = "github:fufexan/nix-gaming";
 
 		nix-citizen = {
-			url = "github:LovingMelody/nix-citizen";
+			url = "github:LovingMelody/nix-citizen/experimental";
 			inputs.nix-gaming.follows = "nix-gaming";
 		};
+
+		# Steam customs
+		millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
 		
 		preload-ng.url = "github:miguel-b-p/preload-ng";
 	};
