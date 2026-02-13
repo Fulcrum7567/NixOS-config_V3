@@ -72,6 +72,10 @@
 				enable = true;
 			};
 
+			steam = {
+				package = "millennium";
+			};
+
 			groups = {
 				gaming.enable = true;
 				FH.enable = true;

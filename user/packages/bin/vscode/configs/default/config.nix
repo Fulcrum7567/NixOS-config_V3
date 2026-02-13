@@ -7,7 +7,7 @@ in
 		home-manager.users.${config.user.settings.username} = {
 			programs.vscode.profiles.default = {
 				enableUpdateCheck = false;
-				extensions = with pkgs-default.vscode-extensions; [
+				extensions = with pkgs-stable.vscode-extensions; [
 					github.copilot
 					github.copilot-chat
 					github.codespaces
@@ -25,35 +25,39 @@ in
 				];
 
 				userSettings = {
-					  "chat.editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
-					  "chat.editor.fontSize" = 20.0;
-					  "debug.console.fontFamily" = "JetBrainsMono Nerd Font Mono";
-					  "debug.console.fontSize" = 20.0;
-					  "editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
-					  "editor.fontSize" = 20.0;
-					  "editor.inlayHints.fontFamily" = "JetBrainsMono Nerd Font Mono";
-					  "editor.inlineSuggest.fontFamily" = "JetBrainsMono Nerd Font Mono";
-					  "editor.minimap.sectionHeaderFontSize" = 12.857142857142858;
-					  "markdown.preview.fontFamily" = "DejaVu Sans";
-					  "markdown.preview.fontSize" = 20.0;
-					  "scm.inputFontFamily" = "JetBrainsMono Nerd Font Mono";
-					  "scm.inputFontSize" = 18.571428571428573;
-					  "screencastMode.fontSize" = 80.0;
-					  "terminal.integrated.fontSize" = 20.0;
-					  "update.mode" = "none";
-					  "workbench.colorTheme" = "Stylix";
-					  "editor.bracketPairColorization.independentColorPoolPerBracketType" = true;
-					  "editor.guides.bracketPairs" = false;
-					  "explorer.compactFolders" = false;
-					  "scm.compactFolders" = false;
-					  "github.copilot.nextEditSuggestions.enabled" = true;
-					  "git.openRepositoryInParentFolders" = "always";
-					  "redhat.telemetry.enabled" = false;
-					  "python.analysis.typeCheckingMode" = "standard";
-					  "explorer.confirmPasteNative" = false;
-					  "git.autofetch" = true;
-					  "git.enableSmartCommit" = true;
-  					"git.confirmSync" = false;
+					"chat.editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
+					"chat.editor.fontSize" = 20.0;
+					"debug.console.fontFamily" = "JetBrainsMono Nerd Font Mono";
+					"debug.console.fontSize" = 20.0;
+					"editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
+					"editor.fontSize" = 20.0;
+					"editor.inlayHints.fontFamily" = "JetBrainsMono Nerd Font Mono";
+					"editor.inlineSuggest.fontFamily" = "JetBrainsMono Nerd Font Mono";
+					"editor.minimap.sectionHeaderFontSize" = 12.857142857142858;
+					"markdown.preview.fontFamily" = "DejaVu Sans";
+					"markdown.preview.fontSize" = 20.0;
+					"scm.inputFontFamily" = "JetBrainsMono Nerd Font Mono";
+					"scm.inputFontSize" = 18.571428571428573;
+					"screencastMode.fontSize" = 80.0;
+					"terminal.integrated.fontSize" = 20.0;
+					"update.mode" = "none";
+					"workbench.colorTheme" = "Stylix";
+					"editor.bracketPairColorization.independentColorPoolPerBracketType" = true;
+					"editor.guides.bracketPairs" = false;
+					"explorer.compactFolders" = false;
+					"scm.compactFolders" = false;
+					"github.copilot.nextEditSuggestions.enabled" = true;
+					"git.openRepositoryInParentFolders" = "always";
+					"redhat.telemetry.enabled" = false;
+					"python.analysis.typeCheckingMode" = "standard";
+					"explorer.confirmPasteNative" = false;
+					"git.autofetch" = true;
+					"git.enableSmartCommit" = true;
+					"git.confirmSync" = false;
+					"github.copilot.enable" = {
+						"*" = true;
+					};
+					"chat.disableAIFeatures" = false;
 				};
 			};
 		};

@@ -20,5 +20,16 @@
 			default = false;
 			description = "Whether to enable the ${settings.displayName} package.";
 		};
+
+		package = lib.mkOption {
+			type = lib.types.enum [
+				"default"
+				"stable"
+				"unstable"
+				"millennium"
+			];
+			default = "default";
+			description = "Which package to use for steam";
+		};
 	};
 }

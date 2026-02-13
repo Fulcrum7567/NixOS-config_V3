@@ -1,5 +1,5 @@
 {
 	optionName = "vscode";
-	packageName = "vscodium";
+	packageName = "vscode";
 	displayName = "Visual studio code";
 }
