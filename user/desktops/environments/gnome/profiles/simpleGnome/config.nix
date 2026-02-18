@@ -22,6 +22,7 @@
 					on = false;
 				};
 				misc.enable = true;
+				power.enable = true;
 			};
 
 			extensions = {
