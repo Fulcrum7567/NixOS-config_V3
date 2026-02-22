@@ -98,6 +98,8 @@ in
       };
     };
 
+    environment.systemPackages = [ config.services.kanidm.package ];
+
     users.users.${cfg.serviceUsername}.extraGroups = [ "nginx" ];
 
     server.services = {
