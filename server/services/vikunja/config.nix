@@ -46,7 +46,8 @@ in
           openid:
             enabled: true
             providers:
-              - name: "kanidm"
+              kanidm:
+                name: "kanidm"
                 authurl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}"
                 logouturl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/ui/logout"
                 clientid: "${clientId}"
