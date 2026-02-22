@@ -85,10 +85,12 @@ in
           displayName = service.displayName;
           originUrl = service.originUrl;
           originLanding = service.originLanding;
-          basicSecretFile = service.basicSecretFile;
+          basicSecretFile = if service.public then null else service.basicSecretFile;
+          public = service.public;
           imageFile = service.imageFile;
           preferShortUsername = service.preferShortUsername;
           allowInsecureClientDisablePkce = service.allowInsecureClientDisablePkce;
+          enableLocalhostRedirects = service.enableLocalhostRedirects;
           scopeMaps = {
             "${service.groupName}" = service.scopes;
             "all_services" = service.scopes;

@@ -51,6 +51,8 @@
 
 			alvr.enable = true;
 
+			vikunja.enable = true;
+
 
 			sunshine.enable = false;
 			moonlight.enable = lib.mkForce true;
