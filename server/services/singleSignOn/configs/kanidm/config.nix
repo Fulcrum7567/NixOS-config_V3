@@ -35,7 +35,7 @@ in
     };
 
     services.kanidm = {
-      package = lib.mkDefault pkgs-unstable.kanidmWithSecretProvisioning_1_8;
+      package = lib.mkDefault pkgs-unstable.kanidmWithSecretProvisioning_1_9;
       server = {
         enable = true;
         settings = {
