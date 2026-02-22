@@ -4,7 +4,7 @@ let
 in
 {
 	config = lib.mkIf (settingsConfig.enable && (settingsConfig.activeConfig == "default")) {
-		home-manager.users.${config.user.settings.username} = {
+		home-manager.users.${config.user.settings.username} = {lib, ... }: {
 			dconf.settings = {
 
 				"org/gnome/settings-daemon/plugins/power" = {
@@ -19,10 +19,9 @@ in
 				};
 
 				"org/gnome/desktop/screensaver" = {
-					lock-delay = 300;
+					lock-delay = lib.hm.gvariant.mkUint32 300;
 					restart-enabled = true;
 				};
-			    
 			};
 		};
 	};
