@@ -17,6 +17,11 @@ in
 					sleep-inactive-battery-timeout = 300;
 					sleep-inactive-battery-type = "suspend";
 				};
+
+				"org/gnome/desktop/screensaver" = {
+					lock-delay = 300;
+					restart-enabled = true;
+				};
 			    
 			};
 		};
