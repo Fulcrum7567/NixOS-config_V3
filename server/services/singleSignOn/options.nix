@@ -100,18 +100,6 @@
             default = false;
             description = "Allow this OAuth client to skip PKCE. Only enable for legacy clients that don't support PKCE.";
           };
-
-          public = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-            description = "Whether this is a public OAuth client (no client secret, enforces PKCE). Required for native/mobile app flows.";
-          };
-
-          enableLocalhostRedirects = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-            description = "Allow localhost redirect URIs (for native/mobile apps). Only valid for public clients.";
-          };
         };      
       });
       default = { };

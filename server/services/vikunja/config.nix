@@ -1,38 +1,60 @@
-{ config, lib, pkgs-default, ... }:
+{ config, lib, pkgs-default, pkgs, ... }:
 let 
   cfg = config.server.services.vikunja;
 
   domain = "${cfg.subdomain}.${config.server.webaddress}";
   clientId = "vikunja";
-
-  # Generate plain config file (no secrets needed for public OAuth2 client)
-  vikunjaConfigFile = pkgs-default.writeText "vikunja-config.yaml" ''
-    database:
-      type: sqlite
-      path: /var/lib/vikunja/vikunja.db
-    files:
-      basepath: /var/lib/vikunja/files
-    service:
-      interface: ":${toString cfg.port}"
-      frontendurl: "https://${domain}/?redirectToProvider=true"
-      publicurl: "https://${domain}/"
-      timezone: "${cfg.timezone}"
-    auth:
-      local:
-        enabled: false
-      openid:
-        enabled: true
-        providers:
-          kanidm:
-            name: "kanidm"
-            authurl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}"
-            logouturl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/ui/logout"
-            clientid: "${clientId}"
-            scope: "openid profile email"
-  '';
+  
+  # Generate YAML config with the secret placeholder
+  vikunjaConfig = pkgs.formats.yaml { };
 in 
 {
   config = lib.mkIf cfg.enable {
+
+
+    sops.secrets = {
+      "vikunja/oauth/client_secret" = {
+        owner = config.server.services.singleSignOn.serviceUsername;
+        group = config.server.services.singleSignOn.serviceGroup;
+        sopsFile = ./vikunjaSecrets.yaml;
+        format = "yaml";
+        key = "vikunja_client_secret";
+        restartUnits = [ "kanidm.service" ];
+        mode = "0440";
+      };
+    };
+
+    # Generate complete config file with secret via sops template
+    sops.templates."vikunja-config.yaml" = {
+      # Make readable by Vikunja's dynamic user
+      mode = "0444";
+      restartUnits = [ "vikunja.service" ];
+      content = ''
+        database:
+          type: sqlite
+          path: /var/lib/vikunja/vikunja.db
+        files:
+          basepath: /var/lib/vikunja/files
+        service:
+          interface: ":${toString cfg.port}"
+          frontendurl: "https://${domain}/?redirectToProvider=true"
+          publicurl: "https://${domain}/"
+          timezone: "${cfg.timezone}"
+        auth:
+          local:
+            enabled: false
+          openid:
+            enabled: true
+            providers:
+              kanidm:
+                name: "kanidm"
+                authurl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}"
+                logouturl: "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/ui/logout"
+                clientid: "${clientId}"
+                clientsecret: "${config.sops.placeholder."vikunja/oauth/client_secret"}"
+                scope: "openid profile email"
+      '';
+    };
 
     # Create a static user for vikunja (instead of DynamicUser)
     users.users.${cfg.serviceUsername} = {
@@ -70,8 +92,8 @@ in
       };
     };
     
-    # Override the config file location to use our generated config
-    environment.etc."vikunja/config.yaml".source = lib.mkForce vikunjaConfigFile;
+    # Override the config file location to use our sops-generated config
+    environment.etc."vikunja/config.yaml".source = lib.mkForce config.sops.templates."vikunja-config.yaml".path;
 
     server.services = {
       reverseProxy.activeRedirects."vikunja" = {
@@ -94,18 +116,21 @@ in
       singleSignOn.oAuthServices."${clientId}" = {
         displayName = "Vikunja";
         # Vikunja redirect URL format: <publicurl>/auth/openid/<provider-name>
+        # Also include the base URL for token refresh scenarios
         originUrl = [ 
           "https://${domain}/auth/openid/kanidm" 
           "https://${domain}/"
         ]; 
         originLanding = "https://${domain}";
-        imageFile = ./checklist.png; 
+        # This points Kanidm to the SAME secret file Vikunja is reading
+        basicSecretFile = config.sops.secrets."vikunja/oauth/client_secret".path;
         preferShortUsername = true;
+        # Ensure you have a suitable icon or remove this line
+        imageFile = ./checklist.png; 
         groupName = "vikunja_users";
         scopes = [ "openid" "profile" "email" ];
-        # Public client: no secret, PKCE enforced — required for native/mobile app localhost redirects
-        public = true;
-        enableLocalhostRedirects = true;
+        # Vikunja 0.24.x doesn't support PKCE, so we need to disable it
+        allowInsecureClientDisablePkce = true;
       };
     };
     
