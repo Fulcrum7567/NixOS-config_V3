@@ -35,21 +35,23 @@ in
     };
 
     services.kanidm = {
-      enableServer = true;
       package = lib.mkDefault pkgs-unstable.kanidmWithSecretProvisioning_1_8;
-      serverSettings = {
-        domain = cfg.subdomain + "." + config.server.webaddress;
-        origin = "https://${cfg.subdomain}.${config.server.webaddress}";
-        bindaddress = "127.0.0.1:${toString cfg.port}";
-        # Kanidm requires TLS internally usually, but if behind local reverse proxy
-        # strictly on localhost, you can sometimes run http. 
-        # However, standard practice is to let Kanidm manage its certs or point to existing ones.
-        # For this example, we assume you might be using ACME certs or self-signed for localhost.
-        # If using ACME from Nginx, Kanidm needs access to those certs.
-        tls_chain = "/var/lib/acme/${config.server.webaddress}/fullchain.pem";
-        tls_key = "/var/lib/acme/${config.server.webaddress}/key.pem";
+      server = {
+        enable = true;
+        settings = {
+          domain = cfg.subdomain + "." + config.server.webaddress;
+          origin = "https://${cfg.subdomain}.${config.server.webaddress}";
+          bindaddress = "127.0.0.1:${toString cfg.port}";
+          # Kanidm requires TLS internally usually, but if behind local reverse proxy
+          # strictly on localhost, you can sometimes run http. 
+          # However, standard practice is to let Kanidm manage its certs or point to existing ones.
+          # For this example, we assume you might be using ACME certs or self-signed for localhost.
+          # If using ACME from Nginx, Kanidm needs access to those certs.
+          tls_chain = "/var/lib/acme/${config.server.webaddress}/fullchain.pem";
+          tls_key = "/var/lib/acme/${config.server.webaddress}/key.pem";
 
-        ldapbindaddress = "[::]:636";
+          ldapbindaddress = "[::]:636";
+        };
       };
 
       provision = {

@@ -1,5 +1,5 @@
 {
 	optionName = "gnomeImageViewer";
-	packageName = "loupe";
-	displayName = "loupe image viewer";
+	packageName = "image-roll";
+	displayName = "image-roll";
 }

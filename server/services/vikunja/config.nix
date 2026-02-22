@@ -37,7 +37,7 @@ in
           basepath: /var/lib/vikunja/files
         service:
           interface: ":${toString cfg.port}"
-          frontendurl: "https://${domain}/"
+          frontendurl: "https://${domain}/?redirectToProvider=true"
           publicurl: "https://${domain}/"
           timezone: "${cfg.timezone}"
         auth:

@@ -46,6 +46,7 @@
           storageLabelClaim = "preferred_username";
           tokenEndpointAuthMethod = "client_secret_post";
           signingAlgorithm = "ES256";
+          sessionTimeout = "1h";
         };
         server = {
           externalDomain = "https://immich.${config.server.webaddress}";

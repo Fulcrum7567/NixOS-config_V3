@@ -5,10 +5,33 @@ in
 {
 	config = lib.mkIf (option.enable && (option.activeConfig == "default")) {
 
-		home-manager.users.${config.user.settings.username} = {
+		home-manager.users.${config.user.settings.username} = { lib, ... }: {
 			home.sessionVariables = {
 				STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
 			};
+
+			# Fix icon not showing in GNOME
+			home.activation.fixSteamDesktopFiles = let
+				desktopDir = "~/.local/share/applications";
+			in lib.hm.dag.entryAfter ["writeBoundary"] ''
+				# Check if the directory exists
+				if [ -d ${desktopDir} ]; then
+					echo "Fixing Steam game desktop files in ${desktopDir}..."
+					# Find all .desktop files that were created by Steam (they contain 'steam://rungameid/')
+					${pkgs-default.findutils}/bin/find ${desktopDir} -name "*.desktop" -type f -exec ${pkgs-default.gnugrep}/bin/grep -l 'steam://rungameid/' {} \; | while read file; do
+						# Extract the Game ID from the Exec line
+						GAMEID=$(${pkgs-default.gnused}/bin/sed -n 's/.*steam:\/\/rungameid\/\([0-9]*\).*/\1/p' "$file")
+						if [ -n "$GAMEID" ]; then
+							# Check if StartupWMClass line already exists
+							if ! ${pkgs-default.gnugrep}/bin/grep -q "^StartupWMClass=" "$file"; then
+								echo "Adding StartupWMClass=steam_app_$GAMEID to $(basename "$file")"
+								# Add the line after the [Desktop Entry] section
+								${pkgs-default.gnused}/bin/sed -i "/^\[Desktop Entry\]/a StartupWMClass=steam_app_$GAMEID" "$file"
+							fi
+						fi
+					done
+				fi
+			'';
 		};
 
 		users.users.${config.user.settings.username}.extraGroups = [ "steam" ];
