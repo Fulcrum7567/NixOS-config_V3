@@ -118,8 +118,9 @@ in
 
           # Kanidm LDAP filter templates
           filter = {
-            # Search by account name (Kanidm uses "name" attribute)
-            name = "(&(class=account)(name=?))";
+            # Search by account name or SPN (service principal name).
+            # Users may log in as "fulcrum" (name) or "fulcrum@sso.aurek.eu" (spn).
+            name = "(&(class=account)(|(name=?)(spn=?)))";
             # Search by email address (Kanidm uses "mail" attribute)
             email = "(&(class=account)(|(mail=?)))";
           };
@@ -148,10 +149,11 @@ in
         directory."imap".lookup.domains = [ domain ];
 
         # ── Admin fallback ────────────────────────────────────────────────
-        # Uses the Kanidm admin password as fallback for web administration
+        # Uses the LDAP bind token as fallback admin password.
+        # The kanidm admin password can't be used here (owned by kanidm:kanidm).
         authentication.fallback-admin = {
           user = "admin";
-          secret = "%{file:${config.sops.secrets."kanidm/adminPassword".path}}%";
+          secret = "%{file:${config.sops.secrets."stalwart/ldap_bind_password".path}}%";
         };
       };
     };
@@ -203,7 +205,23 @@ in
           echo "  stalwart-ldap service account already exists."
         fi
 
+        # Enable POSIX attributes on all persons so they can bind via LDAP.
+        # Kanidm LDAP auth requires a POSIX-enabled account with a POSIX password.
+        echo "🔧 Enabling POSIX attributes on all person accounts..."
+        ${lib.concatStringsSep "\n" (lib.mapAttrsToList (name: _: ''
+          if $KANIDM_BIN person posix show ${name} -H "$KANIDM_URL" --name "$IDM_ADMIN" 2>/dev/null | grep -q "gidnumber"; then
+            echo "  ${name}: POSIX already enabled."
+          else
+            echo "  ${name}: Enabling POSIX attributes..."
+            $KANIDM_BIN person posix set ${name} -H "$KANIDM_URL" --name "$IDM_ADMIN" || echo "  ⚠️ Failed to enable POSIX for ${name}"
+          fi
+        '') config.server.users)}
+
         echo "✅ Stalwart LDAP service account provisioning complete."
+        echo ""
+        echo "📝 NOTE: Each user must set a POSIX password for LDAP/mail login:"
+        echo "   kanidm person posix set-password <username> --name idm_admin"
+        echo "   This is separate from the Kanidm web/passkey credential."
       '';
 
       kanidm.extraIterativeSteps = ''
