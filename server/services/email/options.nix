@@ -21,7 +21,7 @@
 
     subdomain = lib.mkOption {
       type = lib.types.str;
-      default = "mail";
+      default = "stalwart";
       description = "The subdomain to host the Email service on.";
     };
 
