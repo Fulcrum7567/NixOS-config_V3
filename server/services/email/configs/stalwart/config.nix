@@ -205,6 +205,14 @@ in
           echo "  stalwart-ldap service account already exists."
         fi
 
+        # Grant the service account mail server read privileges.
+        # Without this, LDAP searches return "denied - no entries were released"
+        # because the API token bind has no permission to read person attributes.
+        echo "🔧 Adding stalwart-ldap to idm_mail_servers..."
+        $KANIDM_BIN group add-members idm_mail_servers stalwart-ldap -H "$KANIDM_URL" --name "$IDM_ADMIN" 2>/dev/null \
+          && echo "  ✅ Added to idm_mail_servers." \
+          || echo "  ℹ️  Already a member of idm_mail_servers."
+
         # Enable POSIX attributes on all persons so they can bind via LDAP.
         # Kanidm LDAP auth requires a POSIX-enabled account with a POSIX password.
         echo "🔧 Enabling POSIX attributes on all person accounts..."
@@ -219,9 +227,9 @@ in
 
         echo "✅ Stalwart LDAP service account provisioning complete."
         echo ""
-        echo "📝 NOTE: Each user must set a POSIX password for LDAP/mail login:"
-        echo "   kanidm person posix set-password <username> --name idm_admin"
-        echo "   This is separate from the Kanidm web/passkey credential."
+        echo "📝 NOTE: Each user must set a POSIX/UNIX password via the Kanidm"
+        echo "   web UI (Security → POSIX Password) for LDAP/mail login."
+        echo "   This is separate from the Kanidm primary credential."
       '';
 
       kanidm.extraIterativeSteps = ''
