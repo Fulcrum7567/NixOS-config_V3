@@ -111,7 +111,6 @@ in
               # Use "lookup" method: first search for the user's DN using the
               # service-account bind, then re-bind as the user with their password.
               # This works with Kanidm's POSIX password authentication.
-              enable = true;
               method = "lookup";
             };
           };
@@ -136,7 +135,7 @@ in
           };
         };
 
-        # ── Storage & Auth Settings ───────────────────────────────────────
+        # ── Storage & Auth Settings ───────────────────────────────────
         storage.directory = "kanidm";
 
         session.auth = {
@@ -147,6 +146,18 @@ in
         session.rcpt.directory = "'kanidm'";
 
         directory."imap".lookup.domains = [ domain ];
+
+        # ── OAuth Token Settings ──────────────────────────────────────────
+        # Stalwart's OAuth token generation calls password_hash() when the
+        # token expiry exceeds 3600s. With LDAP bind auth, Kanidm does not
+        # expose password hashes, causing "Account does not contain secrets".
+        # Setting all token expiries to ≤ 3600s avoids the password_hash()
+        # call entirely. The web UI auto-refreshes tokens transparently.
+        oauth.expiry = {
+          token = "1h";              # Access token: exactly 3600s (≤ 3600 skips hash)
+          refresh-token = "1h";      # Refresh token: also ≤ 3600s to avoid hash lookup
+          refresh-token-renew = "30m"; # Renew refresh token when 30min remaining
+        };
 
         # ── Admin fallback ────────────────────────────────────────────────
         # Uses the LDAP bind token as fallback admin password.
