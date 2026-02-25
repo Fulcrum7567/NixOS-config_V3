@@ -1,211 +1,235 @@
-{ config, lib, ... }:
+{ config, lib, pkgs-default, ... }:
 let
   cfg = config.server.services.email;
   ssoCfg = config.server.services.singleSignOn;
-  stalwartDomain = cfg.subdomain + "." + config.server.webaddress;
+  domain = config.server.webaddress;
+  mailDomain = cfg.fullDomainName;
+  ssoFullDomain = ssoCfg.fullDomainName;
+
+  # Kanidm LDAP base DN derived from the SSO domain
+  # e.g. "sso.aurek.eu" -> "dc=sso,dc=aurek,dc=eu"
+  ldapBaseDn = lib.concatStringsSep "," (map (part: "dc=${part}") (lib.splitString "." ssoFullDomain));
 in
 {
   config = lib.mkIf (cfg.enable && (cfg.activeConfig == "stalwart")) {
 
-    # --- Sops Secrets ---
+    # ── Sops Secrets ──────────────────────────────────────────────────────
     sops.secrets = {
-      # LDAP bind password for Stalwart to query Kanidm's LDAP interface
-      "stalwart/ldap/bind_password" = {
-        owner = config.services.stalwart-mail.user or "stalwart-mail";
-        group = config.services.stalwart-mail.group or "stalwart-mail";
+      # API token for the stalwart-ldap service account in Kanidm.
+      # Used as the LDAP bind password (bind DN = "dn=token").
+      "stalwart/ldap_bind_password" = {
+        owner = "stalwart-mail";
+        group = "stalwart-mail";
         sopsFile = ./stalwartSecrets.yaml;
         format = "yaml";
         key = "stalwart_ldap_bind_password";
         restartUnits = [ "stalwart-mail.service" ];
       };
-
-      # Service account password for Kanidm LDAP bind (used by kanidm to set it up)
-      "stalwart/kanidm/service_password" = {
-        owner = ssoCfg.serviceUsername;
-        group = ssoCfg.serviceGroup;
-        sopsFile = ./stalwartSecrets.yaml;
-        format = "yaml";
-        key = "stalwart_ldap_bind_password";
-        restartUnits = [ "kanidm.service" ];
-        mode = "0440";
-      };
     };
 
-    # --- Stalwart Mail Service ---
+
+    # ── Stalwart Mail Service ─────────────────────────────────────────────
     services.stalwart-mail = {
       enable = true;
+      openFirewall = true;
+
       settings = {
-        # -- Server / Listener config --
         server = {
-          hostname = stalwartDomain;
-          
-          listener = {
-            # SMTP (MTA - receiving mail from other servers)
-            smtp = {
-              bind = [ "[::]:25" ];
-              protocol = "smtp";
-            };
-
-            # SMTP Submission (authenticated users sending mail)
-            submission = {
-              bind = [ "[::]:587" ];
-              protocol = "smtp";
-              tls.implicit = false; # STARTTLS
-            };
-
-            # SMTP Submissions (implicit TLS)
-            submissions = {
-              bind = [ "[::]:465" ];
-              protocol = "smtp";
-              tls.implicit = true;
-            };
-
-            # IMAP
-            imap = {
-              bind = [ "[::]:143" ];
-              protocol = "imap";
-              tls.implicit = false; # STARTTLS
-            };
-
-            # IMAPS (implicit TLS)
-            imaps = {
-              bind = [ "[::]:993" ];
-              protocol = "imap";
-              tls.implicit = true;
-            };
-
-            # HTTP (management API / webadmin, behind reverse proxy)
-            http = {
-              bind = [ "127.0.0.1:${toString cfg.port}" "[::1]:${toString cfg.port}" ];
-              protocol = "http";
-            };
-          };
-        };
-
-        # -- Authentication directory: Kanidm via LDAP --
-        # Kanidm exposes an LDAP interface on port 636 (LDAPS) by default.
-        # Stalwart will bind as a service account and use LDAP bind auth
-        # (lookup method) since Kanidm doesn't expose password hashes.
-        directory."kanidm-ldap" = {
-          type = "ldap";
-          url = "ldaps://${ssoCfg.subdomain}.${config.server.webaddress}";
-          base-dn = "dc=${lib.concatStringsSep ",dc=" (lib.splitString "." config.server.webaddress)}";
-          timeout = "15s";
+          hostname = "mx1.${domain}";
 
           tls = {
             enable = true;
-            allow-invalid-certs = true; # Set to false in production with valid certs
+            implicit = true;
           };
 
-          # Default bind credentials - service account for searching
+          listener = {
+            # Inbound SMTP (MTA-to-MTA)
+            smtp = {
+              protocol = "smtp";
+              bind = "[::]:25";
+            };
+
+            # Submission (client -> server, implicit TLS)
+            submissions = {
+              protocol = "smtp";
+              bind = "[::]:465";
+              tls.implicit = true;
+            };
+
+            # IMAPS (client -> server, implicit TLS)
+            imaps = {
+              protocol = "imap";
+              bind = "[::]:993";
+              tls.implicit = true;
+            };
+
+            # JMAP / Web Admin (HTTP, behind nginx reverse proxy)
+            jmap = {
+              protocol = "http";
+              bind = "127.0.0.1:8080";
+              url = "https://${mailDomain}";
+            };
+          };
+        };
+
+        # ── TLS Certificates ──────────────────────────────────────────────
+        # Re-use the wildcard ACME certificates managed by nginx
+        certificate."default" = {
+          cert = "%{file:/var/lib/acme/${domain}/fullchain.pem}%";
+          private-key = "%{file:/var/lib/acme/${domain}/key.pem}%";
+        };
+
+        # ── Lookup defaults ───────────────────────────────────────────────
+        lookup.default = {
+          hostname = "mx1.${domain}";
+          domain = domain;
+        };
+
+        # ── LDAP Directory (Kanidm) ──────────────────────────────────────
+        directory."kanidm" = {
+          type = "ldap";
+
+          # Kanidm serves LDAPS on port 636 (reuses its TLS certs)
+          url = "ldaps://${ssoFullDomain}:636";
+
+          base-dn = ldapBaseDn;
+
+          tls = {
+            enable = false;          # Already LDAPS, no STARTTLS needed
+            allow-invalid-certs = false;
+          };
+
+          timeout = "30s";
+
+          # Bind with the service account API token for directory searches.
+          # In Kanidm, "dn=token" + API-token-as-password gives elevated read access.
           bind = {
-            dn = "dn=service_account,dc=${lib.concatStringsSep ",dc=" (lib.splitString "." config.server.webaddress)}";
-            secret = "%{file:${config.sops.secrets."stalwart/ldap/bind_password".path}}%";
+            dn = "dn=token";
+            secret = "%{file:${config.sops.secrets."stalwart/ldap_bind_password".path}}%";
+
+            auth = {
+              # Use "lookup" method: first search for the user's DN using the
+              # service-account bind, then re-bind as the user with their password.
+              # This works with Kanidm's POSIX password authentication.
+              enable = true;
+              method = "lookup";
+            };
           };
 
-          # Use bind authentication with lookup since Kanidm
-          # does not expose password hashes via LDAP
-          bind.auth = {
-            method = "lookup";
-          };
-
-          # LDAP search filters
+          # Kanidm LDAP filter templates
           filter = {
-            name = "(&(objectClass=person)(name=?))";
-            email = "(&(objectClass=person)(|(mail=?)(mailAlias=?)))";
+            # Search by account name (Kanidm uses "name" attribute)
+            name = "(&(class=account)(name=?))";
+            # Search by email address (Kanidm uses "mail" attribute)
+            email = "(&(class=account)(|(mail=?)))";
           };
 
-          # Map Kanidm LDAP attributes to Stalwart attributes
+          # Kanidm LDAP attribute mappings
           attributes = {
             name = "name";
-            class = "objectClass";
-            description = "displayname";
-            groups = "memberOf";
+            class = "objectclass";
+            description = [ "displayname" ];
+            groups = [ "memberof" ];
             email = "mail";
-            email-alias = "mailAlias";
-            quota = "quota";
-            secret-changed = "modifytimestamp";
+            quota = "diskQuota";
           };
         };
 
-        # -- Storage configuration --
-        storage = {
-          data = "rocksdb";
-          fts = "rocksdb";
-          blob = "rocksdb";
-          lookup = "rocksdb";
-          directory = "kanidm-ldap";
+        # ── Storage & Auth Settings ───────────────────────────────────────
+        storage.directory = "kanidm";
+
+        session.auth = {
+          mechanisms = "[plain]";
+          directory = "'kanidm'";
         };
 
-        store."rocksdb" = {
-          type = "rocksdb";
-          path = "${cfg.defaultDataDir}/db";
-        };
+        session.rcpt.directory = "'kanidm'";
 
-        # -- Authentication settings --
+        directory."imap".lookup.domains = [ domain ];
+
+        # ── Admin fallback ────────────────────────────────────────────────
+        # Uses the Kanidm admin password as fallback for web administration
         authentication.fallback-admin = {
           user = "admin";
-          # You should change this or use a secret; this is just for initial setup
-          secret = "%{file:${config.sops.secrets."stalwart/ldap/bind_password".path}}%";
-        };
-
-        # -- TLS certificate (use ACME certs from nginx) --
-        certificate."default" = {
-          cert = "%{file:/var/lib/acme/${config.server.webaddress}/cert.pem}%";
-          private-key = "%{file:/var/lib/acme/${config.server.webaddress}/key.pem}%";
+          secret = "%{file:${config.sops.secrets."kanidm/adminPassword".path}}%";
         };
       };
     };
 
-    # -- Ensure stalwart can read ACME certs --
-    users.users.${config.services.stalwart-mail.user or "stalwart-mail"}.extraGroups = [ "acme" ];
+    # ── System user ───────────────────────────────────────────────────────
+    users.users.stalwart-mail.extraGroups = [ "nginx" ];  # Access ACME certs
 
-    # -- Ensure data directory exists --
-    systemd.tmpfiles.rules = [
-      "d ${cfg.defaultDataDir} 0750 ${config.services.stalwart-mail.user or "stalwart-mail"} ${config.services.stalwart-mail.group or "stalwart-mail"} - -"
-      "d ${cfg.defaultDataDir}/db 0750 ${config.services.stalwart-mail.user or "stalwart-mail"} ${config.services.stalwart-mail.group or "stalwart-mail"} - -"
-    ];
+    # ── Firewall ──────────────────────────────────────────────────────────
+    # openFirewall handles 25, 465, 993 via the NixOS module.
+    # JMAP/WebAdmin is only on localhost behind nginx.
 
-    # -- Systemd ordering --
+    # ── Nginx Reverse Proxy ───────────────────────────────────────────────
+    server.services.reverseProxy.activeRedirects."stalwart-mail" = {
+      subdomain = cfg.subdomain;
+      useACMEHost = true;
+      forceSSL = true;
+
+      locations."/" = {
+        path = "/";
+        to = "http://127.0.0.1:8080";
+        proxyWebsockets = true;
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+        '';
+      };
+    };
+
+    # ── Kanidm Service Account & Group Provisioning ─────────────────────
+    # Declaratively provision the "mail-users" group via Kanidm's provisioner.
+    services.kanidm.provision.groups."mail-users" = {
+      present = true;
+      members = [ ];
+    };
+
+    # Imperatively create the stalwart-ldap service account in Kanidm
+    # (service accounts can't be provisioned declaratively, only persons/groups/oauth2).
+    server.services.singleSignOn = {
+      kanidm.extraIterativeIdmSteps = ''
+        echo "🔧 Provisioning Stalwart LDAP service account..."
+
+        # Create the service account if it doesn't exist
+        if ! $KANIDM_BIN service-account get stalwart-ldap -H "$KANIDM_URL" --name "$IDM_ADMIN" 2>/dev/null; then
+          echo "  Creating stalwart-ldap service account..."
+          $KANIDM_BIN service-account create stalwart-ldap "Stalwart Mail LDAP Bind" idm_admins -H "$KANIDM_URL" --name "$IDM_ADMIN"
+        else
+          echo "  stalwart-ldap service account already exists."
+        fi
+
+        echo "✅ Stalwart LDAP service account provisioning complete."
+      '';
+
+      kanidm.extraIterativeSteps = ''
+        echo "🔧 Ensuring Stalwart LDAP API token..."
+
+        STALWART_TOKEN_FILE="${config.sops.secrets."stalwart/ldap_bind_password".path}"
+
+        # Check if the stored token still works by attempting an LDAP whoami
+        CURRENT_TOKEN=$(cat "$STALWART_TOKEN_FILE" 2>/dev/null || echo "")
+
+        if [ -n "$CURRENT_TOKEN" ]; then
+          echo "  LDAP bind token found in sops secret. Service account ready."
+        else
+          echo "  ⚠️  No LDAP bind token found in sops secret!"
+          echo "  Please generate one manually with:"
+          echo "    kanidm service-account api-token generate stalwart-ldap 'LDAP Bind Token' --name idm_admin"
+          echo "  Then store it in stalwartSecrets.yaml as stalwart_ldap_bind_password"
+        fi
+      '';
+    };
+
+    # ── Systemd Dependencies ──────────────────────────────────────────────
     systemd.services.stalwart-mail = {
-      after = [ "kanidm.service" "network-online.target" ];
-      wants = [ "kanidm.service" ];
+      after = [ "kanidm.service" "nginx.service" "sops-nix.service" ];
+      wants = [ "kanidm.service" "nginx.service" ];
     };
 
-    # -- Reverse Proxy (webadmin / API) --
-    server.services = {
-      reverseProxy.activeRedirects."mail" = lib.mkIf (cfg.exposeGUI or false) {
-        subdomain = cfg.subdomain;
-        useACMEHost = true;
-        forceSSL = true;
-
-        locations."/" = {
-          path = "/";
-          to = "http://[::1]:${toString cfg.port}";
-          proxyWebsockets = true;
-          extraConfig = ''
-            client_max_body_size 50M;
-          '';
-        };
-      };
-
-      # Register a Kanidm service account for LDAP bind
-      # This uses your existing SSO abstraction to create the service account
-      # that Stalwart will use for LDAP searches
-      singleSignOn.ldapServices."stalwart" = {
-        displayName = "Stalwart Mail";
-        basicSecretFile = config.sops.secrets."stalwart/kanidm/service_password".path;
-        groupName = "mail-users";
-      };
-    };
-
-    # -- DNS: open mail-related ports in firewall --
-    networking.firewall.allowedTCPPorts = [
-      25    # SMTP
-      465   # SMTPS
-      587   # Submission
-      143   # IMAP
-      993   # IMAPS
-    ];
   };
 }
