@@ -6,7 +6,7 @@ in
   config = lib.mkIf (cfg.enable && (cfg.activeConfig == "roundcube")) {
     services.roundcube = {
       enable = true;
-      domain = cfg.fullDomainName;
+      hostName = cfg.fullDomainName;
       extraConfig = ''
         $config['mail_domain'] = '${cfg.fullDomainName}';
         $config['smtp_server'] = 'tls://localhost';
