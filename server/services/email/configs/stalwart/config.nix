@@ -1,6 +1,6 @@
 { config, lib, pkgs-default, ... }:
 let
-  cfg = config.server.services.email;
+  cfg = config.server.services.mail-server;
   ssoCfg = config.server.services.singleSignOn;
   domain = config.server.webaddress;
   mailDomain = cfg.fullDomainName;
@@ -29,7 +29,7 @@ in
 
 
     # ── Stalwart Mail Service ─────────────────────────────────────────────
-    services.stalwart-mail = {
+    services.stalwart = {
       enable = true;
       openFirewall = true;
 

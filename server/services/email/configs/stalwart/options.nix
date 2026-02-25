@@ -1,4 +1,4 @@
 { config, lib, ... }:
 {
-  config.server.services.email.availableConfigs = [ "stalwart" ];
+  config.server.services.mail-server.availableConfigs = [ "stalwart" ];
 }

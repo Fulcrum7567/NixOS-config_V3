@@ -42,7 +42,7 @@
 					enable = true;
 				};
 
-				email = {
+				mail-server = {
 					enable = true;
 					activeConfig = "stalwart";
 				};
