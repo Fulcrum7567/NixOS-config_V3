@@ -60,7 +60,7 @@ in
         adminPasswordFile = config.sops.secrets."kanidm/adminPassword".path;
         idmAdminPasswordFile = config.sops.secrets."kanidm/adminPassword".path;
 
-        persons = lib.mapAttrs (name: user: {
+        persons = lib.mapAttrs' (name: user: lib.nameValuePair (lib.toLower name) {
           displayName = user.displayName;
           legalName = user.legalName;
           mailAddresses = user.mailAddresses;
