@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.server.services.mail-client;
+  mailServerCfg = config.server.services.mail-server;
 in
 {
   config = lib.mkIf (cfg.enable && (cfg.activeConfig == "roundcube")) {
@@ -8,10 +9,17 @@ in
       enable = true;
       hostName = cfg.fullDomainName;
       extraConfig = ''
-        $config['mail_domain'] = '${cfg.fullDomainName}';
-        $config['smtp_server'] = 'tls://localhost';
-        $config['smtp_port'] = 587;
+        $config['mail_domain'] = '${config.server.webaddress}';
+        $config['imap_host'] = 'ssl://${mailServerCfg.fullDomainName}:993';
+        $config['smtp_server'] = 'tls://${mailServerCfg.fullDomainName}';
+        $config['smtp_port'] = 465;
       '';
+    };
+
+    # Add SSL/ACME to the nginx vhost that the Roundcube module creates
+    services.nginx.virtualHosts.${cfg.fullDomainName} = {
+      forceSSL = true;
+      useACMEHost = config.server.webaddress;
     };
   };
 }
