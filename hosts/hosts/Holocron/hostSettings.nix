@@ -47,6 +47,11 @@
 					activeConfig = "stalwart";
 				};
 
+				mail-client = {
+					enable = true;
+					activeConfig = "roundcube";
+				};
+
 				syncthing = {
 					enable = true;
 					exposeGUI = true;
