@@ -16,8 +16,11 @@ in
       '';
     };
 
-    # Add SSL/ACME to the nginx vhost that the Roundcube module creates
+    # Add SSL/ACME to the nginx vhost that the Roundcube module creates.
+    # Disable enableACME (set by the Roundcube module) since we use the
+    # shared wildcard certificate via useACMEHost instead.
     services.nginx.virtualHosts.${cfg.fullDomainName} = {
+      enableACME = lib.mkForce false;
       forceSSL = true;
       useACMEHost = config.server.webaddress;
     };
