@@ -8,6 +8,11 @@ in
     services.roundcube = {
       enable = true;
       hostName = cfg.fullDomainName;
+      database = {
+        host = "localhost";
+        dbname = "roundcube";
+        username = "roundcube";
+      };
       extraConfig = ''
         $config['mail_domain'] = '${config.server.webaddress}';
         $config['imap_host'] = 'ssl://${mailServerCfg.fullDomainName}:993';
