@@ -54,6 +54,13 @@
           groups = [ "all_services" ] ++ (if config.server.services.mail-server.enable then [ "mail-users" ] else [ ]);
           present = true;
         };
+        "TestUser" = {
+          displayName = "Test User";
+          legalName = "Test User";
+          mailAddresses = [ ];
+          groups = [ "all_services" ] ++ (if config.server.services.mail-server.enable then [ "mail-users" ] else [ ]);
+          present = true;
+        };
       };
       description = "Attributes for system users.";
     };
