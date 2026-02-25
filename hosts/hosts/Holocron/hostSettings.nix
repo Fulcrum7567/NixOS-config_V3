@@ -43,7 +43,7 @@
 				};
 
 				email = {
-					enable = false;
+					enable = true;
 					activeConfig = "stalwart";
 				};
 
