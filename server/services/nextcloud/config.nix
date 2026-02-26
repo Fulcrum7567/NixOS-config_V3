@@ -1,4 +1,4 @@
-{ config, lib, pkgs-default, ... }:
+{ config, lib, pkgs-default, pkgs, ... }:
 let 
   cfg = config.server.services.nextcloud;
   domain = "${cfg.subdomain}.${config.server.webaddress}";
@@ -35,6 +35,19 @@ in
         sopsFile = ./nextcloudSecrets.yaml;
         format = "yaml";
         key = "nextcloud_admin_password";
+      };
+    };
+
+    # Generate a JSON secret file for Nextcloud's secretFile option.
+    # This gets merged into config.php at runtime via nix_read_secret_and_decode_json_file().
+    # The secret is injected as a plain string, which is what the oidc_login app expects.
+    sops.templates."nextcloud-secrets.json" = {
+      owner = "nextcloud";
+      group = "nextcloud";
+      mode = "0400";
+      restartUnits = [ "phpfpm-nextcloud.service" ];
+      content = builtins.toJSON {
+        oidc_login_client_secret = config.sops.placeholder."nextcloud/clientSecret";
       };
     };
 
@@ -118,10 +131,9 @@ in
       oidc_login_token_auth_method = "client_secret_post";
     };
 
-    # The client secret must use services.nextcloud.secrets (not settings._secret)
-    # so it gets read as a string from the file at runtime via nix_read_secret().
-    # Using settings.foo._secret produces a JSON object {"_secret":"/path"} instead.
-    services.nextcloud.secrets.oidc_login_client_secret = config.sops.secrets."nextcloud/clientSecret".path;
+    # The client secret is injected via secretFile (a JSON file merged into config.php
+    # at runtime). This ensures oidc_login_client_secret is a plain string, not an object.
+    services.nextcloud.secretFile = config.sops.templates."nextcloud-secrets.json".path;
 
 
     # ── Data Directory & Permissions ──────────────────────────────
