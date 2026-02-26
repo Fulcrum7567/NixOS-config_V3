@@ -57,7 +57,7 @@
         "TestUser" = {
           displayName = "Test User";
           legalName = "Test User";
-          mailAddresses = [ "testuser@aurek.eu" ];
+          mailAddresses = [ "testuser@sso.aurek.eu" ];
           groups = [ "all_services" ] ++ (if config.server.services.mail-server.enable then [ "mail-users" ] else [ ]);
           present = true;
         };
