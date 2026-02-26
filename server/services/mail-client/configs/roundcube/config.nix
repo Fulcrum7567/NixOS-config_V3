@@ -17,7 +17,6 @@ in
       };
       extraConfig = ''
         $config['mail_domain'] = '${domain}';
-        $config['username_domain'] = '${domain}';
         $config['imap_host'] = 'ssl://localhost:993';
         $config['smtp_host'] = 'ssl://localhost:465';
         $config['use_https'] = true;

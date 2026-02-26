@@ -182,7 +182,7 @@ in
 
         session.rcpt.directory = "'kanidm'";
 
-        directory."imap".lookup.domains = [ domain ];
+        directory."kanidm".lookup.domains = [ domain ];
 
         # ── OAuth Token Settings ──────────────────────────────────────────
         # Stalwart's OAuth token generation calls password_hash() when the
