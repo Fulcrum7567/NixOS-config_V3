@@ -25,6 +25,14 @@ in
         key = "stalwart_ldap_bind_password";
         restartUnits = [ "stalwart-mail.service" ];
       };
+
+      "stalwart/admin_password" = {
+        owner = "stalwart-mail";
+        group = "stalwart-mail";
+        sopsFile = ./stalwartSecrets.yaml;
+        format = "yaml";
+        key = "admin_password";
+      };
     };
 
 
@@ -34,6 +42,7 @@ in
       openFirewall = true;
 
       settings = {
+
         server = {
           hostname = "mx1.${domain}";
 
@@ -164,7 +173,7 @@ in
         # The kanidm admin password can't be used here (owned by kanidm:kanidm).
         authentication.fallback-admin = {
           user = "admin";
-          secret = "%{file:${config.sops.secrets."stalwart/ldap_bind_password".path}}%";
+          secret = "%{file:${config.sops.secrets."stalwart/admin_password".path}}%";
         };
       };
     };
