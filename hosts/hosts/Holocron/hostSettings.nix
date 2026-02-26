@@ -52,6 +52,11 @@
 					activeConfig = "roundcube";
 				};
 
+				nextcloud = {
+					enable = true;
+					exposeGUI = true;
+				};
+
 				syncthing = {
 					enable = true;
 					exposeGUI = true;
