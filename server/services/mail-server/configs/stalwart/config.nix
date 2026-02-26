@@ -1,6 +1,7 @@
 { config, lib, pkgs-default, ... }:
 let
   cfg = config.server.services.mail-server;
+  relayCfg = cfg.relay;
   ssoCfg = config.server.services.singleSignOn;
   domain = config.server.webaddress;
   mailDomain = cfg.fullDomainName;
@@ -41,6 +42,16 @@ in
         sopsFile = ./stalwartSecrets.yaml;
         format = "yaml";
         key = "dkim_rsa_private_key";
+        restartUnits = [ "stalwart-mail.service" ];
+      };
+    } // lib.optionalAttrs (relayCfg.enable && relayCfg.auth.enable) {
+      # Password for the SMTP relay server authentication
+      "stalwart/relay_password" = {
+        owner = "stalwart-mail";
+        group = "stalwart-mail";
+        sopsFile = ./stalwartSecrets.yaml;
+        format = "yaml";
+        key = "relay_password";
         restartUnits = [ "stalwart-mail.service" ];
       };
     };
@@ -203,7 +214,45 @@ in
           user = "admin";
           secret = "%{file:${config.sops.secrets."stalwart/admin_password".path}}%";
         };
-      };
+
+        # ── Outbound Routing Strategy ─────────────────────────────────────
+        # Local domains are delivered locally, everything else goes through
+        # MX resolution (default) or through an SMTP relay if enabled.
+        queue.strategy.route = [
+          { "if" = "is_local_domain('', rcpt_domain)"; "then" = "'local'"; }
+          { "else" = "'${if relayCfg.enable then "relay" else "mx"}'"; }
+        ];
+
+        queue.route."local".type = "local";
+
+      } // (if relayCfg.enable then {
+        # ── SMTP Relay Route ────────────────────────────────────────────
+        # Relay outbound mail through the configured SMTP relay server.
+        # Enable this when your ISP blocks outbound port 25.
+        queue.route."relay" = {
+          type = "relay";
+          address = relayCfg.address;
+          port = relayCfg.port;
+          protocol = "smtp";
+        };
+
+        queue.route."relay".tls = {
+          implicit = relayCfg.tls.implicit;
+          allow-invalid-certs = relayCfg.tls.allow-invalid-certs;
+        };
+      } // lib.optionalAttrs relayCfg.auth.enable {
+        queue.route."relay".auth = {
+          username = relayCfg.auth.username;
+          secret = "%{file:${config.sops.secrets."stalwart/relay_password".path}}%";
+        };
+      } else {
+        # ── Direct MX Delivery ──────────────────────────────────────────
+        # Deliver outbound mail directly via MX DNS resolution.
+        queue.route."mx" = {
+          type = "mx";
+          ip-lookup = "ipv4_then_ipv6";
+        };
+      });
     };
 
     # ── System user ───────────────────────────────────────────────────────
