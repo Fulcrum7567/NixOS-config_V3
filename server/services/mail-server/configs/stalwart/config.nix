@@ -33,6 +33,16 @@ in
         format = "yaml";
         key = "admin_password";
       };
+
+      # DKIM RSA private key for signing outgoing mail
+      "stalwart/dkim_rsa_private_key" = {
+        owner = "stalwart-mail";
+        group = "stalwart-mail";
+        sopsFile = ./stalwartSecrets.yaml;
+        format = "yaml";
+        key = "dkim_rsa_private_key";
+        restartUnits = [ "stalwart-mail.service" ];
+      };
     };
 
 
@@ -93,6 +103,24 @@ in
           hostname = "mx1.${domain}";
           domain = domain;
         };
+
+        # ── DKIM Signing ──────────────────────────────────────────────────
+        signature."rsa" = {
+          private-key = "%{file:${config.sops.secrets."stalwart/dkim_rsa_private_key".path}}%";
+          domain = domain;
+          selector = "mail";
+          headers = [ "From" "To" "Cc" "Date" "Subject" "Message-ID" "Organization" "MIME-Version" "Content-Type" "In-Reply-To" "References" "List-Id" ];
+          algorithm = "rsa-sha256";
+          canonicalization = "relaxed/relaxed";
+          expire = "10d";
+          set-body-length = false;
+          report = true;
+        };
+
+        auth.dkim.sign = [
+          { "if" = "listener != 'smtp'"; "then" = "['rsa']"; }
+          { "else" = false; }
+        ];
 
         # ── LDAP Directory (Kanidm) ──────────────────────────────────────
         directory."kanidm" = {
