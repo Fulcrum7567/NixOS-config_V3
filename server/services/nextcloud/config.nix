@@ -42,7 +42,7 @@ in
     # ── Nextcloud Service ─────────────────────────────────────────
     services.nextcloud = {
       enable = true;
-      package = pkgs-default.nextcloud33;
+      package = pkgs-default.nextcloud32;
       hostName = domain;
       https = true;
       datadir = cfg.defaultDataDir;
