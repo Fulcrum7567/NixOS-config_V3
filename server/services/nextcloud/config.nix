@@ -127,51 +127,30 @@ in
     ];
 
 
-    # ── Reverse Proxy ─────────────────────────────────────────────
-    # Nextcloud on NixOS uses its own nginx virtualhost by default.
-    # We configure the custom reverse proxy abstraction to point to it.
-    server.services = {
-      reverseProxy.activeRedirects."nextcloud" = lib.mkIf cfg.exposeGUI {
-        subdomain = cfg.subdomain;
-        useACMEHost = true;
-        forceSSL = true;
-
-        locations."/" = {
-          path = "/";
-          to = "http://[::1]:80";
-          proxyWebsockets = true;
-          extraConfig = ''
-            client_max_body_size 50G;
-            proxy_read_timeout   600s;
-            proxy_send_timeout   600s;
-            proxy_set_header     X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header     X-Forwarded-Proto $scheme;
-            proxy_set_header     Host $host;
-          '';
-        };
-      };
-
-      # ── SSO / Kanidm OAuth Registration ───────────────────────────
-      singleSignOn.oAuthServices."${clientId}" = {
-        displayName = "Nextcloud";
-        originUrl = [
-          "https://${domain}/apps/oidc_login/oidc"
-          "https://${domain}/"
-        ];
-        originLanding = "https://${domain}";
-        basicSecretFile = config.sops.secrets."nextcloud/oauth/client_secret".path;
-        preferShortUsername = true;
-        imageFile = ./nextcloud.svg;
-        groupName = "nextcloud-users";
-        scopes = [ "openid" "profile" "email" ];
-      };
+    # ── Nginx / SSL ─────────────────────────────────────────────
+    # Nextcloud's NixOS module creates its own nginx virtualhost with
+    # proper PHP-FPM, rewrite rules, and security headers.
+    # We must NOT use the reverse proxy abstraction (which would create
+    # a conflicting proxy virtualhost). Instead, we add SSL/ACME settings
+    # directly to the Nextcloud-managed virtualhost.
+    services.nginx.virtualHosts.${domain} = lib.mkIf cfg.exposeGUI {
+      forceSSL = true;
+      useACMEHost = config.server.webaddress;
     };
 
-    # Nextcloud's built-in nginx config listens on port 80 by default.
-    # Ensure it uses the correct hostname for ACME/SSL via our reverse proxy.
-    services.nginx.virtualHosts.${domain} = {
-      listen = [{ addr = "[::1]"; port = 80; }];
-      forceSSL = lib.mkForce false;
+    # ── SSO / Kanidm OAuth Registration ───────────────────────────
+    server.services.singleSignOn.oAuthServices."${clientId}" = {
+      displayName = "Nextcloud";
+      originUrl = [
+        "https://${domain}/apps/oidc_login/oidc"
+        "https://${domain}/"
+      ];
+      originLanding = "https://${domain}";
+      basicSecretFile = config.sops.secrets."nextcloud/oauth/client_secret".path;
+      preferShortUsername = true;
+      imageFile = ./nextcloud.svg;
+      groupName = "nextcloud-users";
+      scopes = [ "openid" "profile" "email" ];
     };
   };
 }
