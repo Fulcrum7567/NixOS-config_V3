@@ -94,7 +94,6 @@ in
       # OIDC Login app configuration
       oidc_login_provider_url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}";
       oidc_login_client_id = clientId;
-      oidc_login_client_secret._secret = config.sops.secrets."nextcloud/clientSecret".path;
       oidc_login_auto_redirect = true;
       oidc_login_end_session_redirect = false;
       oidc_login_logout_url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/ui/logout";
@@ -118,6 +117,11 @@ in
       # Use the token endpoint auth method that Kanidm expects
       oidc_login_token_auth_method = "client_secret_post";
     };
+
+    # The client secret must use services.nextcloud.secrets (not settings._secret)
+    # so it gets read as a string from the file at runtime via nix_read_secret().
+    # Using settings.foo._secret produces a JSON object {"_secret":"/path"} instead.
+    services.nextcloud.secrets.oidc_login_client_secret = config.sops.secrets."nextcloud/clientSecret".path;
 
 
     # ── Data Directory & Permissions ──────────────────────────────
