@@ -80,7 +80,7 @@ in
 
       # Install the OIDC Login app for Kanidm integration
       extraApps.oidc_login = pkgs-default.fetchNextcloudApp {
-        url = "https://github.com/pulsejet/nextcloud-oidc-login/releases/download/v4.2.0/oidc_login.tar.gz";
+        url = "https://github.com/pulsejet/nextcloud-oidc-login/releases/download/v3.3.0/oidc_login.tar.gz";
         sha256 = lib.fakeSha256;
         license = "agpl3Plus";
       };
