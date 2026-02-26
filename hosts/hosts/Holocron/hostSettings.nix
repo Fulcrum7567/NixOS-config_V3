@@ -122,7 +122,7 @@
 
 				shutdownTimes = {
 					enable = true;
-					shutdownAt = "22:00";
+					shutdownAt = "23:00";
 					wakeUpAt = "06:00";
 				};
 
