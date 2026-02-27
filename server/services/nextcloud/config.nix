@@ -1,18 +1,32 @@
-{ config, lib, pkgs-default, pkgs, ... }:
+{ config, lib, pkgs-default, ... }:
 let 
   cfg = config.server.services.nextcloud;
+  ssoCfg = config.server.services.singleSignOn;
   domain = "${cfg.subdomain}.${config.server.webaddress}";
   clientId = "nextcloud";
 in 
 {
   config = lib.mkIf cfg.enable {
 
-    # ── SOPS Secrets ──────────────────────────────────────────────
+    # ──────────────────────────────────────────────────────────
+    #  Sops Secrets
+    # ──────────────────────────────────────────────────────────
+
     sops.secrets = {
-      # Secret shared between Kanidm and Nextcloud for OAuth
+      # Admin password for initial Nextcloud setup
+      "nextcloud/adminPassword" = {
+        owner = cfg.serviceUsername;
+        group = cfg.serviceGroup;
+        sopsFile = ./nextcloudSecrets.yaml;
+        format = "yaml";
+        key = "nextcloud_admin_password";
+        restartUnits = [ "nextcloud-setup.service" ];
+      };
+
+      # OAuth client secret – readable by kanidm for provisioning
       "nextcloud/oauth/client_secret" = {
-        owner = config.server.services.singleSignOn.serviceUsername;
-        group = config.server.services.singleSignOn.serviceGroup;
+        owner = ssoCfg.serviceUsername;
+        group = ssoCfg.serviceGroup;
         sopsFile = ./nextcloudSecrets.yaml;
         format = "yaml";
         key = "nextcloud_client_secret";
@@ -20,153 +34,221 @@ in
         mode = "0440";
       };
 
+      # Same secret, but readable by Nextcloud for OIDC config
       "nextcloud/clientSecret" = {
-        owner = "nextcloud";
-        group = "nextcloud";
+        owner = cfg.serviceUsername;
+        group = cfg.serviceGroup;
         sopsFile = ./nextcloudSecrets.yaml;
         format = "yaml";
         key = "nextcloud_client_secret";
-        restartUnits = [ "phpfpm-nextcloud.service" ];
-      };
-
-      "nextcloud/adminPassword" = {
-        owner = "nextcloud";
-        group = "nextcloud";
-        sopsFile = ./nextcloudSecrets.yaml;
-        format = "yaml";
-        key = "nextcloud_admin_password";
+        restartUnits = [ "nextcloud-setup.service" ];
       };
     };
 
-    # Generate a JSON secret file for Nextcloud's secretFile option.
-    # This gets merged into config.php at runtime via nix_read_secret_and_decode_json_file().
-    # The secret is injected as a plain string, which is what the oidc_login app expects.
-    sops.templates."nextcloud-secrets.json" = {
-      owner = "nextcloud";
-      group = "nextcloud";
-      mode = "0400";
-      restartUnits = [ "phpfpm-nextcloud.service" ];
-      content = builtins.toJSON {
-        oidc_login_client_secret = config.sops.placeholder."nextcloud/clientSecret";
-      };
+    # ──────────────────────────────────────────────────────────
+    #  Data directory on /data partition (bind mount)
+    # ──────────────────────────────────────────────────────────
+
+    systemd.tmpfiles.rules = [
+      "d ${cfg.defaultDataDir} 0750 ${cfg.serviceUsername} ${cfg.serviceGroup} - -"
+      "Z ${cfg.defaultDataDir} 0750 ${cfg.serviceUsername} ${cfg.serviceGroup} - -"
+    ];
+
+    fileSystems."/var/lib/nextcloud" = {
+      device = cfg.defaultDataDir;
+      options = [ "bind" ];
     };
 
+    # ──────────────────────────────────────────────────────────
+    #  Nextcloud Service
+    # ──────────────────────────────────────────────────────────
 
-    # ── Nextcloud Service ─────────────────────────────────────────
     services.nextcloud = {
       enable = true;
-      package = pkgs-default.nextcloud32;
+      package = cfg.package;
       hostName = domain;
       https = true;
-      datadir = cfg.defaultDataDir;
-      maxUploadSize = "50G";
-      
-      configureRedis = true;
+      maxUploadSize = cfg.maxUploadSize;
 
       config = {
         adminuser = cfg.adminUsername;
         adminpassFile = config.sops.secrets."nextcloud/adminPassword".path;
+
+        # Use PostgreSQL for production
         dbtype = "pgsql";
       };
 
       database.createLocally = true;
 
-      settings = {
-        overwriteprotocol = "https";
-        default_phone_region = "DE";
-        log_type = "file";
-        loglevel = 2;
-        maintenance_window_start = 3; # 3 AM UTC
-
-        # Disable local login to force SSO via Kanidm
-        # Users authenticate exclusively through Kanidm with passkeys
-        hide_login_form = true;
-
-        # Allow Kanidm-authenticated users to be auto-provisioned
-        allow_user_to_change_display_name = false;
+      # Performance tuning
+      configureRedis = true;
+      caching = {
+        redis = true;
+        apcu = true;
       };
 
+      # Recommended Nextcloud settings
+      settings = {
+        # Trusted domains & proxy config
+        trusted_domains = [ domain ];
+        trusted_proxies = [ "127.0.0.1" "::1" ];
+        overwriteprotocol = "https";
+        overwritehost = domain;
+        default_phone_region = "DE";
+
+        # Logging
+        loglevel = 2;
+        log_type = "file";
+
+        # Maintenance window for background jobs (UTC, 1-5 AM)
+        maintenance_window_start = 1;
+      };
+
+      # phpOptions for performance
+      phpOptions = {
+        "opcache.interned_strings_buffer" = "16";
+        "opcache.max_accelerated_files" = "10000";
+        "opcache.memory_consumption" = "128";
+        "opcache.revalidate_freq" = "1";
+      };
+
+      # Declarative apps
       extraApps = {
         inherit (config.services.nextcloud.package.packages.apps)
-          contacts calendar tasks notes;
-      };
+          contacts
+          calendar
+          tasks
+          user_oidc  # OpenID Connect user backend for Kanidm SSO
+          ;
+      } // cfg.extraApps;
+      extraAppsEnable = true;
 
-      # Install the OIDC Login app for Kanidm integration
-      extraApps.oidc_login = pkgs-default.fetchNextcloudApp {
-        url = "https://github.com/pulsejet/nextcloud-oidc-login/releases/download/v3.3.0/oidc_login.tar.gz";
-        sha256 = "sha256-AU938duXaI625chqgnnqnvOB0bMgRM3ZQVilstb4yRI=";
-        license = "agpl3Plus";
-      };
+      # Enable auto-updates for the database schema
+      autoUpdateApps.enable = true;
     };
 
+    # ──────────────────────────────────────────────────────────
+    #  Systemd hardening
+    # ──────────────────────────────────────────────────────────
 
-    # ── OIDC Login Configuration (via Nextcloud settings) ─────────
-    # The oidc_login app reads its config from Nextcloud's config.php.
-    # We inject it via services.nextcloud.settings which merges into config.php.
-    services.nextcloud.settings = {
-      # OIDC Login app configuration
-      oidc_login_provider_url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}";
-      oidc_login_client_id = clientId;
-      oidc_login_auto_redirect = true;
-      oidc_login_end_session_redirect = false;
-      oidc_login_logout_url = "https://${config.server.services.singleSignOn.subdomain}.${config.server.webaddress}/ui/logout";
-      oidc_login_button_text = "Login with Kanidm";
-      oidc_login_hide_password_form = true;
-      oidc_login_use_id_token = false;
-      oidc_login_scope = "openid profile email";
-      oidc_login_disable_registration = false;
-      oidc_login_redir_fallback = false;
-      oidc_login_tls_verify = true;
-
-      # Attribute mapping: map Kanidm claims to Nextcloud user attributes
-      oidc_login_attributes = {
-        id = "preferred_username";
-        name = "name";
-        mail = "email";
-      };
-
-      oidc_login_code_challenge_method = "S256";
-
-      # Use the token endpoint auth method that Kanidm expects
-      oidc_login_token_auth_method = "client_secret_post";
+    systemd.services.nextcloud-setup = {
+      unitConfig.RequiresMountsFor = "/var/lib/nextcloud";
+      after = [ "sops-nix.service" ];
     };
 
-    # The client secret is injected via secretFile (a JSON file merged into config.php
-    # at runtime). This ensures oidc_login_client_secret is a plain string, not an object.
-    services.nextcloud.secretFile = config.sops.templates."nextcloud-secrets.json".path;
+    systemd.services.phpfpm-nextcloud = {
+      unitConfig.RequiresMountsFor = "/var/lib/nextcloud";
+    };
 
+    # ──────────────────────────────────────────────────────────
+    #  Nginx – Nextcloud manages its own vhost via services.nextcloud
+    #  We just need to configure TLS on it using your wildcard cert
+    # ──────────────────────────────────────────────────────────
 
-    # ── Data Directory & Permissions ──────────────────────────────
-    systemd.tmpfiles.rules = [
-      "d ${cfg.defaultDataDir} 0750 nextcloud nextcloud - -"
-      "Z ${cfg.defaultDataDir} 0750 nextcloud nextcloud - -"
-    ];
-
-
-    # ── Nginx / SSL ─────────────────────────────────────────────
-    # Nextcloud's NixOS module creates its own nginx virtualhost with
-    # proper PHP-FPM, rewrite rules, and security headers.
-    # We must NOT use the reverse proxy abstraction (which would create
-    # a conflicting proxy virtualhost). Instead, we add SSL/ACME settings
-    # directly to the Nextcloud-managed virtualhost.
-    services.nginx.virtualHosts.${domain} = lib.mkIf cfg.exposeGUI {
+    services.nginx.virtualHosts.${domain} = {
       forceSSL = true;
       useACMEHost = config.server.webaddress;
     };
 
-    # ── SSO / Kanidm OAuth Registration ───────────────────────────
+    # ──────────────────────────────────────────────────────────
+    #  OIDC configuration via occ (semi-declarative)
+    #  The user_oidc app must be configured after nextcloud-setup
+    # ──────────────────────────────────────────────────────────
+
+    systemd.services.nextcloud-oidc-setup = {
+      description = "Configure Nextcloud OIDC provider for Kanidm SSO";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "nextcloud-setup.service" "phpfpm-nextcloud.service" ];
+      requires = [ "phpfpm-nextcloud.service" ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root";
+        RemainAfterExit = true;
+      };
+
+      path = [ config.services.nextcloud.occ pkgs-default.jq ];
+
+      script = let
+        issuerUrl = "https://${ssoCfg.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}";
+        ssoDisplayName = "Login with Kanidm";
+      in ''
+        set -euo pipefail
+
+        CLIENT_SECRET=$(cat "${config.sops.secrets."nextcloud/clientSecret".path}")
+
+        # Disable local login so users go through SSO
+        nextcloud-occ config:app:set user_oidc allow_multiple_user_backends --value="0"
+
+        # Check if provider already exists
+        EXISTING=$(nextcloud-occ user_oidc:provider -h 2>&1 || true)
+
+        # Create or update the OIDC provider
+        # user_oidc:provider expects: <identifier> --clientid --clientsecret --discoveryuri
+        if nextcloud-occ user_oidc:provider "${ssoDisplayName}" \
+          --clientid="${clientId}" \
+          --clientsecret="$CLIENT_SECRET" \
+          --discoveryuri="${issuerUrl}" \
+          --scope="openid email profile" \
+          --unique-uid=0 \
+          --check-bearer=1 \
+          --mapping-uid="preferred_username" \
+          --mapping-display-name="name" \
+          --mapping-email="email" \
+          2>&1; then
+          echo "✅ OIDC provider configured successfully"
+        else
+          echo "⚠️  OIDC provider command returned non-zero, may already exist (updating...)"
+          # Try update approach – remove and re-add
+          nextcloud-occ user_oidc:provider:remove "${ssoDisplayName}" 2>/dev/null || true
+          nextcloud-occ user_oidc:provider "${ssoDisplayName}" \
+            --clientid="${clientId}" \
+            --clientsecret="$CLIENT_SECRET" \
+            --discoveryuri="${issuerUrl}" \
+            --scope="openid email profile" \
+            --unique-uid=0 \
+            --check-bearer=1 \
+            --mapping-uid="preferred_username" \
+            --mapping-display-name="name" \
+            --mapping-email="email"
+          echo "✅ OIDC provider updated successfully"
+        fi
+
+        # Auto-redirect to SSO provider (skip Nextcloud login page)
+        nextcloud-occ config:app:set user_oidc auto_redirect_to_provider --value="${ssoDisplayName}" || true
+
+        echo "✅ Nextcloud OIDC setup complete"
+      '';
+    };
+
+    # ──────────────────────────────────────────────────────────
+    #  Reverse Proxy (your custom abstraction)
+    #  Since Nextcloud's NixOS module creates its own nginx vhost,
+    #  we do NOT add an activeRedirects entry – nginx handles it directly.
+    #  But we DO need the extraHosts entry for internal resolution.
+    # ──────────────────────────────────────────────────────────
+
+    networking.extraHosts = ''
+      127.0.0.1 ${domain}
+    '';
+
+    # ──────────────────────────────────────────────────────────
+    #  Kanidm SSO – register Nextcloud as OAuth2 client
+    # ──────────────────────────────────────────────────────────
+
     server.services.singleSignOn.oAuthServices."${clientId}" = {
       displayName = "Nextcloud";
       originUrl = [
-        "https://${domain}/apps/oidc_login/oidc"
+        "https://${domain}/apps/user_oidc/code"
         "https://${domain}/"
       ];
       originLanding = "https://${domain}";
       basicSecretFile = config.sops.secrets."nextcloud/oauth/client_secret".path;
       preferShortUsername = true;
       imageFile = ./nextcloud.svg;
-      groupName = "nextcloud-users";
+      groupName = "nextcloud_users";
       scopes = [ "openid" "profile" "email" ];
     };
+
   };
 }
