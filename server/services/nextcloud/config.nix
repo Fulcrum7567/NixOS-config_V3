@@ -156,11 +156,6 @@ in
       unitConfig.RequiresMountsFor = "/var/lib/nextcloud";
     };
 
-    # Ensure the OIDC setup only runs after a successful installation
-    systemd.services.nextcloud-oidc-setup = {
-      requires = [ "nextcloud-setup.service" "phpfpm-nextcloud.service" ];
-    };
-
     # ──────────────────────────────────────────────────────────
     #  Nginx – Nextcloud manages its own vhost via services.nextcloud
     #  We just need to configure TLS on it using your wildcard cert
