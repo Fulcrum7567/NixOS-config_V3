@@ -187,6 +187,7 @@ in
 
       script = let
         issuerUrl = "https://${ssoCfg.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}";
+        discoveryUrl = "${issuerUrl}/.well-known/openid-configuration";
         ssoDisplayName = "Login with Kanidm";
       in ''
         set -euo pipefail
@@ -204,7 +205,7 @@ in
         if nextcloud-occ user_oidc:provider "${ssoDisplayName}" \
           --clientid="${clientId}" \
           --clientsecret="$CLIENT_SECRET" \
-          --discoveryuri="${issuerUrl}" \
+          --discoveryuri="${discoveryUrl}" \
           --scope="openid email profile" \
           --unique-uid=0 \
           --check-bearer=1 \
@@ -220,7 +221,7 @@ in
           nextcloud-occ user_oidc:provider "${ssoDisplayName}" \
             --clientid="${clientId}" \
             --clientsecret="$CLIENT_SECRET" \
-            --discoveryuri="${issuerUrl}" \
+            --discoveryuri="${discoveryUrl}" \
             --scope="openid email profile" \
             --unique-uid=0 \
             --check-bearer=1 \
