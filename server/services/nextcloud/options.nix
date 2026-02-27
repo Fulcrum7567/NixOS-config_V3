@@ -66,5 +66,12 @@
       default = { };
       description = "Additional Nextcloud apps to install declaratively.";
     };
+
+    disabledApps = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "List of bundled Nextcloud app IDs to disable on every deploy.";
+      example = [ "calendar" "contacts" "photos" "firstrunwizard" ];
+    };
   };
 }

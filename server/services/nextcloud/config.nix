@@ -115,9 +115,6 @@ in
       # Declarative apps
       extraApps = {
         inherit (config.services.nextcloud.package.packages.apps)
-          contacts
-          calendar
-          tasks
           user_oidc  # OpenID Connect user backend for Kanidm SSO
           ;
       } // cfg.extraApps;
@@ -233,6 +230,12 @@ in
 
         # Auto-redirect to SSO provider (skip Nextcloud login page)
         nextcloud-occ config:app:set user_oidc auto_redirect_to_provider --value="${ssoDisplayName}" || true
+
+        # Declaratively disable unwanted bundled apps
+        ${lib.concatMapStringsSep "\n" (app: ''nextcloud-occ app:disable ${app} || true'') cfg.disabledApps}
+
+        # Run mimetype migrations if available (one-time, safe to re-run)
+        nextcloud-occ maintenance:repair --include-expensive || true
 
         echo "✅ Nextcloud OIDC setup complete"
       '';

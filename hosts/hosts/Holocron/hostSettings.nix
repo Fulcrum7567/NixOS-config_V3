@@ -55,6 +55,17 @@
 				nextcloud = {
 					enable = true;
 					exposeGUI = true;
+					disabledApps = [
+						"calendar"
+						"contactsinteraction"
+						"contacts"
+						"firstrunwizard"
+						"nextcloud_announcements"
+						"photos"
+						"support"
+						"tasks"
+						"survey_client"   # usage survey
+					];
 				};
 
 				syncthing = {
