@@ -128,12 +128,30 @@ in
     };
 
     # ──────────────────────────────────────────────────────────
-    #  Systemd hardening
+    #  Systemd hardening & ownership fix
     # ──────────────────────────────────────────────────────────
 
     systemd.services.nextcloud-setup = {
       unitConfig.RequiresMountsFor = "/var/lib/nextcloud";
       after = [ "sops-nix.service" ];
+
+      # Fix ownership before the upstream setup script checks it.
+      # The NixOS module's preStart checks that /var/lib/nextcloud/config
+      # is owned by 'nextcloud', but after a bind mount + previous failed
+      # install, files may be owned by root or another uid.
+      preStart = lib.mkBefore ''
+        ${pkgs-default.coreutils}/bin/install -d -m 0750 -o ${cfg.serviceUsername} -g ${cfg.serviceGroup} /var/lib/nextcloud
+        ${pkgs-default.findutils}/bin/find /var/lib/nextcloud -maxdepth 1 -exec ${pkgs-default.coreutils}/bin/chown ${cfg.serviceUsername}:${cfg.serviceGroup} {} +
+        if [ -d /var/lib/nextcloud/config ]; then
+          ${pkgs-default.coreutils}/bin/chown -R ${cfg.serviceUsername}:${cfg.serviceGroup} /var/lib/nextcloud/config
+        fi
+        if [ -d /var/lib/nextcloud/data ]; then
+          ${pkgs-default.coreutils}/bin/chown -R ${cfg.serviceUsername}:${cfg.serviceGroup} /var/lib/nextcloud/data
+        fi
+        if [ -d /var/lib/nextcloud/store-apps ]; then
+          ${pkgs-default.coreutils}/bin/chown -R ${cfg.serviceUsername}:${cfg.serviceGroup} /var/lib/nextcloud/store-apps
+        fi
+      '';
     };
 
     systemd.services.phpfpm-nextcloud = {
