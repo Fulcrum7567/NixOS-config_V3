@@ -53,6 +53,8 @@
 
 			vikunja.enable = true;
 
+			nextcloudClient.enable = true;
+
 
 			sunshine.enable = false;
 			moonlight.enable = lib.mkForce true;
