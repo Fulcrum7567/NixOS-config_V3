@@ -53,7 +53,7 @@
 				};
 
 				nextcloud = {
-					enable = true;
+					enable = false;
 					exposeGUI = true;
 				};
 

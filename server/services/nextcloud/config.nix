@@ -60,34 +60,6 @@ in
     };
 
     # ──────────────────────────────────────────────────────────
-    #  Fix ownership after bind mount
-    #  The NixOS nextcloud module checks that /var/lib/nextcloud/config
-    #  is owned by 'nextcloud'. With a bind mount from /data, the
-    #  initial directory creation may happen as root. This service
-    #  ensures correct ownership before nextcloud-setup runs.
-    # ──────────────────────────────────────────────────────────
-
-    systemd.services.nextcloud-fix-permissions = {
-      description = "Fix Nextcloud data directory ownership";
-      wantedBy = [ "multi-user.target" ];
-      before = [ "nextcloud-setup.service" ];
-      after = [ "var-lib-nextcloud.mount" "local-fs.target" ];
-      requires = [ "var-lib-nextcloud.mount" ];
-
-      unitConfig.RequiresMountsFor = "/var/lib/nextcloud";
-
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-      };
-
-      script = ''
-        ${pkgs-default.coreutils}/bin/install -d -m 0750 -o ${cfg.serviceUsername} -g ${cfg.serviceGroup} /var/lib/nextcloud
-        ${pkgs-default.coreutils}/bin/chown -R ${cfg.serviceUsername}:${cfg.serviceGroup} /var/lib/nextcloud
-      '';
-    };
-
-    # ──────────────────────────────────────────────────────────
     #  Nextcloud Service
     # ──────────────────────────────────────────────────────────
 
@@ -161,8 +133,7 @@ in
 
     systemd.services.nextcloud-setup = {
       unitConfig.RequiresMountsFor = "/var/lib/nextcloud";
-      after = [ "sops-nix.service" "nextcloud-fix-permissions.service" ];
-      requires = [ "nextcloud-fix-permissions.service" ];
+      after = [ "sops-nix.service" ];
     };
 
     systemd.services.phpfpm-nextcloud = {
