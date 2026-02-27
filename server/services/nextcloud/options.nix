@@ -9,7 +9,7 @@
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.nextcloud31;
+      default = pkgs.nextcloud32;
       description = "The Nextcloud package to use. Must be incremented by 1 for major upgrades.";
     };
 
