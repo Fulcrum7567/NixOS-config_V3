@@ -154,18 +154,7 @@ in
 				Install = {
 					WantedBy = [ "timers.target" ];
 				};
-			};
-
-			# Mask the D-Bus activation service that causes Nextcloud to
-			# instantly relaunch whenever you try to close it. The file manager
-			# queries the CloudProviders D-Bus name, which triggers a restart.
-			/*
-			xdg.dataFile."dbus-1/services/com.nextcloudgmbh.Nextcloud.service".text = ''
-				[D-BUS Service]
-				Name=com.nextcloudgmbh.Nextcloud
-				Exec=/bin/false
-			'';
-			*/
+			};			
 		};
 
 	};
