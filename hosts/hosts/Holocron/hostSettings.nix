@@ -33,6 +33,11 @@
 					activeConfig = "default";
 				};
 
+				vscodeServer = {
+					enable = true;
+					activeConfig = "default";
+				};
+
 				immich = {
 					enable = true;
 					exposeGUI = true;

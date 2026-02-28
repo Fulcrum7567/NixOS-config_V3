@@ -173,10 +173,12 @@
 		millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
 		
 		preload-ng.url = "github:miguel-b-p/preload-ng";
+
+		vscode-server.url = "github:nix-community/nixos-vscode-server";
 	};
 
 
-	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix-stable, sops-nix-unstable, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, noctalia-stable, noctalia-unstable, nixos-anywhere, nix-gaming, preload-ng, nix-citizen, ... }:
+	outputs = inputs@{ self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, sops-nix-stable, sops-nix-unstable, nixcord, zen-browser-stable, zen-browser-unstable, mikuboot, stylix-stable, stylix-unstable, nix-vscode-extensions, flatpak, nvf-stable, nvf-unstable, hyprland-stable, hyprland-unstable, chaotic, disko-stable, disko-unstable, hyprgrass-stable, hyprgrass-unstable, waybar, noctalia-stable, noctalia-unstable, nixos-anywhere, nix-gaming, preload-ng, nix-citizen, vscode-server, ... }:
 	let
 
 		# ╔═══════════════════════════════════════════════════════════╗

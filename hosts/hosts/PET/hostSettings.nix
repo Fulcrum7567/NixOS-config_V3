@@ -37,6 +37,8 @@
 
 			bottles.enable = true;
 
+			nextcloudClient.enable = true;
+
 			neovim = {
 				enable = true;
 				activeConfig = "nvf";
