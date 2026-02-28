@@ -22,6 +22,7 @@ in
 					ms-vscode.cpptools-extension-pack
 					ms-azuretools.vscode-containers
 					ms-python.vscode-pylance
+					ms-vscode-remote.remote-ssh
 				];
 
 				userSettings = {
