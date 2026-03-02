@@ -40,11 +40,13 @@ in
       in nameValuePair "oauth2-proxy-${name}" {
         description = "OAuth2 Proxy for ${name}";
         wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
+        after = [ "network.target" "nginx.service" "kanidm.service" ];
+        wants = [ "nginx.service" "kanidm.service" ];
         
         serviceConfig = {
           ExecStart = "${pkgs-default.oauth2-proxy}/bin/oauth2-proxy --config ${configFile}";
           Restart = "always";
+          RestartSec = "5s";
           
           # Security hardening (optional but recommended)
           User = "root";

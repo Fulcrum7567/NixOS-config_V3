@@ -36,10 +36,10 @@ in
     };
 
     # VERT Docker container
+    virtualisation.oci-containers.backend = "docker";
     virtualisation.oci-containers.containers."vert" = {
       image = "ghcr.io/vert-sh/vert:latest";
       ports = [ "127.0.0.1:${toString cfg.port}:80" ];
-      extraOptions = [ "--restart=unless-stopped" ];
     };
 
     # Reverse proxy points to the OAuth2 proxy
