@@ -77,6 +77,10 @@
 					enable = true;
 					exposeGUI = true;
 				};
+
+				vert = {
+					enable = true;
+				};
 			};
 		};
 
