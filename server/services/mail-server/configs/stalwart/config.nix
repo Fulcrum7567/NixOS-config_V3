@@ -24,7 +24,7 @@ in
         sopsFile = ./stalwartSecrets.yaml;
         format = "yaml";
         key = "stalwart_ldap_bind_password";
-        restartUnits = [ "stalwart-mail.service" ];
+        restartUnits = [ "stalwart.service" ];
       };
 
       "stalwart/admin_password" = {
@@ -42,7 +42,7 @@ in
         sopsFile = ./stalwartSecrets.yaml;
         format = "yaml";
         key = "dkim_rsa_private_key";
-        restartUnits = [ "stalwart-mail.service" ];
+        restartUnits = [ "stalwart.service" ];
       };
     } // lib.optionalAttrs (relayCfg.enable && relayCfg.auth.enable) {
       # Password for the SMTP relay server authentication
@@ -52,7 +52,7 @@ in
         sopsFile = ./stalwartSecrets.yaml;
         format = "yaml";
         key = "relay_password";
-        restartUnits = [ "stalwart-mail.service" ];
+        restartUnits = [ "stalwart.service" ];
       };
     };
 
@@ -98,6 +98,20 @@ in
               protocol = "http";
               bind = "127.0.0.1:8080";
               url = "https://${mailDomain}";
+            };
+
+            # Mozilla Autoconfig (https://autoconfig.<domain>/mail/config-v1.1.xml)
+            autoconfig = {
+              protocol = "http";
+              bind = "127.0.0.1:8081";
+              url = "https://autoconfig.${domain}";
+            };
+
+            # Microsoft Autodiscover (https://autodiscover.<domain>/autodiscover/autodiscover.xml)
+            autodiscover = {
+              protocol = "http";
+              bind = "127.0.0.1:8082";
+              url = "https://autodiscover.${domain}";
             };
           };
         };
@@ -165,9 +179,12 @@ in
 
           # Kanidm LDAP filter templates
           filter = {
-            # Search by account name or SPN (service principal name).
-            # Users may log in as "fulcrum" (name) or "fulcrum@sso.aurek.eu" (spn).
-            name = "(&(class=account)(|(name=?)(spn=?)))";
+            # Search by account name, SPN (service principal name), or email.
+            # Users may log in as "fulcrum" (name), "fulcrum@sso.aurek.eu" (spn),
+            # or "fulcrum@aurek.eu" (mail). The mail match is needed because
+            # autoconfig tells clients (like K-9 Mail) to use the full email
+            # address as the username via %EMAILADDRESS%.
+            name = "(&(class=account)(|(name=?)(spn=?)(mail=?)))";
             # Search by email address (Kanidm uses "mail" attribute)
             email = "(&(class=account)(|(mail=?)))";
           };
@@ -186,12 +203,23 @@ in
         # ── Storage & Auth Settings ───────────────────────────────────
         storage.directory = "kanidm";
 
+        # SMTP session auth (controls SMTP AUTH mechanisms for submissions/submission)
         session.auth = {
           mechanisms = "[plain]";
           directory = "'kanidm'";
         };
 
         session.rcpt.directory = "'kanidm'";
+
+        # IMAP auth — must also be restricted to PLAIN.
+        # Without this, Stalwart advertises SCRAM-SHA-256 etc. on IMAP; when a client
+        # picks one of those, the LDAP bind (which is PLAIN-only) fails with rc=49.
+        # Roundcube forces PLAIN itself, which is why it works; K-9 Mail picks the
+        # "strongest" offered mechanism, which is why it fails.
+        imap.auth = {
+          mechanisms = "[plain]";
+          directory = "'kanidm'";
+        };
 
         directory."kanidm".lookup.domains = [ domain ];
 
@@ -281,6 +309,42 @@ in
       };
     };
 
+    # Mozilla Autoconfig endpoint (autoconfig.<domain>)
+    server.services.reverseProxy.activeRedirects."stalwart-autoconfig" = {
+      subdomain = "autoconfig";
+      useACMEHost = true;
+      forceSSL = true;
+
+      locations."/" = {
+        path = "/";
+        to = "http://127.0.0.1:8081";
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+        '';
+      };
+    };
+
+    # Microsoft Autodiscover endpoint (autodiscover.<domain>)
+    server.services.reverseProxy.activeRedirects."stalwart-autodiscover" = {
+      subdomain = "autodiscover";
+      useACMEHost = true;
+      forceSSL = true;
+
+      locations."/" = {
+        path = "/";
+        to = "http://127.0.0.1:8082";
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+        '';
+      };
+    };
+
     # ── Kanidm Service Account & Group Provisioning ─────────────────────
     # Declaratively provision the "mail-users" group via Kanidm's provisioner.
     services.kanidm.provision.groups."mail-users" = {
@@ -349,7 +413,7 @@ in
     };
 
     # ── Systemd Dependencies ──────────────────────────────────────────────
-    systemd.services.stalwart-mail = {
+    systemd.services.stalwart = {
       after = [ "kanidm.service" "nginx.service" "sops-nix.service" ];
       wants = [ "kanidm.service" "nginx.service" ];
     };
