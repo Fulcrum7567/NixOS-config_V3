@@ -59,6 +59,7 @@ in
 						"*" = true;
 					};
 					"chat.disableAIFeatures" = false;
+					"editor.aiStats.enabled" = false;
 				};
 			};
 		};

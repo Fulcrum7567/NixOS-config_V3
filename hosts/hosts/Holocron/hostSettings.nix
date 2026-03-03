@@ -81,6 +81,11 @@
 				vert = {
 					enable = true;
 				};
+
+				forgejo = {
+					enable = true;
+					exposeGUI = true;
+				};
 			};
 		};
 

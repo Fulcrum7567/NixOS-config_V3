@@ -1,3 +1,0 @@
-{
-	currentHost = "Hyprdrive";
-}
