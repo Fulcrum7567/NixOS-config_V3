@@ -60,6 +60,11 @@ in
           DISABLE_REGISTRATION = false;
           ALLOW_ONLY_EXTERNAL_REGISTRATION = true;
           ENABLE_BASIC_AUTHENTICATION = false;
+          ENABLE_INTERNAL_SIGNIN = false;
+        };
+        openid = {
+          ENABLE_OPENID_SIGNIN = false;
+          ENABLE_OPENID_SIGNUP = false;
         };
         session.COOKIE_SECURE = true;
         oauth2_client = {
@@ -78,13 +83,30 @@ in
 
     # --- Systemd Overrides ---
 
+    # Ensure the forgejo directory structure exists before any forgejo service starts.
+    # forgejo-secrets.service uses ReadWritePaths=/var/lib/forgejo/custom which requires
+    # the directory to exist for systemd mount namespace setup.
+    systemd.services.forgejo-dir-setup = {
+      description = "Create Forgejo directory structure";
+      wantedBy = [ "multi-user.target" ];
+      before = [ "forgejo-secrets.service" "forgejo.service" ];
+      requiredBy = [ "forgejo-secrets.service" "forgejo.service" ];
+      unitConfig.RequiresMountsFor = "/var/lib/forgejo";
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      script = ''
+        ${pkgs-default.coreutils}/bin/install -d -m 0750 -o ${cfg.serviceUsername} -g ${cfg.serviceGroup} /var/lib/forgejo
+        ${pkgs-default.coreutils}/bin/install -d -m 0750 -o ${cfg.serviceUsername} -g ${cfg.serviceGroup} /var/lib/forgejo/custom
+        ${pkgs-default.coreutils}/bin/install -d -m 0750 -o ${cfg.serviceUsername} -g ${cfg.serviceGroup} /var/lib/forgejo/custom/conf
+      '';
+    };
+
     systemd.services.forgejo = {
       unitConfig.RequiresMountsFor = "/var/lib/forgejo";
-      after = [ "sops-nix.service" "postgresql.target" ];
+      after = [ "sops-nix.service" "postgresql.target" "forgejo-dir-setup.service" ];
       requires = [ "postgresql.target" ];
-      preStart = lib.mkAfter ''
-        ${pkgs-default.coreutils}/bin/install -d -m 0750 -o ${cfg.serviceUsername} -g ${cfg.serviceGroup} /var/lib/forgejo
-      '';
     };
 
     # --- OIDC Auth Source Setup ---
@@ -96,10 +118,11 @@ in
       requires = [ "forgejo.service" ];
       serviceConfig = {
         Type = "oneshot";
-        User = "root";
+        User = cfg.serviceUsername;
+        Group = cfg.serviceGroup;
         RemainAfterExit = true;
       };
-      path = [ config.services.forgejo.package ];
+      path = [ config.services.forgejo.package pkgs-default.gawk pkgs-default.gnugrep pkgs-default.coreutils ];
       script = let
         issuerUrl = "https://${ssoCfg.subdomain}.${config.server.webaddress}/oauth2/openid/${clientId}";
         discoveryUrl = "${issuerUrl}/.well-known/openid-configuration";

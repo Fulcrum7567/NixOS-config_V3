@@ -27,7 +27,7 @@
 
     defaultDataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/data/forgejo";
+      default = "/data/forgejo"; # todo
       description = "Default directory to store Forgejo data.";
     };
 
